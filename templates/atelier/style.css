@@ -1,0 +1,313 @@
+/* Atelier: a fashion-magazine cover.
+   Layers: fixed marble page → huge outlined names drifting with the scroll →
+   a sticky cover photo → the white invitation card sliding over it, with an
+   offset gold line. Editorial wipes, counters for photo numbers, and a gallery
+   that blooms from black-and-white into colour. Tokens only; logical properties. */
+
+.at {
+  --at-gold-deep: color-mix(in srgb, var(--c-accent) 60%, var(--c-text));
+  --at-gold-light: color-mix(in srgb, var(--c-accent) 55%, var(--c-card));
+  --at-foil: linear-gradient(115deg, var(--at-gold-deep) 0%, var(--c-accent) 22%, var(--at-gold-light) 36%,
+    var(--c-accent) 50%, var(--at-gold-deep) 64%, var(--c-accent) 80%, var(--at-gold-light) 100%);
+  --at-ink: linear-gradient(115deg, var(--c-text) 0%, var(--c-text) 40%, var(--at-gold-deep) 50%, var(--c-text) 60%, var(--c-text) 100%);
+  position: relative;
+  isolation: isolate;
+  max-inline-size: 520px;
+  margin-inline: auto;
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  text-align: center;
+  overflow-x: clip;
+  counter-reset: at-photo;
+}
+.at :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+.at::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: var(--c-bg);
+}
+.has-marble-texture .at::before {
+  background:
+    linear-gradient(color-mix(in srgb, var(--c-bg) 45%, transparent), color-mix(in srgb, var(--c-bg) 45%, transparent)),
+    var(--img-marble-texture) 0 0 / 760px,
+    var(--c-bg);
+}
+.at-section { position: relative; padding-block: 60px; padding-inline: 22px; }
+
+/* type */
+.at-kicker { font-size: 14px; color: var(--c-muted); }
+.at:lang(en) .at-kicker { text-transform: uppercase; letter-spacing: 0.28em; font-size: 11px; line-height: 2; }
+.at-title {
+  margin-block-end: 30px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.2;
+}
+.at:lang(en) .at-title { font-family: var(--font-latin); font-style: italic; font-size: 40px; }
+.at :is(.at-title, .at-names, .at-count__num, .at-closing) {
+  background: var(--at-ink) 0 0 / 300% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+.at-divider { block-size: 40px; inline-size: 230px; margin-inline: auto; background: linear-gradient(var(--c-line), var(--c-line)) center / 100% 1px no-repeat; }
+.has-divider-art .at-divider { background: var(--img-divider-art) center / contain no-repeat; }
+
+/* ---------- 1 · cover ---------- */
+.at-cover { position: relative; padding-block-end: 30px; }
+.at-masthead { display: flex; align-items: center; gap: 14px; padding-block: 22px; padding-inline: 22px; }
+.at-masthead__rule { flex: 1; block-size: 1px; background: var(--c-text); }
+.at-masthead__date { font-size: 13px; }
+.at:lang(en) .at-masthead__date { text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; }
+
+.at-hero { position: sticky; inset-block-start: 0; z-index: 0; overflow: hidden; }
+.at-hero__photo { display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--c-line); }
+.at-hero__photo img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.at-hero__photo--blank { display: grid; place-items: center; background: color-mix(in srgb, var(--c-card) 60%, transparent); }
+.at-hero__amp {
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: 220px;
+  line-height: 1;
+  background: var(--at-foil);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+/* huge outlined names layered over the photo */
+.at-ghost {
+  position: absolute;
+  inset-block-start: 6%;
+  inset-inline: -10%;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 128px;
+  line-height: 0.95;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--c-card) 85%, transparent);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.at:lang(en) .at-ghost { font-family: var(--font-latin); font-style: italic; }
+.at-ghost span { display: block; }
+.at-ghost span + span { padding-inline-start: 30%; }
+
+.at-invite {
+  margin-block-start: -90px;
+  margin-inline: 18px;
+  padding-block: 44px;
+}
+.at-names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block: 18px 6px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--name-size);
+  line-height: 1.1;
+}
+.at:lang(en) .at-names { font-family: var(--font-latin); }
+.at-name { max-inline-size: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.at-and { font-family: var(--font-latin); font-style: italic; font-size: 0.6em; line-height: 1.3; }
+.at-verse { margin-block-start: 18px; font-family: var(--font-display); font-size: 17px; color: var(--c-muted); }
+.at-families {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-block-start: 26px;
+  padding-block-start: 22px;
+  border-block-start: 1px solid var(--c-line);
+}
+.at-families:not(:has(p)) { display: none; }
+.at-family { display: flex; flex-direction: column; gap: 2px; padding-inline: 8px; min-inline-size: 0; }
+.at-family + .at-family { border-inline-start: 1px solid var(--c-line); }
+.at-family__label { font-size: 12px; color: var(--c-muted); }
+.at:lang(en) .at-family__label { text-transform: uppercase; letter-spacing: 0.18em; font-size: 10px; }
+.at-family__label:not(:first-child) { margin-block-start: 8px; }
+.at-family__name { font-size: 14px; overflow-wrap: anywhere; }
+
+/* ---------- white cards with an offset gold line ---------- */
+.at-card {
+  position: relative;
+  z-index: 1;
+  padding-block: 40px;
+  padding-inline: 26px;
+  border-radius: var(--radius);
+}
+/* the card face sits on ::after, the offset line on ::before behind it */
+.at-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--radius);
+  background: var(--c-card);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--c-text) 8%, transparent),
+    0 36px 60px -36px color-mix(in srgb, var(--c-text) 45%, transparent);
+}
+.at-card::before {
+  content: "";
+  position: absolute;
+  inset-block: 10px -10px;
+  inset-inline: 10px -10px;
+  z-index: -2;
+  border: 1px solid var(--c-accent);
+  border-radius: var(--radius);
+  pointer-events: none;
+}
+
+/* ---------- 2 · countdown ---------- */
+.at-count { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-block-start: 6px; }
+.at-count__num { font-family: var(--font-latin); font-weight: 400; font-size: 120px; line-height: 1; }
+.at:lang(ar) .at-count__num { font-family: var(--font-display); }
+.at-count__unit { font-size: 16px; color: var(--c-muted); }
+.at:lang(en) .at-count__unit { font-family: var(--font-latin); font-style: italic; font-size: 26px; }
+.at-cal { max-inline-size: 320px; margin-block-start: 26px; margin-inline: auto; padding-block-start: 20px; border-block-start: 1px solid var(--c-text); }
+.at-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 22px; }
+.at:lang(en) .at-cal__title { font-family: var(--font-latin); font-style: italic; }
+.at-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; font-size: 13px; }
+.at-cal__wd { font-size: 11px; color: var(--c-muted); }
+.at-cal__cell { display: grid; place-items: center; block-size: 34px; }
+.at-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; border: 1px solid var(--c-text); box-shadow: 0 0 0 3px var(--c-bg), 0 0 0 4px var(--c-accent); font-weight: 700; }
+
+/* ---------- 3 · story: numbered editorial photos ---------- */
+.at-photos { display: flex; justify-content: center; gap: 22px; margin-block-end: 30px; }
+.at-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; counter-increment: at-photo; }
+.at-photo:nth-child(2) { margin-block-start: 46px; }
+.at-photo:nth-child(n+3) { display: none; }
+.at-photo img { position: relative; display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: var(--radius); }
+.at-photo::before {
+  content: "";
+  position: absolute;
+  inset-block: -10px 10px;
+  inset-inline: -10px 10px;
+  border: 1px solid var(--c-accent);
+  border-radius: var(--radius);
+}
+.at-photo::after {
+  content: counter(at-photo, decimal-leading-zero);
+  position: absolute;
+  inset-block-end: -30px;
+  inset-inline-start: 0;
+  font-family: var(--font-latin);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--c-accent);
+}
+.at:lang(ar) .at-photo::after { content: counter(at-photo, arabic-indic); font-family: var(--font-display); font-style: normal; }
+.at[data-photo-frame="arch"] .at-photo img, .at[data-photo-frame="arch"] .at-photo::before { border-radius: 999px 999px 0 0; }
+.at[data-photo-frame="oval"] .at-photo img, .at[data-photo-frame="oval"] .at-photo::before { border-radius: 50%; }
+.at[data-photo-frame="oval"] .at-photo::before { inset: -8px; }
+.at-story__text { max-inline-size: 32ch; margin-inline: auto; margin-block-start: 22px; font-size: 17px; }
+.at-story__date { margin-block-start: 12px; font-size: 13px; color: var(--c-muted); }
+
+/* ---------- 4 · gallery: blooms from black-and-white into colour ---------- */
+.at-gallery { padding-inline: 0; }
+.at-strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 10px 26px; padding-inline: 20%; scrollbar-width: none; }
+.at-strip::-webkit-scrollbar { display: none; }
+.at-strip__item { flex: 0 0 60%; aspect-ratio: 3 / 4; scroll-snap-align: center; padding-inline: 8px; }
+.at-strip__item img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: var(--radius); box-shadow: 0 26px 40px -26px color-mix(in srgb, var(--c-text) 70%, transparent); }
+@supports (animation-timeline: view(inline)) {
+  .at[data-gallery-style="bloom"] .at-strip__item { animation: atelier-bloom linear both; animation-timeline: view(inline); }
+}
+@keyframes atelier-bloom {
+  0%   { transform: scale(0.84); filter: grayscale(1) contrast(1.05); }
+  50%  { transform: none; filter: none; }
+  100% { transform: scale(0.84); filter: grayscale(1) contrast(1.05); }
+}
+.at-hint { font-size: 13px; color: var(--c-muted); }
+
+/* ---------- 5 · events: itinerary cards ---------- */
+.at-events { display: flex; flex-direction: column; gap: 36px; }
+.at-events .at-title { margin-block-end: 0; }
+.at-event { text-align: start; }
+.at-event__head { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 18px; align-items: center; padding-block-end: 16px; border-block-end: 1px solid var(--c-line); }
+.at-event__time {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.2;
+  padding-inline-end: 18px;
+  border-inline-end: 1px solid var(--c-accent);
+}
+.at:lang(en) .at-event__time { font-family: var(--font-latin); font-style: italic; }
+.at-event__type { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.3; }
+.at:lang(en) .at-event__type { font-family: var(--font-latin); }
+.at-event__date { font-size: 14px; color: var(--c-muted); }
+.at-event__place { margin-block-start: 14px; font-size: 15px; overflow-wrap: anywhere; }
+.at-program { margin-block-start: 18px; }
+.at-program__title { margin-block-end: 10px; font-size: 13px; color: var(--c-muted); }
+.at:lang(en) .at-program__title { text-transform: uppercase; letter-spacing: 0.24em; font-size: 10px; }
+.at-program__list { list-style: none; padding: 0; display: grid; }
+.at-program__item { display: flex; gap: 16px; padding-block: 8px; border-block-end: 1px dashed var(--c-line); font-size: 14px; }
+.at-program__time { flex: none; min-inline-size: 70px; color: var(--c-accent); font-weight: 600; }
+.at-map {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 46px;
+  margin-block-start: 22px;
+  padding-inline: 26px;
+  border-radius: var(--radius);
+  background: var(--c-hero);
+  color: var(--c-on-hero);
+  font-size: 13px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.at:lang(en) .at-map { text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; }
+.at-map::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--at-foil); transform: scaleX(0); transform-origin: 0 50%; transition: transform .5s ease; }
+.at-map:hover::after, .at-map:focus-visible::after { transform: scaleX(1); }
+.at-map:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 4px; }
+
+/* ---------- 6 · wishes ---------- */
+.at .wb { text-align: start; }
+.at .wb-chip { border-radius: 0; border-color: var(--c-text); color: var(--c-text); }
+.at .wb-input, .at .wb-textarea { background: transparent; border: 0; border-block-end: 1px solid var(--c-text); border-radius: 0; color: var(--c-text); }
+.at .wb-input:focus, .at .wb-textarea:focus { outline: none; border-block-end-color: var(--c-accent); }
+.at .wb-send { border-radius: var(--radius); background: var(--c-hero); color: var(--c-on-hero); }
+.at .wb-item { background: transparent; border: 0; border-block-end: 1px solid var(--c-line); border-radius: 0; }
+.at .wb-item__name { color: var(--c-accent); }
+.at .wb-item__text { color: var(--c-text); }
+
+/* ---------- 7 · footer ---------- */
+.at-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 30px 64px; }
+.at-closing { max-inline-size: 18ch; font-family: var(--font-display); font-size: 34px; line-height: 1.3; }
+.at:lang(en) .at-closing { font-family: var(--font-latin); font-style: italic; }
+.at-until { font-size: 13px; color: var(--c-muted); }
+.at-brand { font-size: 12px; color: var(--c-muted); }
+
+/* ---------- scroll-driven life ---------- */
+@supports (animation-timeline: view()) {
+  .at-ghost { animation: atelier-drift linear both; animation-timeline: view(); }
+  .at-hero__photo img { animation: atelier-zoom linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .at :is(.at-title, .at-names, .at-count__num, .at-closing) { animation: atelier-glint linear both; animation-timeline: view(); }
+}
+@keyframes atelier-drift { from { translate: 8% 0; } to { translate: -14% 0; } }
+@keyframes atelier-zoom { from { scale: 1; } to { scale: 1.15; } }
+@keyframes atelier-glint { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+
+/* own reveal: an editorial wipe in the reading direction.
+   Part of the section stays geometrically visible (opacity hides it) so the
+   runtime can detect it on screen. */
+.fx-wipe {
+  opacity: 0;
+  clip-path: inset(0 70% 0 0);
+  transition: opacity var(--fx-dur, 1s) ease, clip-path var(--fx-dur, 1s) cubic-bezier(.7, 0, .2, 1);
+}
+.fx-wipe:dir(rtl) { clip-path: inset(0 0 0 70%); }
+.fx-wipe.is-in, .fx-wipe.is-in:dir(rtl) { clip-path: inset(-60px -60px -60px -60px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .at-ghost, .at-hero__photo img, .at-strip__item, .at :is(.at-title, .at-names, .at-count__num, .at-closing) { animation: none !important; }
+  .fx-wipe, .fx-wipe:dir(rtl) { clip-path: none; transition-duration: .01s; }
+  .at-map::after { transition: none; }
+}

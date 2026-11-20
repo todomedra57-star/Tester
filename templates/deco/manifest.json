@@ -1,0 +1,82 @@
+{
+  "key": "deco",
+  "name": { "ar": "ديكو", "en": "Gatsby Deco" },
+  "description": {
+    "ar": "فخامة العشرينات: أشعة شمس ذهبية، إطارات متدرجة، مراوح ديكو، ومعرض صور كأوراق اللعب.",
+    "en": "Roaring-twenties glamour: a gold sunburst, stepped frames, Art Deco fans and a fanned playing-card gallery."
+  },
+  "languages": ["ar", "en"],
+  "texts": {
+    "lead":          { "ar": "يسرّنا دعوتكم لليلة لا تُنسى في حفل زفاف", "en": "Request the pleasure of your company for an evening celebrating" },
+    "and":           { "ar": "و", "en": "&" },
+    "sonOf":         { "ar": "نجل", "en": "Son of" },
+    "daughterOf":    { "ar": "كريمة", "en": "Daughter of" },
+    "countdownTitle":{ "ar": "العد التنازلي", "en": "The countdown" },
+    "countdownUnit": { "ar": "يوم", "en": "days" },
+    "storyTitle":    { "ar": "حكايتنا", "en": "Our story" },
+    "storyPhoto":    { "ar": "صورة من حكايتنا", "en": "A photo from our story" },
+    "engagement":    { "ar": "الخطوبة:", "en": "Engaged on" },
+    "galleryTitle":  { "ar": "من صورنا", "en": "The gallery" },
+    "galleryPhoto":  { "ar": "صورة من معرض الصور", "en": "Gallery photo" },
+    "galleryHint":   { "ar": "اسحبوا لتقليب الصور", "en": "Swipe to deal the photos" },
+    "eventsTitle":   { "ar": "برنامج السهرة", "en": "The evening" },
+    "programTitle":  { "ar": "فقرات الحفل", "en": "Programme" },
+    "openMap":       { "ar": "افتح الموقع على الخريطة", "en": "Open in maps" },
+    "listSeparator": { "ar": "، ", "en": ", " },
+    "wishesTitle":   { "ar": "اكتب دعوة للعروسين", "en": "Raise a toast" },
+    "openUntil":     { "ar": "الصفحة مفتوحة حتى", "en": "This page is open until" },
+    "madeWith":      { "ar": "اتعملت بحب", "en": "Made with love" }
+  },
+  "tokens": [
+    { "key": "hero", "type": "color" }, { "key": "onHero", "type": "color" },
+    { "key": "accent", "type": "color" }, { "key": "bg", "type": "color" },
+    { "key": "text", "type": "color" }, { "key": "muted", "type": "color" },
+    { "key": "card", "type": "color" }, { "key": "line", "type": "color" },
+    { "key": "display", "type": "font" }, { "key": "body", "type": "font" }, { "key": "latin", "type": "font" },
+    { "key": "radius", "type": "length", "min": 0, "max": 6, "unit": "px" },
+    { "key": "nameSize", "type": "length", "min": 36, "max": 70, "unit": "px" },
+    { "key": "patternTile", "type": "image" },
+    { "key": "fanArt", "type": "image" },
+    { "key": "cornerArt", "type": "image" },
+    { "key": "dateStyle", "type": "variant", "options": ["badge", "calendar"],
+      "choices": { "badge": { "ar": "التاريخ على الغلاف", "en": "Date on the cover" }, "calendar": { "ar": "تقويم الشهر", "en": "Month calendar" } } },
+    { "key": "photoFrame", "type": "variant", "options": ["chamfer", "arch", "circle"],
+      "choices": { "chamfer": { "ar": "إطار مشطوف", "en": "Chamfered" }, "arch": { "ar": "قوس", "en": "Arch" }, "circle": { "ar": "دائرة", "en": "Circle" } } },
+    { "key": "galleryStyle", "type": "variant", "options": ["deck", "strip"],
+      "choices": { "deck": { "ar": "كأوراق اللعب", "en": "Playing-card deck" }, "strip": { "ar": "شريط بسيط", "en": "Simple strip" } } }
+  ],
+  "defaultTheme": {
+    "hero": "#0B0B0D", "onHero": "#F1E6CC", "accent": "#CDAA62", "bg": "#121215",
+    "text": "#EDE3CC", "muted": "#A49A86", "card": "#17171B", "line": "#3A3426",
+    "display": "reemKufi", "body": "decoSans", "latin": "poiret",
+    "radius": 0, "nameSize": 56,
+    "patternTile": "deco-tile", "fanArt": "deco-fan", "cornerArt": "deco-corner",
+    "dateStyle": "badge", "photoFrame": "chamfer", "galleryStyle": "deck"
+  },
+  "defaultAnimation": {
+    "intro": "curtain", "ambient": "none", "duration": 1000, "stagger": 140, "parallax": true,
+    "sections": {
+      "cover": { "effect": "fade" }, "countdown": { "effect": "fan" }, "story": { "effect": "fan" },
+      "gallery": { "effect": "fade" }, "events": { "effect": "fade-up" }, "wishes": { "effect": "fan" }, "footer": { "effect": "fade" }
+    }
+  },
+  "effects": [ { "key": "fan", "kind": "reveal", "name": { "ar": "انفتاح المروحة", "en": "Fan open" } } ],
+  "fields": [],
+  "couplePresets": {
+    "label": { "ar": "ديكو", "en": "Gatsby Deco" },
+    "defaultPalette": "onyx",
+    "palettes": [
+      { "key": "onyx", "name": { "ar": "أسود وذهبي", "en": "Onyx & gold" },
+        "values": { "hero": "#0B0B0D", "onHero": "#F1E6CC", "accent": "#CDAA62", "bg": "#121215", "text": "#EDE3CC", "muted": "#A49A86", "card": "#17171B", "line": "#3A3426" } },
+      { "key": "emeraldDeco", "name": { "ar": "زمردي ديكو", "en": "Emerald deco" },
+        "values": { "hero": "#05201B", "onHero": "#F1E6CC", "accent": "#D2B06A", "bg": "#082A24", "text": "#EFE5CE", "muted": "#9FB0A6", "card": "#0B3029", "line": "#2E4A3C" } },
+      { "key": "champagne", "name": { "ar": "شمبانيا وأسود", "en": "Champagne & black" },
+        "values": { "hero": "#141210", "onHero": "#F4EBD8", "accent": "#B8934E", "bg": "#EFE6D4", "text": "#1C1814", "muted": "#6E6355", "card": "#1A1714", "line": "#CDBE9F" } }
+    ],
+    "intros": ["none", "curtain", "doors"],
+    "ambients": ["none"],
+    "motions": { "calm": { "duration": 1000, "stagger": 140, "parallax": true }, "lively": { "duration": 650, "stagger": 90, "parallax": true } },
+    "variants": [ { "key": "dateStyle" }, { "key": "photoFrame" }, { "key": "galleryStyle" } ],
+    "hiddenEffects": []
+  }
+}

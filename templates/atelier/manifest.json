@@ -1,0 +1,81 @@
+{
+  "key": "atelier",
+  "name": { "ar": "أتيليه", "en": "Atelier" },
+  "description": {
+    "ar": "غلاف مجلة أزياء: رخام وعاجي، أسماء ضخمة مفرغة، صورة غلاف ثابتة تنزلق فوقها الدعوة، ومعرض صور يتحول من الأبيض والأسود للألوان.",
+    "en": "A fashion-magazine cover: marble and ivory, huge outlined names, a fixed cover photo the invitation slides over, and a gallery that blooms from black-and-white into colour."
+  },
+  "languages": ["ar", "en"],
+  "texts": {
+    "lead":          { "ar": "بكل سرور ندعوكم لحضور حفل زفاف", "en": "The pleasure of your company is requested at the wedding of" },
+    "and":           { "ar": "و", "en": "&" },
+    "sonOf":         { "ar": "نجل", "en": "Son of" },
+    "daughterOf":    { "ar": "كريمة", "en": "Daughter of" },
+    "countdownTitle":{ "ar": "باقي على الموعد", "en": "Counting down" },
+    "countdownUnit": { "ar": "يوم", "en": "days" },
+    "storyTitle":    { "ar": "حكايتنا", "en": "Our story" },
+    "storyPhoto":    { "ar": "صورة من حكايتنا", "en": "A photo from our story" },
+    "engagement":    { "ar": "الخطوبة:", "en": "Engaged on" },
+    "galleryTitle":  { "ar": "لقطات", "en": "Portraits" },
+    "galleryPhoto":  { "ar": "صورة من معرض الصور", "en": "Gallery photo" },
+    "galleryHint":   { "ar": "اسحبوا لمشاهدة كل الصور", "en": "Swipe through the portraits" },
+    "eventsTitle":   { "ar": "البرنامج", "en": "Itinerary" },
+    "programTitle":  { "ar": "فقرات الحفل", "en": "Programme" },
+    "openMap":       { "ar": "افتح الموقع على الخريطة", "en": "Open in maps" },
+    "listSeparator": { "ar": "، ", "en": ", " },
+    "wishesTitle":   { "ar": "اكتب دعوة للعروسين", "en": "Notes for the couple" },
+    "openUntil":     { "ar": "الصفحة مفتوحة حتى", "en": "This page is open until" },
+    "madeWith":      { "ar": "اتعملت بحب", "en": "Made with love" }
+  },
+  "tokens": [
+    { "key": "hero", "type": "color" }, { "key": "onHero", "type": "color" },
+    { "key": "accent", "type": "color" }, { "key": "bg", "type": "color" },
+    { "key": "text", "type": "color" }, { "key": "muted", "type": "color" },
+    { "key": "card", "type": "color" }, { "key": "line", "type": "color" },
+    { "key": "display", "type": "font" }, { "key": "body", "type": "font" }, { "key": "latin", "type": "font" },
+    { "key": "radius", "type": "length", "min": 0, "max": 12, "unit": "px" },
+    { "key": "nameSize", "type": "length", "min": 40, "max": 76, "unit": "px" },
+    { "key": "marbleTexture", "type": "image" },
+    { "key": "dividerArt", "type": "image" },
+    { "key": "dateStyle", "type": "variant", "options": ["badge", "calendar"],
+      "choices": { "badge": { "ar": "التاريخ في الغلاف", "en": "Date on the cover" }, "calendar": { "ar": "تقويم الشهر", "en": "Month calendar" } } },
+    { "key": "photoFrame", "type": "variant", "options": ["offset", "arch", "oval"],
+      "choices": { "offset": { "ar": "خط مزاح", "en": "Offset line" }, "arch": { "ar": "قوس", "en": "Arch" }, "oval": { "ar": "بيضاوي", "en": "Oval" } } },
+    { "key": "galleryStyle", "type": "variant", "options": ["bloom", "strip"],
+      "choices": { "bloom": { "ar": "من الأبيض والأسود للألوان", "en": "Black-and-white to colour" }, "strip": { "ar": "شريط بسيط", "en": "Simple strip" } } }
+  ],
+  "defaultTheme": {
+    "hero": "#141414", "onHero": "#F6F2EA", "accent": "#B89B5E", "bg": "#F3EEE6",
+    "text": "#161513", "muted": "#6F6A61", "card": "#FFFFFF", "line": "#DDD5C8",
+    "display": "elMessiri", "body": "plexArabic", "latin": "playfair",
+    "radius": 0, "nameSize": 60,
+    "marbleTexture": "marble", "dividerArt": "gold-flourish",
+    "dateStyle": "badge", "photoFrame": "offset", "galleryStyle": "bloom"
+  },
+  "defaultAnimation": {
+    "intro": "curtain", "ambient": "none", "duration": 1000, "stagger": 140, "parallax": true,
+    "sections": {
+      "cover": { "effect": "fade" }, "countdown": { "effect": "wipe" }, "story": { "effect": "wipe" },
+      "gallery": { "effect": "fade" }, "events": { "effect": "fade-up" }, "wishes": { "effect": "wipe" }, "footer": { "effect": "fade" }
+    }
+  },
+  "effects": [ { "key": "wipe", "kind": "reveal", "name": { "ar": "مسح جانبي", "en": "Editorial wipe" } } ],
+  "fields": [],
+  "couplePresets": {
+    "label": { "ar": "أتيليه", "en": "Atelier" },
+    "defaultPalette": "champagne",
+    "palettes": [
+      { "key": "champagne", "name": { "ar": "شمبانيا", "en": "Champagne" },
+        "values": { "hero": "#141414", "onHero": "#F6F2EA", "accent": "#B89B5E", "bg": "#F3EEE6", "text": "#161513", "muted": "#6F6A61", "card": "#FFFFFF", "line": "#DDD5C8" } },
+      { "key": "noir", "name": { "ar": "نوار", "en": "Noir" },
+        "values": { "hero": "#EDE6D8", "onHero": "#121212", "accent": "#C7A76A", "bg": "#121212", "text": "#EFE9DE", "muted": "#A39C90", "card": "#1B1B1B", "line": "#34312C" } },
+      { "key": "sage", "name": { "ar": "أخضر مريمية", "en": "Sage" },
+        "values": { "hero": "#2F3B32", "onHero": "#F4F3EE", "accent": "#A88B57", "bg": "#EDEFE8", "text": "#1E2620", "muted": "#66705F", "card": "#FBFBF8", "line": "#D4D9CC" } }
+    ],
+    "intros": ["none", "curtain", "doors"],
+    "ambients": ["none"],
+    "motions": { "calm": { "duration": 1000, "stagger": 140, "parallax": true }, "lively": { "duration": 650, "stagger": 90, "parallax": true } },
+    "variants": [ { "key": "dateStyle" }, { "key": "photoFrame" }, { "key": "galleryStyle" } ],
+    "hiddenEffects": []
+  }
+}

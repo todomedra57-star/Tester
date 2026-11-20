@@ -1,0 +1,119 @@
+<main class="dc" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}">
+
+  <section class="dc-cover" data-animate="cover">
+    <span class="dc-rays" aria-hidden="true" data-parallax></span>
+    <div class="dc-frame">
+      <span class="dc-corner dc-corner--1" aria-hidden="true"></span>
+      <span class="dc-corner dc-corner--2" aria-hidden="true"></span>
+      <span class="dc-corner dc-corner--3" aria-hidden="true"></span>
+      <span class="dc-corner dc-corner--4" aria-hidden="true"></span>
+      <span class="dc-fan" aria-hidden="true"></span>
+      {{#if story.photos.length}}
+        {{#with story.photos.[0]}}<figure class="dc-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
+      {{/if}}
+      {{#if verse}}<p class="dc-verse">{{verse}}</p>{{/if}}
+      <p class="dc-lead">{{text "lead"}}</p>
+      <h1 class="dc-names">
+        <span class="dc-name">{{couple.groom.name}}</span>
+        {{#if couple.bride.name}}
+          <span class="dc-and">{{text "and"}}</span>
+          <span class="dc-name">{{couple.bride.name}}</span>
+        {{/if}}
+      </h1>
+      {{#unless (variant "dateStyle" "calendar")}}<p class="dc-date">{{formatDate mainDate}}</p>{{/unless}}
+    </div>
+
+    <div class="dc-families">
+      <div class="dc-family">
+        {{#if couple.groom.father}}<p class="dc-family__label">{{text "sonOf"}}</p><p class="dc-family__name">{{couple.groom.father}}</p>{{/if}}
+        {{#each couple.groom.family}}<p class="dc-family__label">{{label}}</p><p class="dc-family__name">{{name}}</p>{{/each}}
+      </div>
+      <div class="dc-family">
+        {{#if couple.bride.father}}<p class="dc-family__label">{{text "daughterOf"}}</p><p class="dc-family__name">{{couple.bride.father}}</p>{{/if}}
+        {{#each couple.bride.family}}<p class="dc-family__label">{{label}}</p><p class="dc-family__name">{{name}}</p>{{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="dc-section dc-countdown" data-animate="countdown">
+    <div class="dc-card">
+      <span class="dc-card__fan" aria-hidden="true"></span>
+      <h2 class="dc-title">{{text "countdownTitle"}}</h2>
+      <p class="dc-count"><span class="dc-count__num">{{daysUntil mainDate}}</span><span class="dc-count__unit">{{text "countdownUnit"}}</span></p>
+      {{#if (variant "dateStyle" "calendar")}}
+        {{#with (calendarMonth mainDate)}}
+          <div class="dc-cal">
+            <p class="dc-cal__title">{{title}}</p>
+            <div class="dc-cal__grid">
+              {{#each weekdays}}<span class="dc-cal__wd">{{this}}</span>{{/each}}
+              {{#each cells}}<span class="dc-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+            </div>
+          </div>
+        {{/with}}
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if story.text}}
+    <section class="dc-section dc-story" data-animate="story">
+      <div class="dc-card">
+        <span class="dc-card__fan" aria-hidden="true"></span>
+        <h2 class="dc-title">{{text "storyTitle"}}</h2>
+        {{#if story.photos.length}}
+          <div class="dc-photos">
+            {{#each story.photos}}<figure class="dc-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
+          </div>
+        {{/if}}
+        <p class="dc-story__text">{{story.text}}</p>
+        {{#if story.engagementDate}}<p class="dc-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="dc-section dc-gallery" data-animate="gallery">
+      <h2 class="dc-title">{{text "galleryTitle"}}</h2>
+      <div class="dc-deck">
+        {{#each gallery}}<figure class="dc-deck__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="dc-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <section class="dc-section dc-events" data-animate="events">
+    <h2 class="dc-title">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="dc-card dc-event" data-item>
+        <span class="dc-card__fan" aria-hidden="true"></span>
+        <h3 class="dc-event__type">{{eventLabel type}}</h3>
+        <p class="dc-event__date">{{formatDate date}}</p>
+        <p class="dc-event__time">{{eventTime this}}</p>
+        <p class="dc-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+        {{#if program.length}}
+          <div class="dc-program">
+            <p class="dc-program__title">{{text "programTitle"}}</p>
+            <ol class="dc-program__list">
+              {{#each program}}<li class="dc-program__item"><span class="dc-program__time">{{formatTime time}}</span><span class="dc-program__what">{{title}}</span></li>{{/each}}
+            </ol>
+          </div>
+        {{/if}}
+        {{#if mapUrl}}<a class="dc-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="dc-section dc-wishes" data-animate="wishes">
+    <div class="dc-card">
+      <span class="dc-card__fan" aria-hidden="true"></span>
+      <h2 class="dc-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="dc-section dc-footer" data-animate="footer">
+    <span class="dc-fan dc-fan--small" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="dc-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}<p class="dc-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
+    {{#if showBranding}}<p class="dc-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+</main>

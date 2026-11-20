@@ -118,6 +118,7 @@ Dividers and decoration between sections are free.
 - Own classes are `.fx-<key>` / `.intro-<key>` / `.ambient-<key>`. Own keyframes start with the template key.
 - Only `@media`, `@supports` and `@keyframes`. No `@import`, and no `url()` to other sites.
 - Respect `prefers-reduced-motion`. Nothing loops forever except light background effects.
+- An own reveal effect hides the section with `opacity`. If it also uses `clip-path`, at least a quarter of the section must stay inside the clip, so the runtime can still detect it on screen. It ends in a clip larger than the box, e.g. `inset(-60px)`, so overlapping art isn't cut.
 - Allowed tools for depth:
   - `position: sticky`, and `position: fixed` on the root's pseudo-elements
   - `perspective`, 3D transforms
