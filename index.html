@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Midnight Template Preview</title>
+<title>Invitation Template Preview</title>
 <style>
   :root {
     --ui-bg: #F4F5F8; --ui-panel: #FFFFFF; --ui-text: #1A2233; --ui-muted: #5E6880;
@@ -84,21 +84,20 @@
 <div class="app">
   <aside class="controls">
     <div>
-      <h1>Midnight</h1>
-      <p class="sub">A minimal dark-blue invitation template, rendered from <code>manifest.json</code>, <code>template.html</code> and <code>style.css</code>.</p>
+      <h1>Template preview</h1>
+      <p class="sub" id="tpl-desc">Each template is rendered from its <code>manifest.json</code>, <code>template.html</code> and <code>style.css</code>.</p>
     </div>
     <p id="error" hidden></p>
 
     <div class="group">
-      <h2>Test case</h2>
+      <h2>Template &amp; test case</h2>
+      <label class="f">Template <select id="template"></select></label>
       <label class="f">Invitation <select id="case"></select></label>
     </div>
     <div class="group">
       <h2>Couple's choices</h2>
       <label class="f">Palette <select id="palette"></select></label>
-      <label class="f">Date style <select id="dateStyle"></select></label>
-      <label class="f">Countdown <select id="countdownStyle"></select></label>
-      <label class="f">Photo frame <select id="photoFrame"></select></label>
+      <div id="variants" class="group" style="border:0;padding:0"></div>
     </div>
     <div class="group">
       <h2>Effects</h2>

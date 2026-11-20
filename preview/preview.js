@@ -1,8 +1,12 @@
-// Preview harness: renders the Midnight template the way the platform would
+// Preview harness: renders a template the way the platform would
 // (view model + manifest texts + tokens), inside an iframe at phone width.
 import { CASES } from './demo-data.js';
 
-const TEMPLATE = 'templates/midnight/';
+// Add a template here to preview it.
+const TEMPLATES = {
+  'navy-bloom': 'templates/navy-bloom/',
+  midnight: 'templates/midnight/',
+};
 const BASE = new URL('.', location.href).href;
 const TZ = 'Asia/Riyadh';
 
@@ -12,8 +16,13 @@ const FONT_LIBRARY = {
   plexArabic: "'IBM Plex Sans Arabic', system-ui, sans-serif",
   cormorant: "'Cormorant Garamond', 'Amiri', Georgia, serif",
   reemKufi: "'Reem Kufi', 'IBM Plex Sans Arabic', sans-serif",
+  bodoni: "'Bodoni Moda', 'Playfair Display', Georgia, serif",
+  serifPair: "'Noto Serif', 'Noto Naskh Arabic', Georgia, serif",
 };
-const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&display=swap';
+const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap';
+
+// Stand-in for the platform's image library (artwork made by tools/make-art.mjs).
+const imageUrl = (key) => `${BASE}preview/library/${encodeURIComponent(key)}.svg`;
 
 // Platform words (the runtime owns these, not the template).
 const PLATFORM = {
@@ -86,23 +95,28 @@ function registerHelpers(H) {
   });
 }
 
-// ---------- tokens → CSS variables ----------
+// ---------- tokens → CSS variables (+ has-<key> classes for images) ----------
 const kebab = (k) => k.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase());
 function tokenCss(manifest, theme) {
-  const out = [];
+  const out = [], classes = [];
   for (const t of manifest.tokens) {
     const v = theme[t.key];
     if (t.type === 'color' && /^#[0-9a-f]{6}$/i.test(v)) out.push(`--c-${kebab(t.key)}: ${v};`);
     if (t.type === 'font' && FONT_LIBRARY[v]) out.push(`--font-${kebab(t.key)}: ${FONT_LIBRARY[v]};`);
     if (t.type === 'length' && typeof v === 'number') out.push(`--${kebab(t.key)}: ${Math.min(t.max, Math.max(t.min, v))}${t.unit};`);
+    if (t.type === 'image' && /^[a-z0-9-]+$/.test(v || '')) {
+      out.push(`--img-${kebab(t.key)}: url("${imageUrl(v)}");`);
+      classes.push(`has-${kebab(t.key)}`);
+    }
   }
-  return `:root{${out.join('')}}`;
+  return { css: `:root{${out.join('')}}`, classes: classes.join(' ') };
 }
 
 // ---------- UI ----------
 const $ = (id) => document.getElementById(id);
 const frame = $('frame');
-let manifest, compiled, playIntro = true;
+let manifest, compiled, templateDir, playIntro = true;
+const variantKeys = () => manifest.couplePresets.variants.map((v) => v.key);
 
 function fillSelect(sel, options) {
   sel.innerHTML = '';
@@ -117,8 +131,9 @@ function render() {
   ctx = {
     lang: c.lang,
     manifest,
-    variants: { dateStyle: $('dateStyle').value, countdownStyle: $('countdownStyle').value, photoFrame: $('photoFrame').value },
+    variants: Object.fromEntries(variantKeys().map((k) => [k, $('v-' + k).value])),
   };
+  const tokens = tokenCss(manifest, theme);
   const body = compiled(c.vm);
   const { groom, bride } = c.vm.couple;
   const runtime = {
@@ -133,46 +148,71 @@ function render() {
   };
   const keepScroll = !playIntro && frame.contentWindow ? frame.contentWindow.scrollY : 0;
   frame.onload = () => { if (keepScroll) frame.contentWindow.scrollTo(0, keepScroll); };
-  frame.srcdoc = `<!doctype html><html lang="${c.lang}" dir="${c.lang === 'ar' ? 'rtl' : 'ltr'}"><head>
+  frame.srcdoc = `<!doctype html><html lang="${c.lang}" dir="${c.lang === 'ar' ? 'rtl' : 'ltr'}" class="${tokens.classes}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS_CSS}">
 <link rel="stylesheet" href="${BASE}preview/runtime.css">
-<link rel="stylesheet" href="${BASE}${TEMPLATE}style.css">
-<style>${tokenCss(manifest, theme)}</style></head><body>${body}
+<link rel="stylesheet" href="${BASE}${templateDir}style.css">
+<style>${tokens.css}</style></head><body>${body}
 <script type="application/json" id="runtime-config">${JSON.stringify(runtime).replace(/</g, '\\u003c')}</script>
 <script src="${BASE}preview/runtime.js"></script></body></html>`;
   playIntro = false;
 }
 
-async function init() {
+async function loadTemplate(key) {
+  templateDir = TEMPLATES[key];
   const [m, tpl] = await Promise.all([
-    fetch(TEMPLATE + 'manifest.json').then((r) => r.json()),
-    fetch(TEMPLATE + 'template.html').then((r) => r.text()),
+    fetch(templateDir + 'manifest.json').then((r) => r.json()),
+    fetch(templateDir + 'template.html').then((r) => r.text()),
   ]);
   manifest = m;
-  registerHelpers(window.Handlebars);
-  compiled = window.Handlebars.compile(tpl, { strict: false });
+  compiled = window.Handlebars.compile(tpl);
+  $('tpl-desc').textContent = manifest.description.en;
 
   const name = (o) => o.name?.en ?? o;
-  const variant = (key) => manifest.tokens.find((t) => t.key === key);
-  fillSelect($('case'), Object.entries(CASES).map(([k, v]) => [k, v.label]));
   fillSelect($('palette'), manifest.couplePresets.palettes.map((p) => [p.key, name(p)]));
-  for (const key of ['dateStyle', 'countdownStyle', 'photoFrame']) {
-    const t = variant(key);
-    fillSelect($(key), t.options.map((o) => [o, t.choices[o].en]));
-    $(key).value = manifest.defaultTheme[key];
+  $('palette').value = manifest.couplePresets.defaultPalette;
+
+  const box = $('variants');
+  box.innerHTML = '';
+  for (const key of variantKeys()) {
+    const t = manifest.tokens.find((x) => x.key === key);
+    const label = document.createElement('label');
+    label.className = 'f';
+    label.textContent = key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase()) + ' ';
+    const sel = document.createElement('select');
+    sel.id = 'v-' + key;
+    fillSelect(sel, t.options.map((o) => [o, t.choices[o].en]));
+    sel.value = manifest.defaultTheme[key];
+    sel.addEventListener('change', render);
+    label.append(sel);
+    box.append(label);
   }
   fillSelect($('intro'), manifest.couplePresets.intros.map((i) => [i, i]));
   $('intro').value = manifest.defaultAnimation.intro;
   fillSelect($('ambient'), manifest.couplePresets.ambients.map((i) => [i, i]));
   $('ambient').value = manifest.defaultAnimation.ambient;
   fillSelect($('motion'), Object.keys(manifest.couplePresets.motions).map((k) => [k, k]));
+}
 
-  document.querySelectorAll('.controls select').forEach((s) => s.addEventListener('change', () => {
-    if (s.id === 'intro' || s.id === 'case') playIntro = true;
+async function init() {
+  registerHelpers(window.Handlebars);
+  fillSelect($('template'), Object.keys(TEMPLATES).map((k) => [k, k.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())]));
+  fillSelect($('case'), Object.entries(CASES).map(([k, v]) => [k, v.label]));
+  await loadTemplate($('template').value);
+
+  $('template').addEventListener('change', async () => {
+    await loadTemplate($('template').value);
+    playIntro = true;
     render();
-  }));
+  });
+  for (const id of ['case', 'palette', 'intro', 'ambient', 'motion']) {
+    $(id).addEventListener('change', () => {
+      if (id === 'intro' || id === 'case') playIntro = true;
+      render();
+    });
+  }
   $('replay').addEventListener('click', () => { playIntro = true; render(); });
   document.querySelectorAll('[name="device"]').forEach((r) => r.addEventListener('change', () => {
     document.querySelector('.stage').dataset.device = r.value;

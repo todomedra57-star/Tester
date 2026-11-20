@@ -1,0 +1,132 @@
+{
+  "key": "navy-bloom",
+  "name": { "ar": "زهر الكحلي", "en": "Navy Bloom" },
+  "description": {
+    "ar": "ورق كريمي ورسم قصر خفيف، كروت كحلي عليها ورد أزرق بالألوان المائية، وظرف بختم شمع.",
+    "en": "Cream paper with a faint palace sketch, navy cards dressed with watercolor blue flowers, and a wax-sealed envelope."
+  },
+  "languages": ["ar", "en"],
+
+  "texts": {
+    "saveTheDate":   { "ar": "احفظوا التاريخ", "en": "Save the date" },
+    "inviteTitle":   { "ar": "دعوة زفاف", "en": "Ceremony info" },
+    "lead":          { "ar": "مع عائلتينا، يسعدنا دعوتكم لحضور حفل زفافنا", "en": "Together with our families we invite you to our wedding" },
+    "and":           { "ar": "&", "en": "&" },
+    "sonOf":         { "ar": "نجل", "en": "Son of" },
+    "daughterOf":    { "ar": "كريمة", "en": "Daughter of" },
+    "countdownTitle":{ "ar": "باقي على الفرح", "en": "Countdown" },
+    "countdownUnit": { "ar": "يوم", "en": "days to go" },
+    "storyTitle":    { "ar": "حكايتنا", "en": "Our story" },
+    "storyPhoto":    { "ar": "صورة من حكايتنا", "en": "A photo from our story" },
+    "engagement":    { "ar": "الخطوبة:", "en": "Engaged on" },
+    "galleryTitle":  { "ar": "من صورنا", "en": "Photo gallery" },
+    "galleryPhoto":  { "ar": "صورة من معرض الصور", "en": "Gallery photo" },
+    "galleryHint":   { "ar": "اسحبوا عشان تشوفوا كل الصور", "en": "Swipe to see every photo" },
+    "eventsTitle":   { "ar": "المواعيد", "en": "When & where" },
+    "programTitle":  { "ar": "فقرات الحفل", "en": "Wedding day schedule" },
+    "openMap":       { "ar": "افتح الموقع على الخريطة", "en": "Open in maps" },
+    "listSeparator": { "ar": "، ", "en": ", " },
+    "wishesTitle":   { "ar": "اكتب دعوة للعروسين", "en": "Guestbook" },
+    "openUntil":     { "ar": "الصفحة مفتوحة حتى", "en": "This page is open until" },
+    "madeWith":      { "ar": "اتعملت بحب", "en": "Made with love" }
+  },
+
+  "tokens": [
+    { "key": "hero",    "type": "color" },
+    { "key": "onHero",  "type": "color" },
+    { "key": "accent",  "type": "color" },
+    { "key": "bg",      "type": "color" },
+    { "key": "text",    "type": "color" },
+    { "key": "muted",   "type": "color" },
+    { "key": "card",    "type": "color" },
+    { "key": "line",    "type": "color" },
+
+    { "key": "display", "type": "font" },
+    { "key": "body",    "type": "font" },
+    { "key": "latin",   "type": "font" },
+
+    { "key": "radius",   "type": "length", "min": 0,  "max": 28, "unit": "px" },
+    { "key": "nameSize", "type": "length", "min": 34, "max": 64, "unit": "px" },
+
+    { "key": "paperTexture", "type": "image" },
+    { "key": "backdropArt",  "type": "image" },
+    { "key": "cornerArt",    "type": "image" },
+    { "key": "sprayArt",     "type": "image" },
+    { "key": "sealArt",      "type": "image" },
+    { "key": "dividerArt",   "type": "image" },
+
+    { "key": "dateStyle", "type": "variant",
+      "options": ["calendar", "badge"],
+      "choices": {
+        "calendar": { "ar": "تقويم الشهر", "en": "Month calendar" },
+        "badge":    { "ar": "شارة التاريخ في الدعوة", "en": "Date badge on the invitation" }
+      } },
+    { "key": "photoFrame", "type": "variant",
+      "options": ["arch", "polaroid"],
+      "choices": {
+        "polaroid": { "ar": "صور فورية مائلة", "en": "Tilted polaroids" },
+        "arch":     { "ar": "قوس", "en": "Arch" }
+      } },
+    { "key": "galleryStyle", "type": "variant",
+      "options": ["coverflow", "strip"],
+      "choices": {
+        "coverflow": { "ar": "عرض ثلاثي الأبعاد", "en": "3D coverflow" },
+        "strip":     { "ar": "شريط بسيط", "en": "Simple strip" }
+      } }
+  ],
+
+  "defaultTheme": {
+    "hero": "#0C2456", "onHero": "#F5F1E8", "accent": "#A9864F", "bg": "#F2EDE3",
+    "text": "#13254F", "muted": "#5D6681", "card": "#FBF8F2", "line": "#D8CFBF",
+    "display": "amiri", "body": "serifPair", "latin": "bodoni",
+    "radius": 14, "nameSize": 46,
+    "paperTexture": "paper-grain", "backdropArt": "palace-sketch", "cornerArt": "flowers-corner",
+    "sprayArt": "flowers-spray", "sealArt": "wax-seal", "dividerArt": "ornament",
+    "dateStyle": "calendar", "photoFrame": "arch", "galleryStyle": "coverflow"
+  },
+
+  "defaultAnimation": {
+    "intro": "doors",
+    "ambient": "none",
+    "duration": 1000, "stagger": 160, "parallax": true,
+    "sections": {
+      "cover":     { "effect": "fade" },
+      "countdown": { "effect": "rise3d" },
+      "story":     { "effect": "fade-up" },
+      "gallery":   { "effect": "fade" },
+      "events":    { "effect": "rise3d" },
+      "wishes":    { "effect": "rise3d" },
+      "footer":    { "effect": "fade" }
+    }
+  },
+
+  "effects": [
+    { "key": "rise3d", "kind": "reveal",
+      "name": { "ar": "صعود بعمق", "en": "Rise in depth" } }
+  ],
+  "fields": [],
+
+  "couplePresets": {
+    "label": { "ar": "زهر الكحلي", "en": "Navy Bloom" },
+    "defaultPalette": "navyCream",
+    "palettes": [
+      { "key": "navyCream", "name": { "ar": "كحلي وكريمي", "en": "Navy & cream" },
+        "values": { "hero": "#0C2456", "onHero": "#F5F1E8", "accent": "#A9864F", "bg": "#F2EDE3",
+                    "text": "#13254F", "muted": "#5D6681", "card": "#FBF8F2", "line": "#D8CFBF" } },
+      { "key": "royalIvory", "name": { "ar": "أزرق ملكي وعاجي", "en": "Royal & ivory" },
+        "values": { "hero": "#1C3C86", "onHero": "#FAF7F0", "accent": "#B8955A", "bg": "#F7F3EA",
+                    "text": "#1A2F63", "muted": "#5F6886", "card": "#FFFDF8", "line": "#DED6C6" } },
+      { "key": "inkPearl", "name": { "ar": "حبر ولؤلؤ", "en": "Ink & pearl" },
+        "values": { "hero": "#101B33", "onHero": "#EEF0F4", "accent": "#8E9BB5", "bg": "#E9EAEE",
+                    "text": "#17213A", "muted": "#596178", "card": "#F7F8FA", "line": "#CDD1DA" } }
+    ],
+    "intros": ["none", "doors", "curtain"],
+    "ambients": ["none"],
+    "motions": {
+      "calm":   { "duration": 1000, "stagger": 160, "parallax": true },
+      "lively": { "duration": 650,  "stagger": 90,  "parallax": true }
+    },
+    "variants": [ { "key": "dateStyle" }, { "key": "photoFrame" }, { "key": "galleryStyle" } ],
+    "hiddenEffects": []
+  }
+}

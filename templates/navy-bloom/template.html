@@ -1,0 +1,185 @@
+<main class="nb" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}">
+
+  <section class="nb-cover" data-animate="cover">
+    <div class="nb-scene">
+      <span class="nb-ornament" aria-hidden="true"></span>
+      <p class="nb-kicker">{{text "saveTheDate"}}</p>
+
+      <div class="nb-envelope" data-parallax>
+        <span class="nb-spray nb-spray--start" aria-hidden="true"></span>
+        <span class="nb-spray nb-spray--end" aria-hidden="true"></span>
+        <div class="nb-envelope__back" aria-hidden="true"></div>
+        <div class="nb-envelope__cards">
+          {{#if story.photos.length}}
+            {{#each story.photos}}
+              <figure class="nb-snap" data-item>
+                <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              </figure>
+            {{/each}}
+          {{else}}
+            <div class="nb-snap nb-snap--blank" aria-hidden="true"><span class="nb-ornament"></span></div>
+          {{/if}}
+        </div>
+        <div class="nb-envelope__front" aria-hidden="true"></div>
+        <span class="nb-seal" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <h1 class="nb-headline">
+      <span class="nb-headline__name">{{couple.groom.name}}</span>
+      {{#if couple.bride.name}}
+        <span class="nb-headline__and" aria-hidden="true">{{text "and"}}</span>
+        <span class="nb-headline__name">{{couple.bride.name}}</span>
+      {{/if}}
+    </h1>
+
+    <div class="nb-card nb-invite">
+      <h2 class="nb-card__title">{{text "inviteTitle"}}</h2>
+
+      <div class="nb-families">
+        <div class="nb-family">
+          {{#if couple.groom.father}}
+            <p class="nb-family__label">{{text "sonOf"}}</p>
+            <p class="nb-family__name">{{couple.groom.father}}</p>
+          {{/if}}
+          {{#each couple.groom.family}}
+            <p class="nb-family__label">{{label}}</p>
+            <p class="nb-family__name">{{name}}</p>
+          {{/each}}
+        </div>
+        <div class="nb-family">
+          {{#if couple.bride.father}}
+            <p class="nb-family__label">{{text "daughterOf"}}</p>
+            <p class="nb-family__name">{{couple.bride.father}}</p>
+          {{/if}}
+          {{#each couple.bride.family}}
+            <p class="nb-family__label">{{label}}</p>
+            <p class="nb-family__name">{{name}}</p>
+          {{/each}}
+        </div>
+      </div>
+
+      {{#if verse}}<p class="nb-verse">{{verse}}</p>{{/if}}
+      <p class="nb-lead">{{text "lead"}}</p>
+
+      <p class="nb-names">
+        <span class="nb-name">{{couple.groom.name}}</span>
+        {{#if couple.bride.name}}
+          <span class="nb-and">{{text "and"}}</span>
+          <span class="nb-name">{{couple.bride.name}}</span>
+        {{/if}}
+      </p>
+
+      {{#unless (variant "dateStyle" "calendar")}}
+        <p class="nb-date">{{formatDate mainDate}}</p>
+      {{/unless}}
+    </div>
+  </section>
+
+  <section class="nb-section nb-countdown" data-animate="countdown">
+    <div class="nb-card">
+      <h2 class="nb-card__title">{{text "countdownTitle"}}</h2>
+      <p class="nb-count">
+        <span class="nb-count__num">{{daysUntil mainDate}}</span>
+        <span class="nb-count__unit">{{text "countdownUnit"}}</span>
+      </p>
+      {{#if (variant "dateStyle" "calendar")}}
+        {{#with (calendarMonth mainDate)}}
+          <div class="nb-cal">
+            <p class="nb-cal__title">{{title}}</p>
+            <div class="nb-cal__grid">
+              {{#each weekdays}}<span class="nb-cal__wd">{{this}}</span>{{/each}}
+              {{#each cells}}<span class="nb-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+            </div>
+          </div>
+        {{/with}}
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if story.text}}
+    <div class="nb-divider" aria-hidden="true"></div>
+    <section class="nb-section nb-story" data-animate="story">
+      <h2 class="nb-title">{{text "storyTitle"}}</h2>
+      {{#if story.photos.length}}
+        <div class="nb-photos">
+          {{#each story.photos}}
+            <figure class="nb-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+            </figure>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="nb-story__text">{{story.text}}</p>
+      {{#if story.engagementDate}}
+        <p class="nb-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>
+      {{/if}}
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="nb-section nb-gallery" data-animate="gallery">
+      <h2 class="nb-title">{{text "galleryTitle"}}</h2>
+      <div class="nb-flow">
+        {{#each gallery}}
+          <figure class="nb-flow__item" data-item>
+            <img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy">
+          </figure>
+        {{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="nb-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <div class="nb-divider" aria-hidden="true"></div>
+
+  <section class="nb-section nb-events" data-animate="events">
+    <h2 class="nb-title">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="nb-card nb-event" data-item>
+        <h3 class="nb-card__title">{{eventLabel type}}</h3>
+        <p class="nb-event__venue">{{venue}}</p>
+        {{#if area}}<p class="nb-event__area">{{area}}</p>{{/if}}
+        <div class="nb-event__when">
+          <span class="nb-event__time">{{eventTime this}}</span>
+          <span class="nb-event__date">{{formatDate date}}</span>
+        </div>
+
+        {{#if program.length}}
+          <div class="nb-program">
+            <p class="nb-program__title">{{text "programTitle"}}</p>
+            <ol class="nb-program__list">
+              {{#each program}}
+                <li class="nb-program__item">
+                  <span class="nb-program__time">{{formatTime time}}</span>
+                  <span class="nb-program__what">{{title}}</span>
+                </li>
+              {{/each}}
+            </ol>
+          </div>
+        {{/if}}
+
+        {{#if mapUrl}}
+          <a class="nb-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>
+        {{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="nb-section nb-wishes" data-animate="wishes">
+    <div class="nb-sheet">
+      <h2 class="nb-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="nb-section nb-footer" data-animate="footer">
+    <span class="nb-ornament" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="nb-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}
+      <p class="nb-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>
+    {{/if}}
+    {{#if showBranding}}<p class="nb-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+
+</main>
