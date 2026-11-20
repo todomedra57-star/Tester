@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Midnight Template Preview</title>
+<style>
+  :root {
+    --ui-bg: #F4F5F8; --ui-panel: #FFFFFF; --ui-text: #1A2233; --ui-muted: #5E6880;
+    --ui-line: #DDE1EA; --ui-accent: #2F5C9E; --ui-stage: #E7EAF1;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ui-bg: #0C111B; --ui-panel: #131A28; --ui-text: #E3E8F2; --ui-muted: #95A0B8;
+      --ui-line: #263048; --ui-accent: #8FB0E6; --ui-stage: #080C14; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ui-bg: #0C111B; --ui-panel: #131A28; --ui-text: #E3E8F2; --ui-muted: #95A0B8;
+    --ui-line: #263048; --ui-accent: #8FB0E6; --ui-stage: #080C14; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ui-bg);
+    color: var(--ui-text);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .app { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
+  .controls {
+    padding: 24px 20px;
+    background: var(--ui-panel);
+    border-right: 1px solid var(--ui-line);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  h1 { margin: 0; font-size: 18px; }
+  .sub { margin: 0 0 6px; color: var(--ui-muted); font-size: 13px; }
+  .group { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--ui-line); }
+  .group h2 { margin: 0; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ui-muted); }
+  label.f { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 8px; }
+  select, button {
+    font: inherit; color: var(--ui-text); background: var(--ui-bg);
+    border: 1px solid var(--ui-line); border-radius: 6px; min-height: 34px; padding: 4px 8px;
+  }
+  select { width: 100%; min-width: 0; }
+  button { cursor: pointer; font-weight: 600; }
+  button:hover { border-color: var(--ui-accent); color: var(--ui-accent); }
+  .seg { display: flex; gap: 6px; }
+  .seg label { flex: 1; }
+  .seg input { position: absolute; opacity: 0; }
+  .seg span {
+    display: block; text-align: center; padding: 6px 0; border: 1px solid var(--ui-line);
+    border-radius: 6px; cursor: pointer; font-size: 13px;
+  }
+  .seg input:checked + span { border-color: var(--ui-accent); color: var(--ui-accent); font-weight: 600; }
+  .seg input:focus-visible + span { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+  .note { margin: auto 0 0; font-size: 12px; color: var(--ui-muted); }
+  .stage {
+    display: grid; place-items: center; padding: 32px 16px;
+    background: var(--ui-stage);
+  }
+  .phone {
+    width: 395px; height: min(844px, calc(100vh - 64px));
+    border: 10px solid #1B1F27; border-radius: 44px; overflow: hidden;
+    background: #000; box-shadow: 0 30px 60px -20px rgba(0,0,0,.45);
+    transition: width .3s;
+  }
+  .stage[data-device="small"] .phone { width: 380px; }
+  .stage[data-device="large"] .phone { width: 432px; }
+  .stage[data-device="desktop"] .phone { width: min(900px, 100%); border-width: 1px; border-radius: 10px; border-color: var(--ui-line); }
+  iframe { display: block; width: 100%; height: 100%; border: 0; }
+  #error { padding: 12px; border-radius: 6px; background: #FDECEC; color: #8A1C1C; }
+  @media (max-width: 760px) {
+    .app { grid-template-columns: 1fr; }
+    .controls { border-right: 0; border-bottom: 1px solid var(--ui-line); padding: 18px 16px; }
+    .stage { padding: 16px; }
+    .phone { width: 100% !important; max-width: 420px; height: 80vh; border-width: 6px; border-radius: 28px; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="controls">
+    <div>
+      <h1>Midnight</h1>
+      <p class="sub">A minimal dark-blue invitation template, rendered from <code>manifest.json</code>, <code>template.html</code> and <code>style.css</code>.</p>
+    </div>
+    <p id="error" hidden></p>
+
+    <div class="group">
+      <h2>Test case</h2>
+      <label class="f">Invitation <select id="case"></select></label>
+    </div>
+    <div class="group">
+      <h2>Couple's choices</h2>
+      <label class="f">Palette <select id="palette"></select></label>
+      <label class="f">Date style <select id="dateStyle"></select></label>
+      <label class="f">Countdown <select id="countdownStyle"></select></label>
+      <label class="f">Photo frame <select id="photoFrame"></select></label>
+    </div>
+    <div class="group">
+      <h2>Effects</h2>
+      <label class="f">Opening <select id="intro"></select></label>
+      <label class="f">Background <select id="ambient"></select></label>
+      <label class="f">Motion <select id="motion"></select></label>
+      <button id="replay" type="button">Replay opening</button>
+    </div>
+    <div class="group">
+      <h2>Screen</h2>
+      <div class="seg" role="radiogroup" aria-label="Screen width">
+        <label><input type="radio" name="device" value="small"><span>360</span></label>
+        <label><input type="radio" name="device" value="phone" checked><span>375</span></label>
+        <label><input type="radio" name="device" value="large"><span>412</span></label>
+        <label><input type="radio" name="device" value="desktop"><span>Wide</span></label>
+      </div>
+    </div>
+    <p class="note">The opening, reveal effects and wishes box are a preview stand-in for the platform runtime.</p>
+  </aside>
+  <main class="stage" data-device="phone">
+    <div class="phone"><iframe id="frame" title="Invitation preview"></iframe></div>
+  </main>
+</div>
+<script type="module" src="preview/preview.js"></script>
+</body>
+</html>
