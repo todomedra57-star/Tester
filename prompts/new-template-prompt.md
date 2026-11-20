@@ -109,6 +109,7 @@ Dividers and decoration between sections are free.
 - Colors only through `var(--c-<key>)` (shades via `color-mix()` on tokens, never a raw hex).
 - Fonts only through `var(--font-<key>)`, lengths through `var(--<key>)`.
 - Images only through `var(--img-<key>)`, applied under `.has-<key>`, with a plain fallback.
+- Prefer single-colour art used as a mask (`mask: var(--img-<key>) …; background: var(--c-…)`), so one drawing follows every palette. Keep shaded art (pearls, wax seals) as normal images.
 - Required tokens: colors hero, onHero, accent, bg, text, card; fonts display and body; length radius.
 - Mobile first: 360–412px wide, centered at max ~520px.
 - Right to left by default with logical properties only, so English mirrors itself. Use `:dir(rtl)` or `:lang(en)` only where art must flip.

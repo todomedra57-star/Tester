@@ -1,0 +1,466 @@
+{
+  "key": "porcelain",
+  "name": {
+    "ar": "بورسلين",
+    "en": "Porcelain"
+  },
+  "description": {
+    "ar": "خزف أزرق وأبيض بحواف ذهبية: طبق مذهب يدور بعمق ثلاثي الأبعاد، نقش أغصان ناعم، وكروت مزججة.",
+    "en": "Fine blue-and-white china with gold rims: a gilded plate turning in 3D, a soft vine pattern and glazed cards."
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "texts": {
+    "lead": {
+      "ar": "يسعدنا دعوتكم لحضور حفل زفاف",
+      "en": "Together with their families invite you to the wedding of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على الفرح",
+      "en": "Counting the days"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
+    },
+    "galleryTitle": {
+      "ar": "من صورنا",
+      "en": "Moments"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "wishesTitle": {
+      "ar": "اكتب دعوة للعروسين",
+      "en": "Leave a wish"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Programme"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
+    }
+  },
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 28,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 34,
+      "max": 68,
+      "unit": "px"
+    },
+    {
+      "key": "patternTile",
+      "type": "image"
+    },
+    {
+      "key": "plateArt",
+      "type": "image"
+    },
+    {
+      "key": "cornerArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "plate",
+        "frame"
+      ],
+      "choices": {
+        "plate": {
+          "ar": "طبق مذهب ثلاثي الأبعاد",
+          "en": "Gilded 3D plate"
+        },
+        "frame": {
+          "ar": "لوحة خزف بإطار منقوش",
+          "en": "Patterned tile frame"
+        }
+      }
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "badge",
+        "calendar"
+      ],
+      "choices": {
+        "badge": {
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "plate",
+        "arch",
+        "scalloped"
+      ],
+      "choices": {
+        "plate": {
+          "ar": "إطار طبق دائري",
+          "en": "Round plate"
+        },
+        "arch": {
+          "ar": "قوس",
+          "en": "Arch"
+        },
+        "scalloped": {
+          "ar": "حافة مموجة",
+          "en": "Scalloped"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "stack",
+        "strip"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "stack": {
+          "ar": "كأوراق متراصة",
+          "en": "Fanned stack"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#1E3F8C",
+    "onHero": "#F7F8FB",
+    "accent": "#C6A15B",
+    "bg": "#F4F6FA",
+    "text": "#1C2A4A",
+    "muted": "#5F6B85",
+    "card": "#FFFFFF",
+    "line": "#D9DFEC",
+    "display": "amiri",
+    "body": "serifPair",
+    "latin": "cormorant",
+    "radius": 14,
+    "nameSize": 52,
+    "patternTile": "porcelain-tile",
+    "plateArt": "porcelain-plate",
+    "cornerArt": "porcelain-corner",
+    "sparkleArt": "sparkle",
+    "coverLayout": "plate",
+    "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "plate",
+    "galleryStyle": "coverflow"
+  },
+  "defaultAnimation": {
+    "intro": "doors",
+    "ambient": "none",
+    "duration": 1000,
+    "stagger": 150,
+    "parallax": true,
+    "sections": {
+      "countdown": {
+        "effect": "glaze"
+      },
+      "story": {
+        "effect": "glaze"
+      },
+      "wishes": {
+        "effect": "glaze"
+      },
+      "cover": {
+        "effect": "fade"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "glaze",
+      "kind": "reveal",
+      "name": {
+        "ar": "تزجيج",
+        "en": "Glaze settle"
+      }
+    }
+  ],
+  "fields": [],
+  "couplePresets": {
+    "label": {
+      "ar": "بورسلين",
+      "en": "Porcelain"
+    },
+    "defaultPalette": "cobalt",
+    "palettes": [
+      {
+        "key": "cobalt",
+        "name": {
+          "ar": "كوبالت وذهبي",
+          "en": "Cobalt & gold"
+        },
+        "values": {
+          "hero": "#1E3F8C",
+          "onHero": "#F7F8FB",
+          "accent": "#C6A15B",
+          "bg": "#F4F6FA",
+          "text": "#1C2A4A",
+          "muted": "#5F6B85",
+          "card": "#FFFFFF",
+          "line": "#D9DFEC"
+        }
+      },
+      {
+        "key": "celadon",
+        "name": {
+          "ar": "سيلادون",
+          "en": "Celadon"
+        },
+        "values": {
+          "hero": "#2C6A58",
+          "onHero": "#F5FAF7",
+          "accent": "#C6A15B",
+          "bg": "#F2F7F4",
+          "text": "#1E3A31",
+          "muted": "#5C7268",
+          "card": "#FFFFFF",
+          "line": "#D5E3DB"
+        }
+      },
+      {
+        "key": "rouge",
+        "name": {
+          "ar": "أحمر صيني",
+          "en": "Rouge"
+        },
+        "values": {
+          "hero": "#9B2B2B",
+          "onHero": "#FFF8F5",
+          "accent": "#C6A15B",
+          "bg": "#FBF4F1",
+          "text": "#3B1A1A",
+          "muted": "#7D5F5B",
+          "card": "#FFFFFF",
+          "line": "#EBD9D3"
+        }
+      },
+      {
+        "key": "rosePorcelain",
+        "name": {
+          "ar": "وردي وذهب وردي",
+          "en": "Rose & rose gold"
+        },
+        "values": {
+          "hero": "#B0607A",
+          "onHero": "#FFF7F9",
+          "accent": "#C99A84",
+          "bg": "#FBF3F5",
+          "text": "#3F2430",
+          "muted": "#7F6470",
+          "card": "#FFFFFF",
+          "line": "#EDD8DE"
+        }
+      },
+      {
+        "key": "midnightChina",
+        "name": {
+          "ar": "خزف ليلي",
+          "en": "Midnight china"
+        },
+        "values": {
+          "hero": "#E3E9F7",
+          "onHero": "#10182E",
+          "accent": "#D4B26B",
+          "bg": "#10182E",
+          "text": "#EEF1F8",
+          "muted": "#9AA6C2",
+          "card": "#1A2440",
+          "line": "#2C3858"
+        }
+      }
+    ],
+    "intros": [
+      "none",
+      "doors",
+      "curtain"
+    ],
+    "ambients": [
+      "none"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1000,
+        "stagger": 150,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 650,
+        "stagger": 90,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      }
+    ],
+    "hiddenEffects": []
+  }
+}

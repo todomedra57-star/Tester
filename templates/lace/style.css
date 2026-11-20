@@ -1,0 +1,235 @@
+/* Lace: bridal lace and pearls on silk.
+   Layers: fixed satin page with soft folds + a lace net (mask, lace colour) →
+   a pearl garland across the top → a lace doily framing the couple's portrait →
+   silk cards with a pearl row on top and a lace trim hanging below the edge.
+   Names in a flowing script. */
+
+/* ---------- base ---------- */
+.lc {
+  --lc-gold-deep: color-mix(in srgb, var(--c-accent) 58%, var(--c-hero));
+  --lc-gold-light: color-mix(in srgb, var(--c-accent) 45%, var(--c-card));
+  --lc-foil: linear-gradient(115deg, var(--lc-gold-deep) 0%, var(--c-accent) 20%, var(--lc-gold-light) 34%,
+    var(--c-accent) 46%, var(--lc-gold-deep) 60%, var(--c-accent) 76%, var(--lc-gold-light) 90%, var(--c-accent) 100%);
+  position: relative;
+  isolation: isolate;
+  max-inline-size: 520px;
+  margin-inline: auto;
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  text-align: center;
+  overflow-x: clip;
+}
+.lc :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+.lc-section { position: relative; padding-block: 60px; padding-inline: 20px; }
+
+/* foil text */
+.lc :is(.lc-names, .lc-title, .lc-count__num, .lc-closing, .lc-event__type) {
+  background: var(--lc-foil-text, var(--lc-foil)) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+.lc-title { margin-block-end: 26px; font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.3; }
+.lc:lang(en) .lc-title { font-family: var(--font-latin); }
+.lc-names { display: flex; flex-direction: column; align-items: center; font-family: var(--font-display); font-weight: 400; font-size: var(--name-size); line-height: 1.25; }
+.lc:lang(en) .lc-names { font-family: var(--font-latin); }
+.lc-name { max-inline-size: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.lc-and { font-size: 0.6em; }
+
+/* sparkles: four-point glints in foil, twinkling as they scroll by */
+.lc-spark { position: absolute; z-index: 4; inline-size: 18px; block-size: 18px; display: none; pointer-events: none; background: var(--lc-foil); }
+.has-sparkle-art .lc-spark { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; }
+.lc-spark--1 { inset-block-start: 14px; inset-inline-start: 18%; }
+.lc-spark--2 { inset-block-start: 34px; inset-inline-end: 14%; inline-size: 12px; block-size: 12px; }
+.lc-spark--3 { inset-block-end: 22%; inset-inline-end: 8%; inline-size: 22px; block-size: 22px; }
+
+/* "refined" hides the extra ornament for a quieter look */
+.lc[data-ornament="refined"] .lc-decor { display: none !important; }
+
+/* dividers */
+.lc-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
+.lc-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--lc-foil); rotate: 45deg; }
+
+/* families */
+.lc-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
+.lc-families:not(:has(p)) { display: none; }
+.lc-family { display: flex; flex-direction: column; gap: 2px; padding-inline: 8px; min-inline-size: 0; }
+.lc-family + .lc-family { border-inline-start: 1px solid var(--c-line); }
+.lc-family__label { font-size: 12px; color: var(--c-muted); }
+.lc-family__label:not(:first-child) { margin-block-start: 8px; }
+.lc-family__name { font-size: 14px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
+.lc-verse { font-family: var(--font-display); font-size: 18px; line-height: 1.9; }
+.lc-lead { max-inline-size: 28ch; margin-inline: auto; font-size: 16px; color: var(--c-muted); }
+
+/* countdown + calendar */
+.lc-count { display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
+.lc-count__num { font-family: var(--font-display); font-size: 76px; }
+.lc:lang(en) .lc-count__num { font-family: var(--font-latin); }
+.lc-count__unit { margin-block-start: 4px; font-size: 14px; color: var(--c-muted); }
+.lc-cal { margin-block-start: 26px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
+.lc-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 22px; }
+.lc:lang(en) .lc-cal__title { font-family: var(--font-latin); }
+.lc-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; font-size: 13px; }
+.lc-cal__wd { font-size: 11px; color: var(--c-muted); }
+.lc-cal__cell { display: grid; place-items: center; block-size: 34px; }
+.lc-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; background: var(--lc-foil); color: var(--c-hero); font-weight: 700; box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px var(--c-accent); }
+
+/* story photos */
+.lc-photos { display: flex; justify-content: center; gap: 18px; margin-block-end: 26px; }
+.lc-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; }
+.lc-photo:nth-child(2) { margin-block-start: 30px; }
+.lc-photo:nth-child(n+3) { display: none; }
+.lc-photo img { position: relative; display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.lc-story__text { max-inline-size: 30ch; margin-inline: auto; font-size: 17px; }
+.lc-story__date { margin-block-start: 12px; font-size: 13px; color: var(--c-muted); }
+
+/* gallery: coverflow · stack · strip */
+.lc-gallery { padding-inline: 0; }
+.lc-flow { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 18px 40px; padding-inline: 22%; perspective: 900px; scrollbar-width: none; }
+.lc-flow::-webkit-scrollbar { display: none; }
+.lc-flow__item { flex: 0 0 56%; aspect-ratio: 3 / 4; scroll-snap-align: center; padding-inline: 8px; }
+.lc-flow__item img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+@supports (animation-timeline: view(inline)) {
+  .lc:not([data-gallery-style="strip"]) .lc-flow__item { padding-inline: 0; animation: lace-flow linear both; animation-timeline: view(inline); }
+  .lc:not([data-gallery-style="strip"]) .lc-flow:dir(rtl) .lc-flow__item { animation-name: lace-flow-rtl; }
+  .lc[data-gallery-style="stack"] .lc-flow__item { animation-name: lace-stack; }
+  .lc[data-gallery-style="stack"] .lc-flow:dir(rtl) .lc-flow__item { animation-name: lace-stack-rtl; }
+}
+@keyframes lace-flow { 0% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } }
+@keyframes lace-flow-rtl { 0% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } }
+@keyframes lace-stack { 0% { transform: translateY(24px) rotate(12deg) scale(0.84); } 50% { transform: none; } 100% { transform: translateY(24px) rotate(-12deg) scale(0.84); } }
+@keyframes lace-stack-rtl { 0% { transform: translateY(24px) rotate(-12deg) scale(0.84); } 50% { transform: none; } 100% { transform: translateY(24px) rotate(12deg) scale(0.84); } }
+.lc-hint { font-size: 13px; color: var(--c-muted); }
+
+/* events */
+.lc-events { display: flex; flex-direction: column; gap: 56px; }
+.lc-events .lc-title { margin-block-end: 0; }
+.lc-event__type { margin-block-end: 6px; font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.3; }
+.lc:lang(en) .lc-event__type { font-family: var(--font-latin); }
+.lc-event__date { font-size: 16px; }
+.lc-event__time { margin-block-start: 2px; font-size: 16px; font-weight: 600; }
+.lc-event__place { font-size: 14px; color: var(--c-muted); overflow-wrap: anywhere; }
+.lc-program { margin-block-start: 22px; padding-block-start: 18px; border-block-start: 1px solid var(--c-line); }
+.lc-program__title { margin-block-end: 12px; font-size: 13px; color: var(--c-muted); }
+.lc-program__list { list-style: none; padding: 0; display: grid; gap: 10px; max-inline-size: 280px; margin-inline: auto; }
+.lc-program__item { display: flex; align-items: center; gap: 12px; font-size: 14px; text-align: start; }
+.lc-program__item::before { content: ""; flex: none; inline-size: 7px; block-size: 7px; rotate: 45deg; background: var(--lc-foil); }
+.lc-program__time { flex: none; min-inline-size: 66px; font-weight: 600; }
+.lc-map {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-block-size: 46px; margin-block-start: 24px; padding-inline: 28px;
+  border-radius: 999px; background: var(--lc-foil) 0 0 / 220% 100%; color: var(--c-hero);
+  box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px color-mix(in srgb, var(--c-accent) 60%, transparent), 0 12px 22px -12px color-mix(in srgb, var(--c-accent) 90%, transparent);
+  font-size: 14px; font-weight: 600; text-decoration: none; transition: background-position .8s ease;
+}
+.lc-map:hover, .lc-map:focus-visible { background-position: 100% 0; }
+.lc-map:focus-visible { outline: 2px solid var(--c-hero); outline-offset: 6px; }
+
+/* wishes box */
+.lc .wb { text-align: start; }
+.lc .wb-chip { border-color: var(--c-accent); color: var(--c-text); }
+.lc .wb-label { color: var(--c-muted); }
+.lc .wb-input, .lc .wb-textarea { background: color-mix(in srgb, var(--c-card) 70%, var(--c-bg)); border-color: var(--c-line); color: var(--c-text); }
+.lc .wb-input::placeholder, .lc .wb-textarea::placeholder { color: var(--c-muted); }
+.lc .wb-input:focus, .lc .wb-textarea:focus { outline: 2px solid var(--c-accent); outline-offset: 0; }
+.lc .wb-send { border-radius: 999px; background: var(--lc-foil) 0 0 / 220% 100%; color: var(--c-hero); transition: background-position .8s ease; }
+.lc .wb-send:hover { background-position: 100% 0; }
+.lc .wb-status { color: var(--c-muted); }
+.lc .wb-item { background: transparent; border: 0; border-inline-start: 2px solid var(--c-accent); border-radius: 0; }
+.lc .wb-item__name, .lc .wb-item__text { color: var(--c-text); }
+
+/* footer */
+.lc-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 40px 64px; }
+.lc-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 32px; line-height: 1.5; }
+.lc:lang(en) .lc-closing { font-family: var(--font-latin); }
+.lc-until, .lc-brand { font-size: 13px; color: var(--c-muted); }
+
+/* scroll-driven life shared by all */
+@supports (animation-timeline: view()) {
+  .lc :is(.lc-names, .lc-title, .lc-count__num, .lc-closing, .lc-event__type, .lc-map) { animation: lace-foil linear both; animation-timeline: view(); }
+  .lc-spark { animation: lace-twinkle linear both; animation-timeline: view(); }
+}
+@keyframes lace-foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+@keyframes lace-twinkle { 0%, 100% { scale: 0.3; opacity: 0.2; rotate: 0deg; } 30% { scale: 1.15; opacity: 1; } 55% { scale: 0.6; opacity: 0.6; rotate: 45deg; } 75% { scale: 1; opacity: 1; } }
+
+/* ---------- page layers ---------- */
+.lc::before { content: ""; position: fixed; inset: 0; z-index: -2;
+  background: linear-gradient(115deg, var(--c-bg) 0%, color-mix(in srgb, var(--c-bg) 70%, var(--c-card)) 22%, var(--c-bg) 40%, color-mix(in srgb, var(--c-bg) 86%, var(--c-hero)) 62%, color-mix(in srgb, var(--c-bg) 70%, var(--c-card)) 80%, var(--c-bg) 100%); }
+.has-pattern-tile .lc::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.35;
+  background: var(--c-lace); -webkit-mask: var(--img-pattern-tile) 0 0 / 96px; mask: var(--img-pattern-tile) 0 0 / 96px; }
+.lc[data-ornament="refined"]::after { opacity: 0.15; }
+.lc-title { color: var(--c-hero); }
+.lc:lang(en) .lc-title { font-size: 44px; }
+.lc { --lc-foil-text: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 38%, var(--lc-gold-deep) 50%, var(--c-hero) 62%, var(--c-hero) 100%); }
+.lc-names { font-size: var(--name-size); line-height: 1.35; }
+.lc:lang(en) .lc-names { font-size: calc(var(--name-size) * 1.15); line-height: 1.2; }
+.lc-and { font-size: 0.7em; }
+
+/* ---------- 1 · cover: pearls, doily, portrait ---------- */
+.lc-cover { position: relative; padding-block: 70px 30px; padding-inline: 18px; }
+.lc-pearls { position: absolute; inset-block-start: 0; inset-inline: -4%; block-size: 90px; display: none; z-index: 3; pointer-events: none; filter: drop-shadow(0 4px 4px color-mix(in srgb, var(--c-text) 25%, transparent)); }
+.has-pearl-art .lc-pearls { display: block; background: var(--img-pearl-art) center top / 100% auto no-repeat; }
+.lc-veil { position: relative; display: grid; place-items: center; inline-size: min(360px, 92vw); aspect-ratio: 1; margin-inline: auto; }
+.lc-doily { position: absolute; inset: 0; display: none; background: var(--c-lace); filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--c-text) 22%, transparent)); }
+.has-doily-art .lc-doily { display: block; -webkit-mask: var(--img-doily-art) center / contain no-repeat; mask: var(--img-doily-art) center / contain no-repeat; }
+.lc-veil__center { position: relative; display: grid; place-items: center; inline-size: 44%; aspect-ratio: 1; }
+.lc-portrait { inline-size: 100%; aspect-ratio: 4 / 5; border-radius: 50%; border: 7px dotted var(--c-lace); padding: 3px; background: var(--c-card) padding-box; box-shadow: 0 0 0 2px var(--c-accent); filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--c-text) 30%, transparent)); }
+.lc-portrait img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: 50%; }
+.lc-veil__amp { font-family: var(--font-latin); font-size: 110px; line-height: 1; background: var(--lc-foil); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lc-invite { margin-block-start: 12px; padding-block-start: 56px; }
+.lc-lead { font-style: italic; }
+.lc-date { display: inline-block; margin-block-start: 14px; padding-block: 8px; padding-inline: 24px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--c-accent); color: var(--c-hero); font-size: 15px; }
+.lc-verse { margin-block-start: 18px; }
+/* satin ribbon tied across the top of the invitation */
+.lc-ribbon { position: absolute; inset-block-start: -14px; inset-inline: 30%; block-size: 28px; z-index: 3; border-radius: 4px;
+  background: linear-gradient(var(--c-hero), color-mix(in srgb, var(--c-hero) 70%, var(--c-card)) 45%, var(--c-hero)); box-shadow: 0 6px 10px -4px color-mix(in srgb, var(--c-text) 40%, transparent); }
+.lc-ribbon::before, .lc-ribbon::after { content: ""; position: absolute; inset-block-start: 22px; inline-size: 22px; block-size: 44px; background: inherit; }
+.lc-ribbon::before { inset-inline-start: 34%; rotate: 18deg; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
+.lc-ribbon::after { inset-inline-end: 34%; rotate: -18deg; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); }
+/* layout "card": no doily, the invitation becomes the hero with a wide lace frame */
+.lc[data-cover-layout="card"] .lc-veil { display: none; }
+.lc[data-cover-layout="card"] .lc-invite { padding-block: 90px 70px; }
+.lc[data-cover-layout="card"] .lc-invite::before { block-size: 18px; }
+
+/* ---------- silk cards: pearl row above, lace trim below ---------- */
+.lc-card {
+  position: relative; z-index: 1; margin-block-end: 26px; padding-block: 48px 52px; padding-inline: 26px; border-radius: var(--radius);
+  background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--c-card) 60%, var(--c-bg)) 48%, transparent 62%) 160% 0 / 250% 100% no-repeat, var(--c-card);
+  outline: 1px solid var(--c-accent); outline-offset: -10px;
+  box-shadow: 0 0 0 1px var(--c-line), 0 30px 46px -28px color-mix(in srgb, var(--c-text) 40%, transparent), 0 0 60px -28px color-mix(in srgb, var(--c-accent) 55%, transparent);
+}
+.lc-card::before { content: ""; position: absolute; inset-block-start: -7px; inset-inline: 18px; block-size: 14px; pointer-events: none;
+  background: radial-gradient(circle at 38% 34%, color-mix(in srgb, var(--c-lace) 70%, var(--c-card)) 0 18%, var(--c-lace) 38%, color-mix(in srgb, var(--c-lace) 75%, var(--c-text)) 70%, transparent 72%) 0 0 / 14px 14px repeat-x;
+  filter: drop-shadow(0 2px 2px color-mix(in srgb, var(--c-text) 25%, transparent)); }
+.lc-card::after { content: ""; position: absolute; inset-block-end: -24px; inset-inline: 0; block-size: 26px; display: none; pointer-events: none; background: var(--c-card); }
+.has-edge-art .lc-card::after { display: block; -webkit-mask: var(--img-edge-art) 0 0 / 52px 100% repeat-x; mask: var(--img-edge-art) 0 0 / 52px 100% repeat-x; filter: drop-shadow(0 6px 5px color-mix(in srgb, var(--c-text) 18%, transparent)); }
+.lc[data-ornament="refined"] .lc-card::before { display: none; }
+
+/* photo frames: pearl oval · arch · scalloped */
+.lc-photo { border-radius: 50%; border: 7px dotted var(--c-lace); padding: 3px; background: var(--c-card) padding-box; box-shadow: 0 0 0 2px var(--c-accent); filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--c-text) 25%, transparent)); }
+.lc[data-photo-frame="arch"] .lc-photo { border-radius: 999px 999px 8px 8px; border: 4px solid transparent; background: var(--lc-foil) border-box; box-shadow: none; padding: 0; }
+.lc[data-photo-frame="scalloped"] .lc-photo, .lc[data-photo-frame="scalloped"] .lc-photo img { aspect-ratio: 1; border: 0; border-radius: 0; box-shadow: none; clip-path: polygon(50.0% 0.0%, 52.6% 0.6%, 55.0% 2.3%, 57.2% 4.6%, 60.0% 3.0%, 62.8% 2.2%, 65.5% 2.4%, 67.7% 3.8%, 69.5% 6.1%, 70.9% 9.0%, 74.0% 8.4%, 76.9% 8.5%, 79.4% 9.5%, 81.1% 11.6%, 82.1% 14.3%, 82.5% 17.5%, 85.7% 17.9%, 88.4% 18.9%, 90.5% 20.6%, 91.5% 23.1%, 91.6% 26.0%, 91.0% 29.1%, 93.9% 30.5%, 96.2% 32.3%, 97.6% 34.5%, 97.8% 37.2%, 97.0% 40.0%, 95.4% 42.8%, 97.7% 45.0%, 99.4% 47.4%, 100.0% 50.0%, 99.4% 52.6%, 97.7% 55.0%, 95.4% 57.2%, 97.0% 60.0%, 97.8% 62.8%, 97.6% 65.5%, 96.2% 67.7%, 93.9% 69.5%, 91.0% 70.9%, 91.6% 74.0%, 91.5% 76.9%, 90.5% 79.4%, 88.4% 81.1%, 85.7% 82.1%, 82.5% 82.5%, 82.1% 85.7%, 81.1% 88.4%, 79.4% 90.5%, 76.9% 91.5%, 74.0% 91.6%, 70.9% 91.0%, 69.5% 93.9%, 67.7% 96.2%, 65.5% 97.6%, 62.8% 97.8%, 60.0% 97.0%, 57.2% 95.4%, 55.0% 97.7%, 52.6% 99.4%, 50.0% 100.0%, 47.4% 99.4%, 45.0% 97.7%, 42.8% 95.4%, 40.0% 97.0%, 37.2% 97.8%, 34.5% 97.6%, 32.3% 96.2%, 30.5% 93.9%, 29.1% 91.0%, 26.0% 91.6%, 23.1% 91.5%, 20.6% 90.5%, 18.9% 88.4%, 17.9% 85.7%, 17.5% 82.5%, 14.3% 82.1%, 11.6% 81.1%, 9.5% 79.4%, 8.5% 76.9%, 8.4% 74.0%, 9.0% 70.9%, 6.1% 69.5%, 3.8% 67.7%, 2.4% 65.5%, 2.2% 62.8%, 3.0% 60.0%, 4.6% 57.2%, 2.3% 55.0%, 0.6% 52.6%, 0.0% 50.0%, 0.6% 47.4%, 2.3% 45.0%, 4.6% 42.8%, 3.0% 40.0%, 2.2% 37.2%, 2.4% 34.5%, 3.8% 32.3%, 6.1% 30.5%, 9.0% 29.1%, 8.4% 26.0%, 8.5% 23.1%, 9.5% 20.6%, 11.6% 18.9%, 14.3% 17.9%, 17.5% 17.5%, 17.9% 14.3%, 18.9% 11.6%, 20.6% 9.5%, 23.1% 8.5%, 26.0% 8.4%, 29.1% 9.0%, 30.5% 6.1%, 32.3% 3.8%, 34.5% 2.4%, 37.2% 2.2%, 40.0% 3.0%, 42.8% 4.6%, 45.0% 2.3%, 47.4% 0.6%); }
+.lc[data-photo-frame="scalloped"] .lc-photo { padding: 6px; background: var(--lc-foil); }
+.lc-flow__item img { border: 8px solid var(--c-card); border-block-end-width: 30px; border-radius: 2px; box-shadow: 0 0 0 1px var(--c-line), 0 22px 34px -18px color-mix(in srgb, var(--c-text) 50%, transparent); }
+
+/* ---------- motion ---------- */
+@supports (animation-timeline: view()) {
+  .lc-doily { animation: lace-turn linear both; animation-timeline: view(); }
+  .lc-card { animation: lace-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+  .lc-pearls { animation: lace-swing linear both; animation-timeline: view(); transform-origin: 50% 0; }
+}
+@keyframes lace-turn { from { rotate: -18deg; } to { rotate: 30deg; } }
+@keyframes lace-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
+@keyframes lace-swing { from { translate: 0 -10px; } to { translate: 0 14px; } }
+
+/* own reveal: unfurls downward like a veil */
+.fx-unfurl { opacity: 0; clip-path: inset(0 0 70% 0);
+  transition: opacity var(--fx-dur, 1s) ease, clip-path var(--fx-dur, 1s) cubic-bezier(.6, 0, .2, 1); }
+.fx-unfurl.is-in { clip-path: inset(-60px -60px -60px -60px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lc *, .lc *::before, .lc *::after { animation: none !important; }
+  .lc-map, .lc .wb-send { transition: none; }
+}

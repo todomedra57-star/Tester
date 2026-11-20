@@ -1,0 +1,505 @@
+{
+  "key": "desert-bloom",
+  "name": {
+    "ar": "زهرة الصحراء",
+    "en": "Desert Bloom"
+  },
+  "description": {
+    "ar": "صحراء عربية وقت الغروب: كثبان تتحرك بسرعات مختلفة مع التمرير، شمس متوهجة، نخيل وورد صحراوي، وكروت رملية بإطار ذهبي.",
+    "en": "An Arabian desert at sunset: dunes that move at different speeds as you scroll, a glowing sun, date palms and desert roses, and sand cards framed in gold."
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "texts": {
+    "lead": {
+      "ar": "تحت سماء الصحراء، ندعوكم لحضور حفل زفاف",
+      "en": "Under the desert sky, please join us for the wedding of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على الفرح",
+      "en": "Until sunset"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
+    },
+    "galleryTitle": {
+      "ar": "من صورنا",
+      "en": "Moments"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "wishesTitle": {
+      "ar": "اكتب دعوة للعروسين",
+      "en": "Leave a wish under the stars"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Programme"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
+    }
+  },
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "glow",
+      "type": "color"
+    },
+    {
+      "key": "dune",
+      "type": "color"
+    },
+    {
+      "key": "silhouette",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 28,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 34,
+      "max": 68,
+      "unit": "px"
+    },
+    {
+      "key": "palmArt",
+      "type": "image"
+    },
+    {
+      "key": "flowerArt",
+      "type": "image"
+    },
+    {
+      "key": "sandTexture",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "dunes",
+        "arch"
+      ],
+      "choices": {
+        "dunes": {
+          "ar": "كثبان على امتداد الشاشة",
+          "en": "Full-screen dunes"
+        },
+        "arch": {
+          "ar": "الكثبان من نافذة مقوسة",
+          "en": "Dunes through a gilded arch"
+        }
+      }
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "badge",
+        "calendar"
+      ],
+      "choices": {
+        "badge": {
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "arch",
+        "circle",
+        "dome"
+      ],
+      "choices": {
+        "arch": {
+          "ar": "قوس",
+          "en": "Arch"
+        },
+        "circle": {
+          "ar": "دائرة",
+          "en": "Circle"
+        },
+        "dome": {
+          "ar": "قبة",
+          "en": "Dome"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "stack",
+        "strip"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "stack": {
+          "ar": "كأوراق متراصة",
+          "en": "Fanned stack"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#5A2A1C",
+    "onHero": "#FFF4E4",
+    "accent": "#D4A64F",
+    "bg": "#E5A066",
+    "text": "#3E2216",
+    "muted": "#7C5A45",
+    "card": "#FBF1E2",
+    "line": "#EBD3B5",
+    "glow": "#F8D9A0",
+    "dune": "#D9925A",
+    "silhouette": "#4A2418",
+    "display": "amiri",
+    "body": "serifPair",
+    "latin": "cormorant",
+    "radius": 12,
+    "nameSize": 54,
+    "palmArt": "palm",
+    "flowerArt": "desert-rose",
+    "sandTexture": "sand-grain",
+    "sparkleArt": "sparkle",
+    "coverLayout": "dunes",
+    "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "arch",
+    "galleryStyle": "coverflow"
+  },
+  "defaultAnimation": {
+    "intro": "curtain",
+    "ambient": "sand-glints",
+    "duration": 1000,
+    "stagger": 150,
+    "parallax": true,
+    "sections": {
+      "countdown": {
+        "effect": "mirage"
+      },
+      "story": {
+        "effect": "mirage"
+      },
+      "wishes": {
+        "effect": "mirage"
+      },
+      "cover": {
+        "effect": "fade"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "mirage",
+      "kind": "reveal",
+      "name": {
+        "ar": "سراب",
+        "en": "Mirage settle"
+      }
+    },
+    {
+      "key": "sand-glints",
+      "kind": "ambient",
+      "name": {
+        "ar": "بريق الرمال",
+        "en": "Drifting sand glints"
+      }
+    }
+  ],
+  "fields": [],
+  "couplePresets": {
+    "label": {
+      "ar": "زهرة الصحراء",
+      "en": "Desert Bloom"
+    },
+    "defaultPalette": "goldenHour",
+    "palettes": [
+      {
+        "key": "goldenHour",
+        "name": {
+          "ar": "الساعة الذهبية",
+          "en": "Golden hour"
+        },
+        "values": {
+          "hero": "#5A2A1C",
+          "onHero": "#FFF4E4",
+          "accent": "#D4A64F",
+          "bg": "#E5A066",
+          "text": "#3E2216",
+          "muted": "#7C5A45",
+          "card": "#FBF1E2",
+          "line": "#EBD3B5",
+          "glow": "#F8D9A0",
+          "dune": "#D9925A",
+          "silhouette": "#4A2418"
+        }
+      },
+      {
+        "key": "desertNight",
+        "name": {
+          "ar": "ليل الصحراء",
+          "en": "Desert night"
+        },
+        "values": {
+          "hero": "#F3E2C2",
+          "onHero": "#141A3A",
+          "accent": "#D9B46A",
+          "bg": "#141A3A",
+          "text": "#F3E9D8",
+          "muted": "#B5A99A",
+          "card": "#1E2448",
+          "line": "#363E6A",
+          "glow": "#3B2F5C",
+          "dune": "#6E5266",
+          "silhouette": "#0B0F24"
+        }
+      },
+      {
+        "key": "roseDune",
+        "name": {
+          "ar": "كثبان وردية",
+          "en": "Rose dune"
+        },
+        "values": {
+          "hero": "#5C2630",
+          "onHero": "#FFF5F2",
+          "accent": "#CFA066",
+          "bg": "#E7A9A0",
+          "text": "#43202A",
+          "muted": "#84606A",
+          "card": "#FCF1EE",
+          "line": "#EED2CC",
+          "glow": "#F7D6C4",
+          "dune": "#D68B7E",
+          "silhouette": "#4E1F28"
+        }
+      },
+      {
+        "key": "oasis",
+        "name": {
+          "ar": "واحة",
+          "en": "Oasis"
+        },
+        "values": {
+          "hero": "#1F4A4C",
+          "onHero": "#F8F3E8",
+          "accent": "#C9A050",
+          "bg": "#93C6C4",
+          "text": "#173638",
+          "muted": "#4E6567",
+          "card": "#F8F3E8",
+          "line": "#E3D8C2",
+          "glow": "#F1D9A7",
+          "dune": "#D9B07C",
+          "silhouette": "#173A3B"
+        }
+      },
+      {
+        "key": "ivorySand",
+        "name": {
+          "ar": "رمال عاجية",
+          "en": "Ivory sand"
+        },
+        "values": {
+          "hero": "#6B4A2B",
+          "onHero": "#FFFBF3",
+          "accent": "#C2A061",
+          "bg": "#F1E6D2",
+          "text": "#3A2A1A",
+          "muted": "#7A6650",
+          "card": "#FFFBF3",
+          "line": "#E8DCC6",
+          "glow": "#FBF3E4",
+          "dune": "#E2C9A2",
+          "silhouette": "#5B3E24"
+        }
+      }
+    ],
+    "intros": [
+      "none",
+      "doors",
+      "curtain"
+    ],
+    "ambients": [
+      "none",
+      "sand-glints"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1000,
+        "stagger": 150,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 650,
+        "stagger": 90,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      }
+    ],
+    "hiddenEffects": []
+  }
+}

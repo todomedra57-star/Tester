@@ -1,0 +1,126 @@
+<main class="db" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}">
+
+  <section class="db-cover" data-animate="cover">
+    <div class="db-scene">
+      <span class="db-stars" aria-hidden="true"></span>
+      <span class="db-sun" aria-hidden="true"></span>
+      <span class="db-spark db-spark--1 db-decor" aria-hidden="true"></span><span class="db-spark db-spark--2 db-decor" aria-hidden="true"></span><span class="db-spark db-spark--3 db-decor" aria-hidden="true"></span>
+      <div class="db-sky">
+        <p class="db-lead">{{text "lead"}}</p>
+        <h1 class="db-names">
+        <span class="db-name">{{couple.groom.name}}</span>
+        {{#if couple.bride.name}}<span class="db-and">{{text "and"}}</span><span class="db-name">{{couple.bride.name}}</span>{{/if}}
+      </h1>
+        {{#unless (variant "dateStyle" "calendar")}}<p class="db-date">{{formatDate mainDate}}</p>{{/unless}}
+      </div>
+      <span class="db-dune db-dune--1" aria-hidden="true"></span>
+      <span class="db-dune db-dune--2" aria-hidden="true"></span>
+      <span class="db-palm db-palm--start" aria-hidden="true"></span>
+      <span class="db-dune db-dune--3" aria-hidden="true"></span>
+      <span class="db-palm db-palm--end db-decor" aria-hidden="true"></span>
+      <span class="db-dune db-dune--4" aria-hidden="true"></span>
+      <span class="db-bloom db-decor" aria-hidden="true"></span>
+    </div>
+    <div class="db-card db-invite">
+      {{#if story.photos.length}}
+        {{#with story.photos.[0]}}<figure class="db-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
+      {{/if}}
+      {{#if verse}}<p class="db-verse">{{verse}}</p>{{/if}}
+    <div class="db-families">
+      <div class="db-family">
+        {{#if couple.groom.father}}<p class="db-family__label">{{text "sonOf"}}</p><p class="db-family__name">{{couple.groom.father}}</p>{{/if}}
+        {{#each couple.groom.family}}<p class="db-family__label">{{label}}</p><p class="db-family__name">{{name}}</p>{{/each}}
+      </div>
+      <div class="db-family">
+        {{#if couple.bride.father}}<p class="db-family__label">{{text "daughterOf"}}</p><p class="db-family__name">{{couple.bride.father}}</p>{{/if}}
+        {{#each couple.bride.family}}<p class="db-family__label">{{label}}</p><p class="db-family__name">{{name}}</p>{{/each}}
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="db-section db-countdown" data-animate="countdown">
+    <div class="db-card">
+      <span class="db-spark db-spark--1 db-decor" aria-hidden="true"></span><span class="db-spark db-spark--2 db-decor" aria-hidden="true"></span>
+      <h2 class="db-title">{{text "countdownTitle"}}</h2>
+      <p class="db-count"><span class="db-count__num">{{daysUntil mainDate}}</span><span class="db-count__unit">{{text "countdownUnit"}}</span></p>
+      {{#if (variant "dateStyle" "calendar")}}
+        {{#with (calendarMonth mainDate)}}
+          <div class="db-cal">
+            <p class="db-cal__title">{{title}}</p>
+            <div class="db-cal__grid">
+              {{#each weekdays}}<span class="db-cal__wd">{{this}}</span>{{/each}}
+              {{#each cells}}<span class="db-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+            </div>
+          </div>
+        {{/with}}
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if story.text}}
+    <div class="db-divider" aria-hidden="true"></div>
+    <section class="db-section db-story" data-animate="story">
+      <div class="db-card">
+        
+        <h2 class="db-title">{{text "storyTitle"}}</h2>
+        {{#if story.photos.length}}
+          <div class="db-photos">
+            {{#each story.photos}}<figure class="db-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
+          </div>
+        {{/if}}
+        <p class="db-story__text">{{story.text}}</p>
+        {{#if story.engagementDate}}<p class="db-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="db-section db-gallery" data-animate="gallery">
+      <h2 class="db-title">{{text "galleryTitle"}}</h2>
+      <div class="db-flow">
+        {{#each gallery}}<figure class="db-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="db-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <div class="db-divider" aria-hidden="true"></div>
+
+  <section class="db-section db-events" data-animate="events">
+    <h2 class="db-title">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="db-card db-event" data-item>
+        
+        <h3 class="db-event__type">{{eventLabel type}}</h3>
+        <p class="db-event__date">{{formatDate date}}</p>
+        <p class="db-event__time">{{eventTime this}}</p>
+        <p class="db-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+        {{#if program.length}}
+          <div class="db-program">
+            <p class="db-program__title">{{text "programTitle"}}</p>
+            <ol class="db-program__list">
+              {{#each program}}<li class="db-program__item"><span class="db-program__time">{{formatTime time}}</span><span class="db-program__what">{{title}}</span></li>{{/each}}
+            </ol>
+          </div>
+        {{/if}}
+        {{#if mapUrl}}<a class="db-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="db-section db-wishes" data-animate="wishes">
+    <div class="db-card">
+      
+      <h2 class="db-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="db-section db-footer" data-animate="footer">
+    <span class="db-divider" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="db-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}<p class="db-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
+    {{#if showBranding}}<p class="db-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+</main>

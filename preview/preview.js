@@ -4,6 +4,10 @@ import { CASES } from './demo-data.js';
 
 // Add a template here to preview it.
 const TEMPLATES = {
+  porcelain: 'templates/porcelain/',
+  'glass-garden': 'templates/glass-garden/',
+  lace: 'templates/lace/',
+  'desert-bloom': 'templates/desert-bloom/',
   andalus: 'templates/andalus/',
   deco: 'templates/deco/',
   atelier: 'templates/atelier/',
@@ -29,8 +33,10 @@ const FONT_LIBRARY = {
   playfair: "'Playfair Display', 'Bodoni Moda', Georgia, serif",
   elMessiri: "'El Messiri', 'Amiri', serif",
   cinzel: "'Cinzel', 'Marcellus', Georgia, serif",
+  italiana: "'Italiana', 'Cormorant Garamond', Georgia, serif",
+  pinyon: "'Pinyon Script', 'Great Vibes', cursive",
 };
-const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Aref+Ruqaa:wght@400;700&family=Marcellus&family=Poiret+One&family=Josefin+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&family=El+Messiri:wght@400;600&family=Cinzel:wght@400;600&display=swap';
+const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Aref+Ruqaa:wght@400;700&family=Marcellus&family=Poiret+One&family=Josefin+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&family=El+Messiri:wght@400;600&family=Cinzel:wght@400;600&family=Italiana&family=Pinyon+Script&display=swap';
 
 // Stand-in for the platform's image library (artwork made by tools/make-art.mjs).
 const imageUrl = (key) => `${BASE}preview/library/${encodeURIComponent(key)}.svg`;

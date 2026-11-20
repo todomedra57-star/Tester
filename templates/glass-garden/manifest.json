@@ -1,0 +1,475 @@
+{
+  "key": "glass-garden",
+  "name": {
+    "ar": "حديقة زجاجية",
+    "en": "Glass Garden"
+  },
+  "description": {
+    "ar": "بيت زجاجي فيكتوري وقت الغروب: ألواح زجاج مثلجة، إطار نحاسي، سرخس ولبلاب يتخطى الحواف، وكروت من زجاج.",
+    "en": "A Victorian glasshouse at golden hour: frosted panes, a brass frame, ferns and ivy spilling over the edges, and frosted-glass cards."
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "texts": {
+    "lead": {
+      "ar": "بين الزهور والضوء، ندعوكم لحضور حفل زفاف",
+      "en": "Among the leaves and the light, please join us for the wedding of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على الفرح",
+      "en": "Until we bloom"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
+    },
+    "galleryTitle": {
+      "ar": "من صورنا",
+      "en": "Through the glass"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the panes"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "wishesTitle": {
+      "ar": "اكتب دعوة للعروسين",
+      "en": "Leave a note in the garden"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Programme"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
+    }
+  },
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 28,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 34,
+      "max": 68,
+      "unit": "px"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "plantArt",
+      "type": "image"
+    },
+    {
+      "key": "vineArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "glasshouse",
+        "window"
+      ],
+      "choices": {
+        "glasshouse": {
+          "ar": "بيت زجاجي",
+          "en": "Glasshouse"
+        },
+        "window": {
+          "ar": "نافذة دائرية",
+          "en": "Rose window"
+        }
+      }
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "badge",
+        "calendar"
+      ],
+      "choices": {
+        "badge": {
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "arch",
+        "circle",
+        "pane"
+      ],
+      "choices": {
+        "arch": {
+          "ar": "قوس",
+          "en": "Arch"
+        },
+        "circle": {
+          "ar": "دائرة",
+          "en": "Circle"
+        },
+        "pane": {
+          "ar": "لوح زجاج",
+          "en": "Glass pane"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "stack",
+        "strip"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "stack": {
+          "ar": "كأوراق متراصة",
+          "en": "Fanned stack"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#3E5E45",
+    "onHero": "#F6F4EC",
+    "accent": "#B08D57",
+    "bg": "#EEF1E8",
+    "text": "#1F2E24",
+    "muted": "#5E6C60",
+    "card": "#FAFBF6",
+    "line": "#D3DBCB",
+    "display": "elMessiri",
+    "body": "plexArabic",
+    "latin": "italiana",
+    "radius": 20,
+    "nameSize": 50,
+    "frameArt": "glasshouse",
+    "plantArt": "fern",
+    "vineArt": "ivy",
+    "sparkleArt": "sparkle",
+    "coverLayout": "glasshouse",
+    "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "arch",
+    "galleryStyle": "coverflow"
+  },
+  "defaultAnimation": {
+    "intro": "doors",
+    "ambient": "pollen",
+    "duration": 1000,
+    "stagger": 150,
+    "parallax": true,
+    "sections": {
+      "countdown": {
+        "effect": "frost"
+      },
+      "story": {
+        "effect": "frost"
+      },
+      "wishes": {
+        "effect": "frost"
+      },
+      "cover": {
+        "effect": "fade"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "frost",
+      "kind": "reveal",
+      "name": {
+        "ar": "انقشاع الضباب",
+        "en": "Frost clearing"
+      }
+    },
+    {
+      "key": "pollen",
+      "kind": "ambient",
+      "name": {
+        "ar": "ضوء متطاير",
+        "en": "Floating pollen light"
+      }
+    }
+  ],
+  "fields": [],
+  "couplePresets": {
+    "label": {
+      "ar": "حديقة زجاجية",
+      "en": "Glass Garden"
+    },
+    "defaultPalette": "sageBrass",
+    "palettes": [
+      {
+        "key": "sageBrass",
+        "name": {
+          "ar": "مريمية ونحاس",
+          "en": "Sage & brass"
+        },
+        "values": {
+          "hero": "#3E5E45",
+          "onHero": "#F6F4EC",
+          "accent": "#B08D57",
+          "bg": "#EEF1E8",
+          "text": "#1F2E24",
+          "muted": "#5E6C60",
+          "card": "#FAFBF6",
+          "line": "#D3DBCB"
+        }
+      },
+      {
+        "key": "blushGlass",
+        "name": {
+          "ar": "زجاج وردي",
+          "en": "Blush glass"
+        },
+        "values": {
+          "hero": "#A0566A",
+          "onHero": "#FFF8F6",
+          "accent": "#C49A82",
+          "bg": "#F7ECEC",
+          "text": "#3A2229",
+          "muted": "#7D6268",
+          "card": "#FFF9F8",
+          "line": "#EBD6D6"
+        }
+      },
+      {
+        "key": "aqua",
+        "name": {
+          "ar": "تركواز",
+          "en": "Aqua"
+        },
+        "values": {
+          "hero": "#2F6F73",
+          "onHero": "#F4FBFA",
+          "accent": "#B9975B",
+          "bg": "#EAF3F2",
+          "text": "#19393B",
+          "muted": "#587577",
+          "card": "#F8FCFB",
+          "line": "#CFE2E0"
+        }
+      },
+      {
+        "key": "ivoryGold",
+        "name": {
+          "ar": "عاجي وذهبي",
+          "en": "Ivory & gold"
+        },
+        "values": {
+          "hero": "#5F6A34",
+          "onHero": "#FFFDF6",
+          "accent": "#C8A45E",
+          "bg": "#F6F2E6",
+          "text": "#2B2A1C",
+          "muted": "#6E6B58",
+          "card": "#FFFDF6",
+          "line": "#E3DCC6"
+        }
+      },
+      {
+        "key": "nightGarden",
+        "name": {
+          "ar": "حديقة ليلية",
+          "en": "Night garden"
+        },
+        "values": {
+          "hero": "#CFE3C8",
+          "onHero": "#0E1C14",
+          "accent": "#D2B26A",
+          "bg": "#0E1C14",
+          "text": "#EAF2E6",
+          "muted": "#9DB3A0",
+          "card": "#1B3323",
+          "line": "#2B4733"
+        }
+      }
+    ],
+    "intros": [
+      "none",
+      "doors",
+      "curtain"
+    ],
+    "ambients": [
+      "none",
+      "pollen"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1000,
+        "stagger": 150,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 650,
+        "stagger": 90,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      }
+    ],
+    "hiddenEffects": []
+  }
+}

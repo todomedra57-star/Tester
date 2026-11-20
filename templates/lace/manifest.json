@@ -1,0 +1,481 @@
+{
+  "key": "lace",
+  "name": {
+    "ar": "دانتيل",
+    "en": "Lace"
+  },
+  "description": {
+    "ar": "دانتيل العروس واللؤلؤ على الحرير: عقد لؤلؤ، مفرش دانتيل حول صورتكم، كروت حرير بحافة دانتيل، وخط يدوي ناعم.",
+    "en": "Bridal lace and pearls on silk: a pearl garland, a lace doily around your portrait, silk cards with lace trims, and a flowing script."
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "texts": {
+    "lead": {
+      "ar": "بكل الحب ندعوكم لمشاركتنا فرحة زفاف",
+      "en": "With love, we invite you to celebrate the marriage of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على الفرح",
+      "en": "Until we say yes"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our love story"
+    },
+    "galleryTitle": {
+      "ar": "من صورنا",
+      "en": "Sweet moments"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through our moments"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "wishesTitle": {
+      "ar": "اكتب دعوة للعروسين",
+      "en": "Write us a little note"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Programme"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
+    }
+  },
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "lace",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 28,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 34,
+      "max": 68,
+      "unit": "px"
+    },
+    {
+      "key": "patternTile",
+      "type": "image"
+    },
+    {
+      "key": "edgeArt",
+      "type": "image"
+    },
+    {
+      "key": "doilyArt",
+      "type": "image"
+    },
+    {
+      "key": "pearlArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "veil",
+        "card"
+      ],
+      "choices": {
+        "veil": {
+          "ar": "مفرش دانتيل حول الصورة",
+          "en": "Lace doily portrait"
+        },
+        "card": {
+          "ar": "كارت دانتيل فقط",
+          "en": "Lace card only"
+        }
+      }
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "badge",
+        "calendar"
+      ],
+      "choices": {
+        "badge": {
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "pearl",
+        "arch",
+        "scalloped"
+      ],
+      "choices": {
+        "pearl": {
+          "ar": "إطار لؤلؤ بيضاوي",
+          "en": "Pearl oval"
+        },
+        "arch": {
+          "ar": "قوس",
+          "en": "Arch"
+        },
+        "scalloped": {
+          "ar": "حافة مموجة",
+          "en": "Scalloped"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "stack",
+        "strip"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "stack": {
+          "ar": "كأوراق متراصة",
+          "en": "Fanned stack"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#8A6D4B",
+    "onHero": "#FFFDF8",
+    "accent": "#C8A97A",
+    "bg": "#F4EBE0",
+    "text": "#3B2E24",
+    "muted": "#7A6A5C",
+    "card": "#FFFCF7",
+    "line": "#E8DCCB",
+    "lace": "#FFFFFF",
+    "display": "arefRuqaa",
+    "body": "serifPair",
+    "latin": "pinyon",
+    "radius": 10,
+    "nameSize": 48,
+    "patternTile": "lace-tile",
+    "edgeArt": "lace-edge",
+    "doilyArt": "lace-doily",
+    "pearlArt": "pearls",
+    "sparkleArt": "sparkle",
+    "coverLayout": "veil",
+    "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "pearl",
+    "galleryStyle": "coverflow"
+  },
+  "defaultAnimation": {
+    "intro": "curtain",
+    "ambient": "none",
+    "duration": 1000,
+    "stagger": 150,
+    "parallax": true,
+    "sections": {
+      "countdown": {
+        "effect": "unfurl"
+      },
+      "story": {
+        "effect": "unfurl"
+      },
+      "wishes": {
+        "effect": "unfurl"
+      },
+      "cover": {
+        "effect": "fade"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "unfurl",
+      "kind": "reveal",
+      "name": {
+        "ar": "انسدال الطرحة",
+        "en": "Veil unfurl"
+      }
+    }
+  ],
+  "fields": [],
+  "couplePresets": {
+    "label": {
+      "ar": "دانتيل",
+      "en": "Lace"
+    },
+    "defaultPalette": "ivoryChampagne",
+    "palettes": [
+      {
+        "key": "ivoryChampagne",
+        "name": {
+          "ar": "عاجي وشمبانيا",
+          "en": "Ivory & champagne"
+        },
+        "values": {
+          "hero": "#8A6D4B",
+          "onHero": "#FFFDF8",
+          "accent": "#C8A97A",
+          "bg": "#F4EBE0",
+          "text": "#3B2E24",
+          "muted": "#7A6A5C",
+          "card": "#FFFCF7",
+          "line": "#E8DCCB",
+          "lace": "#FFFFFF"
+        }
+      },
+      {
+        "key": "blushRose",
+        "name": {
+          "ar": "وردي وذهب وردي",
+          "en": "Blush & rose gold"
+        },
+        "values": {
+          "hero": "#A35D6A",
+          "onHero": "#FFF8F6",
+          "accent": "#C99A84",
+          "bg": "#F1DEDA",
+          "text": "#40262C",
+          "muted": "#7F6168",
+          "card": "#FFF8F6",
+          "line": "#E9D0CB",
+          "lace": "#FFFFFF"
+        }
+      },
+      {
+        "key": "doveSilver",
+        "name": {
+          "ar": "رمادي وفضي",
+          "en": "Dove & silver"
+        },
+        "values": {
+          "hero": "#5E6470",
+          "onHero": "#FAFAFB",
+          "accent": "#AEB4BF",
+          "bg": "#E9E9EC",
+          "text": "#2A2D33",
+          "muted": "#6B6F78",
+          "card": "#FAFAFB",
+          "line": "#DADBE0",
+          "lace": "#FFFFFF"
+        }
+      },
+      {
+        "key": "sageLace",
+        "name": {
+          "ar": "دانتيل مريمية",
+          "en": "Sage lace"
+        },
+        "values": {
+          "hero": "#5E7360",
+          "onHero": "#FBFCFA",
+          "accent": "#B9A16E",
+          "bg": "#E5EBE3",
+          "text": "#263027",
+          "muted": "#66705F",
+          "card": "#FBFCFA",
+          "line": "#D6DED4",
+          "lace": "#FFFFFF"
+        }
+      },
+      {
+        "key": "midnightLace",
+        "name": {
+          "ar": "دانتيل على كحلي",
+          "en": "Midnight lace"
+        },
+        "values": {
+          "hero": "#F1EAE0",
+          "onHero": "#141B2E",
+          "accent": "#D3B47A",
+          "bg": "#141B2E",
+          "text": "#F2ECE2",
+          "muted": "#A7AEC0",
+          "card": "#1D2640",
+          "line": "#313B58",
+          "lace": "#E9E4DA"
+        }
+      }
+    ],
+    "intros": [
+      "none",
+      "doors",
+      "curtain"
+    ],
+    "ambients": [
+      "none"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1000,
+        "stagger": 150,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 650,
+        "stagger": 90,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      }
+    ],
+    "hiddenEffects": []
+  }
+}

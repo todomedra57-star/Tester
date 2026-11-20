@@ -1,0 +1,123 @@
+<main class="gg" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}">
+
+  <section class="gg-cover" data-animate="cover">
+    <div class="gg-house">
+      <span class="gg-house__glass" aria-hidden="true"></span>
+      <span class="gg-house__frame" aria-hidden="true"></span>
+      <span class="gg-house__glare" aria-hidden="true"></span>
+      <span class="gg-ivy gg-decor" aria-hidden="true"></span>
+      <span class="gg-plant gg-plant--start" aria-hidden="true" data-parallax></span>
+      <span class="gg-plant gg-plant--end gg-decor" aria-hidden="true"></span>
+      <span class="gg-spark gg-spark--1 gg-decor" aria-hidden="true"></span><span class="gg-spark gg-spark--2 gg-decor" aria-hidden="true"></span><span class="gg-spark gg-spark--3 gg-decor" aria-hidden="true"></span>
+      <div class="gg-house__content">
+        {{#if story.photos.length}}
+          {{#with story.photos.[0]}}<figure class="gg-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
+        {{/if}}
+        <p class="gg-lead">{{text "lead"}}</p>
+        <h1 class="gg-names">
+        <span class="gg-name">{{couple.groom.name}}</span>
+        {{#if couple.bride.name}}<span class="gg-and">{{text "and"}}</span><span class="gg-name">{{couple.bride.name}}</span>{{/if}}
+      </h1>
+        {{#unless (variant "dateStyle" "calendar")}}<p class="gg-date">{{formatDate mainDate}}</p>{{/unless}}
+      </div>
+    </div>
+    <div class="gg-card gg-invite">
+      {{#if verse}}<p class="gg-verse">{{verse}}</p>{{/if}}
+    <div class="gg-families">
+      <div class="gg-family">
+        {{#if couple.groom.father}}<p class="gg-family__label">{{text "sonOf"}}</p><p class="gg-family__name">{{couple.groom.father}}</p>{{/if}}
+        {{#each couple.groom.family}}<p class="gg-family__label">{{label}}</p><p class="gg-family__name">{{name}}</p>{{/each}}
+      </div>
+      <div class="gg-family">
+        {{#if couple.bride.father}}<p class="gg-family__label">{{text "daughterOf"}}</p><p class="gg-family__name">{{couple.bride.father}}</p>{{/if}}
+        {{#each couple.bride.family}}<p class="gg-family__label">{{label}}</p><p class="gg-family__name">{{name}}</p>{{/each}}
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="gg-section gg-countdown" data-animate="countdown">
+    <div class="gg-card">
+      <span class="gg-sprig gg-decor" aria-hidden="true"></span><span class="gg-spark gg-spark--1 gg-decor" aria-hidden="true"></span><span class="gg-spark gg-spark--2 gg-decor" aria-hidden="true"></span>
+      <h2 class="gg-title">{{text "countdownTitle"}}</h2>
+      <p class="gg-count"><span class="gg-count__num">{{daysUntil mainDate}}</span><span class="gg-count__unit">{{text "countdownUnit"}}</span></p>
+      {{#if (variant "dateStyle" "calendar")}}
+        {{#with (calendarMonth mainDate)}}
+          <div class="gg-cal">
+            <p class="gg-cal__title">{{title}}</p>
+            <div class="gg-cal__grid">
+              {{#each weekdays}}<span class="gg-cal__wd">{{this}}</span>{{/each}}
+              {{#each cells}}<span class="gg-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+            </div>
+          </div>
+        {{/with}}
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if story.text}}
+    <div class="gg-divider" aria-hidden="true"></div>
+    <section class="gg-section gg-story" data-animate="story">
+      <div class="gg-card">
+        <span class="gg-sprig gg-decor" aria-hidden="true"></span>
+        <h2 class="gg-title">{{text "storyTitle"}}</h2>
+        {{#if story.photos.length}}
+          <div class="gg-photos">
+            {{#each story.photos}}<figure class="gg-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
+          </div>
+        {{/if}}
+        <p class="gg-story__text">{{story.text}}</p>
+        {{#if story.engagementDate}}<p class="gg-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="gg-section gg-gallery" data-animate="gallery">
+      <h2 class="gg-title">{{text "galleryTitle"}}</h2>
+      <div class="gg-flow">
+        {{#each gallery}}<figure class="gg-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="gg-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <div class="gg-divider" aria-hidden="true"></div>
+
+  <section class="gg-section gg-events" data-animate="events">
+    <h2 class="gg-title">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="gg-card gg-event" data-item>
+        <span class="gg-sprig gg-decor" aria-hidden="true"></span>
+        <h3 class="gg-event__type">{{eventLabel type}}</h3>
+        <p class="gg-event__date">{{formatDate date}}</p>
+        <p class="gg-event__time">{{eventTime this}}</p>
+        <p class="gg-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+        {{#if program.length}}
+          <div class="gg-program">
+            <p class="gg-program__title">{{text "programTitle"}}</p>
+            <ol class="gg-program__list">
+              {{#each program}}<li class="gg-program__item"><span class="gg-program__time">{{formatTime time}}</span><span class="gg-program__what">{{title}}</span></li>{{/each}}
+            </ol>
+          </div>
+        {{/if}}
+        {{#if mapUrl}}<a class="gg-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="gg-section gg-wishes" data-animate="wishes">
+    <div class="gg-card">
+      <span class="gg-sprig gg-decor" aria-hidden="true"></span>
+      <h2 class="gg-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="gg-section gg-footer" data-animate="footer">
+    <span class="gg-divider" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="gg-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}<p class="gg-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
+    {{#if showBranding}}<p class="gg-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+</main>
