@@ -1,0 +1,495 @@
+/* Andalus: a moonlit Andalusian courtyard.
+   Layers, back to front: fixed emerald page + zellige pattern → the arch gateway
+   (night sky, mashrabiya screen, photo window, names over a rosette) → a tiled
+   floor in 3D perspective → lanterns hanging over the arch edge → ivory cards
+   with gold corner rosettes crossing their edges.
+   Colors, fonts, sizes and images only through tokens; logical properties. */
+
+/* ---------- page layers ---------- */
+.an {
+  position: relative;
+  isolation: isolate;
+  max-inline-size: 520px;
+  margin-inline: auto;
+  color: var(--c-on-hero);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  text-align: center;
+  overflow-x: clip;
+}
+.an :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+.an::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--c-accent) 14%, transparent), transparent 60%),
+    radial-gradient(140% 90% at 50% 120%, var(--c-hero), transparent 70%),
+    var(--c-bg);
+}
+.has-pattern-tile .an::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--img-pattern-tile) 0 0 / 84px;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.an-section { position: relative; padding-block: 56px; padding-inline: 20px; }
+
+/* ---------- type ---------- */
+.an-title, .an-kicker, .an-event__type { font-family: var(--font-display); font-weight: 400; }
+.an-title { margin-block-end: 26px; font-size: 34px; line-height: 1.3; color: var(--c-text); }
+.an-title--light { color: var(--c-on-hero); }
+.an-kicker, .an-event__type { font-size: 20px; color: var(--c-accent); }
+.an:lang(en) :is(.an-title, .an-kicker, .an-event__type) {
+  font-family: var(--font-latin);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.an:lang(en) .an-title { font-size: 21px; }
+.an:lang(en) :is(.an-kicker, .an-event__type) { font-size: 13px; letter-spacing: 0.24em; }
+
+/* ---------- dividers ---------- */
+.an-divider {
+  block-size: 30px;
+  inline-size: 220px;
+  margin-inline: auto;
+  background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat;
+}
+.has-divider-art .an-divider { background: var(--img-divider-art) center / contain no-repeat; }
+
+/* ---------- 1 · cover: the gateway ---------- */
+.an-cover { padding-block: 24px 40px; padding-inline: 18px; }
+.an-gate {
+  position: relative;
+  padding-block: 64px 120px;
+  perspective: 600px;
+  perspective-origin: 50% 70%;
+}
+.an-gate__arch {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  inline-size: min(340px, 86%);
+  min-block-size: 540px;
+  margin-inline: auto;
+  padding-block: 92px 44px;
+  padding-inline: 22px;
+  border: 2px solid var(--c-accent);
+  border-radius: 50% 50% 4px 4px / 34% 34% 4px 4px;
+  outline: 1px solid color-mix(in srgb, var(--c-accent) 70%, transparent);
+  outline-offset: 9px;
+  overflow: hidden;
+  background: linear-gradient(var(--c-hero) 30%, color-mix(in srgb, var(--c-bg) 72%, var(--c-accent)));
+  box-shadow: 0 40px 60px -30px color-mix(in srgb, var(--c-hero) 90%, transparent);
+}
+/* stars in the night sky */
+.an-gate__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(1.2px 1.2px at 22% 14%, var(--c-on-hero), transparent),
+    radial-gradient(1px 1px at 70% 9%, var(--c-on-hero), transparent),
+    radial-gradient(1.5px 1.5px at 58% 22%, var(--c-accent), transparent),
+    radial-gradient(1px 1px at 34% 30%, var(--c-on-hero), transparent),
+    radial-gradient(1px 1px at 84% 34%, var(--c-on-hero), transparent),
+    radial-gradient(1.4px 1.4px at 12% 44%, var(--c-accent), transparent),
+    radial-gradient(1px 1px at 46% 6%, var(--c-on-hero), transparent);
+  opacity: 0.8;
+}
+/* mashrabiya lattice inside the arch, fading downward */
+.has-screen-art .an-gate__screen {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: 70%;
+  z-index: -1;
+  background: var(--img-screen-art) center top / 100% auto no-repeat;
+  opacity: 0.22;
+  -webkit-mask-image: linear-gradient(#000 20%, transparent 85%);
+          mask-image: linear-gradient(#000 20%, transparent 85%);
+}
+
+/* the couple's photo in an arched window, or a crescent */
+.an-window {
+  inline-size: 118px;
+  aspect-ratio: 3 / 4;
+  padding: 4px;
+  border-radius: 999px 999px 8px 8px;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--c-accent) 22%, transparent), 0 0 46px color-mix(in srgb, var(--c-accent) 45%, transparent);
+}
+.an-window img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.an-moon {
+  inline-size: 64px;
+  block-size: 64px;
+  border-radius: 50%;
+  box-shadow: inset 14px -8px 0 0 var(--c-accent), 0 0 40px -6px color-mix(in srgb, var(--c-accent) 60%, transparent);
+  rotate: -25deg;
+}
+
+.an-names {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--name-size);
+  line-height: 1.3;
+  color: var(--c-on-hero);
+  text-shadow: 0 2px 18px color-mix(in srgb, var(--c-hero) 80%, transparent);
+}
+.an:lang(en) .an-names { font-family: var(--font-latin); font-size: calc(var(--name-size) * 0.72); line-height: 1.2; }
+.an-name { max-inline-size: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.an-and { font-size: 0.6em; color: var(--c-accent); }
+.an-names__rosette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: auto;
+  inline-size: 250px;
+  block-size: 250px;
+  opacity: 0.3;
+}
+.has-medallion-art .an-names__rosette { background: var(--img-medallion-art) center / contain no-repeat; }
+.an-date {
+  padding-block: 8px;
+  padding-inline: 22px;
+  border: 1px solid var(--c-accent);
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--c-on-hero);
+  background: color-mix(in srgb, var(--c-hero) 60%, transparent);
+}
+
+/* tiled floor receding in 3D */
+.an-floor {
+  position: absolute;
+  inset-inline: -45%;
+  inset-block-end: 0;
+  block-size: 520px;
+  z-index: 0;
+  background: color-mix(in srgb, var(--c-hero) 70%, var(--c-bg));
+  transform: rotateX(70deg);
+  transform-origin: 50% 100%;
+  -webkit-mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 35%, transparent 72%);
+          mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 35%, transparent 72%);
+}
+.has-pattern-tile .an-floor {
+  background:
+    var(--img-pattern-tile) center bottom / 64px,
+    color-mix(in srgb, var(--c-hero) 70%, var(--c-bg));
+}
+
+/* lanterns hanging over the arch edge */
+.an-lanterns { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.an-lantern { position: absolute; inline-size: 54px; aspect-ratio: 100 / 270; transform-origin: 50% 0; display: none; }
+.has-lantern-art .an-lantern { display: block; background: var(--img-lantern-art) center top / contain no-repeat; }
+.an-lantern--start { inset-inline-start: 5%; inset-block-start: -12px; }
+.an-lantern--end { inset-inline-end: 5%; inset-block-start: 26px; inline-size: 46px; }
+
+/* ---------- ivory cards ---------- */
+.an-card {
+  position: relative;
+  z-index: 3;
+  padding-block: 44px;
+  padding-inline: 26px;
+  border-radius: var(--radius);
+  background: var(--c-card);
+  color: var(--c-text);
+  outline: 1px solid var(--c-accent);
+  outline-offset: -10px;
+  box-shadow:
+    0 0 0 1px var(--c-line),
+    0 34px 54px -26px color-mix(in srgb, var(--c-hero) 95%, transparent),
+    0 10px 18px -10px color-mix(in srgb, var(--c-hero) 70%, transparent);
+}
+/* gold rosettes sitting on two corners, half over the card edge */
+.has-corner-art .an-card::before,
+.has-corner-art .an-card::after {
+  content: "";
+  position: absolute;
+  inset-block-start: -24px;
+  inline-size: 52px;
+  block-size: 52px;
+  border-radius: 50%;
+  background: var(--img-corner-art) center / contain no-repeat, var(--c-hero);
+  box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--c-hero) 90%, transparent);
+  pointer-events: none;
+}
+.has-corner-art .an-card::before { inset-inline-start: -18px; }
+.has-corner-art .an-card::after { inset-inline-end: -18px; }
+/* arch-topped cards keep the rosettes on the bottom corners */
+.an-card--arch {
+  padding-block-start: 72px;
+  border-radius: 50% 50% var(--radius) var(--radius) / 110px 110px var(--radius) var(--radius);
+}
+.has-corner-art .an-card--arch::before,
+.has-corner-art .an-card--arch::after { inset-block: auto -24px; }
+
+.an-invite { margin-block-start: -64px; }
+.an-verse { margin-block-end: 14px; font-family: var(--font-display); font-size: 19px; line-height: 1.9; color: var(--c-text); }
+.an-lead { max-inline-size: 26ch; margin-inline: auto; font-size: 17px; }
+.an-families {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-block-start: 26px;
+  padding-block-start: 22px;
+  border-block-start: 1px solid var(--c-line);
+}
+.an-families:not(:has(p)) { display: none; }
+.an-family { display: flex; flex-direction: column; gap: 2px; padding-inline: 8px; min-inline-size: 0; }
+.an-family + .an-family { border-inline-start: 1px solid var(--c-line); }
+.an-family__label { font-size: 12px; color: var(--c-muted); }
+.an-family__label:not(:first-child) { margin-block-start: 8px; }
+.an-family__name { font-size: 14px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
+
+/* ---------- 2 · countdown inside a turning rosette ---------- */
+.an-count {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  inline-size: 290px;
+  block-size: 290px;
+  margin-inline: auto;
+  isolation: isolate;
+}
+.an-count__rosette { position: absolute; inset: 0; z-index: -1; opacity: 0.55; }
+.has-medallion-art .an-count__rosette { background: var(--img-medallion-art) center / contain no-repeat; }
+.an-count__num { font-family: var(--font-display); font-size: 76px; line-height: 1.15; color: var(--c-on-hero); }
+.an:lang(en) .an-count__num { font-family: var(--font-latin); font-size: 64px; }
+.an-count__unit { font-size: 14px; color: color-mix(in srgb, var(--c-on-hero) 75%, transparent); }
+
+.an-cal { margin-block-start: 30px; padding-block: 30px; }
+.an-cal__title { margin-block-end: 14px; font-family: var(--font-display); font-size: 24px; }
+.an:lang(en) .an-cal__title { font-family: var(--font-latin); }
+.an-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; font-size: 13px; }
+.an-cal__wd { font-size: 11px; color: var(--c-muted); }
+.an-cal__cell { display: grid; place-items: center; block-size: 34px; }
+.an-cal__cell.is-wedding {
+  justify-self: center;
+  inline-size: 38px;
+  block-size: 38px;
+  background: var(--c-accent);
+  color: var(--c-hero);
+  font-weight: 700;
+  clip-path: polygon(50% 0%, 65.7% 12.1%, 85.4% 14.6%, 87.9% 34.3%, 100% 50%, 87.9% 65.7%, 85.4% 85.4%, 65.7% 87.9%, 50% 100%, 34.3% 87.9%, 14.6% 85.4%, 12.1% 65.7%, 0% 50%, 12.1% 34.3%, 14.6% 14.6%, 34.3% 12.1%);
+}
+
+/* ---------- 3 · story ---------- */
+.an-photos { display: flex; justify-content: center; gap: 16px; margin-block-end: 26px; }
+.an-photo {
+  flex: 0 1 44%;
+  aspect-ratio: 3 / 4;
+  padding: 4px;
+  background: var(--c-accent);
+  border-radius: 999px 999px 6px 6px;
+  box-shadow: 0 18px 30px -18px color-mix(in srgb, var(--c-hero) 80%, transparent);
+}
+.an-photo:nth-child(2) { margin-block-start: 30px; }
+.an-photo:nth-child(n+3) { display: none; }
+.an-photo img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.an[data-photo-frame="circle"] .an-photo { aspect-ratio: 1; border-radius: 50%; }
+.an[data-photo-frame="octagon"] .an-photo { aspect-ratio: 1; border-radius: 0; padding: 5px; }
+.an[data-photo-frame="octagon"] :is(.an-photo, .an-photo img) {
+  clip-path: polygon(50% 0%, 65.7% 12.1%, 85.4% 14.6%, 87.9% 34.3%, 100% 50%, 87.9% 65.7%, 85.4% 85.4%, 65.7% 87.9%, 50% 100%, 34.3% 87.9%, 14.6% 85.4%, 12.1% 65.7%, 0% 50%, 12.1% 34.3%, 14.6% 14.6%, 34.3% 12.1%);
+  border-radius: 0;
+}
+.an-story__text { max-inline-size: 30ch; margin-inline: auto; font-size: 17px; }
+.an-story__date { margin-block-start: 12px; font-size: 13px; color: var(--c-muted); }
+
+/* ---------- 4 · gallery: a 3D arcade of arches ---------- */
+.an-gallery { padding-inline: 0; }
+.an-arcade {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block: 10px 30px;
+  padding-inline: 22%;
+  perspective: 900px;
+  scrollbar-width: none;
+}
+.an-arcade::-webkit-scrollbar { display: none; }
+.an-arcade__item { flex: 0 0 56%; aspect-ratio: 3 / 4.4; scroll-snap-align: center; padding-inline: 6px; }
+.an-arcade__item img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  border: 3px solid var(--c-accent);
+  border-radius: 999px 999px 6px 6px;
+  box-shadow: 0 26px 40px -20px color-mix(in srgb, var(--c-hero) 95%, transparent);
+}
+@supports (animation-timeline: view(inline)) {
+  .an[data-gallery-style="arcade"] .an-arcade__item {
+    padding-inline: 0;
+    animation: andalus-flow linear both;
+    animation-timeline: view(inline);
+  }
+  .an[data-gallery-style="arcade"] .an-arcade:dir(rtl) .an-arcade__item { animation-name: andalus-flow-rtl; }
+}
+@keyframes andalus-flow {
+  0%   { transform: translateZ(-170px) rotateY(-50deg); opacity: 0.55; }
+  50%  { transform: none; opacity: 1; }
+  100% { transform: translateZ(-170px) rotateY(50deg); opacity: 0.55; }
+}
+@keyframes andalus-flow-rtl {
+  0%   { transform: translateZ(-170px) rotateY(50deg); opacity: 0.55; }
+  50%  { transform: none; opacity: 1; }
+  100% { transform: translateZ(-170px) rotateY(-50deg); opacity: 0.55; }
+}
+.an-hint { font-size: 13px; color: color-mix(in srgb, var(--c-on-hero) 70%, transparent); }
+
+/* ---------- 5 · events: arched cards, each with a lantern ---------- */
+.an-events { display: flex; flex-direction: column; gap: 96px; }
+.an-events .an-title { margin-block-end: 0; }
+.an-event__lantern {
+  position: absolute;
+  inset-block-start: -78px;
+  inset-inline-start: calc(50% - 21px);
+  inline-size: 42px;
+  aspect-ratio: 100 / 270;
+  transform-origin: 50% 0;
+  display: none;
+}
+.has-lantern-art .an-event__lantern { display: block; background: var(--img-lantern-art) center top / contain no-repeat; }
+.an-event { padding-block-start: 96px; }
+.an-event__type { margin-block-end: 6px; }
+.an-event__date { font-family: var(--font-display); font-size: 26px; line-height: 1.4; }
+.an:lang(en) .an-event__date { font-family: var(--font-latin); font-size: 21px; }
+.an-event__time { margin-block-start: 4px; font-size: 16px; font-weight: 600; }
+.an-event__place { font-size: 14px; color: var(--c-muted); overflow-wrap: anywhere; }
+
+.an-program { margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
+.an-program__title { margin-block-end: 12px; font-size: 14px; color: var(--c-muted); }
+.an-program__list { list-style: none; padding: 0; display: grid; gap: 10px; max-inline-size: 260px; margin-inline: auto; }
+.an-program__item { display: flex; align-items: center; gap: 12px; font-size: 14px; text-align: start; }
+.an-program__item::before {
+  content: "";
+  flex: none;
+  inline-size: 11px;
+  block-size: 11px;
+  background: var(--c-accent);
+  clip-path: polygon(50% 0%, 61.9% 21.4%, 85.4% 14.6%, 78.6% 38.1%, 100% 50%, 78.6% 61.9%, 85.4% 85.4%, 61.9% 78.6%, 50% 100%, 38.1% 78.6%, 14.6% 85.4%, 21.4% 61.9%, 0% 50%, 21.4% 38.1%, 14.6% 14.6%, 38.1% 21.4%);
+}
+.an-program__time { flex: none; min-inline-size: 64px; font-weight: 600; }
+
+.an-map {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 46px;
+  margin-block-start: 26px;
+  padding-inline: 28px;
+  border-radius: 999px;
+  background: var(--c-hero);
+  color: var(--c-on-hero);
+  box-shadow: 0 0 0 1px var(--c-accent), 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 60%, transparent);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color .25s, color .25s;
+}
+.an-map:hover, .an-map:focus-visible { background: var(--c-accent); color: var(--c-hero); }
+.an-map:focus-visible { outline: 2px solid var(--c-hero); outline-offset: 6px; }
+
+/* ---------- 6 · wishes ---------- */
+.an .wb { text-align: start; }
+.an .wb-chip { border-color: var(--c-accent); color: var(--c-text); }
+.an .wb-input, .an .wb-textarea { background: color-mix(in srgb, var(--c-card) 60%, var(--c-on-hero)); border-color: var(--c-line); color: var(--c-text); }
+.an .wb-input:focus, .an .wb-textarea:focus { outline: 2px solid var(--c-accent); outline-offset: 0; }
+.an .wb-send { border-radius: 999px; background: var(--c-hero); color: var(--c-on-hero); }
+.an .wb-status { color: var(--c-muted); }
+.an .wb-item { background: transparent; border: 0; border-inline-start: 2px solid var(--c-accent); border-radius: 0; }
+.an .wb-item__name { color: var(--c-text); }
+.an .wb-item__text { color: var(--c-text); }
+
+/* ---------- 7 · footer ---------- */
+.an-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 50px 64px; }
+.an-footer__rosette { inline-size: 110px; block-size: 110px; opacity: 0.8; }
+.has-medallion-art .an-footer__rosette { background: var(--img-medallion-art) center / contain no-repeat; }
+.an-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 32px; line-height: 1.5; }
+.an:lang(en) .an-closing { font-family: var(--font-latin); font-size: 24px; }
+.an-until { font-size: 13px; color: color-mix(in srgb, var(--c-on-hero) 72%, transparent); }
+.an-brand { font-size: 12px; color: color-mix(in srgb, var(--c-on-hero) 55%, transparent); }
+
+/* ---------- scroll-driven life (CSS only) ---------- */
+@supports (animation-timeline: view()) {
+  /* rosettes turn as you scroll past them */
+  .an-names__rosette, .an-count__rosette, .an-footer__rosette {
+    animation: andalus-turn linear both;
+    animation-timeline: view();
+  }
+  /* lanterns swing gently with the scroll */
+  .an-lantern, .an-event__lantern {
+    animation: andalus-swing linear both;
+    animation-timeline: view();
+  }
+  .an-lantern--end { animation-direction: reverse; }
+}
+@keyframes andalus-turn { from { rotate: -30deg; } to { rotate: 60deg; } }
+@keyframes andalus-swing {
+  0%   { rotate: 7deg; }
+  35%  { rotate: -5deg; }
+  70%  { rotate: 3deg; }
+  100% { rotate: 0deg; }
+}
+
+/* ---------- own effects ---------- */
+/* reveal: the section opens like an arch */
+.fx-unveil {
+  opacity: 0;
+  transform: translateY(26px);
+  clip-path: inset(35% 0 0 0 round 50% 50% 0 0);
+  transition:
+    opacity var(--fx-dur, 1s) ease,
+    transform var(--fx-dur, 1s) cubic-bezier(.2, .7, .2, 1),
+    clip-path var(--fx-dur, 1s) cubic-bezier(.2, .7, .2, 1);
+}
+.fx-unveil.is-in { clip-path: inset(-60px -60px -60px -60px round 0 0 0 0); }
+
+/* ambient: gold dust rising slowly */
+.ambient-gold-dust {
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 20%, var(--c-accent), transparent),
+    radial-gradient(1.2px 1.2px at 38% 64%, var(--c-accent), transparent),
+    radial-gradient(2px 2px at 66% 38%, var(--c-accent), transparent),
+    radial-gradient(1.2px 1.2px at 88% 80%, var(--c-accent), transparent),
+    radial-gradient(1.4px 1.4px at 54% 92%, var(--c-on-hero), transparent);
+  background-size: 240px 420px;
+  opacity: 0.7;
+  animation: gold-dust-rise 28s linear infinite;
+}
+.ambient-gold-dust::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 24% 50%, var(--c-accent), transparent),
+    radial-gradient(1.4px 1.4px at 76% 14%, var(--c-accent), transparent),
+    radial-gradient(1px 1px at 48% 30%, var(--c-on-hero), transparent);
+  background-size: 180px 300px;
+  animation: gold-dust-rise 18s linear infinite;
+}
+@keyframes gold-dust-rise { to { background-position: 0 -420px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-gold-dust, .ambient-gold-dust::after { animation-duration: 120s; }
+  .an-names__rosette, .an-count__rosette, .an-footer__rosette,
+  .an-lantern, .an-event__lantern, .an-arcade__item { animation: none !important; }
+  .fx-unveil { clip-path: none; transition-duration: .01s; }
+  .an-map { transition: none; }
+}

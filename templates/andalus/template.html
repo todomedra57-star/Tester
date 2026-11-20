@@ -1,0 +1,156 @@
+<main class="an" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}">
+
+  <section class="an-cover" data-animate="cover">
+    <div class="an-gate">
+      <div class="an-gate__arch">
+        <span class="an-gate__sky" aria-hidden="true"></span>
+        <span class="an-gate__screen" aria-hidden="true"></span>
+        {{#if story.photos.length}}
+          {{#with story.photos.[0]}}
+            <figure class="an-window"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>
+          {{/with}}
+        {{else}}
+          <span class="an-moon" aria-hidden="true"></span>
+        {{/if}}
+        <h1 class="an-names">
+          <span class="an-names__rosette" aria-hidden="true"></span>
+          <span class="an-name">{{couple.groom.name}}</span>
+          {{#if couple.bride.name}}
+            <span class="an-and">{{text "and"}}</span>
+            <span class="an-name">{{couple.bride.name}}</span>
+          {{/if}}
+        </h1>
+        {{#unless (variant "dateStyle" "calendar")}}
+          <p class="an-date">{{formatDate mainDate}}</p>
+        {{/unless}}
+      </div>
+      <span class="an-floor" aria-hidden="true"></span>
+      <div class="an-lanterns" aria-hidden="true" data-parallax>
+        <span class="an-lantern an-lantern--start"></span>
+        <span class="an-lantern an-lantern--end"></span>
+      </div>
+    </div>
+
+    <div class="an-card an-invite">
+      {{#if verse}}<p class="an-verse">{{verse}}</p>{{/if}}
+      <p class="an-lead">{{text "lead"}}</p>
+      <div class="an-families">
+        <div class="an-family">
+          {{#if couple.groom.father}}
+            <p class="an-family__label">{{text "sonOf"}}</p>
+            <p class="an-family__name">{{couple.groom.father}}</p>
+          {{/if}}
+          {{#each couple.groom.family}}
+            <p class="an-family__label">{{label}}</p>
+            <p class="an-family__name">{{name}}</p>
+          {{/each}}
+        </div>
+        <div class="an-family">
+          {{#if couple.bride.father}}
+            <p class="an-family__label">{{text "daughterOf"}}</p>
+            <p class="an-family__name">{{couple.bride.father}}</p>
+          {{/if}}
+          {{#each couple.bride.family}}
+            <p class="an-family__label">{{label}}</p>
+            <p class="an-family__name">{{name}}</p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="an-section an-countdown" data-animate="countdown">
+    <div class="an-count">
+      <span class="an-count__rosette" aria-hidden="true"></span>
+      <h2 class="an-kicker">{{text "countdownTitle"}}</h2>
+      <p class="an-count__num">{{daysUntil mainDate}}</p>
+      <p class="an-count__unit">{{text "countdownUnit"}}</p>
+    </div>
+    {{#if (variant "dateStyle" "calendar")}}
+      {{#with (calendarMonth mainDate)}}
+        <div class="an-card an-cal">
+          <p class="an-cal__title">{{title}}</p>
+          <div class="an-cal__grid">
+            {{#each weekdays}}<span class="an-cal__wd">{{this}}</span>{{/each}}
+            {{#each cells}}<span class="an-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+          </div>
+        </div>
+      {{/with}}
+    {{/if}}
+  </section>
+
+  {{#if story.text}}
+    <div class="an-divider" aria-hidden="true"></div>
+    <section class="an-section an-story" data-animate="story">
+      <div class="an-card an-card--arch">
+        <h2 class="an-title">{{text "storyTitle"}}</h2>
+        {{#if story.photos.length}}
+          <div class="an-photos">
+            {{#each story.photos}}
+              <figure class="an-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>
+            {{/each}}
+          </div>
+        {{/if}}
+        <p class="an-story__text">{{story.text}}</p>
+        {{#if story.engagementDate}}
+          <p class="an-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>
+        {{/if}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="an-section an-gallery" data-animate="gallery">
+      <h2 class="an-title an-title--light">{{text "galleryTitle"}}</h2>
+      <div class="an-arcade">
+        {{#each gallery}}
+          <figure class="an-arcade__item" data-item>
+            <img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy">
+          </figure>
+        {{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="an-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <div class="an-divider" aria-hidden="true"></div>
+
+  <section class="an-section an-events" data-animate="events">
+    <h2 class="an-title an-title--light">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="an-card an-card--arch an-event" data-item>
+        <span class="an-event__lantern" aria-hidden="true"></span>
+        <h3 class="an-event__type">{{eventLabel type}}</h3>
+        <p class="an-event__date">{{formatDate date}}</p>
+        <p class="an-event__time">{{eventTime this}}</p>
+        <p class="an-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+        {{#if program.length}}
+          <div class="an-program">
+            <p class="an-program__title">{{text "programTitle"}}</p>
+            <ol class="an-program__list">
+              {{#each program}}
+                <li class="an-program__item"><span class="an-program__time">{{formatTime time}}</span><span class="an-program__what">{{title}}</span></li>
+              {{/each}}
+            </ol>
+          </div>
+        {{/if}}
+        {{#if mapUrl}}<a class="an-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="an-section an-wishes" data-animate="wishes">
+    <div class="an-card">
+      <h2 class="an-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="an-section an-footer" data-animate="footer">
+    <span class="an-footer__rosette" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="an-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}<p class="an-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
+    {{#if showBranding}}<p class="an-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+
+</main>

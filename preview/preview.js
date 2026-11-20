@@ -4,6 +4,7 @@ import { CASES } from './demo-data.js';
 
 // Add a template here to preview it.
 const TEMPLATES = {
+  andalus: 'templates/andalus/',
   'navy-bloom': 'templates/navy-bloom/',
   midnight: 'templates/midnight/',
 };
@@ -18,8 +19,10 @@ const FONT_LIBRARY = {
   reemKufi: "'Reem Kufi', 'IBM Plex Sans Arabic', sans-serif",
   bodoni: "'Bodoni Moda', 'Playfair Display', Georgia, serif",
   serifPair: "'Noto Serif', 'Noto Naskh Arabic', Georgia, serif",
+  arefRuqaa: "'Aref Ruqaa', 'Amiri', serif",
+  marcellus: "'Marcellus', 'Cormorant Garamond', Georgia, serif",
 };
-const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap';
+const FONTS_CSS = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Noto+Serif:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Aref+Ruqaa:wght@400;700&family=Marcellus&display=swap';
 
 // Stand-in for the platform's image library (artwork made by tools/make-art.mjs).
 const imageUrl = (key) => `${BASE}preview/library/${encodeURIComponent(key)}.svg`;
