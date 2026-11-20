@@ -19,6 +19,33 @@
   overflow-x: clip;
 }
 .an :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+
+/* ---------- luxury finish: gold foil built from the accent token ---------- */
+.an {
+  --an-gold-deep: color-mix(in srgb, var(--c-accent) 62%, var(--c-hero));
+  --an-gold-light: color-mix(in srgb, var(--c-accent) 50%, var(--c-on-hero));
+  --an-foil: linear-gradient(110deg,
+    var(--an-gold-deep) 0%, var(--c-accent) 18%, var(--an-gold-light) 32%, var(--c-accent) 44%,
+    var(--an-gold-deep) 58%, var(--c-accent) 74%, var(--an-gold-light) 88%, var(--c-accent) 100%);
+  --an-ink-foil: linear-gradient(110deg,
+    var(--c-text) 0%, var(--an-gold-deep) 35%, var(--c-text) 60%, var(--an-gold-deep) 85%, var(--c-text) 100%);
+}
+/* foil text: names, light titles, countdown */
+.an :is(.an-names, .an-title--light, .an-count__num, .an-kicker, .an-closing, .an-event__type) {
+  background: var(--an-foil) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+.an .an-names .an-and { color: transparent; }
+.an .an-names { text-shadow: none; filter: drop-shadow(0 3px 14px color-mix(in srgb, var(--c-hero) 85%, transparent)); }
+/* titles on ivory: dark ink with a gold glint */
+.an :is(.an-title:not(.an-title--light), .an-event__date) {
+  background: var(--an-ink-foil) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
 .an::before {
   content: "";
   position: fixed;
@@ -84,13 +111,17 @@
   margin-inline: auto;
   padding-block: 92px 44px;
   padding-inline: 22px;
-  border: 2px solid var(--c-accent);
+  border: 3px solid transparent;
   border-radius: 50% 50% 4px 4px / 34% 34% 4px 4px;
   outline: 1px solid color-mix(in srgb, var(--c-accent) 70%, transparent);
   outline-offset: 9px;
   overflow: hidden;
-  background: linear-gradient(var(--c-hero) 30%, color-mix(in srgb, var(--c-bg) 72%, var(--c-accent)));
-  box-shadow: 0 40px 60px -30px color-mix(in srgb, var(--c-hero) 90%, transparent);
+  background:
+    linear-gradient(var(--c-hero) 30%, color-mix(in srgb, var(--c-bg) 72%, var(--c-accent))) padding-box,
+    var(--an-foil) border-box;
+  box-shadow:
+    0 40px 60px -30px color-mix(in srgb, var(--c-hero) 90%, transparent),
+    0 0 80px -30px color-mix(in srgb, var(--c-accent) 50%, transparent);
 }
 /* stars in the night sky */
 .an-gate__sky {
@@ -126,7 +157,7 @@
   aspect-ratio: 3 / 4;
   padding: 4px;
   border-radius: 999px 999px 8px 8px;
-  background: var(--c-accent);
+  background: var(--an-foil);
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--c-accent) 22%, transparent), 0 0 46px color-mix(in srgb, var(--c-accent) 45%, transparent);
 }
 .an-window img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
@@ -207,14 +238,27 @@
   padding-block: 44px;
   padding-inline: 26px;
   border-radius: var(--radius);
-  background: var(--c-card);
+  background:
+    linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--c-on-hero) 70%, transparent) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
+    radial-gradient(130% 90% at 50% 0%, transparent 55%, color-mix(in srgb, var(--c-line) 55%, transparent)),
+    var(--c-card);
   color: var(--c-text);
   outline: 1px solid var(--c-accent);
   outline-offset: -10px;
   box-shadow:
+    inset 0 0 0 14px var(--c-card),
+    inset 0 0 0 15px color-mix(in srgb, var(--c-accent) 55%, transparent),
     0 0 0 1px var(--c-line),
     0 34px 54px -26px color-mix(in srgb, var(--c-hero) 95%, transparent),
-    0 10px 18px -10px color-mix(in srgb, var(--c-hero) 70%, transparent);
+    0 10px 18px -10px color-mix(in srgb, var(--c-hero) 70%, transparent),
+    0 0 70px -28px color-mix(in srgb, var(--c-accent) 55%, transparent);
+}
+.has-paper-texture .an-card {
+  background:
+    linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--c-on-hero) 70%, transparent) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
+    radial-gradient(130% 90% at 50% 0%, transparent 55%, color-mix(in srgb, var(--c-line) 55%, transparent)),
+    var(--img-paper-texture),
+    var(--c-card);
 }
 /* gold rosettes sitting on two corners, half over the card edge */
 .has-corner-art .an-card::before,
@@ -296,7 +340,7 @@
   flex: 0 1 44%;
   aspect-ratio: 3 / 4;
   padding: 4px;
-  background: var(--c-accent);
+  background: var(--an-foil);
   border-radius: 999px 999px 6px 6px;
   box-shadow: 0 18px 30px -18px color-mix(in srgb, var(--c-hero) 80%, transparent);
 }
@@ -330,7 +374,8 @@
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-  border: 3px solid var(--c-accent);
+  border: 3px solid transparent;
+  background: var(--an-foil) border-box;
   border-radius: 999px 999px 6px 6px;
   box-shadow: 0 26px 40px -20px color-mix(in srgb, var(--c-hero) 95%, transparent);
 }
@@ -396,14 +441,15 @@
   margin-block-start: 26px;
   padding-inline: 28px;
   border-radius: 999px;
-  background: var(--c-hero);
-  color: var(--c-on-hero);
-  box-shadow: 0 0 0 1px var(--c-accent), 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 60%, transparent);
+  background: var(--an-foil) 0 0 / 220% 100%;
+  color: var(--c-hero);
+  box-shadow: 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 60%, transparent), 0 10px 20px -10px color-mix(in srgb, var(--c-accent) 90%, transparent);
   font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
-  transition: background-color .25s, color .25s;
+  transition: background-position .8s ease;
 }
-.an-map:hover, .an-map:focus-visible { background: var(--c-accent); color: var(--c-hero); }
+.an-map:hover, .an-map:focus-visible { background-position: 100% 0; }
 .an-map:focus-visible { outline: 2px solid var(--c-hero); outline-offset: 6px; }
 
 /* ---------- 6 · wishes ---------- */
@@ -411,7 +457,8 @@
 .an .wb-chip { border-color: var(--c-accent); color: var(--c-text); }
 .an .wb-input, .an .wb-textarea { background: color-mix(in srgb, var(--c-card) 60%, var(--c-on-hero)); border-color: var(--c-line); color: var(--c-text); }
 .an .wb-input:focus, .an .wb-textarea:focus { outline: 2px solid var(--c-accent); outline-offset: 0; }
-.an .wb-send { border-radius: 999px; background: var(--c-hero); color: var(--c-on-hero); }
+.an .wb-send { border-radius: 999px; background: var(--an-foil) 0 0 / 220% 100%; color: var(--c-hero); transition: background-position .8s ease; }
+.an .wb-send:hover, .an .wb-send:focus-visible { background-position: 100% 0; }
 .an .wb-status { color: var(--c-muted); }
 .an .wb-item { background: transparent; border: 0; border-inline-start: 2px solid var(--c-accent); border-radius: 0; }
 .an .wb-item__name { color: var(--c-text); }
@@ -439,6 +486,22 @@
     animation-timeline: view();
   }
   .an-lantern--end { animation-direction: reverse; }
+  /* light sweeps across the gold foil as it scrolls by */
+  .an-names, .an-title, .an-count__num, .an-kicker, .an-closing, .an-event__type, .an-event__date, .an-map {
+    animation: andalus-foil linear both;
+    animation-timeline: view();
+  }
+  /* a soft shine crosses each ivory card once */
+  .an-card {
+    animation: andalus-shine linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 60%;
+  }
+}
+@keyframes andalus-foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+@keyframes andalus-shine {
+  from { background-position: 160% 0, 0 0, 0 0, 0 0; }
+  to   { background-position: -60% 0, 0 0, 0 0, 0 0; }
 }
 @keyframes andalus-turn { from { rotate: -30deg; } to { rotate: 60deg; } }
 @keyframes andalus-swing {
@@ -489,7 +552,8 @@
 @media (prefers-reduced-motion: reduce) {
   .ambient-gold-dust, .ambient-gold-dust::after { animation-duration: 120s; }
   .an-names__rosette, .an-count__rosette, .an-footer__rosette,
-  .an-lantern, .an-event__lantern, .an-arcade__item { animation: none !important; }
+  .an-lantern, .an-event__lantern, .an-arcade__item,
+  .an-names, .an-title, .an-count__num, .an-kicker, .an-closing, .an-event__type, .an-event__date, .an-map, .an-card { animation: none !important; }
   .fx-unveil { clip-path: none; transition-duration: .01s; }
   .an-map { transition: none; }
 }

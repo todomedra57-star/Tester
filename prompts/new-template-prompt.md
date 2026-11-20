@@ -19,7 +19,7 @@ You are a senior front-end designer and art director creating a new wedding-invi
 
 If my idea is vague, make bold, specific choices that fit it and explain them. Do not fall back to a generic look.
 
-## FEATURE BASELINE: every template must have all of these
+## FEATURE BASELINE: every template must have all 13 of these
 
 Express each one in the style of MY DESIGN IDEA. Do more where it fits.
 
@@ -35,6 +35,14 @@ Express each one in the style of MY DESIGN IDEA. Do more where it fits.
 10. **Rich small details**: dividers, a countdown treatment (number and/or calendar with a marked day), a styled program timeline, and a styled map button and wishes box.
 11. **Choices for couples**: 3 palettes and at least 3 variants, and every combination looks right.
 12. **An opening that matches**: pick the best intro and ambient effect for the style from the library, and suggest a new one if the style deserves it.
+13. **A luxury finish**: the details that make it feel expensive, adapted to the style:
+    - **Metallic foil**: names, titles and numbers in a foil gradient built only from tokens (`color-mix()` of accent with hero and onHero, kept in custom properties such as `--x-foil`) using `background-clip: text`, with a light sweep that moves as you scroll (`animation-timeline: view()`).
+    - **Metallic frames**: borders, photo frames and buttons use the foil (`border: 3px solid transparent; background: … padding-box, var(--x-foil) border-box`).
+    - **Fine double frames**: an outer line plus a thin inner line (`outline-offset` and inset box-shadows), never thick blocks.
+    - **Paper you can feel**: a texture image token, a soft vignette and a one-time shine crossing each card.
+    - **Rich light**: layered shadows plus a faint accent-colored glow under cards.
+    - **Restraint**: generous spacing, refined type (tracked caps in Latin only), one hero metal, no clutter.
+    - **One premium palette**: such as onyx and gold, or ivory and champagne.
 
 ## WHAT YOU DELIVER
 
@@ -50,7 +58,7 @@ Express each one in the style of MY DESIGN IDEA. Do more where it fits.
    - a ready prompt for an AI image generator or a brief for an illustrator
 
    Prefer transparent WebP at 2×, about 150 KB at most.
-6. **Feature checklist**: the 12 baseline features, each with how this template does it.
+6. **Feature checklist**: the 13 baseline features, each with how this template does it.
 7. **Edge cases**: what it looks like with no photos, one event, and very long names.
 
 ## THE DATA (view model): never hardcode any of it
@@ -122,6 +130,6 @@ Dividers and decoration between sections are free.
 - The smallest invitation still looks complete: one event, no story, verse, families or photos.
 - The longest invitation still holds: 50-letter names, 6 family lines per side, 4 events, long venue names.
 - Every palette × variant combination works.
-- All 12 baseline features are present, and no rule is broken.
+- All 13 baseline features are present, and no rule is broken.
 
 Then output the files in full, each in its own code block, with the file name above it.
