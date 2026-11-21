@@ -15,6 +15,7 @@ const OUT = path.join(__dirname, '..', 'qa');
 const SHOTS = path.join(OUT, 'shots');
 const CASES = ['demo-ar', 'demo-en', 'minimal', 'longest'];
 const WIDTH = 390, HEIGHT = 844;
+const HEIGHT_PX = HEIGHT;
 fs.mkdirSync(SHOTS, { recursive: true });
 
 async function main() {
@@ -35,9 +36,10 @@ async function main() {
   async function render() {
     await ui.waitForTimeout(500);
     const html = await ui.$eval('#frame', (f) => f.srcdoc);
-    await page.goto(URL + 'README.md');
+    // load the rendered invitation as a real page (document.write would leave custom elements such as <wishes-box> un-upgraded)
+    fs.writeFileSync(path.join(OUT, '_render.html'), html);
     errors.length = 0;
-    await page.evaluate((h) => { document.open(); document.write(h); document.close(); }, html);
+    await page.goto(URL + 'qa/_render.html');
     // wait until the stylesheets and the runtime have really arrived (first loads are not cached)
     await page.waitForFunction(() => window.customElements.get('wishes-box')
       && [...document.querySelectorAll('link[rel="stylesheet"]')].every((l) => { try { return l.sheet && l.sheet.cssRules; } catch (e) { return true; } }), null, { timeout: 15000 });
@@ -94,9 +96,23 @@ async function main() {
       await ui.selectOption('#case', c);
       await render();
       const file = `${t}--${c}.jpg`;
-      await page.screenshot({ path: path.join(SHOTS, file), fullPage: true, type: 'jpeg', quality: 70 });
       const issues = [...(await checks()), ...errors.map((e) => `page error: ${e}`)];
-      entry.cases.push({ c, file, issues });
+      // templates using the scene engine play while scrolling: capture a scroll-through instead of one tall picture
+      const frames = [];
+      if (await page.evaluate(() => !!document.querySelector('[data-scene]'))) {
+        const total = await page.evaluate(() => document.documentElement.scrollHeight - innerHeight);
+        const steps = Math.min(14, Math.ceil(total / (HEIGHT_PX * 0.85)) + 1);
+        for (let i = 0; i < steps; i++) {
+          await page.evaluate((y) => scrollTo(0, y), Math.round((total * i) / Math.max(1, steps - 1)));
+          await page.waitForTimeout(700);
+          const f = `${t}--${c}--${String(i).padStart(2, '0')}.jpg`;
+          await page.screenshot({ path: path.join(SHOTS, f), type: 'jpeg', quality: 72 });
+          frames.push(f);
+        }
+        await page.evaluate(() => scrollTo(0, 0));
+      }
+      await page.screenshot({ path: path.join(SHOTS, file), fullPage: true, type: 'jpeg', quality: 70 });
+      entry.cases.push({ c, file, frames, issues });
       console.log(`${t} ${c}: ${issues.length ? issues.join(' | ') : 'ok'}`);
     }
     await ui.selectOption('#case', 'demo-ar');
@@ -149,7 +165,9 @@ figcaption { padding: 8px 10px; font-size: 12px; } figcaption ul { margin: 4px 0
 <p class="sub">Every template in four test cases (full page) and its cover in every palette, rendered at 390px. Red frames have automatic findings. Tap a picture to open it full size.</p>
 <span class="summary">${report.length} templates · ${report.reduce((a, e) => a + e.cases.length + e.palettes.length, 0)} screens · ${total ? `${total} with findings` : 'no automatic findings'}</span>
 <nav>${report.map((e) => `<a href="#${e.template}">${esc(e.template)}</a>`).join('')}</nav></header>
-${report.map((e) => `<section id="${e.template}"><h2>${esc(e.template)}</h2><h3>Test cases</h3><div class="row">${e.cases.map((x) => card('shots/' + x.file, LABEL[x.c], x.issues, 'full')).join('')}</div>
+${report.map((e) => `<section id="${e.template}"><h2>${esc(e.template)}</h2><h3>Test cases</h3>${e.cases.some((x) => x.frames && x.frames.length)
+  ? e.cases.map((x) => `<h3>${esc(LABEL[x.c])} · scroll-through</h3><div class="row">${x.frames.map((f, i) => card('shots/' + f, `${i + 1}/${x.frames.length}`, i ? [] : x.issues, 'cover')).join('')}</div>`).join('')
+  : `<div class="row">${e.cases.map((x) => card('shots/' + x.file, LABEL[x.c], x.issues, 'full')).join('')}</div>`}
 <h3>Palettes</h3><div class="row">${e.palettes.map((x) => card('shots/' + x.file, x.label, x.issues, 'cover')).join('')}</div></section>`).join('\n')}
 </body></html>`;
 }

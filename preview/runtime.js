@@ -35,12 +35,67 @@
     addEventListener('scroll', () => { px.style.translate = `0 ${Math.min(scrollY, 800) * 0.25}px`; }, { passive: true });
   }
 
+  // ----- scene engine -----
+  // Templates mark elements with data-scene ("contain" for a tall pinned section,
+  // "cover" for a section passing through the screen). The engine writes, every
+  // frame and smoothed for weight:
+  //   on each scene:  --p   scroll progress 0..1   ·  --n / data-n  number of [data-item]
+  //   on :root:       --tx / --ty  device tilt (or pointer) -1..1
+  // and adds .scene-on to <html>. Templates do all choreography in CSS with these.
+  const scene = (() => {
+    const els = [...document.querySelectorAll('[data-scene]')];
+    els.forEach((el) => { const n = el.querySelectorAll('[data-item]').length; el.style.setProperty('--n', n); el.dataset.n = n; });
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const progress = (el) => {
+      const r = el.getBoundingClientRect(), vh = innerHeight, range = r.height - vh;
+      if (el.dataset.scene !== 'cover' && range > 40) return clamp(-r.top / range);
+      return clamp((vh - r.top) / (vh + r.height));
+    };
+    const state = new Map();
+    let tx = 0, ty = 0, cx = 0, cy = 0, hasTilt = false;
+    if (!reduce) {
+      root.classList.add('scene-on');
+      addEventListener('pointermove', (e) => { if (hasTilt) return; tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
+      addEventListener('deviceorientation', (e) => {
+        if (e.gamma == null) return;
+        hasTilt = true;
+        tx = Math.max(-1, Math.min(1, e.gamma / 25));
+        ty = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+      });
+    }
+    const frame = () => {
+      for (const el of els) {
+        const target = progress(el);
+        const cur = state.has(el) ? state.get(el) + (target - state.get(el)) * (reduce ? 1 : 0.14) : target;
+        state.set(el, cur);
+        el.style.setProperty('--p', cur.toFixed(4));
+      }
+      if (!reduce) {
+        cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07;
+        root.style.setProperty('--tx', cx.toFixed(3));
+        root.style.setProperty('--ty', cy.toFixed(3));
+      }
+      requestAnimationFrame(frame);
+    };
+    if (els.length || !reduce) requestAnimationFrame(frame);
+    return {
+      // iOS asks for motion permission; it must be requested inside a tap (the opening)
+      askTilt() {
+        const D = window.DeviceOrientationEvent;
+        if (!reduce && D && typeof D.requestPermission === 'function') D.requestPermission().catch(() => {});
+      },
+    };
+  })();
+
   // ----- opening -----
   if (cfg.intro && cfg.intro !== 'none') {
     document.body.classList.add('is-locked');
     const intro = document.createElement('div');
     intro.className = `intro intro-${cfg.intro}`;
-    intro.innerHTML = '<div class="intro__half intro__half--l"></div><div class="intro__half intro__half--r"></div>' +
+    const doors = cfg.intro === 'palace'
+      ? '<div class="intro__doors"><div class="intro__door intro__door--l"><span class="intro__lattice"></span></div><div class="intro__door intro__door--r"><span class="intro__lattice"></span></div></div>'
+      : '<div class="intro__half intro__half--l"></div><div class="intro__half intro__half--r"></div>';
+    intro.innerHTML = doors +
       '<div class="intro__content"><h2 class="intro__names"></h2><button class="intro-seal" type="button"></button><p class="intro__hint"></p></div>';
     intro.querySelector('.intro__names').textContent = cfg.names;
     const seal = intro.querySelector('.intro-seal');
@@ -50,9 +105,15 @@
     document.body.append(intro);
     seal.focus({ preventScroll: true });
     seal.addEventListener('click', () => {
+      scene.askTilt();
       intro.classList.add('is-open');
       document.body.classList.remove('is-locked');
-      setTimeout(() => { intro.classList.add('is-gone'); startReveal(); }, reduce ? 0 : 900);
+      if (cfg.intro === 'palace' && !reduce) {
+        // the page behind the doors settles from a slight zoom while the doors swing open
+        document.body.classList.add('intro-settle');
+        setTimeout(() => document.body.classList.remove('intro-settle'), 2200);
+      }
+      setTimeout(() => { intro.classList.add('is-gone'); startReveal(); }, reduce ? 0 : (cfg.intro === 'palace' ? 1700 : 900));
     }, { once: true });
   } else {
     startReveal();

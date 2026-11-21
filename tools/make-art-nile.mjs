@@ -95,9 +95,56 @@ function wave() {
   return svg('0 0 260 32', `<mask id="m"><rect width="260" height="32" fill="#fff"/><circle cx="130" cy="13" r="14" fill="#000"/></mask><g mask="url(#m)">${b}</g><polygon points="${st}" fill="${K}"/>`);
 }
 
+
+// felucca: the Nile sailboat with a tall lateen sail
+function felucca() {
+  return svg('0 0 200 170', `<path d="M20 132 Q 100 156 180 132 L170 146 Q 100 166 30 146 Z" fill="${K}"/>
+<path d="M98 136 L104 18" stroke="${K}" stroke-width="3"/><path d="M40 128 L150 6" stroke="${K}" stroke-width="2.4"/>
+<path d="M104 22 Q 150 70 150 126 L104 130 Z" fill="${K}"/><path d="M98 30 Q 64 80 52 124 L98 128 Z" fill="${K}" fill-opacity=".85"/>
+<path d="M150 6 L156 2 L154 10 Z" fill="${K}"/>`);
+}
+// distant Cairo skyline: domes and minarets with crescent finials
+function skyline() {
+  let b = '';
+  const finial = (x, y) => `<rect x="${x - 1}" y="${y - 12}" width="2" height="12" fill="${K}"/><path d="M${x - 4} ${y - 16} a4 4 0 1 0 7 0 a3.2 3.2 0 1 1 -7 0 Z" fill="${K}"/>`;
+  const minaret = (x, h) => `<rect x="${x - 4}" y="${200 - h}" width="8" height="${h}" fill="${K}"/><rect x="${x - 7}" y="${200 - h * 0.62}" width="14" height="4" fill="${K}"/><rect x="${x - 6}" y="${200 - h * 0.85}" width="12" height="3" fill="${K}"/><path d="M${x - 4} ${200 - h} L${x} ${200 - h - 18} L${x + 4} ${200 - h} Z" fill="${K}"/>` + finial(x, 200 - h - 18);
+  const mosque = (x, w, h) => `<rect x="${x - w / 2}" y="${200 - h}" width="${w}" height="${h}" fill="${K}"/><path d="M${x - w * 0.36} ${200 - h} Q ${x} ${200 - h - w * 0.8} ${x + w * 0.36} ${200 - h} Z" fill="${K}"/>` + finial(x, 200 - h - w * 0.4)
+    + `<path d="M${x - w / 2} ${200 - h} Q ${x - w * 0.36} ${200 - h - w * 0.3} ${x - w * 0.22} ${200 - h} Z M${x + w * 0.22} ${200 - h} Q ${x + w * 0.36} ${200 - h - w * 0.3} ${x + w / 2} ${200 - h} Z" fill="${K}"/>`;
+  b += mosque(150, 90, 50) + minaret(92, 120) + minaret(208, 120);
+  b += mosque(400, 120, 64) + minaret(326, 150) + minaret(474, 150);
+  b += mosque(640, 80, 44) + minaret(690, 110);
+  b += `<rect x="0" y="176" width="760" height="24" fill="${K}"/>`;
+  for (let x = 10; x < 760; x += 46) b += `<rect x="${x}" y="${160 + (x % 3) * 4}" width="${26 + (x % 5) * 4}" height="${40 - (x % 3) * 4}" fill="${K}"/>`;
+  return svg('0 0 760 200', b);
+}
+// a grove of palms and bushes for the river banks
+function palms() {
+  let b = '';
+  const palm = (x, h, lean) => {
+    let p = `<path d="M${x - 3} 260 Q ${x + lean * 0.5} ${260 - h * 0.5} ${x + lean} ${260 - h} L${x + lean + 6} ${260 - h} Q ${x + lean * 0.5 + 6} ${260 - h * 0.5} ${x + 4} 260 Z" fill="${K}"/>`;
+    const cx = x + lean + 3, cy = 260 - h;
+    for (const a of [-170, -140, -110, -75, -40, -10, 15]) {
+      const r = (a * Math.PI) / 180, ex = cx + Math.cos(r) * 62, ey = cy + Math.sin(r) * 26 + 22;
+      p += `<path d="M${cx} ${cy} Q ${f((cx + ex) / 2)} ${f(cy - 18)} ${f(ex)} ${f(ey)} Q ${f((cx + ex) / 2)} ${f(cy - 4)} ${cx} ${cy + 5} Z" fill="${K}"/>`;
+    }
+    return p;
+  };
+  b += palm(70, 220, 18) + palm(130, 170, -14) + palm(40, 140, -10);
+  b += `<ellipse cx="110" cy="250" rx="70" ry="22" fill="${K}"/><ellipse cx="40" cy="254" rx="44" ry="16" fill="${K}"/><rect x="0" y="252" width="200" height="8" fill="${K}"/>`;
+  return svg('-36 0 236 260', b);
+}
+// lotus frieze for the papyrus scroll edges
+function frieze() {
+  let b = `<rect x="0" y="26" width="120" height="2" fill="${K}"/><rect x="0" y="2" width="120" height="1.2" fill="${K}"/>`;
+  const lotus = (x) => `<path d="M${x} 24 C ${x - 10} 16 ${x - 8} 6 ${x} 4 C ${x + 8} 6 ${x + 10} 16 ${x} 24 Z" fill="${K}"/><path d="M${x} 24 C ${x - 16} 22 ${x - 18} 12 ${x - 14} 8 C ${x - 10} 14 ${x - 6} 20 ${x} 24 Z M${x} 24 C ${x + 16} 22 ${x + 18} 12 ${x + 14} 8 C ${x + 10} 14 ${x + 6} 20 ${x} 24 Z" fill="${K}"/>`;
+  const bud = (x) => `<path d="M${x} 24 C ${x - 5} 18 ${x - 4} 12 ${x} 10 C ${x + 4} 12 ${x + 5} 18 ${x} 24 Z" fill="${K}"/>`;
+  b += lotus(30) + bud(60) + lotus(90) + bud(120) + bud(0);
+  return svg('0 0 120 30', b);
+}
+
 const files = {
   'nile-column.svg': column(), 'nile-garden.svg': garden(),
-  'jasmine-olive.svg': sprig(), 'jasmine-flowers.svg': jasmineOnly(), 'nile-wave.svg': wave(),
+  'jasmine-olive.svg': sprig(), 'jasmine-flowers.svg': jasmineOnly(), 'nile-wave.svg': wave(), 'felucca.svg': felucca(), 'nile-skyline.svg': skyline(), 'nile-palms.svg': palms(), 'lotus-frieze.svg': frieze(),
 };
 for (const [n, s] of Object.entries(files)) writeFileSync(new URL(n, OUT), s.replace(/\n\s*/g, ' '));
 console.log('wrote', Object.keys(files).join(', '));

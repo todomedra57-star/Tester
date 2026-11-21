@@ -6,7 +6,7 @@ written against the view model, plus a preview harness to see them.
 | Template | Look |
 |---|---|
 | `navy-bloom` | Cream paper with a faint palace sketch, navy cards with watercolor blue flowers on the corners, wax-sealed envelope with the couple's photos, sticky names the card slides over, 3D coverflow gallery |
-| `nile-royal` | Moonlit celebration beside the Nile: palace arch window with mashrabiya screen, full moon, domes and gardens, the Nile with a moon path, lotus columns, a floating vellum panel with jasmine and olive, Nile-wave dividers. 6 palettes incl. Midnight Nile |
+| `nile-royal` | **Showcase built on the scene engine.** Palace doors open in 3D; a pinned 13-plane diorama (sky, stars, moon, mist, Cairo skyline, the Nile, a sailing felucca, palms, the palace window, lotus columns, the names cartouche, foreground jasmine) that the camera flies through as you scroll, with tilt parallax; an unrolling papyrus, a swinging lantern countdown, shutters opening in 3D, a 3D photo ring and a felucca sailing down the Nile past each event |
 | `porcelain` | Blue-and-white china: a gilded plate turning in 3D, vine pattern, glazed cards with gold and cobalt rims. 5 palettes incl. Midnight china |
 | `glass-garden` | Victorian glasshouse at golden hour: frosted-glass cards (backdrop blur), brass frame, ferns and ivy over the edges, reflections under the gallery, floating pollen light |
 | `lace` | Bridal lace and pearls on silk: pearl garland, lace doily portrait, satin ribbon, pearl rows and lace trims on every card, script names |
@@ -126,3 +126,23 @@ node tools/qa-screenshots.js            # visual QA → qa/report.html
   smallest, longest) plus a cover per palette, and flags sideways scrolling,
   text off screen, broken images, text left invisible and page errors.
   Set `QA_HANDLEBARS=/path/handlebars.min.js` if the CDN is unreachable.
+
+## Scene engine (runtime)
+
+The runtime gives templates a small scene engine, so they can build real depth
+and camera moves with CSS only:
+
+- Mark an element `data-scene="contain"` (a tall section with a pinned stage) or
+  `data-scene="cover"` (a section passing through the screen).
+- Every frame, smoothed, the engine sets on each scene `--p` (scroll progress
+  0..1), `--n` and `data-n` (number of `[data-item]` inside), and on `:root`
+  `--tx` / `--ty` (device tilt, or the pointer on desktop, -1..1). It adds
+  `scene-on` to `<html>`; without it (reduced motion, no JavaScript) templates
+  show a still, complete page.
+- On iPhone, motion permission is asked inside the opening tap.
+- New opening `palace`: two lattice doors swing open in 3D while the page settles
+  from a slight zoom.
+
+Templates do all the choreography in CSS with these variables, for example a
+plane at depth `--d` uses
+`transform: translate3d(calc(var(--tx) * var(--d) * -3px), …) scale(calc(1 + var(--p) * var(--d) * .045))`.

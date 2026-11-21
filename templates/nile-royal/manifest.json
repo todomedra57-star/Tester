@@ -5,8 +5,8 @@
     "en": "Nile Royale"
   },
   "description": {
-    "ar": "احتفال تحت القمر على ضفاف النيل: نافذة قصر مقوسة، مشربية ذهبية، قباب وحدائق، أعمدة لوتس، وياسمين وزيتون على ورق عاجي.",
-    "en": "A moonlit celebration beside the Nile: a palace arch window, golden mashrabiya, distant domes and gardens, lotus columns, and jasmine and olive on ivory paper."
+    "ar": "رحلة ثلاثية الأبعاد في ليلة مقمرة على النيل: تفتح أبواب القصر وتعبر الكاميرا النافذة نحو النهر، مع مركب شراعي ومآذن ونخيل وياسمين، وفانوس للعد التنازلي، ومصاريع تنفتح، وحلقة صور ثلاثية الأبعاد.",
+    "en": "A 3D journey on a moonlit Nile night: palace doors open and the camera flies through the arch toward the river, with a felucca, minarets, palms and jasmine, a lantern countdown, opening shutters and a 3D photo ring."
   },
   "languages": [
     "ar",
@@ -16,30 +16,6 @@
     "lead": {
       "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
       "en": "With joy and love, request the honour of your presence at the wedding of"
-    },
-    "countdownTitle": {
-      "ar": "باقي على ليلتنا",
-      "en": "Until our night by the Nile"
-    },
-    "storyTitle": {
-      "ar": "حكايتنا",
-      "en": "Our story"
-    },
-    "galleryTitle": {
-      "ar": "من ليالينا",
-      "en": "Moments"
-    },
-    "galleryHint": {
-      "ar": "اسحبوا لمشاهدة كل الصور",
-      "en": "Swipe through the moments"
-    },
-    "eventsTitle": {
-      "ar": "المواعيد",
-      "en": "The celebrations"
-    },
-    "wishesTitle": {
-      "ar": "اكتبوا دعوة للعروسين",
-      "en": "Leave a wish for the couple"
     },
     "and": {
       "ar": "و",
@@ -53,9 +29,21 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا لتعبروا النافذة",
+      "en": "Scroll to step through the window"
+    },
+    "countdownTitle": {
+      "ar": "باقي على ليلتنا",
+      "en": "Until our night by the Nile"
+    },
     "countdownUnit": {
       "ar": "يوم",
       "en": "days"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
     },
     "storyPhoto": {
       "ar": "صورة من حكايتنا",
@@ -65,9 +53,21 @@
       "ar": "الخطوبة:",
       "en": "Engaged on"
     },
+    "galleryTitle": {
+      "ar": "من ليالينا",
+      "en": "Moments"
+    },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "رحلتنا على النيل",
+      "en": "Our journey down the Nile"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -80,6 +80,10 @@
     "listSeparator": {
       "ar": "، ",
       "en": ", "
+    },
+    "wishesTitle": {
+      "ar": "اكتبوا دعوة للعروسين",
+      "en": "Leave a wish for the couple"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -147,14 +151,14 @@
       "key": "radius",
       "type": "length",
       "min": 0,
-      "max": 28,
+      "max": 24,
       "unit": "px"
     },
     {
       "key": "nameSize",
       "type": "length",
       "min": 34,
-      "max": 68,
+      "max": 64,
       "unit": "px"
     },
     {
@@ -170,11 +174,19 @@
       "type": "image"
     },
     {
-      "key": "columnArt",
+      "key": "skylineArt",
       "type": "image"
     },
     {
-      "key": "gardenArt",
+      "key": "palmsArt",
+      "type": "image"
+    },
+    {
+      "key": "boatArt",
+      "type": "image"
+    },
+    {
+      "key": "columnArt",
       "type": "image"
     },
     {
@@ -187,6 +199,14 @@
     },
     {
       "key": "waveArt",
+      "type": "image"
+    },
+    {
+      "key": "friezeArt",
+      "type": "image"
+    },
+    {
+      "key": "lanternArt",
       "type": "image"
     },
     {
@@ -350,18 +370,18 @@
       "key": "coverLayout",
       "type": "variant",
       "options": [
-        "scene",
-        "panel",
+        "diorama",
+        "window",
         "names"
       ],
       "choices": {
-        "scene": {
-          "ar": "نافذة القصر على النيل",
-          "en": "Palace window on the Nile"
+        "diorama": {
+          "ar": "رحلة ثلاثية الأبعاد عبر النافذة",
+          "en": "3D journey through the window"
         },
-        "panel": {
-          "ar": "قوس ولوحة هادئة",
-          "en": "Arch with a quiet panel"
+        "window": {
+          "ar": "نافذة القصر بدون رحلة",
+          "en": "Palace window, no journey"
         },
         "names": {
           "ar": "الأسماء فقط",
@@ -438,8 +458,8 @@
       ],
       "choices": {
         "archRoyal": {
-          "ar": "قوس ملكي",
-          "en": "Royal arch"
+          "ar": "نافذة ملكية بمصاريع",
+          "en": "Royal window with shutters"
         },
         "nileOval": {
           "ar": "بيضاوي النيل",
@@ -467,20 +487,20 @@
       "key": "galleryStyle",
       "type": "variant",
       "options": [
+        "carousel",
         "coverflow",
-        "stack",
         "strip",
         "grid",
         "scatter"
       ],
       "choices": {
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
+        },
         "coverflow": {
           "ar": "عرض ثلاثي الأبعاد",
           "en": "3D coverflow"
-        },
-        "stack": {
-          "ar": "كأوراق متراصة",
-          "en": "Fanned stack"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -512,22 +532,26 @@
     "body": "plexArabic",
     "latin": "cormorant",
     "radius": 14,
-    "nameSize": 52,
+    "nameSize": 50,
     "paperTexture": "paper-grain",
     "patternTile": "zellige-tile",
     "screenArt": "mashrabiya",
+    "skylineArt": "nile-skyline",
+    "palmsArt": "nile-palms",
+    "boatArt": "felucca",
     "columnArt": "nile-column",
-    "gardenArt": "nile-garden",
     "sprigArt": "jasmine-olive",
     "jasmineArt": "jasmine-flowers",
     "waveArt": "nile-wave",
+    "friezeArt": "lotus-frieze",
+    "lanternArt": "lantern",
     "monogramArt": "rosette",
     "sparkleArt": "sparkle",
-    "coverLayout": "scene",
+    "coverLayout": "diorama",
     "ornament": "rich",
     "dateStyle": "badge",
     "photoFrame": "archRoyal",
-    "galleryStyle": "coverflow",
+    "galleryStyle": "carousel",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -542,23 +566,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "doors",
+    "intro": "palace",
     "ambient": "lantern-glints",
-    "duration": 1000,
-    "stagger": 150,
+    "duration": 1100,
+    "stagger": 160,
     "parallax": true,
     "sections": {
+      "cover": {
+        "effect": "fade"
+      },
       "countdown": {
         "effect": "ascend"
       },
       "story": {
         "effect": "ascend"
-      },
-      "wishes": {
-        "effect": "ascend"
-      },
-      "cover": {
-        "effect": "fade"
       },
       "gallery": {
         "effect": "fade"
@@ -566,10 +587,19 @@
       "events": {
         "effect": "fade-up"
       },
+      "wishes": {
+        "effect": "ascend"
+      },
       "footer": {
         "effect": "fade"
       }
     }
+  },
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "palace"
+    ]
   },
   "effects": [
     {
@@ -713,23 +743,24 @@
       }
     ],
     "intros": [
-      "none",
+      "palace",
       "doors",
-      "curtain"
+      "curtain",
+      "none"
     ],
     "ambients": [
-      "none",
-      "lantern-glints"
+      "lantern-glints",
+      "none"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
-        "stagger": 150,
+        "duration": 1100,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },

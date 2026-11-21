@@ -135,8 +135,8 @@ LIVE = {
                          stages=[".gg-house__glass", ".gg-house__frame", ".gg-plant--start, .gg-plant--end", ".gg-ivy", ".gg-house__content", ".gg-invite"]),
     "lace": dict(key="lace", portraits=[".lc-portrait"], titles=".lc-title", foil="--lc-foil",
                  stages=[".lc-pearls", ".lc-doily", ".lc-veil__center", ".lc-invite"]),
-    "nile-royal": dict(key="nile-royal", portraits=[".nr-portrait"], titles=".nr-title", foil="--nr-foil",
-                       stages=[".nr-sky, .nr-moon", ".nr-screen", ".nr-garden, .nr-nile", ".nr-column--start, .nr-column--end", ".nr-panel", ".nr-sprig", ".nr-invite"]),
+    "nile-royal": dict(key="nile-royal", portraits=[], titles=".nr-title", foil="--nr-foil",
+                       stages=[".nr-sky, .nr-stars", ".nr-moon", ".nr-mist, .nr-skyline", ".nr-water, .nr-boat", ".nr-palms", ".nr-arch", ".nr-column", ".nr-cartouche", ".nr-jasmine", ".nr-papyrus"]),
     "desert-bloom": dict(key="desert-bloom", portraits=[".db-portrait"], titles=".db-title", foil="--db-foil",
                          stages=[".db-stars", ".db-sun", ".db-dune--1", ".db-dune--2, .db-palm--start", ".db-dune--3, .db-palm--end", ".db-dune--4, .db-bloom", ".db-sky", ".db-invite"]),
 }
@@ -307,9 +307,11 @@ def extra_css(name, R):
 .db[data-cover-layout="horizon"] .db-sun { inset-block-end: 0; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
 .db[data-cover-layout="horizon"] .db-dune--4 { block-size: 120px; }"""]
     if name == "nile-royal":
-        return [""".nr[data-cover-layout="names"] :is(.nr-sky, .nr-moon, .nr-screen, .nr-garden, .nr-nile, .nr-column) { display: none; }
-.nr[data-cover-layout="names"] .nr-scene { min-block-size: 0; padding-block: 70px 40px; border: 0; outline: 0; box-shadow: none; background: none; }
-.nr[data-cover-layout="names"] .nr-panel { background: none; box-shadow: none; outline: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+        return [""".nr[data-cover-layout="names"] .nr-diorama { block-size: auto; }
+.nr[data-cover-layout="names"] .nr-stage { position: relative; block-size: auto; padding-block: 90px 40px; overflow: visible; }
+.nr[data-cover-layout="names"] .nr-layer:not(.nr-cartouche), .nr[data-cover-layout="names"] .nr-spark, .nr[data-cover-layout="names"] .nr-cue { display: none; }
+.nr[data-cover-layout="names"] .nr-cartouche { position: relative; inset: auto; transform: none; margin-inline: auto; background: none; box-shadow: none; outline: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.nr[data-cover-layout="names"] .nr-cartouche::after { display: none; }
 .nr[data-cover-layout="names"] .nr-names { font-size: calc(var(--name-size) * 1.15); }"""]
     return []
 

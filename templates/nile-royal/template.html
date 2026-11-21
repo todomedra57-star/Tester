@@ -1,127 +1,155 @@
 <main class="nr" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="nr-cover" data-animate="cover">
-    <div class="nr-stage">
-      <span class="nr-column nr-column--start nr-decor" aria-hidden="true"></span>
-      <span class="nr-column nr-column--end nr-decor" aria-hidden="true"></span>
-      <div class="nr-scene">
-        <span class="nr-sky" aria-hidden="true"></span>
-        <span class="nr-moon" aria-hidden="true"></span>
-        <span class="nr-screen" aria-hidden="true" data-parallax></span>
-        <span class="nr-garden" aria-hidden="true"></span>
-        <span class="nr-nile" aria-hidden="true"></span>
-        <span class="nr-spark nr-spark--1 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--2 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--3 nr-decor" aria-hidden="true"></span>
-        <div class="nr-panel">
-          <span class="nr-sprig nr-sprig--start nr-decor" aria-hidden="true"></span>
-          <span class="nr-sprig nr-sprig--end nr-decor" aria-hidden="true"></span>
+    <!-- the diorama: a pinned stage; the camera flies through the palace window as you scroll -->
+    <div class="nr-diorama" data-scene="contain">
+      <div class="nr-stage">
+        <span class="nr-layer nr-sky" aria-hidden="true"></span>
+        <span class="nr-layer nr-stars" aria-hidden="true"></span>
+        <span class="nr-layer nr-moon" aria-hidden="true"></span>
+        <span class="nr-layer nr-mist nr-mist--far" aria-hidden="true"></span>
+        <span class="nr-layer nr-skyline" aria-hidden="true"></span>
+        <span class="nr-layer nr-mist nr-mist--near" aria-hidden="true"></span>
+        <span class="nr-layer nr-water" aria-hidden="true"><span class="nr-moonpath"></span></span>
+        <span class="nr-layer nr-boat" aria-hidden="true"></span>
+        <span class="nr-layer nr-palms nr-palms--start" aria-hidden="true"></span>
+        <span class="nr-layer nr-palms nr-palms--end" aria-hidden="true"></span>
+        <span class="nr-layer nr-arch" aria-hidden="true"><span class="nr-screen"></span></span>
+        <span class="nr-layer nr-column nr-column--start nr-decor" aria-hidden="true"></span>
+        <span class="nr-layer nr-column nr-column--end nr-decor" aria-hidden="true"></span>
+        <span class="nr-spark nr-spark--1 nr-decor" aria-hidden="true"></span>
+        <span class="nr-spark nr-spark--2 nr-decor" aria-hidden="true"></span>
+        <span class="nr-spark nr-spark--3 nr-decor" aria-hidden="true"></span>
+        <div class="nr-layer nr-cartouche">
           <span class="nr-monogram" aria-hidden="true"></span>
-          {{#if story.photos.length}}
-            {{#with story.photos.[0]}}<figure class="nr-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
-          {{/if}}
           <p class="nr-lead">{{text "lead"}}</p>
           <h1 class="nr-names">
-        <span class="nr-name">{{couple.groom.name}}</span>
-        {{#if couple.bride.name}}<span class="nr-and">{{text "and"}}</span><span class="nr-name">{{couple.bride.name}}</span>{{/if}}
-      </h1>
+            <span class="nr-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="nr-and">{{text "and"}}</span><span class="nr-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
           {{#unless (variant "dateStyle" "calendar")}}<p class="nr-date">{{formatDate mainDate}}</p>{{/unless}}
         </div>
+        <span class="nr-layer nr-jasmine nr-jasmine--start nr-decor" aria-hidden="true"></span>
+        <span class="nr-layer nr-jasmine nr-jasmine--end nr-decor" aria-hidden="true"></span>
+        <p class="nr-cue">{{text "scrollHint"}}</p>
       </div>
     </div>
-    <div class="nr-card nr-invite">
-      {{#if verse}}<p class="nr-verse">{{verse}}</p>{{/if}}
-    <div class="nr-families">
-      <div class="nr-family">
-        {{#if couple.groom.father}}<p class="nr-family__label">{{text "sonOf"}}</p><p class="nr-family__name">{{couple.groom.father}}</p>{{/if}}
-        {{#each couple.groom.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
+
+    <!-- the invitation unrolls like a papyrus scroll -->
+    <div class="nr-papyrus" data-scene="cover">
+      <span class="nr-papyrus__roll nr-papyrus__roll--top" aria-hidden="true"></span>
+      <div class="nr-papyrus__sheet">
+        {{#if verse}}<p class="nr-verse">{{verse}}</p>{{/if}}
+        <div class="nr-families">
+          <div class="nr-family">
+            {{#if couple.groom.father}}<p class="nr-family__label">{{text "sonOf"}}</p><p class="nr-family__name">{{couple.groom.father}}</p>{{/if}}
+            {{#each couple.groom.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
+          </div>
+          <div class="nr-family">
+            {{#if couple.bride.father}}<p class="nr-family__label">{{text "daughterOf"}}</p><p class="nr-family__name">{{couple.bride.father}}</p>{{/if}}
+            {{#each couple.bride.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
+          </div>
+        </div>
       </div>
-      <div class="nr-family">
-        {{#if couple.bride.father}}<p class="nr-family__label">{{text "daughterOf"}}</p><p class="nr-family__name">{{couple.bride.father}}</p>{{/if}}
-        {{#each couple.bride.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
-      </div>
-    </div>
+      <span class="nr-papyrus__roll nr-papyrus__roll--bottom" aria-hidden="true"></span>
     </div>
   </section>
 
+  <!-- countdown inside a hanging lantern -->
   <section class="nr-section nr-countdown" data-animate="countdown">
-    <div class="nr-card">
-      <span class="nr-spark nr-spark--1 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--2 nr-decor" aria-hidden="true"></span>
-      <h2 class="nr-title">{{text "countdownTitle"}}</h2>
+    <h2 class="nr-title">{{text "countdownTitle"}}</h2>
+    <div class="nr-lantern">
+      <span class="nr-lantern__halo" aria-hidden="true"></span>
+      <span class="nr-lantern__body" aria-hidden="true"></span>
       <p class="nr-count"><span class="nr-count__num">{{daysUntil mainDate}}</span><span class="nr-count__unit">{{text "countdownUnit"}}</span></p>
-      {{#if (variant "dateStyle" "calendar")}}
-        {{#with (calendarMonth mainDate)}}
-          <div class="nr-cal">
-            <p class="nr-cal__title">{{title}}</p>
-            <div class="nr-cal__grid">
-              {{#each weekdays}}<span class="nr-cal__wd">{{this}}</span>{{/each}}
-              {{#each cells}}<span class="nr-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
-            </div>
-          </div>
-        {{/with}}
-      {{/if}}
     </div>
+    {{#if (variant "dateStyle" "calendar")}}
+      {{#with (calendarMonth mainDate)}}
+        <div class="nr-card nr-cal">
+          <p class="nr-cal__title">{{title}}</p>
+          <div class="nr-cal__grid">
+            {{#each weekdays}}<span class="nr-cal__wd">{{this}}</span>{{/each}}
+            {{#each cells}}<span class="nr-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+          </div>
+        </div>
+      {{/with}}
+    {{/if}}
   </section>
 
   {{#if story.text}}
     <div class="nr-divider" aria-hidden="true"></div>
-    <section class="nr-section nr-story" data-animate="story">
-      <div class="nr-card">
-        
-        <h2 class="nr-title">{{text "storyTitle"}}</h2>
-        {{#if story.photos.length}}
-          <div class="nr-photos">
-            {{#each story.photos}}<figure class="nr-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
-          </div>
-        {{/if}}
-        <p class="nr-story__text">{{story.text}}</p>
-        {{#if story.engagementDate}}<p class="nr-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
-      </div>
+    <!-- story: palace windows whose shutters open as you scroll -->
+    <section class="nr-section nr-story" data-animate="story" data-scene="cover">
+      <h2 class="nr-title">{{text "storyTitle"}}</h2>
+      {{#if story.photos.length}}
+        <div class="nr-windows">
+          {{#each story.photos}}
+            <figure class="nr-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="nr-shutter nr-shutter--a" aria-hidden="true"></span>
+              <span class="nr-shutter nr-shutter--b" aria-hidden="true"></span>
+            </figure>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="nr-story__text">{{story.text}}</p>
+      {{#if story.engagementDate}}<p class="nr-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
     </section>
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="nr-section nr-gallery" data-animate="gallery">
-      <h2 class="nr-title">{{text "galleryTitle"}}</h2>
-      <div class="nr-flow">
-        {{#each gallery}}<figure class="nr-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+    <!-- gallery: a 3D ring of photos turning as you scroll -->
+    <section class="nr-section nr-gallery" data-animate="gallery" data-scene="contain">
+      <div class="nr-gallery__stage">
+        <h2 class="nr-title">{{text "galleryTitle"}}</h2>
+        <div class="nr-flow">
+          {{#each gallery}}<figure class="nr-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="nr-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="nr-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
   <div class="nr-divider" aria-hidden="true"></div>
 
-  <section class="nr-section nr-events" data-animate="events">
+  <!-- events: a felucca sails down the Nile past each celebration -->
+  <section class="nr-section nr-events" data-animate="events" data-scene="cover">
     <h2 class="nr-title">{{text "eventsTitle"}}</h2>
-    {{#each events}}
-      <article class="nr-card nr-event" data-item>
-        
-        <h3 class="nr-event__type">{{eventLabel type}}</h3>
-        <p class="nr-event__date">{{formatDate date}}</p>
-        <p class="nr-event__time">{{eventTime this}}</p>
-        <p class="nr-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-        {{#if program.length}}
-          <div class="nr-program">
-            <p class="nr-program__title">{{text "programTitle"}}</p>
-            <ol class="nr-program__list">
-              {{#each program}}<li class="nr-program__item"><span class="nr-program__time">{{formatTime time}}</span><span class="nr-program__what">{{title}}</span></li>{{/each}}
-            </ol>
-          </div>
-        {{/if}}
-        {{#if mapUrl}}<a class="nr-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
-      </article>
-    {{/each}}
+    <div class="nr-journey">
+      <span class="nr-river" aria-hidden="true"></span>
+      <span class="nr-river__boat" aria-hidden="true"></span>
+      {{#each events}}
+        <article class="nr-card nr-event" data-item>
+          <h3 class="nr-event__type">{{eventLabel type}}</h3>
+          <p class="nr-event__date">{{formatDate date}}</p>
+          <p class="nr-event__time">{{eventTime this}}</p>
+          <p class="nr-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+          {{#if program.length}}
+            <div class="nr-program">
+              <p class="nr-program__title">{{text "programTitle"}}</p>
+              <ol class="nr-program__list">
+                {{#each program}}<li class="nr-program__item"><span class="nr-program__time">{{formatTime time}}</span><span class="nr-program__what">{{title}}</span></li>{{/each}}
+              </ol>
+            </div>
+          {{/if}}
+          {{#if mapUrl}}<a class="nr-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+        </article>
+      {{/each}}
+    </div>
   </section>
 
+  <!-- wishes under a night sky with rising lanterns -->
   <section class="nr-section nr-wishes" data-animate="wishes">
-    <div class="nr-card">
-      
-      <h2 class="nr-title">{{text "wishesTitle"}}</h2>
+    <div class="nr-night">
+      <span class="nr-night__lanterns" aria-hidden="true"></span>
+      <h2 class="nr-title nr-title--light">{{text "wishesTitle"}}</h2>
       <wishes-box></wishes-box>
     </div>
   </section>
 
   <footer class="nr-section nr-footer" data-animate="footer">
-    <span class="nr-divider" aria-hidden="true"></span><span class="nr-monogram" aria-hidden="true"></span>
+    <span class="nr-footer__moon" aria-hidden="true"></span>
+    <span class="nr-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="nr-closing">{{closingLine}}</p>{{/if}}
     {{#if wishes.closeDate}}<p class="nr-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="nr-brand">{{text "madeWith"}}</p>{{/if}}
