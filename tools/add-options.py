@@ -109,6 +109,120 @@ def extend_variant(tokens, key, new_opts, fallback=None):
 def variant_tok(key, opts):
     return {"key": key, "type": "variant", "options": [o[0] for o in opts], "choices": {o[0]: {"ar": o[1], "en": o[2]} for o in opts}}
 
+
+# ----------------------------------------------------------------- living + premium set
+# portraits: cover photos · stages: cover pieces in build-up order · titles · foil: the
+# template's foil custom property (None = no foil, metal choice not offered)
+LIVE = {
+    "midnight": dict(key="midnight", portraits=[], titles=".mn-title, .mn-kicker", foil=None,
+                     stages=[".mn-moon", ".mn-verse", ".mn-lead", ".mn-names", ".mn-families", ".mn-date"]),
+    "navy-bloom": dict(key="navy-bloom", portraits=[".nb-snap"], titles=".nb-title, .nb-card__title", foil=None,
+                       stages=[".nb-scene > .nb-ornament", ".nb-kicker", ".nb-envelope", ".nb-headline"]),
+    "andalus": dict(key="andalus", portraits=[".an-window"], titles=".an-title, .an-kicker", foil="--an-foil",
+                    stages=[".an-gate__arch", ".an-lanterns", ".an-window, .an-moon", ".an-names", ".an-date", ".an-invite"]),
+    "deco": dict(key="deco", portraits=[".dc-portrait"], titles=".dc-title", foil="--dc-foil",
+                 stages=[".dc-frame", ".dc-portrait", ".dc-lead", ".dc-names", ".dc-date", ".dc-families"]),
+    "atelier": dict(key="atelier", portraits=[".at-hero__photo"], titles=".at-title, .at-kicker", foil="--at-foil",
+                    stages=[".at-masthead", ".at-hero__photo", ".at-ghost", ".at-invite"]),
+    "royal": dict(key="royal", portraits=[], titles=".ry-title", foil="--ry-foil",
+                  stages=[".ry-drapes", ".ry-crest", ".ry-panel", ".ry-names", ".ry-ribbon"]),
+    "porcelain": dict(key="porcelain", portraits=[".pc-plate__photo"], titles=".pc-title", foil="--pc-foil",
+                      stages=[".pc-plate", ".pc-lead", ".pc-names", ".pc-date", ".pc-invite"]),
+    "glass-garden": dict(key="glass-garden", portraits=[".gg-portrait"], titles=".gg-title", foil="--gg-foil",
+                         stages=[".gg-house__glass", ".gg-house__frame", ".gg-plant--start, .gg-plant--end", ".gg-ivy", ".gg-house__content", ".gg-invite"]),
+    "lace": dict(key="lace", portraits=[".lc-portrait"], titles=".lc-title", foil="--lc-foil",
+                 stages=[".lc-pearls", ".lc-doily", ".lc-veil__center", ".lc-invite"]),
+    "desert-bloom": dict(key="desert-bloom", portraits=[".db-portrait"], titles=".db-title", foil="--db-foil",
+                         stages=[".db-stars", ".db-sun", ".db-dune--1", ".db-dune--2, .db-palm--start", ".db-dune--3, .db-palm--end", ".db-dune--4, .db-bloom", ".db-sky", ".db-invite"]),
+}
+
+PHOTO_TONE = [("natural", "ألوان طبيعية", "Natural colour"), ("golden", "تدرج ذهبي", "Golden tone"),
+              ("palette", "بألوان التصميم", "Palette tone"), ("noir", "أبيض وأسود", "Black and white")]
+ENTRANCE = [("cinematic", "دخول سينمائي متتابع", "Cinematic build-up"), ("gentle", "دخول هادئ", "Gentle"), ("none", "بدون حركة دخول", "No entrance motion")]
+METAL = [("palette", "معدن الألوان", "Palette metal"), ("champagne", "شمبانيا", "Champagne"), ("roseGold", "ذهب وردي", "Rose gold"),
+         ("silver", "فضي", "Silver"), ("iridescent", "لؤلؤي قزحي", "Iridescent pearl")]
+FONT_PAIR = [("template", "كما في التصميم", "As designed"), ("classic", "كلاسيكي", "Classic"), ("modern", "عصري", "Modern"),
+             ("script", "خط يدوي", "Script"), ("geometric", "هندسي", "Geometric")]
+FONT_TOKENS = {"classic": "amiri", "classicLatin": "cormorant", "modern": "elMessiri", "modernLatin": "decoSans",
+               "script": "arefRuqaa", "scriptLatin": "pinyon", "geometric": "reemKufi", "geometricLatin": "cinzel"}
+
+# metal colours derived from the palette accent (relative colour syntax, no raw hex)
+METALS = {
+    "champagne": ("oklch(from var(--c-accent) calc(l - 0.12) calc(c * 0.5) h)", "oklch(from var(--c-accent) calc(l + 0.08) calc(c * 0.55) h)", "oklch(from var(--c-accent) 0.95 calc(c * 0.3) h)"),
+    "roseGold": ("oklch(from var(--c-accent) calc(l - 0.14) c 30)", "oklch(from var(--c-accent) l calc(c * 0.9) 42)", "oklch(from var(--c-accent) calc(l + 0.15) calc(c * 0.5) 50)"),
+    "silver": ("oklch(from var(--c-accent) calc(l - 0.2) 0.012 250)", "oklch(from var(--c-accent) calc(l + 0.06) 0.01 250)", "oklch(from var(--c-accent) 0.96 0.004 250)"),
+}
+
+def live_css(name, R, c):
+    L = LIVE[name]
+    K = L["key"]
+    P = R[1:]
+    photos = [c["photo"], c["item"]] + L["portraits"]
+    allp = ", ".join(photos)
+    out = ["/* ---- living + premium set ---- */",
+           f"@property --{P}-shine {{ syntax: '<angle>'; inherits: false; initial-value: 0deg; }}",
+           f"{R} {{ --{P}-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --{P}-mm: var(--c-accent); --{P}-ml: color-mix(in srgb, var(--c-accent) 45%, {c['light']}); }}"]
+    # 1. photo tone
+    tone_bg = {"golden": f"var({L['foil']})" if L["foil"] else "var(--c-accent)",
+               "palette": f"linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, {'var(' + L['foil'] + ')' if L['foil'] else 'var(--c-accent)'}"}
+    for tone, bg in tone_bg.items():
+        out.append(f"{R}[data-photo-tone=\"{tone}\"] :is({allp}) {{ isolation: isolate; background: {bg}; }}")
+        out.append(f"{R}[data-photo-tone=\"{tone}\"] :is({allp}) img {{ mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }}")
+    out.append(f"{R}[data-photo-tone=\"palette\"][data-photo-frame=\"polaroid\"] {c['photo']} {{ background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, {c['light']}; }}")
+    out.append(f"{R}[data-photo-tone=\"noir\"] :is({allp}) img {{ filter: grayscale(1) contrast(1.15); }}")
+    # 2. shimmering foil frames (light travels around as you scroll)
+    shine_sel = f"{R}:not([data-ornament=\"refined\"]):not([data-photo-frame=\"polaroid\"]):not([data-photo-frame=\"pearl\"]):is([data-photo-tone=\"natural\"], :not([data-photo-tone])) :is({', '.join([c['photo']] + L['portraits'])})"
+    out.append(f"""@supports (animation-timeline: view()) {{
+  {shine_sel} {{
+    background: conic-gradient(from var(--{P}-shine), var(--{P}-md), var(--{P}-mm) 15%, var(--{P}-ml) 25%, var(--{P}-mm) 35%, var(--{P}-md) 50%, var(--{P}-mm) 65%, var(--{P}-ml) 75%, var(--{P}-mm) 85%, var(--{P}-md));
+    animation: {K}-shine linear both; animation-timeline: view();
+  }}
+}}
+@keyframes {K}-shine {{ from {{ --{P}-shine: 0deg; }} to {{ --{P}-shine: 300deg; }} }}""")
+    # 3. cinematic entrance: the cover builds piece by piece
+    stage_rules = []
+    for i, st in enumerate(L["stages"]):
+        sels = ", ".join(f"{R} [data-animate=\"cover\"] {x.strip()}" for x in st.split(","))
+        stage_rules.append(f"  {sels} {{ --{P}-stage: {i}; }}")
+    all_stages = ", ".join(x.strip() for st in L["stages"] for x in st.split(","))
+    out.append(f"""@media (prefers-reduced-motion: no-preference) {{
+{chr(10).join(stage_rules)}
+  {R}:not([data-entrance="none"]) [data-animate="cover"] :is({all_stages}) {{
+    transition: opacity 1.1s ease, scale 1.5s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
+    transition-delay: calc(var(--{P}-stage, 0) * 0.34s + 0.15s);
+  }}
+  {R}[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is({all_stages}) {{ opacity: 0; scale: 0.92; filter: blur(10px); }}
+  {R}[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is({all_stages}) {{ opacity: 0; }}
+  {R}[data-entrance="gentle"] [data-animate="cover"] :is({all_stages}) {{ transition-delay: calc(var(--{P}-stage, 0) * 0.12s); }}
+""")
+    # 4. choreographed reveals: title, then a gold line drawing, then the content
+    out.append(f"""  {R}:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is({L['titles']}) {{ transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); }}
+  {R}:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is({L['titles']}) {{ opacity: 0; translate: 0 14px; }}
+  {R}:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(p, ol, .wb):not(:is({L['titles']})) {{ transition: opacity .9s ease .55s; }}
+  {R}:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(p, ol, .wb):not(:is({L['titles']})) {{ opacity: 0; }}
+  {R}:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is({L['titles']})::after {{
+    content: ""; display: block; inline-size: 56px; block-size: 1px; margin-block-start: 12px; margin-inline: auto;
+    background: var(--c-accent); transform: scaleX(0); transition: transform .9s cubic-bezier(.6, 0, .2, 1) .3s;
+  }}
+  {R}:not([data-entrance="none"]) [data-animate].is-in :is({L['titles']})::after {{ transform: scaleX(1); }}
+}}""")
+    # 5. metal
+    if L["foil"]:
+        f = L["foil"]
+        stops = lambda: f"linear-gradient(115deg, var(--{P}-md) 0%, var(--{P}-mm) 20%, var(--{P}-ml) 34%, var(--{P}-mm) 46%, var(--{P}-md) 60%, var(--{P}-mm) 76%, var(--{P}-ml) 90%, var(--{P}-mm) 100%)"
+        rules = []
+        for m, (d, mm, l) in METALS.items():
+            rules.append(f"  {R}[data-metal=\"{m}\"] {{ --{P}-md: {d}; --{P}-mm: {mm}; --{P}-ml: {l}; {f}: {stops()}; }}")
+        irid = ("linear-gradient(115deg, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 0%, oklch(from var(--c-accent) 0.93 0.06 calc(h + 40)) 22%, "
+                "oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)) 40%, oklch(from var(--c-accent) 0.9 0.07 calc(h + 220)) 60%, "
+                "oklch(from var(--c-accent) 0.95 0.05 calc(h + 300)) 80%, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 100%)")
+        rules.append(f"  {R}[data-metal=\"iridescent\"] {{ --{P}-md: oklch(from var(--c-accent) 0.82 0.07 calc(h + 220)); --{P}-mm: oklch(from var(--c-accent) 0.9 0.06 calc(h + 40)); --{P}-ml: oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)); {f}: {irid}; }}")
+        out.append("@supports (color: oklch(from red l c h)) {\n" + "\n".join(rules) + "\n}")
+    # 6. font pairing (swaps to other font tokens of this template)
+    for fp in ("classic", "modern", "script", "geometric"):
+        out.append(f"{R}[data-font-pair=\"{fp}\"] {{ --font-display: var(--font-{fp}); --font-latin: var(--font-{fp}-latin); }}")
+    return out
+
 # ----------------------------------------------------------------- CSS pack
 def css_pack(name, c):
     R, ph, fl, it = c["root"], c["photo"], c["flow"], c["item"]
@@ -157,6 +271,7 @@ def css_pack(name, c):
     out.append(f"""{sel('ornament', 'opulent', c['cards'])} {{ filter: {c['filter']}{glow}; }}
 {sel('ornament', 'opulent', c['names'])} {{ filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c-accent) 55%, transparent)); }}
 {sel('ornament', 'opulent', ph)} {{ filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c-accent) 55%, transparent)); }}""")
+    out.extend(live_css(name, R, c))
     out.extend(extra_css(name, R))
     out.append(END)
     return "\n".join(out) + "\n"
@@ -200,7 +315,20 @@ for name, c in T.items():
         extend_variant(toks, "countdownStyle", COUNTDOWN_NEW)
     if name in COVER_NEW:
         extend_variant(toks, "coverLayout", [COVER_NEW[name]])
-    for k in ("galleryStyle", "ornament"):
+    extend_variant(toks, "photoTone", [], fallback=variant_tok("photoTone", PHOTO_TONE))
+    extend_variant(toks, "entrance", [], fallback=variant_tok("entrance", ENTRANCE))
+    if LIVE[name]["foil"]:
+        extend_variant(toks, "metal", [], fallback=variant_tok("metal", METAL))
+    extend_variant(toks, "fontPair", [], fallback=variant_tok("fontPair", FONT_PAIR))
+    names_have = {t["key"] for t in toks}
+    first_var = next(i for i, t in enumerate(toks) if t["type"] == "variant")
+    for fk, fv in FONT_TOKENS.items():
+        if fk not in names_have:
+            toks.insert(first_var, {"key": fk, "type": "font"}); first_var += 1
+        man["defaultTheme"].setdefault(fk, fv)
+    for k in ("galleryStyle", "ornament", "photoTone", "entrance", "metal", "fontPair"):
+        if not any(t["key"] == k for t in toks):
+            continue
         man["defaultTheme"].setdefault(k, next(t for t in toks if t["key"] == k)["options"][0])
     vkeys = [v["key"] for v in man["couplePresets"]["variants"]]
     for t in toks:
@@ -219,7 +347,9 @@ for name, c in T.items():
     # templates that print data-* only for the variants they already had
     html = (d / "template.html").read_text(encoding="utf-8")
     first_tag = html.split(">", 1)[0]
-    for attr, key in (("data-gallery-style", "galleryStyle"), ("data-ornament", "ornament")):
+    attrs = [("data-gallery-style", "galleryStyle"), ("data-ornament", "ornament"), ("data-photo-tone", "photoTone"),
+             ("data-entrance", "entrance"), ("data-font-pair", "fontPair")] + ([("data-metal", "metal")] if LIVE[name]["foil"] else [])
+    for attr, key in attrs:
         if attr not in first_tag:
             html = html.replace(first_tag, first_tag + f' {attr}="{{{{variant "{key}"}}}}"', 1)
             first_tag = html.split(">", 1)[0]

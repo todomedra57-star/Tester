@@ -298,6 +298,59 @@
 .db[data-ornament="opulent"] .db-card { filter: drop-shadow(0 0 20px color-mix(in srgb, var(--c-accent) 45%, transparent)) drop-shadow(0 0 2px color-mix(in srgb, var(--c-accent) 70%, transparent)); }
 .db[data-ornament="opulent"] .db-names { filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
 .db[data-ornament="opulent"] .db-photo { filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
+/* ---- living + premium set ---- */
+@property --db-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.db { --db-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --db-mm: var(--c-accent); --db-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
+.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait) { isolation: isolate; background: var(--db-foil); }
+.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--db-foil); }
+.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.db[data-photo-tone="palette"][data-photo-frame="polaroid"] .db-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
+.db[data-photo-tone="noir"] :is(.db-photo, .db-flow__item, .db-portrait) img { filter: grayscale(1) contrast(1.15); }
+@supports (animation-timeline: view()) {
+  .db:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait) {
+    background: conic-gradient(from var(--db-shine), var(--db-md), var(--db-mm) 15%, var(--db-ml) 25%, var(--db-mm) 35%, var(--db-md) 50%, var(--db-mm) 65%, var(--db-ml) 75%, var(--db-mm) 85%, var(--db-md));
+    animation: desert-bloom-shine linear both; animation-timeline: view();
+  }
+}
+@keyframes desert-bloom-shine { from { --db-shine: 0deg; } to { --db-shine: 300deg; } }
+@media (prefers-reduced-motion: no-preference) {
+  .db [data-animate="cover"] .db-stars { --db-stage: 0; }
+  .db [data-animate="cover"] .db-sun { --db-stage: 1; }
+  .db [data-animate="cover"] .db-dune--1 { --db-stage: 2; }
+  .db [data-animate="cover"] .db-dune--2, .db [data-animate="cover"] .db-palm--start { --db-stage: 3; }
+  .db [data-animate="cover"] .db-dune--3, .db [data-animate="cover"] .db-palm--end { --db-stage: 4; }
+  .db [data-animate="cover"] .db-dune--4, .db [data-animate="cover"] .db-bloom { --db-stage: 5; }
+  .db [data-animate="cover"] .db-sky { --db-stage: 6; }
+  .db [data-animate="cover"] .db-invite { --db-stage: 7; }
+  .db:not([data-entrance="none"]) [data-animate="cover"] :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) {
+    transition: opacity 1.1s ease, scale 1.5s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
+    transition-delay: calc(var(--db-stage, 0) * 0.34s + 0.15s);
+  }
+  .db[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { opacity: 0; scale: 0.92; filter: blur(10px); }
+  .db[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { opacity: 0; }
+  .db[data-entrance="gentle"] [data-animate="cover"] :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { transition-delay: calc(var(--db-stage, 0) * 0.12s); }
+
+  .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.db-title) { transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); }
+  .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(.db-title) { opacity: 0; translate: 0 14px; }
+  .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(p, ol, .wb):not(:is(.db-title)) { transition: opacity .9s ease .55s; }
+  .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(p, ol, .wb):not(:is(.db-title)) { opacity: 0; }
+  .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.db-title)::after {
+    content: ""; display: block; inline-size: 56px; block-size: 1px; margin-block-start: 12px; margin-inline: auto;
+    background: var(--c-accent); transform: scaleX(0); transition: transform .9s cubic-bezier(.6, 0, .2, 1) .3s;
+  }
+  .db:not([data-entrance="none"]) [data-animate].is-in :is(.db-title)::after { transform: scaleX(1); }
+}
+@supports (color: oklch(from red l c h)) {
+  .db[data-metal="champagne"] { --db-md: oklch(from var(--c-accent) calc(l - 0.12) calc(c * 0.5) h); --db-mm: oklch(from var(--c-accent) calc(l + 0.08) calc(c * 0.55) h); --db-ml: oklch(from var(--c-accent) 0.95 calc(c * 0.3) h); --db-foil: linear-gradient(115deg, var(--db-md) 0%, var(--db-mm) 20%, var(--db-ml) 34%, var(--db-mm) 46%, var(--db-md) 60%, var(--db-mm) 76%, var(--db-ml) 90%, var(--db-mm) 100%); }
+  .db[data-metal="roseGold"] { --db-md: oklch(from var(--c-accent) calc(l - 0.14) c 30); --db-mm: oklch(from var(--c-accent) l calc(c * 0.9) 42); --db-ml: oklch(from var(--c-accent) calc(l + 0.15) calc(c * 0.5) 50); --db-foil: linear-gradient(115deg, var(--db-md) 0%, var(--db-mm) 20%, var(--db-ml) 34%, var(--db-mm) 46%, var(--db-md) 60%, var(--db-mm) 76%, var(--db-ml) 90%, var(--db-mm) 100%); }
+  .db[data-metal="silver"] { --db-md: oklch(from var(--c-accent) calc(l - 0.2) 0.012 250); --db-mm: oklch(from var(--c-accent) calc(l + 0.06) 0.01 250); --db-ml: oklch(from var(--c-accent) 0.96 0.004 250); --db-foil: linear-gradient(115deg, var(--db-md) 0%, var(--db-mm) 20%, var(--db-ml) 34%, var(--db-mm) 46%, var(--db-md) 60%, var(--db-mm) 76%, var(--db-ml) 90%, var(--db-mm) 100%); }
+  .db[data-metal="iridescent"] { --db-md: oklch(from var(--c-accent) 0.82 0.07 calc(h + 220)); --db-mm: oklch(from var(--c-accent) 0.9 0.06 calc(h + 40)); --db-ml: oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)); --db-foil: linear-gradient(115deg, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 0%, oklch(from var(--c-accent) 0.93 0.06 calc(h + 40)) 22%, oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)) 40%, oklch(from var(--c-accent) 0.9 0.07 calc(h + 220)) 60%, oklch(from var(--c-accent) 0.95 0.05 calc(h + 300)) 80%, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 100%); }
+}
+.db[data-font-pair="classic"] { --font-display: var(--font-classic); --font-latin: var(--font-classic-latin); }
+.db[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
+.db[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
+.db[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
 .db[data-cover-layout="horizon"] .db-scene { block-size: 560px; }
 .db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }
 .db[data-cover-layout="horizon"] .db-sun { inset-block-start: 330px; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }

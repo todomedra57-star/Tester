@@ -50,6 +50,13 @@ Every template now offers, on top of its own choices:
 | Date | badge, gold ribbon, double frame, between hairlines, month calendar |
 | Ornament | rich, refined (quiet), opulent (gold glow) |
 | Cover layout | 3 layouts in Porcelain, Glass Garden, Lace and Desert Bloom |
+| Photo tone | natural, golden, palette-toned, black and white (any photo matches the design) |
+| Entrance | cinematic build-up of the cover after opening, gentle, or none; sections reveal title, then a drawn gold line, then content |
+| Metal | palette gold, champagne, rose gold, silver, iridescent pearl (derived from the accent token with relative colours) |
+| Font pairing | as designed, classic, modern, script, geometric (extra font tokens) |
+
+Photo frames also get a **shimmer**: light runs around the gilded frames as
+you scroll (a registered `@property` angle on a scroll timeline).
 
 `python3 tools/add-options.py` adds these to every template (manifest options,
 palettes and an "options pack" at the end of each style.css). It is safe to

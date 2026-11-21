@@ -352,4 +352,53 @@
 .at[data-ornament="opulent"] .at-card { filter: drop-shadow(0 0 20px color-mix(in srgb, var(--c-accent) 45%, transparent)) drop-shadow(0 0 2px color-mix(in srgb, var(--c-accent) 70%, transparent)); }
 .at[data-ornament="opulent"] .at-names { filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
 .at[data-ornament="opulent"] .at-photo { filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
+/* ---- living + premium set ---- */
+@property --at-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.at { --at-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --at-mm: var(--c-accent); --at-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
+.at[data-photo-tone="golden"] :is(.at-photo, .at-strip__item, .at-hero__photo) { isolation: isolate; background: var(--at-foil); }
+.at[data-photo-tone="golden"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.at[data-photo-tone="palette"] :is(.at-photo, .at-strip__item, .at-hero__photo) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--at-foil); }
+.at[data-photo-tone="palette"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.at[data-photo-tone="palette"][data-photo-frame="polaroid"] .at-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
+.at[data-photo-tone="noir"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { filter: grayscale(1) contrast(1.15); }
+@supports (animation-timeline: view()) {
+  .at:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo) {
+    background: conic-gradient(from var(--at-shine), var(--at-md), var(--at-mm) 15%, var(--at-ml) 25%, var(--at-mm) 35%, var(--at-md) 50%, var(--at-mm) 65%, var(--at-ml) 75%, var(--at-mm) 85%, var(--at-md));
+    animation: atelier-shine linear both; animation-timeline: view();
+  }
+}
+@keyframes atelier-shine { from { --at-shine: 0deg; } to { --at-shine: 300deg; } }
+@media (prefers-reduced-motion: no-preference) {
+  .at [data-animate="cover"] .at-masthead { --at-stage: 0; }
+  .at [data-animate="cover"] .at-hero__photo { --at-stage: 1; }
+  .at [data-animate="cover"] .at-ghost { --at-stage: 2; }
+  .at [data-animate="cover"] .at-invite { --at-stage: 3; }
+  .at:not([data-entrance="none"]) [data-animate="cover"] :is(.at-masthead, .at-hero__photo, .at-ghost, .at-invite) {
+    transition: opacity 1.1s ease, scale 1.5s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
+    transition-delay: calc(var(--at-stage, 0) * 0.34s + 0.15s);
+  }
+  .at[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.at-masthead, .at-hero__photo, .at-ghost, .at-invite) { opacity: 0; scale: 0.92; filter: blur(10px); }
+  .at[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.at-masthead, .at-hero__photo, .at-ghost, .at-invite) { opacity: 0; }
+  .at[data-entrance="gentle"] [data-animate="cover"] :is(.at-masthead, .at-hero__photo, .at-ghost, .at-invite) { transition-delay: calc(var(--at-stage, 0) * 0.12s); }
+
+  .at:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.at-title, .at-kicker) { transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); }
+  .at:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(.at-title, .at-kicker) { opacity: 0; translate: 0 14px; }
+  .at:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(p, ol, .wb):not(:is(.at-title, .at-kicker)) { transition: opacity .9s ease .55s; }
+  .at:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(p, ol, .wb):not(:is(.at-title, .at-kicker)) { opacity: 0; }
+  .at:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.at-title, .at-kicker)::after {
+    content: ""; display: block; inline-size: 56px; block-size: 1px; margin-block-start: 12px; margin-inline: auto;
+    background: var(--c-accent); transform: scaleX(0); transition: transform .9s cubic-bezier(.6, 0, .2, 1) .3s;
+  }
+  .at:not([data-entrance="none"]) [data-animate].is-in :is(.at-title, .at-kicker)::after { transform: scaleX(1); }
+}
+@supports (color: oklch(from red l c h)) {
+  .at[data-metal="champagne"] { --at-md: oklch(from var(--c-accent) calc(l - 0.12) calc(c * 0.5) h); --at-mm: oklch(from var(--c-accent) calc(l + 0.08) calc(c * 0.55) h); --at-ml: oklch(from var(--c-accent) 0.95 calc(c * 0.3) h); --at-foil: linear-gradient(115deg, var(--at-md) 0%, var(--at-mm) 20%, var(--at-ml) 34%, var(--at-mm) 46%, var(--at-md) 60%, var(--at-mm) 76%, var(--at-ml) 90%, var(--at-mm) 100%); }
+  .at[data-metal="roseGold"] { --at-md: oklch(from var(--c-accent) calc(l - 0.14) c 30); --at-mm: oklch(from var(--c-accent) l calc(c * 0.9) 42); --at-ml: oklch(from var(--c-accent) calc(l + 0.15) calc(c * 0.5) 50); --at-foil: linear-gradient(115deg, var(--at-md) 0%, var(--at-mm) 20%, var(--at-ml) 34%, var(--at-mm) 46%, var(--at-md) 60%, var(--at-mm) 76%, var(--at-ml) 90%, var(--at-mm) 100%); }
+  .at[data-metal="silver"] { --at-md: oklch(from var(--c-accent) calc(l - 0.2) 0.012 250); --at-mm: oklch(from var(--c-accent) calc(l + 0.06) 0.01 250); --at-ml: oklch(from var(--c-accent) 0.96 0.004 250); --at-foil: linear-gradient(115deg, var(--at-md) 0%, var(--at-mm) 20%, var(--at-ml) 34%, var(--at-mm) 46%, var(--at-md) 60%, var(--at-mm) 76%, var(--at-ml) 90%, var(--at-mm) 100%); }
+  .at[data-metal="iridescent"] { --at-md: oklch(from var(--c-accent) 0.82 0.07 calc(h + 220)); --at-mm: oklch(from var(--c-accent) 0.9 0.06 calc(h + 40)); --at-ml: oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)); --at-foil: linear-gradient(115deg, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 0%, oklch(from var(--c-accent) 0.93 0.06 calc(h + 40)) 22%, oklch(from var(--c-accent) 0.96 0.04 calc(h + 130)) 40%, oklch(from var(--c-accent) 0.9 0.07 calc(h + 220)) 60%, oklch(from var(--c-accent) 0.95 0.05 calc(h + 300)) 80%, oklch(from var(--c-accent) 0.86 0.07 calc(h - 50)) 100%); }
+}
+.at[data-font-pair="classic"] { --font-display: var(--font-classic); --font-latin: var(--font-classic-latin); }
+.at[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
+.at[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
+.at[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
 /* ==== end of options pack ==== */

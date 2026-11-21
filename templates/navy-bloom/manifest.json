@@ -182,6 +182,122 @@
       "type": "image"
     },
     {
+      "key": "classic",
+      "type": "font"
+    },
+    {
+      "key": "classicLatin",
+      "type": "font"
+    },
+    {
+      "key": "modern",
+      "type": "font"
+    },
+    {
+      "key": "modernLatin",
+      "type": "font"
+    },
+    {
+      "key": "script",
+      "type": "font"
+    },
+    {
+      "key": "scriptLatin",
+      "type": "font"
+    },
+    {
+      "key": "geometric",
+      "type": "font"
+    },
+    {
+      "key": "geometricLatin",
+      "type": "font"
+    },
+    {
+      "key": "fontPair",
+      "type": "variant",
+      "options": [
+        "template",
+        "classic",
+        "modern",
+        "script",
+        "geometric"
+      ],
+      "choices": {
+        "template": {
+          "ar": "كما في التصميم",
+          "en": "As designed"
+        },
+        "classic": {
+          "ar": "كلاسيكي",
+          "en": "Classic"
+        },
+        "modern": {
+          "ar": "عصري",
+          "en": "Modern"
+        },
+        "script": {
+          "ar": "خط يدوي",
+          "en": "Script"
+        },
+        "geometric": {
+          "ar": "هندسي",
+          "en": "Geometric"
+        }
+      }
+    },
+    {
+      "key": "entrance",
+      "type": "variant",
+      "options": [
+        "cinematic",
+        "gentle",
+        "none"
+      ],
+      "choices": {
+        "cinematic": {
+          "ar": "دخول سينمائي متتابع",
+          "en": "Cinematic build-up"
+        },
+        "gentle": {
+          "ar": "دخول هادئ",
+          "en": "Gentle"
+        },
+        "none": {
+          "ar": "بدون حركة دخول",
+          "en": "No entrance motion"
+        }
+      }
+    },
+    {
+      "key": "photoTone",
+      "type": "variant",
+      "options": [
+        "natural",
+        "golden",
+        "palette",
+        "noir"
+      ],
+      "choices": {
+        "natural": {
+          "ar": "ألوان طبيعية",
+          "en": "Natural colour"
+        },
+        "golden": {
+          "ar": "تدرج ذهبي",
+          "en": "Golden tone"
+        },
+        "palette": {
+          "ar": "بألوان التصميم",
+          "en": "Palette tone"
+        },
+        "noir": {
+          "ar": "أبيض وأسود",
+          "en": "Black and white"
+        }
+      }
+    },
+    {
       "key": "ornament",
       "type": "variant",
       "options": [
@@ -317,7 +433,18 @@
     "dateStyle": "calendar",
     "photoFrame": "arch",
     "galleryStyle": "coverflow",
-    "ornament": "rich"
+    "ornament": "rich",
+    "classic": "amiri",
+    "classicLatin": "cormorant",
+    "modern": "elMessiri",
+    "modernLatin": "decoSans",
+    "script": "arefRuqaa",
+    "scriptLatin": "pinyon",
+    "geometric": "reemKufi",
+    "geometricLatin": "cinzel",
+    "photoTone": "natural",
+    "entrance": "cinematic",
+    "fontPair": "template"
   },
   "defaultAnimation": {
     "intro": "doors",
@@ -485,6 +612,15 @@
       },
       {
         "key": "ornament"
+      },
+      {
+        "key": "fontPair"
+      },
+      {
+        "key": "entrance"
+      },
+      {
+        "key": "photoTone"
       }
     ],
     "hiddenEffects": []

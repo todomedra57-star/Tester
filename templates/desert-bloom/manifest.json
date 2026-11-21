@@ -178,6 +178,155 @@
       "type": "image"
     },
     {
+      "key": "classic",
+      "type": "font"
+    },
+    {
+      "key": "classicLatin",
+      "type": "font"
+    },
+    {
+      "key": "modern",
+      "type": "font"
+    },
+    {
+      "key": "modernLatin",
+      "type": "font"
+    },
+    {
+      "key": "script",
+      "type": "font"
+    },
+    {
+      "key": "scriptLatin",
+      "type": "font"
+    },
+    {
+      "key": "geometric",
+      "type": "font"
+    },
+    {
+      "key": "geometricLatin",
+      "type": "font"
+    },
+    {
+      "key": "fontPair",
+      "type": "variant",
+      "options": [
+        "template",
+        "classic",
+        "modern",
+        "script",
+        "geometric"
+      ],
+      "choices": {
+        "template": {
+          "ar": "كما في التصميم",
+          "en": "As designed"
+        },
+        "classic": {
+          "ar": "كلاسيكي",
+          "en": "Classic"
+        },
+        "modern": {
+          "ar": "عصري",
+          "en": "Modern"
+        },
+        "script": {
+          "ar": "خط يدوي",
+          "en": "Script"
+        },
+        "geometric": {
+          "ar": "هندسي",
+          "en": "Geometric"
+        }
+      }
+    },
+    {
+      "key": "metal",
+      "type": "variant",
+      "options": [
+        "palette",
+        "champagne",
+        "roseGold",
+        "silver",
+        "iridescent"
+      ],
+      "choices": {
+        "palette": {
+          "ar": "معدن الألوان",
+          "en": "Palette metal"
+        },
+        "champagne": {
+          "ar": "شمبانيا",
+          "en": "Champagne"
+        },
+        "roseGold": {
+          "ar": "ذهب وردي",
+          "en": "Rose gold"
+        },
+        "silver": {
+          "ar": "فضي",
+          "en": "Silver"
+        },
+        "iridescent": {
+          "ar": "لؤلؤي قزحي",
+          "en": "Iridescent pearl"
+        }
+      }
+    },
+    {
+      "key": "entrance",
+      "type": "variant",
+      "options": [
+        "cinematic",
+        "gentle",
+        "none"
+      ],
+      "choices": {
+        "cinematic": {
+          "ar": "دخول سينمائي متتابع",
+          "en": "Cinematic build-up"
+        },
+        "gentle": {
+          "ar": "دخول هادئ",
+          "en": "Gentle"
+        },
+        "none": {
+          "ar": "بدون حركة دخول",
+          "en": "No entrance motion"
+        }
+      }
+    },
+    {
+      "key": "photoTone",
+      "type": "variant",
+      "options": [
+        "natural",
+        "golden",
+        "palette",
+        "noir"
+      ],
+      "choices": {
+        "natural": {
+          "ar": "ألوان طبيعية",
+          "en": "Natural colour"
+        },
+        "golden": {
+          "ar": "تدرج ذهبي",
+          "en": "Golden tone"
+        },
+        "palette": {
+          "ar": "بألوان التصميم",
+          "en": "Palette tone"
+        },
+        "noir": {
+          "ar": "أبيض وأسود",
+          "en": "Black and white"
+        }
+      }
+    },
+    {
       "key": "coverLayout",
       "type": "variant",
       "options": [
@@ -353,7 +502,19 @@
     "ornament": "rich",
     "dateStyle": "badge",
     "photoFrame": "arch",
-    "galleryStyle": "coverflow"
+    "galleryStyle": "coverflow",
+    "classic": "amiri",
+    "classicLatin": "cormorant",
+    "modern": "elMessiri",
+    "modernLatin": "decoSans",
+    "script": "arefRuqaa",
+    "scriptLatin": "pinyon",
+    "geometric": "reemKufi",
+    "geometricLatin": "cinzel",
+    "photoTone": "natural",
+    "entrance": "cinematic",
+    "metal": "palette",
+    "fontPair": "template"
   },
   "defaultAnimation": {
     "intro": "curtain",
@@ -588,6 +749,18 @@
       },
       {
         "key": "galleryStyle"
+      },
+      {
+        "key": "fontPair"
+      },
+      {
+        "key": "metal"
+      },
+      {
+        "key": "entrance"
+      },
+      {
+        "key": "photoTone"
       }
     ],
     "hiddenEffects": []
