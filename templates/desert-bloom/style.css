@@ -53,6 +53,9 @@
 .db-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
 .db-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--db-foil); rotate: 45deg; }
 
+/* the invitation card under the cover disappears when the couple filled nothing for it */
+.db-invite:not(:has(p, figure)) { display: none; }
+
 /* families */
 .db-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .db-families:not(:has(p)) { display: none; }
@@ -165,15 +168,16 @@
 
 /* ---------- 1 · cover: dunes at sunset ---------- */
 .db-cover { padding-block: 0 30px; padding-inline: 0; }
-.db-scene { position: relative; isolation: isolate; block-size: 720px; overflow: hidden; }
+.db-scene { position: relative; isolation: isolate; min-block-size: 720px; overflow: hidden; }
+/* the sky grows with long names; the dunes stay pinned to the bottom below the text */
 .db-stars { position: absolute; inset: 0 0 50%; z-index: -1; opacity: 0.7;
   background-image: radial-gradient(1.2px 1.2px at 10% 12%, var(--c-card), transparent), radial-gradient(1px 1px at 30% 26%, var(--c-card), transparent), radial-gradient(1.4px 1.4px at 52% 8%, var(--c-accent), transparent),
     radial-gradient(1px 1px at 72% 20%, var(--c-card), transparent), radial-gradient(1.2px 1.2px at 88% 10%, var(--c-card), transparent), radial-gradient(1px 1px at 64% 34%, var(--c-card), transparent);
-  -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
-.db-sun { position: absolute; inset-block-start: 330px; inset-inline-start: calc(50% - 90px); inline-size: 180px; block-size: 180px; border-radius: 50%; z-index: -1;
+  -webkit-mask-image: linear-gradient(var(--c-text), transparent); mask-image: linear-gradient(var(--c-text), transparent); }
+.db-sun { position: absolute; inset-block-end: 210px; inset-inline-start: calc(50% - 90px); inline-size: 180px; block-size: 180px; border-radius: 50%; z-index: -1;
   background: radial-gradient(circle, var(--c-card) 0%, color-mix(in srgb, var(--c-accent) 70%, var(--c-card)) 38%, var(--c-accent) 60%, transparent 62%);
   box-shadow: 0 0 80px 30px color-mix(in srgb, var(--c-accent) 45%, transparent), 0 0 200px 80px color-mix(in srgb, var(--c-glow) 60%, transparent); }
-.db-sky { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 76px 0; padding-inline: 26px; }
+.db-sky { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 76px 390px; padding-inline: 26px; }
 .db-lead { color: var(--c-text); }
 .db:lang(en) .db-lead { text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; line-height: 2; }
 .db-names { filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--c-glow) 80%, transparent)); }
@@ -193,11 +197,11 @@
 .db-bloom { position: absolute; inset-block-end: 40px; inset-inline-start: 10%; inline-size: 110px; aspect-ratio: 1; display: none; z-index: 6; background: color-mix(in srgb, var(--c-accent) 55%, var(--c-hero)); pointer-events: none; }
 .has-flower-art .db-bloom { display: block; -webkit-mask: var(--img-flower-art) center / contain no-repeat; mask: var(--img-flower-art) center / contain no-repeat; }
 /* layout "arch": the same scene seen through a gilded arch window */
-.db[data-cover-layout="arch"] .db-scene { inline-size: min(360px, 88%); margin-block-start: 30px; margin-inline: auto; block-size: 620px; border: 5px solid transparent;
+.db[data-cover-layout="arch"] .db-scene { inline-size: min(360px, 88%); margin-block-start: 30px; margin-inline: auto; min-block-size: 620px; border: 5px solid transparent;
   border-radius: 50% 50% 4px 4px / 32% 32% 4px 4px; background: linear-gradient(var(--c-bg), var(--c-glow)) padding-box, var(--db-foil) border-box;
   outline: 1px solid var(--c-accent); outline-offset: 8px; box-shadow: 0 40px 60px -30px color-mix(in srgb, var(--c-hero) 70%, transparent); }
-.db[data-cover-layout="arch"] .db-scene { block-size: 700px; }
-.db[data-cover-layout="arch"] .db-sun { inset-block-start: 420px; inline-size: 140px; block-size: 140px; inset-inline-start: calc(50% - 70px); }
+.db[data-cover-layout="arch"] .db-scene { min-block-size: 700px; }
+.db[data-cover-layout="arch"] .db-sun { inset-block-end: 140px; inline-size: 140px; block-size: 140px; inset-inline-start: calc(50% - 70px); }
 .db[data-cover-layout="arch"] .db-sky { padding-block-start: 96px; padding-inline: 30px; }
 .db[data-cover-layout="arch"] .db-palm--start { inset-block-end: 170px; inline-size: 90px; }
 .db[data-cover-layout="arch"] .db-palm--end { inset-block-end: 110px; inline-size: 120px; }
@@ -229,17 +233,17 @@
 
 /* ---------- motion: dunes move at different speeds ---------- */
 @supports (animation-timeline: view()) {
-  .db-dune--1 { animation: desert-far linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--2 { animation: desert-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--3, .db-palm--start { animation: desert-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-sun { animation: desert-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-card { animation: desert-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+  .db-dune--1 { animation: desert-bloom-far linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-dune--2 { animation: desert-bloom-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-dune--3, .db-palm--start { animation: desert-bloom-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-sun { animation: desert-bloom-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-card { animation: desert-bloom-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
-@keyframes desert-far { to { translate: 0 -40px; } }
-@keyframes desert-mid { to { translate: 0 -90px; } }
-@keyframes desert-near { to { translate: 0 -150px; } }
-@keyframes desert-set { to { translate: 0 120px; scale: 1.15; } }
-@keyframes desert-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
+@keyframes desert-bloom-far { to { translate: 0 -40px; } }
+@keyframes desert-bloom-mid { to { translate: 0 -90px; } }
+@keyframes desert-bloom-near { to { translate: 0 -150px; } }
+@keyframes desert-bloom-set { to { translate: 0 120px; scale: 1.15; } }
+@keyframes desert-bloom-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
 
 /* own reveal: a mirage settling */
 .fx-mirage { opacity: 0; transform: translateY(40px) scaleY(1.04); filter: blur(5px);
@@ -301,14 +305,14 @@
 /* ---- living + premium set ---- */
 @property --db-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .db { --db-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --db-mm: var(--c-accent); --db-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait) { isolation: isolate; background: var(--db-foil); }
+.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait):has(img) { isolation: isolate; background: var(--db-foil); }
 .db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--db-foil); }
+.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--db-foil); }
 .db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .db[data-photo-tone="palette"][data-photo-frame="polaroid"] .db-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .db[data-photo-tone="noir"] :is(.db-photo, .db-flow__item, .db-portrait) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .db:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait) {
+  .db:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait):has(img) {
     background: conic-gradient(from var(--db-shine), var(--db-md), var(--db-mm) 15%, var(--db-ml) 25%, var(--db-mm) 35%, var(--db-md) 50%, var(--db-mm) 65%, var(--db-ml) 75%, var(--db-mm) 85%, var(--db-md));
     animation: desert-bloom-shine linear both; animation-timeline: view();
   }
@@ -351,8 +355,9 @@
 .db[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .db[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .db[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
-.db[data-cover-layout="horizon"] .db-scene { block-size: 560px; }
+.db[data-cover-layout="horizon"] .db-scene { min-block-size: 560px; }
+.db[data-cover-layout="horizon"] .db-sky { padding-block-end: 280px; }
 .db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }
-.db[data-cover-layout="horizon"] .db-sun { inset-block-start: 330px; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
+.db[data-cover-layout="horizon"] .db-sun { inset-block-end: 0; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
 .db[data-cover-layout="horizon"] .db-dune--4 { block-size: 120px; }
 /* ==== end of options pack ==== */

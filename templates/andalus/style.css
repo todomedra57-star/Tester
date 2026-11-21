@@ -147,8 +147,8 @@
   z-index: -1;
   background: var(--img-screen-art) center top / 100% auto no-repeat;
   opacity: 0.22;
-  -webkit-mask-image: linear-gradient(#000 20%, transparent 85%);
-          mask-image: linear-gradient(#000 20%, transparent 85%);
+  -webkit-mask-image: linear-gradient(var(--c-text) 20%, transparent 85%);
+          mask-image: linear-gradient(var(--c-text) 20%, transparent 85%);
 }
 
 /* the couple's photo in an arched window, or a crescent */
@@ -215,8 +215,8 @@
   background: color-mix(in srgb, var(--c-hero) 70%, var(--c-bg));
   transform: rotateX(70deg);
   transform-origin: 50% 100%;
-  -webkit-mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 35%, transparent 72%);
-          mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, #000 35%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, var(--c-text) 35%, transparent 72%);
+          mask-image: radial-gradient(ellipse 55% 90% at 50% 100%, var(--c-text) 35%, transparent 72%);
 }
 .has-pattern-tile .an-floor {
   background:
@@ -601,14 +601,14 @@
 /* ---- living + premium set ---- */
 @property --an-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .an { --an-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --an-mm: var(--c-accent); --an-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.an[data-photo-tone="golden"] :is(.an-photo, .an-arcade__item, .an-window) { isolation: isolate; background: var(--an-foil); }
+.an[data-photo-tone="golden"] :is(.an-photo, .an-arcade__item, .an-window):has(img) { isolation: isolate; background: var(--an-foil); }
 .an[data-photo-tone="golden"] :is(.an-photo, .an-arcade__item, .an-window) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.an[data-photo-tone="palette"] :is(.an-photo, .an-arcade__item, .an-window) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--an-foil); }
+.an[data-photo-tone="palette"] :is(.an-photo, .an-arcade__item, .an-window):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--an-foil); }
 .an[data-photo-tone="palette"] :is(.an-photo, .an-arcade__item, .an-window) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .an[data-photo-tone="palette"][data-photo-frame="polaroid"] .an-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .an[data-photo-tone="noir"] :is(.an-photo, .an-arcade__item, .an-window) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .an:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.an-photo, .an-window) {
+  .an:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.an-photo, .an-window):has(img) {
     background: conic-gradient(from var(--an-shine), var(--an-md), var(--an-mm) 15%, var(--an-ml) 25%, var(--an-mm) 35%, var(--an-md) 50%, var(--an-mm) 65%, var(--an-ml) 75%, var(--an-mm) 85%, var(--an-md));
     animation: andalus-shine linear both; animation-timeline: view();
   }

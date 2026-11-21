@@ -427,14 +427,14 @@
 /* ---- living + premium set ---- */
 @property --ry-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .ry { --ry-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --ry-mm: var(--c-accent); --ry-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-wall__item) { isolation: isolate; background: var(--ry-foil); }
+.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-wall__item):has(img) { isolation: isolate; background: var(--ry-foil); }
 .ry[data-photo-tone="golden"] :is(.ry-photo, .ry-wall__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-wall__item) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--ry-foil); }
+.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-wall__item):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--ry-foil); }
 .ry[data-photo-tone="palette"] :is(.ry-photo, .ry-wall__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .ry[data-photo-tone="palette"][data-photo-frame="polaroid"] .ry-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .ry[data-photo-tone="noir"] :is(.ry-photo, .ry-wall__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .ry:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo) {
+  .ry:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo):has(img) {
     background: conic-gradient(from var(--ry-shine), var(--ry-md), var(--ry-mm) 15%, var(--ry-ml) 25%, var(--ry-mm) 35%, var(--ry-md) 50%, var(--ry-mm) 65%, var(--ry-ml) 75%, var(--ry-mm) 85%, var(--ry-md));
     animation: royal-shine linear both; animation-timeline: view();
   }

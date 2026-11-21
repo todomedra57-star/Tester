@@ -528,14 +528,14 @@
 /* ---- living + premium set ---- */
 @property --mn-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .mn { --mn-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --mn-mm: var(--c-accent); --mn-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-on-hero)); }
-.mn[data-photo-tone="golden"] :is(.mn-frame, .mn-strip__item) { isolation: isolate; background: var(--c-accent); }
+.mn[data-photo-tone="golden"] :is(.mn-frame, .mn-strip__item):has(img) { isolation: isolate; background: var(--c-accent); }
 .mn[data-photo-tone="golden"] :is(.mn-frame, .mn-strip__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.mn[data-photo-tone="palette"] :is(.mn-frame, .mn-strip__item) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-accent); }
+.mn[data-photo-tone="palette"] :is(.mn-frame, .mn-strip__item):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-accent); }
 .mn[data-photo-tone="palette"] :is(.mn-frame, .mn-strip__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .mn[data-photo-tone="palette"][data-photo-frame="polaroid"] .mn-frame { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-on-hero); }
 .mn[data-photo-tone="noir"] :is(.mn-frame, .mn-strip__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .mn:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.mn-frame) {
+  .mn:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.mn-frame):has(img) {
     background: conic-gradient(from var(--mn-shine), var(--mn-md), var(--mn-mm) 15%, var(--mn-ml) 25%, var(--mn-mm) 35%, var(--mn-md) 50%, var(--mn-mm) 65%, var(--mn-ml) 75%, var(--mn-mm) 85%, var(--mn-md));
     animation: midnight-shine linear both; animation-timeline: view();
   }

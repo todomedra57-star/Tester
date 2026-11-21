@@ -52,6 +52,9 @@
 .pc-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
 .pc-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--pc-foil); rotate: 45deg; }
 
+/* the invitation card under the cover disappears when the couple filled nothing for it */
+.pc-invite:not(:has(p, figure)) { display: none; }
+
 /* families */
 .pc-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .pc-families:not(:has(p)) { display: none; }
@@ -283,14 +286,14 @@
 /* ---- living + premium set ---- */
 @property --pc-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .pc { --pc-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --pc-mm: var(--c-accent); --pc-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.pc[data-photo-tone="golden"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) { isolation: isolate; background: var(--pc-foil); }
+.pc[data-photo-tone="golden"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo):has(img) { isolation: isolate; background: var(--pc-foil); }
 .pc[data-photo-tone="golden"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.pc[data-photo-tone="palette"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--pc-foil); }
+.pc[data-photo-tone="palette"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--pc-foil); }
 .pc[data-photo-tone="palette"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .pc[data-photo-tone="palette"][data-photo-frame="polaroid"] .pc-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .pc[data-photo-tone="noir"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .pc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.pc-photo, .pc-plate__photo) {
+  .pc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.pc-photo, .pc-plate__photo):has(img) {
     background: conic-gradient(from var(--pc-shine), var(--pc-md), var(--pc-mm) 15%, var(--pc-ml) 25%, var(--pc-mm) 35%, var(--pc-md) 50%, var(--pc-mm) 65%, var(--pc-ml) 75%, var(--pc-mm) 85%, var(--pc-md));
     animation: porcelain-shine linear both; animation-timeline: view();
   }

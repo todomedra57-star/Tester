@@ -106,3 +106,22 @@ the palettes. Keep the rules from the guide: no `<script>`, no fixed words in
 the HTML (`{{text "key"}}`), no `{{{ }}}`, colors and fonts only via `--c-*` /
 `--font-*`, own classes prefixed `.fx-` / `.intro-` / `.ambient-`.
 To preview it, add it to `TEMPLATES` at the top of `preview/preview.js`.
+
+## Quality checks
+
+```
+node tools/check-templates.mjs          # rule checker (exit 1 on errors)
+python3 -m http.server 8765 &           # then:
+node tools/qa-screenshots.js            # visual QA → qa/report.html
+```
+
+- **Rule checker** (no dependencies): manifest (texts in both languages, required
+  tokens, valid defaults and palettes, known effects), template.html (no script,
+  no on…=, no {{{ }}}, no fixed words, sections in order, one wishes box, one
+  parallax layer, every {{text}} key and variant option defined) and style.css
+  (balanced braces, allowed at-rules only, no url(), no raw colours, font tokens
+  only, logical properties, reduced motion, effect and keyframe naming).
+- **Visual QA** renders every template in the four test cases (Arabic, English,
+  smallest, longest) plus a cover per palette, and flags sideways scrolling,
+  text off screen, broken images, text left invisible and page errors.
+  Set `QA_HANDLEBARS=/path/handlebars.min.js` if the CDN is unreachable.

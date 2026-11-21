@@ -184,6 +184,9 @@ BASE_CSS = """
 .@@-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
 .@@-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--@@-foil); rotate: 45deg; }
 
+/* the invitation card under the cover disappears when the couple filled nothing for it */
+.@@-invite:not(:has(p, figure)) { display: none; }
+
 /* families */
 .@@-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .@@-families:not(:has(p)) { display: none; }
@@ -546,7 +549,7 @@ glass_css = """/* Glass Garden: a Victorian glasshouse at golden hour.
     linear-gradient(170deg, color-mix(in srgb, var(--c-accent) 18%, var(--c-bg)) 0%, var(--c-bg) 45%, color-mix(in srgb, var(--c-hero) 16%, var(--c-bg)) 100%); }
 .gg::after { content: ""; position: fixed; inset-block-start: -10%; inset-inline: 0; block-size: 90svh; z-index: -1; pointer-events: none;
   background: repeating-conic-gradient(from 150deg at 0% 0%, color-mix(in srgb, var(--c-card) 45%, transparent) 0deg 3deg, transparent 3deg 11deg);
-  -webkit-mask-image: radial-gradient(90% 80% at 0% 0%, #000 10%, transparent 70%); mask-image: radial-gradient(90% 80% at 0% 0%, #000 10%, transparent 70%); }
+  -webkit-mask-image: radial-gradient(90% 80% at 0% 0%, var(--c-text) 10%, transparent 70%); mask-image: radial-gradient(90% 80% at 0% 0%, var(--c-text) 10%, transparent 70%); }
 .gg-title { color: var(--c-hero); }
 .gg:lang(en) .gg-title { letter-spacing: 0.08em; font-size: 32px; }
 .gg { --gg-foil-text: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 38%, var(--gg-gold-deep) 50%, var(--c-hero) 62%, var(--c-hero) 100%); }
@@ -622,13 +625,13 @@ glass_css = """/* Glass Garden: a Victorian glasshouse at golden hour.
 
 /* ---------- motion ---------- */
 @supports (animation-timeline: view()) {
-  .gg-house__glare { animation: glass-glare linear both; animation-timeline: view(); }
-  .gg-ivy { animation: glass-sway linear both; animation-timeline: view(); }
-  .gg-card { animation: glass-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+  .gg-house__glare { animation: glass-garden-glare linear both; animation-timeline: view(); }
+  .gg-ivy { animation: glass-garden-sway linear both; animation-timeline: view(); }
+  .gg-card { animation: glass-garden-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
-@keyframes glass-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
-@keyframes glass-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
-@keyframes glass-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
+@keyframes glass-garden-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+@keyframes glass-garden-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
+@keyframes glass-garden-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 
 /* own reveal: frost clearing from the glass */
 .fx-frost { opacity: 0; transform: translateY(20px); filter: blur(12px);
@@ -839,15 +842,16 @@ desert_css = """/* Desert Bloom: an Arabian desert at sunset.
 
 /* ---------- 1 · cover: dunes at sunset ---------- */
 .db-cover { padding-block: 0 30px; padding-inline: 0; }
-.db-scene { position: relative; isolation: isolate; block-size: 720px; overflow: hidden; }
+.db-scene { position: relative; isolation: isolate; min-block-size: 720px; overflow: hidden; }
+/* the sky grows with long names; the dunes stay pinned to the bottom below the text */
 .db-stars { position: absolute; inset: 0 0 50%; z-index: -1; opacity: 0.7;
   background-image: radial-gradient(1.2px 1.2px at 10% 12%, var(--c-card), transparent), radial-gradient(1px 1px at 30% 26%, var(--c-card), transparent), radial-gradient(1.4px 1.4px at 52% 8%, var(--c-accent), transparent),
     radial-gradient(1px 1px at 72% 20%, var(--c-card), transparent), radial-gradient(1.2px 1.2px at 88% 10%, var(--c-card), transparent), radial-gradient(1px 1px at 64% 34%, var(--c-card), transparent);
-  -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
-.db-sun { position: absolute; inset-block-start: 330px; inset-inline-start: calc(50% - 90px); inline-size: 180px; block-size: 180px; border-radius: 50%; z-index: -1;
+  -webkit-mask-image: linear-gradient(var(--c-text), transparent); mask-image: linear-gradient(var(--c-text), transparent); }
+.db-sun { position: absolute; inset-block-end: 210px; inset-inline-start: calc(50% - 90px); inline-size: 180px; block-size: 180px; border-radius: 50%; z-index: -1;
   background: radial-gradient(circle, var(--c-card) 0%, color-mix(in srgb, var(--c-accent) 70%, var(--c-card)) 38%, var(--c-accent) 60%, transparent 62%);
   box-shadow: 0 0 80px 30px color-mix(in srgb, var(--c-accent) 45%, transparent), 0 0 200px 80px color-mix(in srgb, var(--c-glow) 60%, transparent); }
-.db-sky { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 76px 0; padding-inline: 26px; }
+.db-sky { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 76px 390px; padding-inline: 26px; }
 .db-lead { color: var(--c-text); }
 .db:lang(en) .db-lead { text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; line-height: 2; }
 .db-names { filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--c-glow) 80%, transparent)); }
@@ -867,11 +871,11 @@ desert_css = """/* Desert Bloom: an Arabian desert at sunset.
 .db-bloom { position: absolute; inset-block-end: 40px; inset-inline-start: 10%; inline-size: 110px; aspect-ratio: 1; display: none; z-index: 6; background: color-mix(in srgb, var(--c-accent) 55%, var(--c-hero)); pointer-events: none; }
 .has-flower-art .db-bloom { display: block; -webkit-mask: var(--img-flower-art) center / contain no-repeat; mask: var(--img-flower-art) center / contain no-repeat; }
 /* layout "arch": the same scene seen through a gilded arch window */
-.db[data-cover-layout="arch"] .db-scene { inline-size: min(360px, 88%); margin-block-start: 30px; margin-inline: auto; block-size: 620px; border: 5px solid transparent;
+.db[data-cover-layout="arch"] .db-scene { inline-size: min(360px, 88%); margin-block-start: 30px; margin-inline: auto; min-block-size: 620px; border: 5px solid transparent;
   border-radius: 50% 50% 4px 4px / 32% 32% 4px 4px; background: linear-gradient(var(--c-bg), var(--c-glow)) padding-box, var(--db-foil) border-box;
   outline: 1px solid var(--c-accent); outline-offset: 8px; box-shadow: 0 40px 60px -30px color-mix(in srgb, var(--c-hero) 70%, transparent); }
-.db[data-cover-layout="arch"] .db-scene { block-size: 700px; }
-.db[data-cover-layout="arch"] .db-sun { inset-block-start: 420px; inline-size: 140px; block-size: 140px; inset-inline-start: calc(50% - 70px); }
+.db[data-cover-layout="arch"] .db-scene { min-block-size: 700px; }
+.db[data-cover-layout="arch"] .db-sun { inset-block-end: 140px; inline-size: 140px; block-size: 140px; inset-inline-start: calc(50% - 70px); }
 .db[data-cover-layout="arch"] .db-sky { padding-block-start: 96px; padding-inline: 30px; }
 .db[data-cover-layout="arch"] .db-palm--start { inset-block-end: 170px; inline-size: 90px; }
 .db[data-cover-layout="arch"] .db-palm--end { inset-block-end: 110px; inline-size: 120px; }
@@ -903,17 +907,17 @@ desert_css = """/* Desert Bloom: an Arabian desert at sunset.
 
 /* ---------- motion: dunes move at different speeds ---------- */
 @supports (animation-timeline: view()) {
-  .db-dune--1 { animation: desert-far linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--2 { animation: desert-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--3, .db-palm--start { animation: desert-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-sun { animation: desert-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-card { animation: desert-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+  .db-dune--1 { animation: desert-bloom-far linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-dune--2 { animation: desert-bloom-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-dune--3, .db-palm--start { animation: desert-bloom-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-sun { animation: desert-bloom-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
+  .db-card { animation: desert-bloom-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
-@keyframes desert-far { to { translate: 0 -40px; } }
-@keyframes desert-mid { to { translate: 0 -90px; } }
-@keyframes desert-near { to { translate: 0 -150px; } }
-@keyframes desert-set { to { translate: 0 120px; scale: 1.15; } }
-@keyframes desert-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
+@keyframes desert-bloom-far { to { translate: 0 -40px; } }
+@keyframes desert-bloom-mid { to { translate: 0 -90px; } }
+@keyframes desert-bloom-near { to { translate: 0 -150px; } }
+@keyframes desert-bloom-set { to { translate: 0 120px; scale: 1.15; } }
+@keyframes desert-bloom-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
 
 /* own reveal: a mirage settling */
 .fx-mirage { opacity: 0; transform: translateY(40px) scaleY(1.04); filter: blur(5px);

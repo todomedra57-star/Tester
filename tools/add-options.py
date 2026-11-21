@@ -166,12 +166,12 @@ def live_css(name, R, c):
     tone_bg = {"golden": f"var({L['foil']})" if L["foil"] else "var(--c-accent)",
                "palette": f"linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, {'var(' + L['foil'] + ')' if L['foil'] else 'var(--c-accent)'}"}
     for tone, bg in tone_bg.items():
-        out.append(f"{R}[data-photo-tone=\"{tone}\"] :is({allp}) {{ isolation: isolate; background: {bg}; }}")
+        out.append(f"{R}[data-photo-tone=\"{tone}\"] :is({allp}):has(img) {{ isolation: isolate; background: {bg}; }}")
         out.append(f"{R}[data-photo-tone=\"{tone}\"] :is({allp}) img {{ mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }}")
     out.append(f"{R}[data-photo-tone=\"palette\"][data-photo-frame=\"polaroid\"] {c['photo']} {{ background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, {c['light']}; }}")
     out.append(f"{R}[data-photo-tone=\"noir\"] :is({allp}) img {{ filter: grayscale(1) contrast(1.15); }}")
     # 2. shimmering foil frames (light travels around as you scroll)
-    shine_sel = f"{R}:not([data-ornament=\"refined\"]):not([data-photo-frame=\"polaroid\"]):not([data-photo-frame=\"pearl\"]):is([data-photo-tone=\"natural\"], :not([data-photo-tone])) :is({', '.join([c['photo']] + L['portraits'])})"
+    shine_sel = f"{R}:not([data-ornament=\"refined\"]):not([data-photo-frame=\"polaroid\"]):not([data-photo-frame=\"pearl\"]):is([data-photo-tone=\"natural\"], :not([data-photo-tone])) :is({', '.join([c['photo']] + L['portraits'])}):has(img)"
     out.append(f"""@supports (animation-timeline: view()) {{
   {shine_sel} {{
     background: conic-gradient(from var(--{P}-shine), var(--{P}-md), var(--{P}-mm) 15%, var(--{P}-ml) 25%, var(--{P}-mm) 35%, var(--{P}-md) 50%, var(--{P}-mm) 65%, var(--{P}-ml) 75%, var(--{P}-mm) 85%, var(--{P}-md));
@@ -296,9 +296,10 @@ def extra_css(name, R):
 .lc[data-cover-layout="portrait"] .lc-veil__center { inline-size: 74%; }
 .lc[data-cover-layout="portrait"] .lc-veil__amp { font-size: 180px; }"""]
     if name == "desert-bloom":
-        return [""".db[data-cover-layout="horizon"] .db-scene { block-size: 560px; }
+        return [""".db[data-cover-layout="horizon"] .db-scene { min-block-size: 560px; }
+.db[data-cover-layout="horizon"] .db-sky { padding-block-end: 280px; }
 .db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }
-.db[data-cover-layout="horizon"] .db-sun { inset-block-start: 330px; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
+.db[data-cover-layout="horizon"] .db-sun { inset-block-end: 0; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
 .db[data-cover-layout="horizon"] .db-dune--4 { block-size: 120px; }"""]
     return []
 

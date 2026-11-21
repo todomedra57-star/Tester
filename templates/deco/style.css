@@ -48,8 +48,8 @@
   block-size: 90svh;
   z-index: -1;
   background: repeating-conic-gradient(from 180deg at 50% 0%, color-mix(in srgb, var(--c-accent) 16%, transparent) 0deg 2.5deg, transparent 2.5deg 9deg);
-  -webkit-mask-image: radial-gradient(70% 90% at 50% 0%, #000 20%, transparent 75%);
-          mask-image: radial-gradient(70% 90% at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(70% 90% at 50% 0%, var(--c-text) 20%, transparent 75%);
+          mask-image: radial-gradient(70% 90% at 50% 0%, var(--c-text) 20%, transparent 75%);
   pointer-events: none;
 }
 
@@ -74,8 +74,8 @@
   block-size: 640px;
   z-index: -1;
   background: repeating-conic-gradient(from 0deg at 50% 50%, color-mix(in srgb, var(--c-accent) 20%, transparent) 0deg 1.5deg, transparent 1.5deg 7.5deg);
-  -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent);
-          mask-image: radial-gradient(closest-side, #000 30%, transparent);
+  -webkit-mask-image: radial-gradient(closest-side, var(--c-text) 30%, transparent);
+          mask-image: radial-gradient(closest-side, var(--c-text) 30%, transparent);
 }
 .dc-frame {
   position: relative;
@@ -422,14 +422,14 @@
 /* ---- living + premium set ---- */
 @property --dc-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .dc { --dc-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --dc-mm: var(--c-accent); --dc-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-on-hero)); }
-.dc[data-photo-tone="golden"] :is(.dc-photo, .dc-deck__item, .dc-portrait) { isolation: isolate; background: var(--dc-foil); }
+.dc[data-photo-tone="golden"] :is(.dc-photo, .dc-deck__item, .dc-portrait):has(img) { isolation: isolate; background: var(--dc-foil); }
 .dc[data-photo-tone="golden"] :is(.dc-photo, .dc-deck__item, .dc-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.dc[data-photo-tone="palette"] :is(.dc-photo, .dc-deck__item, .dc-portrait) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--dc-foil); }
+.dc[data-photo-tone="palette"] :is(.dc-photo, .dc-deck__item, .dc-portrait):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--dc-foil); }
 .dc[data-photo-tone="palette"] :is(.dc-photo, .dc-deck__item, .dc-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .dc[data-photo-tone="palette"][data-photo-frame="polaroid"] .dc-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-on-hero); }
 .dc[data-photo-tone="noir"] :is(.dc-photo, .dc-deck__item, .dc-portrait) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .dc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.dc-photo, .dc-portrait) {
+  .dc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.dc-photo, .dc-portrait):has(img) {
     background: conic-gradient(from var(--dc-shine), var(--dc-md), var(--dc-mm) 15%, var(--dc-ml) 25%, var(--dc-mm) 35%, var(--dc-md) 50%, var(--dc-mm) 65%, var(--dc-ml) 75%, var(--dc-mm) 85%, var(--dc-md));
     animation: deco-shine linear both; animation-timeline: view();
   }

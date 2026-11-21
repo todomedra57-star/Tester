@@ -52,6 +52,9 @@
 .gg-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
 .gg-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--gg-foil); rotate: 45deg; }
 
+/* the invitation card under the cover disappears when the couple filled nothing for it */
+.gg-invite:not(:has(p, figure)) { display: none; }
+
 /* families */
 .gg-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .gg-families:not(:has(p)) { display: none; }
@@ -161,7 +164,7 @@
     linear-gradient(170deg, color-mix(in srgb, var(--c-accent) 18%, var(--c-bg)) 0%, var(--c-bg) 45%, color-mix(in srgb, var(--c-hero) 16%, var(--c-bg)) 100%); }
 .gg::after { content: ""; position: fixed; inset-block-start: -10%; inset-inline: 0; block-size: 90svh; z-index: -1; pointer-events: none;
   background: repeating-conic-gradient(from 150deg at 0% 0%, color-mix(in srgb, var(--c-card) 45%, transparent) 0deg 3deg, transparent 3deg 11deg);
-  -webkit-mask-image: radial-gradient(90% 80% at 0% 0%, #000 10%, transparent 70%); mask-image: radial-gradient(90% 80% at 0% 0%, #000 10%, transparent 70%); }
+  -webkit-mask-image: radial-gradient(90% 80% at 0% 0%, var(--c-text) 10%, transparent 70%); mask-image: radial-gradient(90% 80% at 0% 0%, var(--c-text) 10%, transparent 70%); }
 .gg-title { color: var(--c-hero); }
 .gg:lang(en) .gg-title { letter-spacing: 0.08em; font-size: 32px; }
 .gg { --gg-foil-text: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 38%, var(--gg-gold-deep) 50%, var(--c-hero) 62%, var(--c-hero) 100%); }
@@ -237,13 +240,13 @@
 
 /* ---------- motion ---------- */
 @supports (animation-timeline: view()) {
-  .gg-house__glare { animation: glass-glare linear both; animation-timeline: view(); }
-  .gg-ivy { animation: glass-sway linear both; animation-timeline: view(); }
-  .gg-card { animation: glass-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
+  .gg-house__glare { animation: glass-garden-glare linear both; animation-timeline: view(); }
+  .gg-ivy { animation: glass-garden-sway linear both; animation-timeline: view(); }
+  .gg-card { animation: glass-garden-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
-@keyframes glass-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
-@keyframes glass-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
-@keyframes glass-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
+@keyframes glass-garden-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+@keyframes glass-garden-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
+@keyframes glass-garden-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 
 /* own reveal: frost clearing from the glass */
 .fx-frost { opacity: 0; transform: translateY(20px); filter: blur(12px);
@@ -307,14 +310,14 @@
 /* ---- living + premium set ---- */
 @property --gg-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .gg { --gg-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --gg-mm: var(--c-accent); --gg-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.gg[data-photo-tone="golden"] :is(.gg-photo, .gg-flow__item, .gg-portrait) { isolation: isolate; background: var(--gg-foil); }
+.gg[data-photo-tone="golden"] :is(.gg-photo, .gg-flow__item, .gg-portrait):has(img) { isolation: isolate; background: var(--gg-foil); }
 .gg[data-photo-tone="golden"] :is(.gg-photo, .gg-flow__item, .gg-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.gg[data-photo-tone="palette"] :is(.gg-photo, .gg-flow__item, .gg-portrait) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--gg-foil); }
+.gg[data-photo-tone="palette"] :is(.gg-photo, .gg-flow__item, .gg-portrait):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--gg-foil); }
 .gg[data-photo-tone="palette"] :is(.gg-photo, .gg-flow__item, .gg-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .gg[data-photo-tone="palette"][data-photo-frame="polaroid"] .gg-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .gg[data-photo-tone="noir"] :is(.gg-photo, .gg-flow__item, .gg-portrait) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .gg:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.gg-photo, .gg-portrait) {
+  .gg:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.gg-photo, .gg-portrait):has(img) {
     background: conic-gradient(from var(--gg-shine), var(--gg-md), var(--gg-mm) 15%, var(--gg-ml) 25%, var(--gg-mm) 35%, var(--gg-md) 50%, var(--gg-mm) 65%, var(--gg-ml) 75%, var(--gg-mm) 85%, var(--gg-md));
     animation: glass-garden-shine linear both; animation-timeline: view();
   }

@@ -355,14 +355,14 @@
 /* ---- living + premium set ---- */
 @property --at-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .at { --at-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --at-mm: var(--c-accent); --at-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.at[data-photo-tone="golden"] :is(.at-photo, .at-strip__item, .at-hero__photo) { isolation: isolate; background: var(--at-foil); }
+.at[data-photo-tone="golden"] :is(.at-photo, .at-strip__item, .at-hero__photo):has(img) { isolation: isolate; background: var(--at-foil); }
 .at[data-photo-tone="golden"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.at[data-photo-tone="palette"] :is(.at-photo, .at-strip__item, .at-hero__photo) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--at-foil); }
+.at[data-photo-tone="palette"] :is(.at-photo, .at-strip__item, .at-hero__photo):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--at-foil); }
 .at[data-photo-tone="palette"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .at[data-photo-tone="palette"][data-photo-frame="polaroid"] .at-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .at[data-photo-tone="noir"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .at:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo) {
+  .at:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo):has(img) {
     background: conic-gradient(from var(--at-shine), var(--at-md), var(--at-mm) 15%, var(--at-ml) 25%, var(--at-mm) 35%, var(--at-md) 50%, var(--at-mm) 65%, var(--at-ml) 75%, var(--at-mm) 85%, var(--at-md));
     animation: atelier-shine linear both; animation-timeline: view();
   }

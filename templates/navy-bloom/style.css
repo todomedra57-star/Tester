@@ -39,8 +39,8 @@
   z-index: -1;
   opacity: 0.17;
   background: var(--img-backdrop-art) center 30px / min(620px, 150%) auto no-repeat;
-  -webkit-mask-image: linear-gradient(#000 45%, transparent);
-          mask-image: linear-gradient(#000 45%, transparent);
+  -webkit-mask-image: linear-gradient(var(--c-text) 45%, transparent);
+          mask-image: linear-gradient(var(--c-text) 45%, transparent);
   pointer-events: none;
 }
 
@@ -520,14 +520,14 @@
 /* ---- living + premium set ---- */
 @property --nb-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .nb { --nb-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --nb-mm: var(--c-accent); --nb-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.nb[data-photo-tone="golden"] :is(.nb-photo, .nb-flow__item, .nb-snap) { isolation: isolate; background: var(--c-accent); }
+.nb[data-photo-tone="golden"] :is(.nb-photo, .nb-flow__item, .nb-snap):has(img) { isolation: isolate; background: var(--c-accent); }
 .nb[data-photo-tone="golden"] :is(.nb-photo, .nb-flow__item, .nb-snap) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.nb[data-photo-tone="palette"] :is(.nb-photo, .nb-flow__item, .nb-snap) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-accent); }
+.nb[data-photo-tone="palette"] :is(.nb-photo, .nb-flow__item, .nb-snap):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-accent); }
 .nb[data-photo-tone="palette"] :is(.nb-photo, .nb-flow__item, .nb-snap) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .nb[data-photo-tone="palette"][data-photo-frame="polaroid"] .nb-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .nb[data-photo-tone="noir"] :is(.nb-photo, .nb-flow__item, .nb-snap) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .nb:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.nb-photo, .nb-snap) {
+  .nb:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.nb-photo, .nb-snap):has(img) {
     background: conic-gradient(from var(--nb-shine), var(--nb-md), var(--nb-mm) 15%, var(--nb-ml) 25%, var(--nb-mm) 35%, var(--nb-md) 50%, var(--nb-mm) 65%, var(--nb-ml) 75%, var(--nb-mm) 85%, var(--nb-md));
     animation: navy-bloom-shine linear both; animation-timeline: view();
   }
