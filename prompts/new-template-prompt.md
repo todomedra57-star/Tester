@@ -148,6 +148,7 @@ Dividers and decoration between sections are free.
   - Only `@media`, `@supports`, `@keyframes` and `@property`. No `@import`, no `url()`.
 - **Motion:**
   - Respect `prefers-reduced-motion`. Nothing loops forever except light background effects.
+  - Keep it smooth (60 fps on a mid-range phone): continuous motion uses only `transform` and `opacity` on elements with `will-change: transform`; never animate `background-position`, `box-shadow` or a live `filter: blur()`; don't repaint textured cards on scroll.
   - An own reveal effect hides the section with `opacity`. If it also uses `clip-path`, at least a quarter of the section stays inside the clip, so the runtime still detects it on screen. It ends in a clip larger than the box (`inset(-60px)`), so overlapping art isn't cut.
 - **Allowed tools for depth:**
   - `position: sticky`, and `position: fixed` on the root's pseudo-elements

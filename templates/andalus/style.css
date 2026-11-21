@@ -491,18 +491,8 @@
     animation: andalus-foil linear both;
     animation-timeline: view();
   }
-  /* a soft shine crosses each ivory card once */
-  .an-card {
-    animation: andalus-shine linear both;
-    animation-timeline: view();
-    animation-range: entry 20% cover 60%;
-  }
 }
 @keyframes andalus-foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
-@keyframes andalus-shine {
-  from { background-position: 160% 0, 0 0, 0 0, 0 0; }
-  to   { background-position: -60% 0, 0 0, 0 0, 0 0; }
-}
 @keyframes andalus-turn { from { rotate: -30deg; } to { rotate: 60deg; } }
 @keyframes andalus-swing {
   0%   { rotate: 7deg; }
@@ -524,8 +514,10 @@
 }
 .fx-unveil.is-in { clip-path: inset(-60px -60px -60px -60px round 0 0 0 0); }
 
-/* ambient: gold dust rising slowly */
-.ambient-gold-dust {
+/* ambient: gold dust rising slowly (a tall layer moved by transform, not repainted) */
+.ambient-gold-dust { overflow: hidden; opacity: 0.7; }
+.ambient-gold-dust::before, .ambient-gold-dust::after { content: ""; position: absolute; inset: 0 0 -420px; will-change: transform; }
+.ambient-gold-dust::before {
   background-image:
     radial-gradient(1.6px 1.6px at 12% 20%, var(--c-accent), transparent),
     radial-gradient(1.2px 1.2px at 38% 64%, var(--c-accent), transparent),
@@ -533,24 +525,20 @@
     radial-gradient(1.2px 1.2px at 88% 80%, var(--c-accent), transparent),
     radial-gradient(1.4px 1.4px at 54% 92%, var(--c-on-hero), transparent);
   background-size: 240px 420px;
-  opacity: 0.7;
   animation: gold-dust-rise 28s linear infinite;
 }
 .ambient-gold-dust::after {
-  content: "";
-  position: absolute;
-  inset: 0;
   background-image:
     radial-gradient(1px 1px at 24% 50%, var(--c-accent), transparent),
     radial-gradient(1.4px 1.4px at 76% 14%, var(--c-accent), transparent),
     radial-gradient(1px 1px at 48% 30%, var(--c-on-hero), transparent);
-  background-size: 180px 300px;
+  background-size: 180px 420px;
   animation: gold-dust-rise 18s linear infinite;
 }
-@keyframes gold-dust-rise { to { background-position: 0 -420px; } }
+@keyframes gold-dust-rise { to { transform: translateY(-420px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-gold-dust, .ambient-gold-dust::after { animation-duration: 120s; }
+  .ambient-gold-dust::before, .ambient-gold-dust::after { animation-duration: 120s; }
   .an-names__rosette, .an-count__rosette, .an-footer__rosette,
   .an-lantern, .an-event__lantern, .an-arcade__item,
   .an-names, .an-title, .an-count__num, .an-kicker, .an-closing, .an-event__type, .an-event__date, .an-map, .an-card { animation: none !important; }
@@ -610,10 +598,10 @@
 @supports (animation-timeline: view()) {
   .an:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.an-photo, .an-window):has(img) {
     background: conic-gradient(from var(--an-shine), var(--an-md), var(--an-mm) 15%, var(--an-ml) 25%, var(--an-mm) 35%, var(--an-md) 50%, var(--an-mm) 65%, var(--an-ml) 75%, var(--an-mm) 85%, var(--an-md));
-    animation: andalus-shine linear both; animation-timeline: view();
+    animation: andalus-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes andalus-shine { from { --an-shine: 0deg; } to { --an-shine: 300deg; } }
+@keyframes andalus-frameshine { from { --an-shine: 0deg; } to { --an-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .an [data-animate="cover"] .an-gate__arch { --an-stage: 0; }
   .an [data-animate="cover"] .an-lanterns { --an-stage: 1; }

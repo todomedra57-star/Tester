@@ -184,7 +184,8 @@
 .db:lang(en) .db-names { text-transform: uppercase; letter-spacing: 0.06em; font-size: calc(var(--name-size) * 0.8); }
 .db-date { padding-block: 8px; padding-inline: 24px; border-block: 1px solid var(--c-accent); color: var(--c-hero); font-size: 15px; }
 /* dunes: four layers of soft curves, darker as they come closer */
-.db-dune { position: absolute; inset-inline: -20%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+.db-dune { position: absolute; inset-inline: -20%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; will-change: transform; }
+.db-sun, .db-palm { will-change: transform; }
 .db-dune--1 { inset-block-end: 150px; block-size: 160px; inset-inline: -40% 10%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 70%, var(--c-glow)), var(--c-dune)); z-index: 0; }
 .db-dune--2 { inset-block-end: 100px; block-size: 170px; inset-inline: 20% -50%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 85%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 75%, var(--c-hero))); z-index: 1; }
 .db-dune--3 { inset-block-end: 40px; block-size: 160px; inset-inline: -50% 25%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 65%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 55%, var(--c-hero))); z-index: 3; }
@@ -237,13 +238,11 @@
   .db-dune--2 { animation: desert-bloom-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
   .db-dune--3, .db-palm--start { animation: desert-bloom-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
   .db-sun { animation: desert-bloom-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-card { animation: desert-bloom-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
 @keyframes desert-bloom-far { to { translate: 0 -40px; } }
 @keyframes desert-bloom-mid { to { translate: 0 -90px; } }
 @keyframes desert-bloom-near { to { translate: 0 -150px; } }
 @keyframes desert-bloom-set { to { translate: 0 120px; scale: 1.15; } }
-@keyframes desert-bloom-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
 
 /* own reveal: a mirage settling */
 .fx-mirage { opacity: 0; transform: translateY(40px) scaleY(1.04); filter: blur(5px);
@@ -314,10 +313,10 @@
 @supports (animation-timeline: view()) {
   .db:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait):has(img) {
     background: conic-gradient(from var(--db-shine), var(--db-md), var(--db-mm) 15%, var(--db-ml) 25%, var(--db-mm) 35%, var(--db-md) 50%, var(--db-mm) 65%, var(--db-ml) 75%, var(--db-mm) 85%, var(--db-md));
-    animation: desert-bloom-shine linear both; animation-timeline: view();
+    animation: desert-bloom-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes desert-bloom-shine { from { --db-shine: 0deg; } to { --db-shine: 300deg; } }
+@keyframes desert-bloom-frameshine { from { --db-shine: 0deg; } to { --db-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .db [data-animate="cover"] .db-stars { --db-stage: 0; }
   .db [data-animate="cover"] .db-sun { --db-stage: 1; }

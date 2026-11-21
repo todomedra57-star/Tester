@@ -288,10 +288,10 @@
 @supports (animation-timeline: view()) {
   .lc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.lc-photo, .lc-portrait):has(img) {
     background: conic-gradient(from var(--lc-shine), var(--lc-md), var(--lc-mm) 15%, var(--lc-ml) 25%, var(--lc-mm) 35%, var(--lc-md) 50%, var(--lc-mm) 65%, var(--lc-ml) 75%, var(--lc-mm) 85%, var(--lc-md));
-    animation: lace-shine linear both; animation-timeline: view();
+    animation: lace-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes lace-shine { from { --lc-shine: 0deg; } to { --lc-shine: 300deg; } }
+@keyframes lace-frameshine { from { --lc-shine: 0deg; } to { --lc-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .lc [data-animate="cover"] .lc-pearls { --lc-stage: 0; }
   .lc [data-animate="cover"] .lc-doily { --lc-stage: 1; }

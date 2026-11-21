@@ -40,7 +40,9 @@
   // "cover" for a section passing through the screen). The engine writes, every
   // frame and smoothed for weight:
   //   on each scene:  --p   scroll progress 0..1   ·  --n / data-n  number of [data-item]
-  //   on :root:       --tx / --ty  device tilt (or pointer) -1..1
+  //                   --tx / --ty  device tilt (or pointer) -1..1
+  // Only scenes near the screen are updated, only when a value changes, and the
+  // loop sleeps when nothing moves.
   // and adds .scene-on to <html>. Templates do all choreography in CSS with these.
   const scene = (() => {
     const els = [...document.querySelectorAll('[data-scene]')];
@@ -51,33 +53,50 @@
       if (el.dataset.scene !== 'cover' && range > 40) return clamp(-r.top / range);
       return clamp((vh - r.top) / (vh + r.height));
     };
-    const state = new Map();
-    let tx = 0, ty = 0, cx = 0, cy = 0, hasTilt = false;
-    if (!reduce) {
-      root.classList.add('scene-on');
-      addEventListener('pointermove', (e) => { if (hasTilt) return; tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; }, { passive: true });
-      addEventListener('deviceorientation', (e) => {
-        if (e.gamma == null) return;
-        hasTilt = true;
-        tx = Math.max(-1, Math.min(1, e.gamma / 25));
-        ty = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
-      });
-    }
+    // only scenes near the screen are updated
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) visible.add(e.target); else visible.delete(e.target); });
+      wake();
+    }, { rootMargin: '200px 0px' });
+    els.forEach((el) => io.observe(el));
+    const state = new Map(); // el -> { p, tx, ty } as last written
+    let tx = 0, ty = 0, cx = 0, cy = 0, hasTilt = false, running = false;
+    const write = (el, name, v, prev) => { if (prev === undefined || Math.abs(v - prev) > 0.0008) { el.style.setProperty(name, v.toFixed(4)); return v; } return prev; };
     const frame = () => {
-      for (const el of els) {
-        const target = progress(el);
-        const cur = state.has(el) ? state.get(el) + (target - state.get(el)) * (reduce ? 1 : 0.14) : target;
-        state.set(el, cur);
-        el.style.setProperty('--p', cur.toFixed(4));
-      }
+      let busy = false;
       if (!reduce) {
-        cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07;
-        root.style.setProperty('--tx', cx.toFixed(3));
-        root.style.setProperty('--ty', cy.toFixed(3));
+        cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+        if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) busy = true;
       }
-      requestAnimationFrame(frame);
+      for (const el of visible) {
+        const st = state.get(el) || {};
+        const target = progress(el);
+        const cur = st.cur === undefined || reduce ? target : st.cur + (target - st.cur) * 0.16;
+        if (Math.abs(target - cur) > 0.0005) busy = true;
+        st.cur = cur;
+        st.p = write(el, '--p', cur, st.p);
+        if (!reduce) { st.tx = write(el, '--tx', cx, st.tx); st.ty = write(el, '--ty', cy, st.ty); }
+        state.set(el, st);
+      }
+      if (busy) requestAnimationFrame(frame); else running = false;
     };
-    if (els.length || !reduce) requestAnimationFrame(frame);
+    function wake() { if (!running) { running = true; requestAnimationFrame(frame); } }
+    if (els.length) {
+      if (!reduce) root.classList.add('scene-on');
+      addEventListener('scroll', wake, { passive: true });
+      addEventListener('resize', wake);
+      if (!reduce) {
+        addEventListener('pointermove', (e) => { if (hasTilt) return; tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2; wake(); }, { passive: true });
+        addEventListener('deviceorientation', (e) => {
+          if (e.gamma == null) return;
+          hasTilt = true;
+          const nx = Math.max(-1, Math.min(1, e.gamma / 25)), ny = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
+          if (Math.abs(nx - tx) > 0.01 || Math.abs(ny - ty) > 0.01) { tx = nx; ty = ny; wake(); }
+        });
+      }
+      wake();
+    }
     return {
       // iOS asks for motion permission; it must be requested inside a tap (the opening)
       askTilt() {

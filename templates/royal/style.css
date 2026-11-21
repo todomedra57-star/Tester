@@ -436,10 +436,10 @@
 @supports (animation-timeline: view()) {
   .ry:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo):has(img) {
     background: conic-gradient(from var(--ry-shine), var(--ry-md), var(--ry-mm) 15%, var(--ry-ml) 25%, var(--ry-mm) 35%, var(--ry-md) 50%, var(--ry-mm) 65%, var(--ry-ml) 75%, var(--ry-mm) 85%, var(--ry-md));
-    animation: royal-shine linear both; animation-timeline: view();
+    animation: royal-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes royal-shine { from { --ry-shine: 0deg; } to { --ry-shine: 300deg; } }
+@keyframes royal-frameshine { from { --ry-shine: 0deg; } to { --ry-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .ry [data-animate="cover"] .ry-drapes { --ry-stage: 0; }
   .ry [data-animate="cover"] .ry-crest { --ry-stage: 1; }

@@ -143,6 +143,13 @@ and camera moves with CSS only:
 - New opening `palace`: two lattice doors swing open in 3D while the page settles
   from a slight zoom.
 
+Performance rules the engine follows (and templates should too): it updates only
+scenes near the screen, writes a variable only when its value changes, writes
+tilt on the scenes rather than `:root` (so the whole page is not recalculated),
+and sleeps when nothing moves. Templates animate continuous effects with
+`transform`/`opacity` on their own layers (never `background-position` or live
+`filter: blur()` every frame), and avoid repainting textured cards on scroll.
+
 Templates do all the choreography in CSS with these variables, for example a
 plane at depth `--d` uses
 `transform: translate3d(calc(var(--tx) * var(--d) * -3px), …) scale(calc(1 + var(--p) * var(--d) * .045))`.

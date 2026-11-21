@@ -537,10 +537,10 @@
 @supports (animation-timeline: view()) {
   .mn:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.mn-frame):has(img) {
     background: conic-gradient(from var(--mn-shine), var(--mn-md), var(--mn-mm) 15%, var(--mn-ml) 25%, var(--mn-mm) 35%, var(--mn-md) 50%, var(--mn-mm) 65%, var(--mn-ml) 75%, var(--mn-mm) 85%, var(--mn-md));
-    animation: midnight-shine linear both; animation-timeline: view();
+    animation: midnight-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes midnight-shine { from { --mn-shine: 0deg; } to { --mn-shine: 300deg; } }
+@keyframes midnight-frameshine { from { --mn-shine: 0deg; } to { --mn-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .mn [data-animate="cover"] .mn-moon { --mn-stage: 0; }
   .mn [data-animate="cover"] .mn-verse { --mn-stage: 1; }

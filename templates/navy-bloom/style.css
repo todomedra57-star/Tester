@@ -529,10 +529,10 @@
 @supports (animation-timeline: view()) {
   .nb:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.nb-photo, .nb-snap):has(img) {
     background: conic-gradient(from var(--nb-shine), var(--nb-md), var(--nb-mm) 15%, var(--nb-ml) 25%, var(--nb-mm) 35%, var(--nb-md) 50%, var(--nb-mm) 65%, var(--nb-ml) 75%, var(--nb-mm) 85%, var(--nb-md));
-    animation: navy-bloom-shine linear both; animation-timeline: view();
+    animation: navy-bloom-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes navy-bloom-shine { from { --nb-shine: 0deg; } to { --nb-shine: 300deg; } }
+@keyframes navy-bloom-frameshine { from { --nb-shine: 0deg; } to { --nb-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .nb [data-animate="cover"] .nb-scene > .nb-ornament { --nb-stage: 0; }
   .nb [data-animate="cover"] .nb-kicker { --nb-stage: 1; }

@@ -364,10 +364,10 @@
 @supports (animation-timeline: view()) {
   .at:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo):has(img) {
     background: conic-gradient(from var(--at-shine), var(--at-md), var(--at-mm) 15%, var(--at-ml) 25%, var(--at-mm) 35%, var(--at-md) 50%, var(--at-mm) 65%, var(--at-ml) 75%, var(--at-mm) 85%, var(--at-md));
-    animation: atelier-shine linear both; animation-timeline: view();
+    animation: atelier-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes atelier-shine { from { --at-shine: 0deg; } to { --at-shine: 300deg; } }
+@keyframes atelier-frameshine { from { --at-shine: 0deg; } to { --at-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .at [data-animate="cover"] .at-masthead { --at-stage: 0; }
   .at [data-animate="cover"] .at-hero__photo { --at-stage: 1; }

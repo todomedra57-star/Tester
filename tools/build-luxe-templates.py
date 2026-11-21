@@ -597,7 +597,7 @@ glass_css = """/* Glass Garden: a Victorian glasshouse at golden hour.
   position: relative; z-index: 1; padding-block: 48px; padding-inline: 26px; border-radius: var(--radius);
   background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--c-card) 70%, transparent) 48%, transparent 60%) 160% 0 / 250% 100% no-repeat,
     color-mix(in srgb, var(--c-card) 58%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--c-card) 90%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--c-card) 70%, transparent),
     0 30px 50px -30px color-mix(in srgb, var(--c-hero) 55%, transparent), 0 0 60px -30px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
@@ -627,11 +627,9 @@ glass_css = """/* Glass Garden: a Victorian glasshouse at golden hour.
 @supports (animation-timeline: view()) {
   .gg-house__glare { animation: glass-garden-glare linear both; animation-timeline: view(); }
   .gg-ivy { animation: glass-garden-sway linear both; animation-timeline: view(); }
-  .gg-card { animation: glass-garden-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
 @keyframes glass-garden-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
 @keyframes glass-garden-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
-@keyframes glass-garden-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 
 /* own reveal: frost clearing from the glass */
 .fx-frost { opacity: 0; transform: translateY(20px); filter: blur(12px);
@@ -858,7 +856,8 @@ desert_css = """/* Desert Bloom: an Arabian desert at sunset.
 .db:lang(en) .db-names { text-transform: uppercase; letter-spacing: 0.06em; font-size: calc(var(--name-size) * 0.8); }
 .db-date { padding-block: 8px; padding-inline: 24px; border-block: 1px solid var(--c-accent); color: var(--c-hero); font-size: 15px; }
 /* dunes: four layers of soft curves, darker as they come closer */
-.db-dune { position: absolute; inset-inline: -20%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+.db-dune { position: absolute; inset-inline: -20%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; will-change: transform; }
+.db-sun, .db-palm { will-change: transform; }
 .db-dune--1 { inset-block-end: 150px; block-size: 160px; inset-inline: -40% 10%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 70%, var(--c-glow)), var(--c-dune)); z-index: 0; }
 .db-dune--2 { inset-block-end: 100px; block-size: 170px; inset-inline: 20% -50%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 85%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 75%, var(--c-hero))); z-index: 1; }
 .db-dune--3 { inset-block-end: 40px; block-size: 160px; inset-inline: -50% 25%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 65%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 55%, var(--c-hero))); z-index: 3; }
@@ -911,13 +910,11 @@ desert_css = """/* Desert Bloom: an Arabian desert at sunset.
   .db-dune--2 { animation: desert-bloom-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
   .db-dune--3, .db-palm--start { animation: desert-bloom-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
   .db-sun { animation: desert-bloom-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-card { animation: desert-bloom-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
 @keyframes desert-bloom-far { to { translate: 0 -40px; } }
 @keyframes desert-bloom-mid { to { translate: 0 -90px; } }
 @keyframes desert-bloom-near { to { translate: 0 -150px; } }
 @keyframes desert-bloom-set { to { translate: 0 120px; scale: 1.15; } }
-@keyframes desert-bloom-shine { from { background-position: 160% 0, 0 0, 0 0; } to { background-position: -60% 0, 0 0, 0 0; } }
 
 /* own reveal: a mirage settling */
 .fx-mirage { opacity: 0; transform: translateY(40px) scaleY(1.04); filter: blur(5px);

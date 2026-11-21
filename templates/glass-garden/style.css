@@ -212,7 +212,7 @@
   position: relative; z-index: 1; padding-block: 48px; padding-inline: 26px; border-radius: var(--radius);
   background: linear-gradient(115deg, transparent 35%, color-mix(in srgb, var(--c-card) 70%, transparent) 48%, transparent 60%) 160% 0 / 250% 100% no-repeat,
     color-mix(in srgb, var(--c-card) 58%, transparent);
-  -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--c-card) 90%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--c-card) 70%, transparent),
     0 30px 50px -30px color-mix(in srgb, var(--c-hero) 55%, transparent), 0 0 60px -30px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
@@ -242,11 +242,9 @@
 @supports (animation-timeline: view()) {
   .gg-house__glare { animation: glass-garden-glare linear both; animation-timeline: view(); }
   .gg-ivy { animation: glass-garden-sway linear both; animation-timeline: view(); }
-  .gg-card { animation: glass-garden-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
 }
 @keyframes glass-garden-glare { from { background-position: 150% 0; } to { background-position: -50% 0; } }
 @keyframes glass-garden-sway { 0% { rotate: 4deg; } 50% { rotate: -3deg; } 100% { rotate: 1deg; } }
-@keyframes glass-garden-shine { from { background-position: 160% 0, 0 0; } to { background-position: -60% 0, 0 0; } }
 
 /* own reveal: frost clearing from the glass */
 .fx-frost { opacity: 0; transform: translateY(20px); filter: blur(12px);
@@ -319,10 +317,10 @@
 @supports (animation-timeline: view()) {
   .gg:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.gg-photo, .gg-portrait):has(img) {
     background: conic-gradient(from var(--gg-shine), var(--gg-md), var(--gg-mm) 15%, var(--gg-ml) 25%, var(--gg-mm) 35%, var(--gg-md) 50%, var(--gg-mm) 65%, var(--gg-ml) 75%, var(--gg-mm) 85%, var(--gg-md));
-    animation: glass-garden-shine linear both; animation-timeline: view();
+    animation: glass-garden-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes glass-garden-shine { from { --gg-shine: 0deg; } to { --gg-shine: 300deg; } }
+@keyframes glass-garden-frameshine { from { --gg-shine: 0deg; } to { --gg-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .gg [data-animate="cover"] .gg-house__glass { --gg-stage: 0; }
   .gg [data-animate="cover"] .gg-house__frame { --gg-stage: 1; }

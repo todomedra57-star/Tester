@@ -295,10 +295,10 @@
 @supports (animation-timeline: view()) {
   .pc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.pc-photo, .pc-plate__photo):has(img) {
     background: conic-gradient(from var(--pc-shine), var(--pc-md), var(--pc-mm) 15%, var(--pc-ml) 25%, var(--pc-mm) 35%, var(--pc-md) 50%, var(--pc-mm) 65%, var(--pc-ml) 75%, var(--pc-mm) 85%, var(--pc-md));
-    animation: porcelain-shine linear both; animation-timeline: view();
+    animation: porcelain-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes porcelain-shine { from { --pc-shine: 0deg; } to { --pc-shine: 300deg; } }
+@keyframes porcelain-frameshine { from { --pc-shine: 0deg; } to { --pc-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .pc [data-animate="cover"] .pc-plate { --pc-stage: 0; }
   .pc [data-animate="cover"] .pc-lead { --pc-stage: 1; }

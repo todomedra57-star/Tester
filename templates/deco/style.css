@@ -431,10 +431,10 @@
 @supports (animation-timeline: view()) {
   .dc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.dc-photo, .dc-portrait):has(img) {
     background: conic-gradient(from var(--dc-shine), var(--dc-md), var(--dc-mm) 15%, var(--dc-ml) 25%, var(--dc-mm) 35%, var(--dc-md) 50%, var(--dc-mm) 65%, var(--dc-ml) 75%, var(--dc-mm) 85%, var(--dc-md));
-    animation: deco-shine linear both; animation-timeline: view();
+    animation: deco-frameshine linear both; animation-timeline: view();
   }
 }
-@keyframes deco-shine { from { --dc-shine: 0deg; } to { --dc-shine: 300deg; } }
+@keyframes deco-frameshine { from { --dc-shine: 0deg; } to { --dc-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
   .dc [data-animate="cover"] .dc-frame { --dc-stage: 0; }
   .dc [data-animate="cover"] .dc-portrait { --dc-stage: 1; }

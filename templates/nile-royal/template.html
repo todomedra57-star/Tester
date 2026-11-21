@@ -56,12 +56,14 @@
   </section>
 
   <!-- countdown inside a hanging lantern -->
-  <section class="nr-section nr-countdown" data-animate="countdown">
+  <section class="nr-section nr-countdown" data-animate="countdown" data-scene="cover">
     <h2 class="nr-title">{{text "countdownTitle"}}</h2>
     <div class="nr-lantern">
-      <span class="nr-lantern__halo" aria-hidden="true"></span>
-      <span class="nr-lantern__body" aria-hidden="true"></span>
-      <p class="nr-count"><span class="nr-count__num">{{daysUntil mainDate}}</span><span class="nr-count__unit">{{text "countdownUnit"}}</span></p>
+      <div class="nr-lantern__swing">
+        <span class="nr-lantern__halo" aria-hidden="true"></span>
+        <span class="nr-lantern__body" aria-hidden="true"></span>
+        <p class="nr-count"><span class="nr-count__num">{{daysUntil mainDate}}</span><span class="nr-count__unit">{{text "countdownUnit"}}</span></p>
+      </div>
     </div>
     {{#if (variant "dateStyle" "calendar")}}
       {{#with (calendarMonth mainDate)}}

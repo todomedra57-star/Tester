@@ -180,10 +180,10 @@ def live_css(name, R, c):
     out.append(f"""@supports (animation-timeline: view()) {{
   {shine_sel} {{
     background: conic-gradient(from var(--{P}-shine), var(--{P}-md), var(--{P}-mm) 15%, var(--{P}-ml) 25%, var(--{P}-mm) 35%, var(--{P}-md) 50%, var(--{P}-mm) 65%, var(--{P}-ml) 75%, var(--{P}-mm) 85%, var(--{P}-md));
-    animation: {K}-shine linear both; animation-timeline: view();
+    animation: {K}-frameshine linear both; animation-timeline: view();
   }}
 }}
-@keyframes {K}-shine {{ from {{ --{P}-shine: 0deg; }} to {{ --{P}-shine: 300deg; }} }}""")
+@keyframes {K}-frameshine {{ from {{ --{P}-shine: 0deg; }} to {{ --{P}-shine: 300deg; }} }}""")
     # 3. cinematic entrance: the cover builds piece by piece
     stage_rules = []
     for i, st in enumerate(L["stages"]):
