@@ -1,0 +1,129 @@
+<main class="nr" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
+
+  <section class="nr-cover" data-animate="cover">
+    <div class="nr-stage">
+      <span class="nr-column nr-column--start nr-decor" aria-hidden="true"></span>
+      <span class="nr-column nr-column--end nr-decor" aria-hidden="true"></span>
+      <div class="nr-scene">
+        <span class="nr-sky" aria-hidden="true"></span>
+        <span class="nr-moon" aria-hidden="true"></span>
+        <span class="nr-screen" aria-hidden="true" data-parallax></span>
+        <span class="nr-garden" aria-hidden="true"></span>
+        <span class="nr-nile" aria-hidden="true"></span>
+        <span class="nr-spark nr-spark--1 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--2 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--3 nr-decor" aria-hidden="true"></span>
+        <div class="nr-panel">
+          <span class="nr-sprig nr-sprig--start nr-decor" aria-hidden="true"></span>
+          <span class="nr-sprig nr-sprig--end nr-decor" aria-hidden="true"></span>
+          <span class="nr-monogram" aria-hidden="true"></span>
+          {{#if story.photos.length}}
+            {{#with story.photos.[0]}}<figure class="nr-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
+          {{/if}}
+          <p class="nr-lead">{{text "lead"}}</p>
+          <h1 class="nr-names">
+        <span class="nr-name">{{couple.groom.name}}</span>
+        {{#if couple.bride.name}}<span class="nr-and">{{text "and"}}</span><span class="nr-name">{{couple.bride.name}}</span>{{/if}}
+      </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="nr-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+      </div>
+    </div>
+    <div class="nr-card nr-invite">
+      {{#if verse}}<p class="nr-verse">{{verse}}</p>{{/if}}
+    <div class="nr-families">
+      <div class="nr-family">
+        {{#if couple.groom.father}}<p class="nr-family__label">{{text "sonOf"}}</p><p class="nr-family__name">{{couple.groom.father}}</p>{{/if}}
+        {{#each couple.groom.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
+      </div>
+      <div class="nr-family">
+        {{#if couple.bride.father}}<p class="nr-family__label">{{text "daughterOf"}}</p><p class="nr-family__name">{{couple.bride.father}}</p>{{/if}}
+        {{#each couple.bride.family}}<p class="nr-family__label">{{label}}</p><p class="nr-family__name">{{name}}</p>{{/each}}
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="nr-section nr-countdown" data-animate="countdown">
+    <div class="nr-card">
+      <span class="nr-spark nr-spark--1 nr-decor" aria-hidden="true"></span><span class="nr-spark nr-spark--2 nr-decor" aria-hidden="true"></span>
+      <h2 class="nr-title">{{text "countdownTitle"}}</h2>
+      <p class="nr-count"><span class="nr-count__num">{{daysUntil mainDate}}</span><span class="nr-count__unit">{{text "countdownUnit"}}</span></p>
+      {{#if (variant "dateStyle" "calendar")}}
+        {{#with (calendarMonth mainDate)}}
+          <div class="nr-cal">
+            <p class="nr-cal__title">{{title}}</p>
+            <div class="nr-cal__grid">
+              {{#each weekdays}}<span class="nr-cal__wd">{{this}}</span>{{/each}}
+              {{#each cells}}<span class="nr-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+            </div>
+          </div>
+        {{/with}}
+      {{/if}}
+    </div>
+  </section>
+
+  {{#if story.text}}
+    <div class="nr-divider" aria-hidden="true"></div>
+    <section class="nr-section nr-story" data-animate="story">
+      <div class="nr-card">
+        
+        <h2 class="nr-title">{{text "storyTitle"}}</h2>
+        {{#if story.photos.length}}
+          <div class="nr-photos">
+            {{#each story.photos}}<figure class="nr-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
+          </div>
+        {{/if}}
+        <p class="nr-story__text">{{story.text}}</p>
+        {{#if story.engagementDate}}<p class="nr-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
+      </div>
+    </section>
+  {{/if}}
+
+  {{#if gallery.length}}
+    <section class="nr-section nr-gallery" data-animate="gallery">
+      <h2 class="nr-title">{{text "galleryTitle"}}</h2>
+      <div class="nr-flow">
+        {{#each gallery}}<figure class="nr-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+      </div>
+      {{#if gallery.[1]}}<p class="nr-hint">{{text "galleryHint"}}</p>{{/if}}
+    </section>
+  {{/if}}
+
+  <div class="nr-divider" aria-hidden="true"></div>
+
+  <section class="nr-section nr-events" data-animate="events">
+    <h2 class="nr-title">{{text "eventsTitle"}}</h2>
+    {{#each events}}
+      <article class="nr-card nr-event" data-item>
+        
+        <h3 class="nr-event__type">{{eventLabel type}}</h3>
+        <p class="nr-event__date">{{formatDate date}}</p>
+        <p class="nr-event__time">{{eventTime this}}</p>
+        <p class="nr-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+        {{#if program.length}}
+          <div class="nr-program">
+            <p class="nr-program__title">{{text "programTitle"}}</p>
+            <ol class="nr-program__list">
+              {{#each program}}<li class="nr-program__item"><span class="nr-program__time">{{formatTime time}}</span><span class="nr-program__what">{{title}}</span></li>{{/each}}
+            </ol>
+          </div>
+        {{/if}}
+        {{#if mapUrl}}<a class="nr-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+      </article>
+    {{/each}}
+  </section>
+
+  <section class="nr-section nr-wishes" data-animate="wishes">
+    <div class="nr-card">
+      
+      <h2 class="nr-title">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
+  </section>
+
+  <footer class="nr-section nr-footer" data-animate="footer">
+    <span class="nr-divider" aria-hidden="true"></span><span class="nr-monogram" aria-hidden="true"></span>
+    {{#if closingLine}}<p class="nr-closing">{{closingLine}}</p>{{/if}}
+    {{#if wishes.closeDate}}<p class="nr-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
+    {{#if showBranding}}<p class="nr-brand">{{text "madeWith"}}</p>{{/if}}
+  </footer>
+</main>

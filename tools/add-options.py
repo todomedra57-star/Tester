@@ -31,7 +31,7 @@ def hexagon():
 HEART, HEX = heart(), hexagon()
 
 # ----------------------------------------------------------------- per template
-LUXE = {"pc": "porcelain", "gg": "glass-garden", "lc": "lace", "db": "desert-bloom"}
+LUXE = {"pc": "porcelain", "gg": "glass-garden", "lc": "lace", "db": "desert-bloom", "nr": "nile-royal"}
 T = {
     "midnight": dict(root=".mn", photo=".mn-frame", flow=".mn-strip", item=".mn-strip__item", hint=".mn-hint", date=".mn-date",
                      cards=".mn-event", names=".mn-names", foil="var(--c-accent)", light="var(--c-on-hero)",
@@ -68,6 +68,7 @@ COVER_NEW = {
     "glass-garden": ("conservatory", "لوح زجاجي بين النباتات", "Glass panel among plants"),
     "lace": ("portrait", "صورة كبيرة بإطار لؤلؤ", "Large pearl portrait"),
     "desert-bloom": ("horizon", "أفق هادئ", "Calm horizon"),
+    "nile-royal": ("names", "الأسماء فقط", "Names only"),
 }
 
 PALETTES = {
@@ -89,6 +90,8 @@ PALETTES = {
                      ("terracotta", "تيراكوتا", "Terracotta", dict(hero="#8C4A32", onHero="#FFF7F1", accent="#C49A5E", bg="#F6ECE4", text="#3A2117", muted="#7B6255", card="#FFFBF7", line="#EAD8CA"))],
     "lace": [("lilacLace", "دانتيل ليلكي", "Lilac lace", dict(hero="#7A6596", onHero="#FBF9FD", accent="#BFA6C8", bg="#ECE6F2", text="#2E2540", muted="#6E6684", card="#FDFBFF", line="#DDD5E7", lace="#FFFFFF")),
              ("blackGoldLace", "دانتيل أسود وذهبي", "Black & gold lace", dict(hero="#F0E6D2", onHero="#111111", accent="#D4B26B", bg="#121212", text="#F2EBDD", muted="#A49C8E", card="#1C1B19", line="#33302A", lace="#D9CDB4"))],
+    "nile-royal": [("roseNile", "نيل وردي وذهب وردي", "Rose Nile", dict(hero="#6E3A44", onHero="#FFF7F4", accent="#C99A84", bg="#F6ECE6", text="#3E2329", muted="#7E686C", card="#FFFAF7", line="#EAD8CF", sage="#A39F88", night="#3A2440")),
+                   ("silverMoon", "قمر فضي", "Silver moon", dict(hero="#2F4A5A", onHero="#F7F9FA", accent="#AEB6C0", bg="#EEF0F1", text="#1F3340", muted="#62707A", card="#FCFDFD", line="#D9DEE2", sage="#93A39C", night="#1C3442"))],
     "desert-bloom": [("saffron", "زعفران", "Saffron", dict(hero="#5A3410", onHero="#FFF6E6", accent="#D9A440", bg="#EDB85A", text="#3D2410", muted="#7D5A35", card="#FFF6E4", line="#EED8B0", glow="#FBE3A8", dune="#DDA052", silhouette="#4A2A0E")),
                      ("lavenderDusk", "غروب لافندر", "Lavender dusk", dict(hero="#3D2850", onHero="#FAF4FF", accent="#D3AE6E", bg="#9C86B8", text="#2B1D3A", muted="#4E3F5E", card="#FBF6FC", line="#E5D9EA", glow="#F2CFC4", dune="#B98AA0", silhouette="#2E1C3B"))],
 }
@@ -132,6 +135,8 @@ LIVE = {
                          stages=[".gg-house__glass", ".gg-house__frame", ".gg-plant--start, .gg-plant--end", ".gg-ivy", ".gg-house__content", ".gg-invite"]),
     "lace": dict(key="lace", portraits=[".lc-portrait"], titles=".lc-title", foil="--lc-foil",
                  stages=[".lc-pearls", ".lc-doily", ".lc-veil__center", ".lc-invite"]),
+    "nile-royal": dict(key="nile-royal", portraits=[".nr-portrait"], titles=".nr-title", foil="--nr-foil",
+                       stages=[".nr-sky, .nr-moon", ".nr-screen", ".nr-garden, .nr-nile", ".nr-column--start, .nr-column--end", ".nr-panel", ".nr-sprig", ".nr-invite"]),
     "desert-bloom": dict(key="desert-bloom", portraits=[".db-portrait"], titles=".db-title", foil="--db-foil",
                          stages=[".db-stars", ".db-sun", ".db-dune--1", ".db-dune--2, .db-palm--start", ".db-dune--3, .db-palm--end", ".db-dune--4, .db-bloom", ".db-sky", ".db-invite"]),
 }
@@ -301,6 +306,11 @@ def extra_css(name, R):
 .db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }
 .db[data-cover-layout="horizon"] .db-sun { inset-block-end: 0; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
 .db[data-cover-layout="horizon"] .db-dune--4 { block-size: 120px; }"""]
+    if name == "nile-royal":
+        return [""".nr[data-cover-layout="names"] :is(.nr-sky, .nr-moon, .nr-screen, .nr-garden, .nr-nile, .nr-column) { display: none; }
+.nr[data-cover-layout="names"] .nr-scene { min-block-size: 0; padding-block: 70px 40px; border: 0; outline: 0; box-shadow: none; background: none; }
+.nr[data-cover-layout="names"] .nr-panel { background: none; box-shadow: none; outline: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.nr[data-cover-layout="names"] .nr-names { font-size: calc(var(--name-size) * 1.15); }"""]
     return []
 
 # ----------------------------------------------------------------- apply

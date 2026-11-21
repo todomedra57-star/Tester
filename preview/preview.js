@@ -4,6 +4,7 @@ import { CASES } from './demo-data.js';
 
 // Add a template here to preview it.
 const TEMPLATES = {
+  'nile-royal': 'templates/nile-royal/',
   porcelain: 'templates/porcelain/',
   'glass-garden': 'templates/glass-garden/',
   lace: 'templates/lace/',

@@ -1,0 +1,767 @@
+{
+  "key": "nile-royal",
+  "name": {
+    "ar": "ليلة النيل",
+    "en": "Nile Royale"
+  },
+  "description": {
+    "ar": "احتفال تحت القمر على ضفاف النيل: نافذة قصر مقوسة، مشربية ذهبية، قباب وحدائق، أعمدة لوتس، وياسمين وزيتون على ورق عاجي.",
+    "en": "A moonlit celebration beside the Nile: a palace arch window, golden mashrabiya, distant domes and gardens, lotus columns, and jasmine and olive on ivory paper."
+  },
+  "languages": [
+    "ar",
+    "en"
+  ],
+  "texts": {
+    "lead": {
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على ليلتنا",
+      "en": "Until our night by the Nile"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
+    },
+    "galleryTitle": {
+      "ar": "من ليالينا",
+      "en": "Moments"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "wishesTitle": {
+      "ar": "اكتبوا دعوة للعروسين",
+      "en": "Leave a wish for the couple"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Programme"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
+    }
+  },
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "sage",
+      "type": "color"
+    },
+    {
+      "key": "night",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 28,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 34,
+      "max": 68,
+      "unit": "px"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
+    },
+    {
+      "key": "patternTile",
+      "type": "image"
+    },
+    {
+      "key": "screenArt",
+      "type": "image"
+    },
+    {
+      "key": "columnArt",
+      "type": "image"
+    },
+    {
+      "key": "gardenArt",
+      "type": "image"
+    },
+    {
+      "key": "sprigArt",
+      "type": "image"
+    },
+    {
+      "key": "jasmineArt",
+      "type": "image"
+    },
+    {
+      "key": "waveArt",
+      "type": "image"
+    },
+    {
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "classic",
+      "type": "font"
+    },
+    {
+      "key": "classicLatin",
+      "type": "font"
+    },
+    {
+      "key": "modern",
+      "type": "font"
+    },
+    {
+      "key": "modernLatin",
+      "type": "font"
+    },
+    {
+      "key": "script",
+      "type": "font"
+    },
+    {
+      "key": "scriptLatin",
+      "type": "font"
+    },
+    {
+      "key": "geometric",
+      "type": "font"
+    },
+    {
+      "key": "geometricLatin",
+      "type": "font"
+    },
+    {
+      "key": "fontPair",
+      "type": "variant",
+      "options": [
+        "template",
+        "classic",
+        "modern",
+        "script",
+        "geometric"
+      ],
+      "choices": {
+        "template": {
+          "ar": "كما في التصميم",
+          "en": "As designed"
+        },
+        "classic": {
+          "ar": "كلاسيكي",
+          "en": "Classic"
+        },
+        "modern": {
+          "ar": "عصري",
+          "en": "Modern"
+        },
+        "script": {
+          "ar": "خط يدوي",
+          "en": "Script"
+        },
+        "geometric": {
+          "ar": "هندسي",
+          "en": "Geometric"
+        }
+      }
+    },
+    {
+      "key": "metal",
+      "type": "variant",
+      "options": [
+        "palette",
+        "champagne",
+        "roseGold",
+        "silver",
+        "iridescent"
+      ],
+      "choices": {
+        "palette": {
+          "ar": "معدن الألوان",
+          "en": "Palette metal"
+        },
+        "champagne": {
+          "ar": "شمبانيا",
+          "en": "Champagne"
+        },
+        "roseGold": {
+          "ar": "ذهب وردي",
+          "en": "Rose gold"
+        },
+        "silver": {
+          "ar": "فضي",
+          "en": "Silver"
+        },
+        "iridescent": {
+          "ar": "لؤلؤي قزحي",
+          "en": "Iridescent pearl"
+        }
+      }
+    },
+    {
+      "key": "entrance",
+      "type": "variant",
+      "options": [
+        "cinematic",
+        "gentle",
+        "none"
+      ],
+      "choices": {
+        "cinematic": {
+          "ar": "دخول سينمائي متتابع",
+          "en": "Cinematic build-up"
+        },
+        "gentle": {
+          "ar": "دخول هادئ",
+          "en": "Gentle"
+        },
+        "none": {
+          "ar": "بدون حركة دخول",
+          "en": "No entrance motion"
+        }
+      }
+    },
+    {
+      "key": "photoTone",
+      "type": "variant",
+      "options": [
+        "natural",
+        "golden",
+        "palette",
+        "noir"
+      ],
+      "choices": {
+        "natural": {
+          "ar": "ألوان طبيعية",
+          "en": "Natural colour"
+        },
+        "golden": {
+          "ar": "تدرج ذهبي",
+          "en": "Golden tone"
+        },
+        "palette": {
+          "ar": "بألوان التصميم",
+          "en": "Palette tone"
+        },
+        "noir": {
+          "ar": "أبيض وأسود",
+          "en": "Black and white"
+        }
+      }
+    },
+    {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "scene",
+        "panel",
+        "names"
+      ],
+      "choices": {
+        "scene": {
+          "ar": "نافذة القصر على النيل",
+          "en": "Palace window on the Nile"
+        },
+        "panel": {
+          "ar": "قوس ولوحة هادئة",
+          "en": "Arch with a quiet panel"
+        },
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
+        }
+      }
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined",
+        "opulent"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "badge",
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
+      ],
+      "choices": {
+        "badge": {
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "archRoyal",
+        "nileOval",
+        "vellum",
+        "heart",
+        "hexagon",
+        "polaroid"
+      ],
+      "choices": {
+        "archRoyal": {
+          "ar": "قوس ملكي",
+          "en": "Royal arch"
+        },
+        "nileOval": {
+          "ar": "بيضاوي النيل",
+          "en": "Nile oval"
+        },
+        "vellum": {
+          "ar": "ورق شفاف",
+          "en": "Vellum polaroid"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "stack",
+        "strip",
+        "grid",
+        "scatter"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "stack": {
+          "ar": "كأوراق متراصة",
+          "en": "Fanned stack"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#0F4A3C",
+    "onHero": "#FBF6EA",
+    "accent": "#C8A96A",
+    "bg": "#F4EDDF",
+    "text": "#1E3A33",
+    "muted": "#66756B",
+    "card": "#FFFCF5",
+    "line": "#E6DCC6",
+    "sage": "#8FA388",
+    "night": "#123A40",
+    "display": "amiri",
+    "body": "plexArabic",
+    "latin": "cormorant",
+    "radius": 14,
+    "nameSize": 52,
+    "paperTexture": "paper-grain",
+    "patternTile": "zellige-tile",
+    "screenArt": "mashrabiya",
+    "columnArt": "nile-column",
+    "gardenArt": "nile-garden",
+    "sprigArt": "jasmine-olive",
+    "jasmineArt": "jasmine-flowers",
+    "waveArt": "nile-wave",
+    "monogramArt": "rosette",
+    "sparkleArt": "sparkle",
+    "coverLayout": "scene",
+    "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "archRoyal",
+    "galleryStyle": "coverflow",
+    "classic": "amiri",
+    "classicLatin": "cormorant",
+    "modern": "elMessiri",
+    "modernLatin": "decoSans",
+    "script": "arefRuqaa",
+    "scriptLatin": "pinyon",
+    "geometric": "reemKufi",
+    "geometricLatin": "cinzel",
+    "photoTone": "natural",
+    "entrance": "cinematic",
+    "metal": "palette",
+    "fontPair": "template"
+  },
+  "defaultAnimation": {
+    "intro": "doors",
+    "ambient": "lantern-glints",
+    "duration": 1000,
+    "stagger": 150,
+    "parallax": true,
+    "sections": {
+      "countdown": {
+        "effect": "ascend"
+      },
+      "story": {
+        "effect": "ascend"
+      },
+      "wishes": {
+        "effect": "ascend"
+      },
+      "cover": {
+        "effect": "fade"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "ascend",
+      "kind": "reveal",
+      "name": {
+        "ar": "صعود هادئ",
+        "en": "Soft ascent"
+      }
+    },
+    {
+      "key": "lantern-glints",
+      "kind": "ambient",
+      "name": {
+        "ar": "بريق الفوانيس",
+        "en": "Rising lantern glints"
+      }
+    }
+  ],
+  "fields": [],
+  "couplePresets": {
+    "label": {
+      "ar": "ليلة النيل",
+      "en": "Nile Royale"
+    },
+    "defaultPalette": "ivoryEmerald",
+    "palettes": [
+      {
+        "key": "ivoryEmerald",
+        "name": {
+          "ar": "عاجي وزمردي",
+          "en": "Ivory & emerald"
+        },
+        "values": {
+          "hero": "#0F4A3C",
+          "onHero": "#FBF6EA",
+          "accent": "#C8A96A",
+          "bg": "#F4EDDF",
+          "text": "#1E3A33",
+          "muted": "#66756B",
+          "card": "#FFFCF5",
+          "line": "#E6DCC6",
+          "sage": "#8FA388",
+          "night": "#123A40"
+        }
+      },
+      {
+        "key": "midnightNile",
+        "name": {
+          "ar": "ليل النيل",
+          "en": "Midnight Nile"
+        },
+        "values": {
+          "hero": "#F1E6CC",
+          "onHero": "#0D2430",
+          "accent": "#CDAE6E",
+          "bg": "#0D2430",
+          "text": "#F3ECDD",
+          "muted": "#A7B3AE",
+          "card": "#12313E",
+          "line": "#24485A",
+          "sage": "#7E9C8B",
+          "night": "#071821"
+        }
+      },
+      {
+        "key": "tealChampagne",
+        "name": {
+          "ar": "تركواز وشمبانيا",
+          "en": "Teal & champagne"
+        },
+        "values": {
+          "hero": "#144E57",
+          "onHero": "#FBF8F0",
+          "accent": "#CBB07A",
+          "bg": "#F2EEE4",
+          "text": "#173A40",
+          "muted": "#62767A",
+          "card": "#FFFDF7",
+          "line": "#E3DCCB",
+          "sage": "#8FA79A",
+          "night": "#0F3A44"
+        }
+      },
+      {
+        "key": "sageGold",
+        "name": {
+          "ar": "مريمية وذهبي",
+          "en": "Sage & gold"
+        },
+        "values": {
+          "hero": "#4D6650",
+          "onHero": "#FBFBF4",
+          "accent": "#C2A462",
+          "bg": "#F1F0E6",
+          "text": "#263326",
+          "muted": "#677060",
+          "card": "#FDFDF7",
+          "line": "#DEDFCF",
+          "sage": "#93A88C",
+          "night": "#23392E"
+        }
+      },
+      {
+        "key": "roseNile",
+        "name": {
+          "ar": "نيل وردي وذهب وردي",
+          "en": "Rose Nile"
+        },
+        "values": {
+          "hero": "#6E3A44",
+          "onHero": "#FFF7F4",
+          "accent": "#C99A84",
+          "bg": "#F6ECE6",
+          "text": "#3E2329",
+          "muted": "#7E686C",
+          "card": "#FFFAF7",
+          "line": "#EAD8CF",
+          "sage": "#A39F88",
+          "night": "#3A2440"
+        }
+      },
+      {
+        "key": "silverMoon",
+        "name": {
+          "ar": "قمر فضي",
+          "en": "Silver moon"
+        },
+        "values": {
+          "hero": "#2F4A5A",
+          "onHero": "#F7F9FA",
+          "accent": "#AEB6C0",
+          "bg": "#EEF0F1",
+          "text": "#1F3340",
+          "muted": "#62707A",
+          "card": "#FCFDFD",
+          "line": "#D9DEE2",
+          "sage": "#93A39C",
+          "night": "#1C3442"
+        }
+      }
+    ],
+    "intros": [
+      "none",
+      "doors",
+      "curtain"
+    ],
+    "ambients": [
+      "none",
+      "lantern-glints"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1000,
+        "stagger": 150,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 650,
+        "stagger": 90,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      },
+      {
+        "key": "fontPair"
+      },
+      {
+        "key": "metal"
+      },
+      {
+        "key": "entrance"
+      },
+      {
+        "key": "photoTone"
+      }
+    ],
+    "hiddenEffects": []
+  }
+}
