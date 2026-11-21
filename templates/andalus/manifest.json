@@ -178,11 +178,37 @@
       "type": "image"
     },
     {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined",
+        "opulent"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
+        }
+      }
+    },
+    {
       "key": "dateStyle",
       "type": "variant",
       "options": [
         "badge",
-        "calendar"
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
       ],
       "choices": {
         "badge": {
@@ -192,6 +218,18 @@
         "calendar": {
           "ar": "تقويم الشهر",
           "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -201,7 +239,10 @@
       "options": [
         "arch",
         "octagon",
-        "circle"
+        "circle",
+        "heart",
+        "hexagon",
+        "polaroid"
       ],
       "choices": {
         "arch": {
@@ -215,6 +256,18 @@
         "circle": {
           "ar": "دائرة",
           "en": "Circle"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
         }
       }
     },
@@ -223,7 +276,9 @@
       "type": "variant",
       "options": [
         "arcade",
-        "strip"
+        "strip",
+        "grid",
+        "scatter"
       ],
       "choices": {
         "arcade": {
@@ -233,6 +288,14 @@
         "strip": {
           "ar": "شريط بسيط",
           "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
         }
       }
     }
@@ -260,7 +323,8 @@
     "dateStyle": "badge",
     "photoFrame": "arch",
     "galleryStyle": "arcade",
-    "paperTexture": "paper-grain"
+    "paperTexture": "paper-grain",
+    "ornament": "rich"
   },
   "defaultAnimation": {
     "intro": "doors",
@@ -385,6 +449,40 @@
           "card": "#FAF1E7",
           "line": "#E7D5C3"
         }
+      },
+      {
+        "key": "amethyst",
+        "name": {
+          "ar": "جمشت وذهبي",
+          "en": "Amethyst & gold"
+        },
+        "values": {
+          "hero": "#2A1638",
+          "onHero": "#F4EDF6",
+          "accent": "#C9A55C",
+          "bg": "#3A1F4D",
+          "text": "#2E1A3B",
+          "muted": "#6E5F78",
+          "card": "#F7F1F6",
+          "line": "#E1D3E2"
+        }
+      },
+      {
+        "key": "turquoise",
+        "name": {
+          "ar": "فيروزي وذهبي",
+          "en": "Turquoise & gold"
+        },
+        "values": {
+          "hero": "#0B3440",
+          "onHero": "#EEF6F5",
+          "accent": "#C9A55C",
+          "bg": "#0F4553",
+          "text": "#123A44",
+          "muted": "#5B7178",
+          "card": "#F4F1E6",
+          "line": "#DDD6C0"
+        }
       }
     ],
     "intros": [
@@ -417,6 +515,9 @@
       },
       {
         "key": "galleryStyle"
+      },
+      {
+        "key": "ornament"
       }
     ],
     "hiddenEffects": []

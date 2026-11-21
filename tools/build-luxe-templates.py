@@ -963,3 +963,7 @@ for key, html, css, man in BUILDS:
     (d / "style.css").write_text(css, encoding="utf-8")
     (d / "manifest.json").write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("wrote", key)
+
+# extra couple options (palettes, frames, galleries, dates, ornament) for every template
+import subprocess, sys
+subprocess.run([sys.executable, str(pathlib.Path(__file__).with_name("add-options.py"))], check=True)

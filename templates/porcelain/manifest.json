@@ -170,7 +170,8 @@
       "type": "variant",
       "options": [
         "plate",
-        "frame"
+        "frame",
+        "minimal"
       ],
       "choices": {
         "plate": {
@@ -180,6 +181,10 @@
         "frame": {
           "ar": "لوحة خزف بإطار منقوش",
           "en": "Patterned tile frame"
+        },
+        "minimal": {
+          "ar": "أسماء فقط بإطار ذهبي",
+          "en": "Names only, gold frame"
         }
       }
     },
@@ -188,7 +193,8 @@
       "type": "variant",
       "options": [
         "rich",
-        "refined"
+        "refined",
+        "opulent"
       ],
       "choices": {
         "rich": {
@@ -198,6 +204,10 @@
         "refined": {
           "ar": "هادئ وراقي",
           "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
         }
       }
     },
@@ -206,7 +216,10 @@
       "type": "variant",
       "options": [
         "badge",
-        "calendar"
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
       ],
       "choices": {
         "badge": {
@@ -216,6 +229,18 @@
         "calendar": {
           "ar": "تقويم الشهر",
           "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -225,7 +250,10 @@
       "options": [
         "plate",
         "arch",
-        "scalloped"
+        "scalloped",
+        "heart",
+        "hexagon",
+        "polaroid"
       ],
       "choices": {
         "plate": {
@@ -239,6 +267,18 @@
         "scalloped": {
           "ar": "حافة مموجة",
           "en": "Scalloped"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
         }
       }
     },
@@ -248,7 +288,9 @@
       "options": [
         "coverflow",
         "stack",
-        "strip"
+        "strip",
+        "grid",
+        "scatter"
       ],
       "choices": {
         "coverflow": {
@@ -262,6 +304,14 @@
         "strip": {
           "ar": "شريط بسيط",
           "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
         }
       }
     }
@@ -421,6 +471,40 @@
           "muted": "#9AA6C2",
           "card": "#1A2440",
           "line": "#2C3858"
+        }
+      },
+      {
+        "key": "goldLeaf",
+        "name": {
+          "ar": "ورق ذهب",
+          "en": "Gold leaf"
+        },
+        "values": {
+          "hero": "#6B4E1F",
+          "onHero": "#FFF9EE",
+          "accent": "#C9A55C",
+          "bg": "#FBF6EC",
+          "text": "#3A2C17",
+          "muted": "#7A6A52",
+          "card": "#FFFFFF",
+          "line": "#EADFCB"
+        }
+      },
+      {
+        "key": "lavender",
+        "name": {
+          "ar": "لافندر",
+          "en": "Lavender"
+        },
+        "values": {
+          "hero": "#6A5A9E",
+          "onHero": "#FAF8FF",
+          "accent": "#C8A96A",
+          "bg": "#F6F4FB",
+          "text": "#2D2547",
+          "muted": "#6E6888",
+          "card": "#FFFFFF",
+          "line": "#E1DCEE"
         }
       }
     ],

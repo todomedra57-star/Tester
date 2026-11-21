@@ -1,85 +1,489 @@
 {
   "key": "royal",
-  "name": { "ar": "الشعار الملكي", "en": "Royal Crest" },
+  "name": {
+    "ar": "الشعار الملكي",
+    "en": "Royal Crest"
+  },
   "description": {
     "ar": "حفل في قصر: مخمل عنابي ونقش دمشقي، شعار ذهبي بتاج وأغصان غار، ستائر مخملية تنفتح مع التمرير، وإطارات صور مذهبة.",
     "en": "A palace ball: burgundy velvet and damask, a gold crest with crown and laurels, velvet curtains that part as you scroll, and gilded portrait frames."
   },
-  "languages": ["ar", "en"],
-  "texts": {
-    "lead":          { "ar": "تتشرف العائلتان بدعوتكم لحضور حفل زفاف", "en": "The families request the honour of your presence at the marriage of" },
-    "and":           { "ar": "و", "en": "&" },
-    "sonOf":         { "ar": "نجل", "en": "Son of" },
-    "daughterOf":    { "ar": "كريمة", "en": "Daughter of" },
-    "countdownTitle":{ "ar": "باقي على الفرح", "en": "Days until the celebration" },
-    "countdownUnit": { "ar": "يوم", "en": "days" },
-    "storyTitle":    { "ar": "حكايتنا", "en": "Our story" },
-    "storyPhoto":    { "ar": "صورة من حكايتنا", "en": "A photo from our story" },
-    "engagement":    { "ar": "الخطوبة:", "en": "Engaged on" },
-    "galleryTitle":  { "ar": "معرض الصور", "en": "The portrait gallery" },
-    "galleryPhoto":  { "ar": "صورة من معرض الصور", "en": "Gallery photo" },
-    "galleryHint":   { "ar": "اسحبوا لتتجولوا في المعرض", "en": "Swipe to stroll the gallery" },
-    "eventsTitle":   { "ar": "المواعيد", "en": "The celebrations" },
-    "programTitle":  { "ar": "فقرات الحفل", "en": "Order of the evening" },
-    "openMap":       { "ar": "افتح الموقع على الخريطة", "en": "Open in maps" },
-    "listSeparator": { "ar": "، ", "en": ", " },
-    "wishesTitle":   { "ar": "اكتب دعوة للعروسين", "en": "Sign the royal guestbook" },
-    "openUntil":     { "ar": "الصفحة مفتوحة حتى", "en": "This page is open until" },
-    "madeWith":      { "ar": "اتعملت بحب", "en": "Made with love" }
-  },
-  "tokens": [
-    { "key": "hero", "type": "color" }, { "key": "onHero", "type": "color" },
-    { "key": "accent", "type": "color" }, { "key": "bg", "type": "color" },
-    { "key": "text", "type": "color" }, { "key": "muted", "type": "color" },
-    { "key": "card", "type": "color" }, { "key": "line", "type": "color" },
-    { "key": "display", "type": "font" }, { "key": "body", "type": "font" }, { "key": "latin", "type": "font" },
-    { "key": "radius", "type": "length", "min": 0, "max": 16, "unit": "px" },
-    { "key": "nameSize", "type": "length", "min": 36, "max": 66, "unit": "px" },
-    { "key": "patternTile", "type": "image" },
-    { "key": "crestArt", "type": "image" },
-    { "key": "cornerArt", "type": "image" },
-    { "key": "sealArt", "type": "image" },
-    { "key": "paperTexture", "type": "image" },
-    { "key": "dateStyle", "type": "variant", "options": ["ribbon", "calendar"],
-      "choices": { "ribbon": { "ar": "شريط ذهبي بالتاريخ", "en": "Gold ribbon with the date" }, "calendar": { "ar": "تقويم الشهر", "en": "Month calendar" } } },
-    { "key": "photoFrame", "type": "variant", "options": ["oval", "arch", "square"],
-      "choices": { "oval": { "ar": "إطار بيضاوي مذهب", "en": "Gilded oval" }, "arch": { "ar": "قوس", "en": "Arch" }, "square": { "ar": "إطار مربع مذهب", "en": "Gilded square" } } },
-    { "key": "galleryStyle", "type": "variant", "options": ["gallery", "strip"],
-      "choices": { "gallery": { "ar": "معرض بإطارات ثلاثية الأبعاد", "en": "3D framed gallery" }, "strip": { "ar": "شريط بسيط", "en": "Simple strip" } } }
+  "languages": [
+    "ar",
+    "en"
   ],
-  "defaultTheme": {
-    "hero": "#33070F", "onHero": "#F6EAD6", "accent": "#CFAB63", "bg": "#4A0F1B",
-    "text": "#3A1A16", "muted": "#7A625B", "card": "#F8F1E4", "line": "#E6D6BC",
-    "display": "arefRuqaa", "body": "serifPair", "latin": "cinzel",
-    "radius": 6, "nameSize": 52,
-    "patternTile": "damask-tile", "crestArt": "royal-crest", "cornerArt": "filigree-corner",
-    "sealArt": "wax-seal", "paperTexture": "paper-grain",
-    "dateStyle": "ribbon", "photoFrame": "oval", "galleryStyle": "gallery"
-  },
-  "defaultAnimation": {
-    "intro": "curtain", "ambient": "none", "duration": 1100, "stagger": 160, "parallax": true,
-    "sections": {
-      "cover": { "effect": "fade" }, "countdown": { "effect": "crown" }, "story": { "effect": "crown" },
-      "gallery": { "effect": "fade" }, "events": { "effect": "fade-up" }, "wishes": { "effect": "crown" }, "footer": { "effect": "fade" }
+  "texts": {
+    "lead": {
+      "ar": "تتشرف العائلتان بدعوتكم لحضور حفل زفاف",
+      "en": "The families request the honour of your presence at the marriage of"
+    },
+    "and": {
+      "ar": "و",
+      "en": "&"
+    },
+    "sonOf": {
+      "ar": "نجل",
+      "en": "Son of"
+    },
+    "daughterOf": {
+      "ar": "كريمة",
+      "en": "Daughter of"
+    },
+    "countdownTitle": {
+      "ar": "باقي على الفرح",
+      "en": "Days until the celebration"
+    },
+    "countdownUnit": {
+      "ar": "يوم",
+      "en": "days"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
+    },
+    "storyPhoto": {
+      "ar": "صورة من حكايتنا",
+      "en": "A photo from our story"
+    },
+    "engagement": {
+      "ar": "الخطوبة:",
+      "en": "Engaged on"
+    },
+    "galleryTitle": {
+      "ar": "معرض الصور",
+      "en": "The portrait gallery"
+    },
+    "galleryPhoto": {
+      "ar": "صورة من معرض الصور",
+      "en": "Gallery photo"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لتتجولوا في المعرض",
+      "en": "Swipe to stroll the gallery"
+    },
+    "eventsTitle": {
+      "ar": "المواعيد",
+      "en": "The celebrations"
+    },
+    "programTitle": {
+      "ar": "فقرات الحفل",
+      "en": "Order of the evening"
+    },
+    "openMap": {
+      "ar": "افتح الموقع على الخريطة",
+      "en": "Open in maps"
+    },
+    "listSeparator": {
+      "ar": "، ",
+      "en": ", "
+    },
+    "wishesTitle": {
+      "ar": "اكتب دعوة للعروسين",
+      "en": "Sign the royal guestbook"
+    },
+    "openUntil": {
+      "ar": "الصفحة مفتوحة حتى",
+      "en": "This page is open until"
+    },
+    "madeWith": {
+      "ar": "اتعملت بحب",
+      "en": "Made with love"
     }
   },
-  "effects": [ { "key": "crown", "kind": "reveal", "name": { "ar": "ظهور ملكي", "en": "Royal entrance" } } ],
+  "tokens": [
+    {
+      "key": "hero",
+      "type": "color"
+    },
+    {
+      "key": "onHero",
+      "type": "color"
+    },
+    {
+      "key": "accent",
+      "type": "color"
+    },
+    {
+      "key": "bg",
+      "type": "color"
+    },
+    {
+      "key": "text",
+      "type": "color"
+    },
+    {
+      "key": "muted",
+      "type": "color"
+    },
+    {
+      "key": "card",
+      "type": "color"
+    },
+    {
+      "key": "line",
+      "type": "color"
+    },
+    {
+      "key": "display",
+      "type": "font"
+    },
+    {
+      "key": "body",
+      "type": "font"
+    },
+    {
+      "key": "latin",
+      "type": "font"
+    },
+    {
+      "key": "radius",
+      "type": "length",
+      "min": 0,
+      "max": 16,
+      "unit": "px"
+    },
+    {
+      "key": "nameSize",
+      "type": "length",
+      "min": 36,
+      "max": 66,
+      "unit": "px"
+    },
+    {
+      "key": "patternTile",
+      "type": "image"
+    },
+    {
+      "key": "crestArt",
+      "type": "image"
+    },
+    {
+      "key": "cornerArt",
+      "type": "image"
+    },
+    {
+      "key": "sealArt",
+      "type": "image"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
+    },
+    {
+      "key": "ornament",
+      "type": "variant",
+      "options": [
+        "rich",
+        "refined",
+        "opulent"
+      ],
+      "choices": {
+        "rich": {
+          "ar": "زخرفة كاملة",
+          "en": "Rich ornament"
+        },
+        "refined": {
+          "ar": "هادئ وراقي",
+          "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
+        }
+      }
+    },
+    {
+      "key": "dateStyle",
+      "type": "variant",
+      "options": [
+        "ribbon",
+        "calendar",
+        "frame",
+        "line",
+        "badge"
+      ],
+      "choices": {
+        "ribbon": {
+          "ar": "شريط ذهبي بالتاريخ",
+          "en": "Gold ribbon with the date"
+        },
+        "calendar": {
+          "ar": "تقويم الشهر",
+          "en": "Month calendar"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
+        },
+        "badge": {
+          "ar": "شارة",
+          "en": "Badge"
+        }
+      }
+    },
+    {
+      "key": "photoFrame",
+      "type": "variant",
+      "options": [
+        "oval",
+        "arch",
+        "square",
+        "heart",
+        "hexagon",
+        "polaroid"
+      ],
+      "choices": {
+        "oval": {
+          "ar": "إطار بيضاوي مذهب",
+          "en": "Gilded oval"
+        },
+        "arch": {
+          "ar": "قوس",
+          "en": "Arch"
+        },
+        "square": {
+          "ar": "إطار مربع مذهب",
+          "en": "Gilded square"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
+        }
+      }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "gallery",
+        "strip",
+        "grid",
+        "scatter"
+      ],
+      "choices": {
+        "gallery": {
+          "ar": "معرض بإطارات ثلاثية الأبعاد",
+          "en": "3D framed gallery"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
+        }
+      }
+    }
+  ],
+  "defaultTheme": {
+    "hero": "#33070F",
+    "onHero": "#F6EAD6",
+    "accent": "#CFAB63",
+    "bg": "#4A0F1B",
+    "text": "#3A1A16",
+    "muted": "#7A625B",
+    "card": "#F8F1E4",
+    "line": "#E6D6BC",
+    "display": "arefRuqaa",
+    "body": "serifPair",
+    "latin": "cinzel",
+    "radius": 6,
+    "nameSize": 52,
+    "patternTile": "damask-tile",
+    "crestArt": "royal-crest",
+    "cornerArt": "filigree-corner",
+    "sealArt": "wax-seal",
+    "paperTexture": "paper-grain",
+    "dateStyle": "ribbon",
+    "photoFrame": "oval",
+    "galleryStyle": "gallery",
+    "ornament": "rich"
+  },
+  "defaultAnimation": {
+    "intro": "curtain",
+    "ambient": "none",
+    "duration": 1100,
+    "stagger": 160,
+    "parallax": true,
+    "sections": {
+      "cover": {
+        "effect": "fade"
+      },
+      "countdown": {
+        "effect": "crown"
+      },
+      "story": {
+        "effect": "crown"
+      },
+      "gallery": {
+        "effect": "fade"
+      },
+      "events": {
+        "effect": "fade-up"
+      },
+      "wishes": {
+        "effect": "crown"
+      },
+      "footer": {
+        "effect": "fade"
+      }
+    }
+  },
+  "effects": [
+    {
+      "key": "crown",
+      "kind": "reveal",
+      "name": {
+        "ar": "ظهور ملكي",
+        "en": "Royal entrance"
+      }
+    }
+  ],
   "fields": [],
   "couplePresets": {
-    "label": { "ar": "الشعار الملكي", "en": "Royal Crest" },
+    "label": {
+      "ar": "الشعار الملكي",
+      "en": "Royal Crest"
+    },
     "defaultPalette": "burgundy",
     "palettes": [
-      { "key": "burgundy", "name": { "ar": "عنابي وذهبي", "en": "Burgundy & gold" },
-        "values": { "hero": "#33070F", "onHero": "#F6EAD6", "accent": "#CFAB63", "bg": "#4A0F1B", "text": "#3A1A16", "muted": "#7A625B", "card": "#F8F1E4", "line": "#E6D6BC" } },
-      { "key": "royalNavy", "name": { "ar": "كحلي ملكي", "en": "Royal navy" },
-        "values": { "hero": "#0C1733", "onHero": "#F3ECDD", "accent": "#CFAB63", "bg": "#14234A", "text": "#18213A", "muted": "#626A80", "card": "#F7F2E8", "line": "#DDD5C3" } },
-      { "key": "forest", "name": { "ar": "أخضر غابات", "en": "Forest" },
-        "values": { "hero": "#0E2618", "onHero": "#F3EEDF", "accent": "#CBA761", "bg": "#163523", "text": "#1C2A20", "muted": "#647064", "card": "#F7F3E8", "line": "#DCD6C2" } }
+      {
+        "key": "burgundy",
+        "name": {
+          "ar": "عنابي وذهبي",
+          "en": "Burgundy & gold"
+        },
+        "values": {
+          "hero": "#33070F",
+          "onHero": "#F6EAD6",
+          "accent": "#CFAB63",
+          "bg": "#4A0F1B",
+          "text": "#3A1A16",
+          "muted": "#7A625B",
+          "card": "#F8F1E4",
+          "line": "#E6D6BC"
+        }
+      },
+      {
+        "key": "royalNavy",
+        "name": {
+          "ar": "كحلي ملكي",
+          "en": "Royal navy"
+        },
+        "values": {
+          "hero": "#0C1733",
+          "onHero": "#F3ECDD",
+          "accent": "#CFAB63",
+          "bg": "#14234A",
+          "text": "#18213A",
+          "muted": "#626A80",
+          "card": "#F7F2E8",
+          "line": "#DDD5C3"
+        }
+      },
+      {
+        "key": "forest",
+        "name": {
+          "ar": "أخضر غابات",
+          "en": "Forest"
+        },
+        "values": {
+          "hero": "#0E2618",
+          "onHero": "#F3EEDF",
+          "accent": "#CBA761",
+          "bg": "#163523",
+          "text": "#1C2A20",
+          "muted": "#647064",
+          "card": "#F7F3E8",
+          "line": "#DCD6C2"
+        }
+      },
+      {
+        "key": "royalPurple",
+        "name": {
+          "ar": "بنفسجي ملكي",
+          "en": "Royal purple"
+        },
+        "values": {
+          "hero": "#1E0B2E",
+          "onHero": "#F3EADF",
+          "accent": "#CFAB63",
+          "bg": "#2E1046",
+          "text": "#2A1A33",
+          "muted": "#6F6078",
+          "card": "#F7F1E8",
+          "line": "#E2D6C6"
+        }
+      },
+      {
+        "key": "onyxRoyal",
+        "name": {
+          "ar": "أسود ملكي",
+          "en": "Onyx royal"
+        },
+        "values": {
+          "hero": "#0A0A0C",
+          "onHero": "#F3EADF",
+          "accent": "#CFAB63",
+          "bg": "#141416",
+          "text": "#221E18",
+          "muted": "#6E675C",
+          "card": "#F8F2E6",
+          "line": "#E3D8C3"
+        }
+      }
     ],
-    "intros": ["none", "curtain", "doors"],
-    "ambients": ["none"],
-    "motions": { "calm": { "duration": 1100, "stagger": 160, "parallax": true }, "lively": { "duration": 700, "stagger": 100, "parallax": true } },
-    "variants": [ { "key": "dateStyle" }, { "key": "photoFrame" }, { "key": "galleryStyle" } ],
+    "intros": [
+      "none",
+      "curtain",
+      "doors"
+    ],
+    "ambients": [
+      "none"
+    ],
+    "motions": {
+      "calm": {
+        "duration": 1100,
+        "stagger": 160,
+        "parallax": true
+      },
+      "lively": {
+        "duration": 700,
+        "stagger": 100,
+        "parallax": true
+      }
+    },
+    "variants": [
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
+      },
+      {
+        "key": "galleryStyle"
+      },
+      {
+        "key": "ornament"
+      }
+    ],
     "hiddenEffects": []
   }
 }

@@ -178,7 +178,8 @@
       "type": "variant",
       "options": [
         "veil",
-        "card"
+        "card",
+        "portrait"
       ],
       "choices": {
         "veil": {
@@ -188,6 +189,10 @@
         "card": {
           "ar": "كارت دانتيل فقط",
           "en": "Lace card only"
+        },
+        "portrait": {
+          "ar": "صورة كبيرة بإطار لؤلؤ",
+          "en": "Large pearl portrait"
         }
       }
     },
@@ -196,7 +201,8 @@
       "type": "variant",
       "options": [
         "rich",
-        "refined"
+        "refined",
+        "opulent"
       ],
       "choices": {
         "rich": {
@@ -206,6 +212,10 @@
         "refined": {
           "ar": "هادئ وراقي",
           "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
         }
       }
     },
@@ -214,7 +224,10 @@
       "type": "variant",
       "options": [
         "badge",
-        "calendar"
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
       ],
       "choices": {
         "badge": {
@@ -224,6 +237,18 @@
         "calendar": {
           "ar": "تقويم الشهر",
           "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -233,7 +258,10 @@
       "options": [
         "pearl",
         "arch",
-        "scalloped"
+        "scalloped",
+        "heart",
+        "hexagon",
+        "polaroid"
       ],
       "choices": {
         "pearl": {
@@ -247,6 +275,18 @@
         "scalloped": {
           "ar": "حافة مموجة",
           "en": "Scalloped"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
         }
       }
     },
@@ -256,7 +296,9 @@
       "options": [
         "coverflow",
         "stack",
-        "strip"
+        "strip",
+        "grid",
+        "scatter"
       ],
       "choices": {
         "coverflow": {
@@ -270,6 +312,14 @@
         "strip": {
           "ar": "شريط بسيط",
           "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
         }
       }
     }
@@ -436,6 +486,42 @@
           "card": "#1D2640",
           "line": "#313B58",
           "lace": "#E9E4DA"
+        }
+      },
+      {
+        "key": "lilacLace",
+        "name": {
+          "ar": "دانتيل ليلكي",
+          "en": "Lilac lace"
+        },
+        "values": {
+          "hero": "#7A6596",
+          "onHero": "#FBF9FD",
+          "accent": "#BFA6C8",
+          "bg": "#ECE6F2",
+          "text": "#2E2540",
+          "muted": "#6E6684",
+          "card": "#FDFBFF",
+          "line": "#DDD5E7",
+          "lace": "#FFFFFF"
+        }
+      },
+      {
+        "key": "blackGoldLace",
+        "name": {
+          "ar": "دانتيل أسود وذهبي",
+          "en": "Black & gold lace"
+        },
+        "values": {
+          "hero": "#F0E6D2",
+          "onHero": "#111111",
+          "accent": "#D4B26B",
+          "bg": "#121212",
+          "text": "#F2EBDD",
+          "muted": "#A49C8E",
+          "card": "#1C1B19",
+          "line": "#33302A",
+          "lace": "#D9CDB4"
         }
       }
     ],

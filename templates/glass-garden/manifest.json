@@ -170,7 +170,8 @@
       "type": "variant",
       "options": [
         "glasshouse",
-        "window"
+        "window",
+        "conservatory"
       ],
       "choices": {
         "glasshouse": {
@@ -180,6 +181,10 @@
         "window": {
           "ar": "نافذة دائرية",
           "en": "Rose window"
+        },
+        "conservatory": {
+          "ar": "لوح زجاجي بين النباتات",
+          "en": "Glass panel among plants"
         }
       }
     },
@@ -188,7 +193,8 @@
       "type": "variant",
       "options": [
         "rich",
-        "refined"
+        "refined",
+        "opulent"
       ],
       "choices": {
         "rich": {
@@ -198,6 +204,10 @@
         "refined": {
           "ar": "هادئ وراقي",
           "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
         }
       }
     },
@@ -206,7 +216,10 @@
       "type": "variant",
       "options": [
         "badge",
-        "calendar"
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
       ],
       "choices": {
         "badge": {
@@ -216,6 +229,18 @@
         "calendar": {
           "ar": "تقويم الشهر",
           "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -225,7 +250,10 @@
       "options": [
         "arch",
         "circle",
-        "pane"
+        "pane",
+        "heart",
+        "hexagon",
+        "polaroid"
       ],
       "choices": {
         "arch": {
@@ -239,6 +267,18 @@
         "pane": {
           "ar": "لوح زجاج",
           "en": "Glass pane"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
         }
       }
     },
@@ -248,7 +288,9 @@
       "options": [
         "coverflow",
         "stack",
-        "strip"
+        "strip",
+        "grid",
+        "scatter"
       ],
       "choices": {
         "coverflow": {
@@ -262,6 +304,14 @@
         "strip": {
           "ar": "شريط بسيط",
           "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
         }
       }
     }
@@ -429,6 +479,40 @@
           "muted": "#9DB3A0",
           "card": "#1B3323",
           "line": "#2B4733"
+        }
+      },
+      {
+        "key": "lavenderMist",
+        "name": {
+          "ar": "ضباب لافندر",
+          "en": "Lavender mist"
+        },
+        "values": {
+          "hero": "#6C5B9A",
+          "onHero": "#FBF9FF",
+          "accent": "#B9A06E",
+          "bg": "#F1EEF7",
+          "text": "#2B2442",
+          "muted": "#6D6787",
+          "card": "#FDFCFF",
+          "line": "#DDD7EA"
+        }
+      },
+      {
+        "key": "terracotta",
+        "name": {
+          "ar": "تيراكوتا",
+          "en": "Terracotta"
+        },
+        "values": {
+          "hero": "#8C4A32",
+          "onHero": "#FFF7F1",
+          "accent": "#C49A5E",
+          "bg": "#F6ECE4",
+          "text": "#3A2117",
+          "muted": "#7B6255",
+          "card": "#FFFBF7",
+          "line": "#EAD8CA"
         }
       }
     ],

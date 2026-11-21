@@ -182,7 +182,8 @@
       "type": "variant",
       "options": [
         "dunes",
-        "arch"
+        "arch",
+        "horizon"
       ],
       "choices": {
         "dunes": {
@@ -192,6 +193,10 @@
         "arch": {
           "ar": "الكثبان من نافذة مقوسة",
           "en": "Dunes through a gilded arch"
+        },
+        "horizon": {
+          "ar": "أفق هادئ",
+          "en": "Calm horizon"
         }
       }
     },
@@ -200,7 +205,8 @@
       "type": "variant",
       "options": [
         "rich",
-        "refined"
+        "refined",
+        "opulent"
       ],
       "choices": {
         "rich": {
@@ -210,6 +216,10 @@
         "refined": {
           "ar": "هادئ وراقي",
           "en": "Refined and quiet"
+        },
+        "opulent": {
+          "ar": "فخامة مضاعفة بتوهج ذهبي",
+          "en": "Opulent gold glow"
         }
       }
     },
@@ -218,7 +228,10 @@
       "type": "variant",
       "options": [
         "badge",
-        "calendar"
+        "calendar",
+        "ribbon",
+        "frame",
+        "line"
       ],
       "choices": {
         "badge": {
@@ -228,6 +241,18 @@
         "calendar": {
           "ar": "تقويم الشهر",
           "en": "Month calendar"
+        },
+        "ribbon": {
+          "ar": "شريط ذهبي",
+          "en": "Gold ribbon"
+        },
+        "frame": {
+          "ar": "إطار مزدوج",
+          "en": "Double frame"
+        },
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -237,7 +262,10 @@
       "options": [
         "arch",
         "circle",
-        "dome"
+        "dome",
+        "heart",
+        "hexagon",
+        "polaroid"
       ],
       "choices": {
         "arch": {
@@ -251,6 +279,18 @@
         "dome": {
           "ar": "قبة",
           "en": "Dome"
+        },
+        "heart": {
+          "ar": "قلب",
+          "en": "Heart"
+        },
+        "hexagon": {
+          "ar": "سداسي",
+          "en": "Hexagon"
+        },
+        "polaroid": {
+          "ar": "صورة فورية",
+          "en": "Polaroid"
         }
       }
     },
@@ -260,7 +300,9 @@
       "options": [
         "coverflow",
         "stack",
-        "strip"
+        "strip",
+        "grid",
+        "scatter"
       ],
       "choices": {
         "coverflow": {
@@ -274,6 +316,14 @@
         "strip": {
           "ar": "شريط بسيط",
           "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
         }
       }
     }
@@ -459,6 +509,46 @@
           "glow": "#FBF3E4",
           "dune": "#E2C9A2",
           "silhouette": "#5B3E24"
+        }
+      },
+      {
+        "key": "saffron",
+        "name": {
+          "ar": "زعفران",
+          "en": "Saffron"
+        },
+        "values": {
+          "hero": "#5A3410",
+          "onHero": "#FFF6E6",
+          "accent": "#D9A440",
+          "bg": "#EDB85A",
+          "text": "#3D2410",
+          "muted": "#7D5A35",
+          "card": "#FFF6E4",
+          "line": "#EED8B0",
+          "glow": "#FBE3A8",
+          "dune": "#DDA052",
+          "silhouette": "#4A2A0E"
+        }
+      },
+      {
+        "key": "lavenderDusk",
+        "name": {
+          "ar": "غروب لافندر",
+          "en": "Lavender dusk"
+        },
+        "values": {
+          "hero": "#3D2850",
+          "onHero": "#FAF4FF",
+          "accent": "#D3AE6E",
+          "bg": "#9C86B8",
+          "text": "#2B1D3A",
+          "muted": "#4E3F5E",
+          "card": "#FBF6FC",
+          "line": "#E5D9EA",
+          "glow": "#F2CFC4",
+          "dune": "#B98AA0",
+          "silhouette": "#2E1C3B"
         }
       }
     ],
