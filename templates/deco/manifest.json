@@ -1,12 +1,12 @@
 {
   "key": "deco",
   "name": {
-    "ar": "ديكو",
+    "ar": "غاتسبي ديكو",
     "en": "Gatsby Deco"
   },
   "description": {
-    "ar": "فخامة العشرينات: أشعة شمس ذهبية، إطارات متدرجة، مراوح ديكو، ومعرض صور كأوراق اللعب.",
-    "en": "Roaring-twenties glamour: a gold sunburst, stepped frames, Art Deco fans and a fanned playing-card gallery."
+    "ar": "سطح ناطحة سحاب في ليلة احتفال بعمق: أضواء كاشفة وألعاب نارية ومدينة ديكو وسور ذهبي وبرج شمبانيا، يُفتح بمروحة ديكو، مع لوحة أضواء للعد ومؤشر مصعد يتنقل بين فقرات الليلة.",
+    "en": "A skyscraper rooftop on a party night with depth: searchlights, fireworks, a deco skyline, a gold balustrade and a champagne tower. Opens with a deco fan, counts down on a marquee sign, and an elevator dial travels through the evening."
   },
   "languages": [
     "ar",
@@ -14,8 +14,8 @@
   ],
   "texts": {
     "lead": {
-      "ar": "يسرّنا دعوتكم لليلة لا تُنسى في حفل زفاف",
-      "en": "Request the pleasure of your company for an evening celebrating"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
       "ar": "و",
@@ -29,9 +29,13 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
     "countdownTitle": {
-      "ar": "العد التنازلي",
-      "en": "The countdown"
+      "ar": "الأضواء تعدّ لليلتنا",
+      "en": "The lights count to our night"
     },
     "countdownUnit": {
       "ar": "يوم",
@@ -50,20 +54,20 @@
       "en": "Engaged on"
     },
     "galleryTitle": {
-      "ar": "من صورنا",
-      "en": "The gallery"
+      "ar": "من الحفل",
+      "en": "From the party"
     },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
     },
     "galleryHint": {
-      "ar": "اسحبوا لتقليب الصور",
-      "en": "Swipe to deal the photos"
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
     },
     "eventsTitle": {
-      "ar": "برنامج السهرة",
-      "en": "The evening"
+      "ar": "طوابق الليلة",
+      "en": "Floor by floor"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -78,7 +82,7 @@
       "en": ", "
     },
     "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
+      "ar": "ارفعوا نخب العروسين",
       "en": "Raise a toast"
     },
     "openUntil": {
@@ -124,6 +128,14 @@
       "type": "color"
     },
     {
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
+      "type": "color"
+    },
+    {
       "key": "display",
       "type": "font"
     },
@@ -139,22 +151,58 @@
       "key": "radius",
       "type": "length",
       "min": 0,
-      "max": 6,
+      "max": 24,
       "unit": "px"
     },
     {
       "key": "nameSize",
       "type": "length",
-      "min": 36,
-      "max": 70,
+      "min": 34,
+      "max": 64,
       "unit": "px"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
     },
     {
       "key": "patternTile",
       "type": "image"
     },
     {
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
+      "type": "image"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "dividerArt",
+      "type": "image"
+    },
+    {
+      "key": "fireworksArt",
+      "type": "image"
+    },
+    {
+      "key": "skylineArt",
+      "type": "image"
+    },
+    {
       "key": "fanArt",
+      "type": "image"
+    },
+    {
+      "key": "champagneArt",
       "type": "image"
     },
     {
@@ -311,6 +359,29 @@
       }
     },
     {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "scene",
+        "still",
+        "names"
+      ],
+      "choices": {
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
+        },
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
+        },
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
+        }
+      }
+    },
+    {
       "key": "ornament",
       "type": "variant",
       "options": [
@@ -370,25 +441,25 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
-        "chamfer",
+        "veiled",
         "arch",
-        "circle",
+        "oval",
         "heart",
         "hexagon",
         "polaroid"
       ],
       "choices": {
-        "chamfer": {
-          "ar": "إطار مشطوف",
-          "en": "Chamfered"
+        "veiled": {
+          "ar": "أبواب مصعد مذهبة",
+          "en": "Gilded elevator doors"
         },
         "arch": {
           "ar": "قوس",
           "en": "Arch"
         },
-        "circle": {
-          "ar": "دائرة",
-          "en": "Circle"
+        "oval": {
+          "ar": "بيضاوي",
+          "en": "Oval"
         },
         "heart": {
           "ar": "قلب",
@@ -408,15 +479,20 @@
       "key": "galleryStyle",
       "type": "variant",
       "options": [
-        "deck",
+        "coverflow",
+        "carousel",
         "strip",
         "grid",
         "scatter"
       ],
       "choices": {
-        "deck": {
-          "ar": "كأوراق اللعب",
-          "en": "Playing-card deck"
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -434,26 +510,38 @@
     }
   ],
   "defaultTheme": {
-    "hero": "#0B0B0D",
-    "onHero": "#F1E6CC",
+    "hero": "#142238",
+    "onHero": "#F4EBD6",
     "accent": "#CDAA62",
-    "bg": "#121215",
-    "text": "#EDE3CC",
-    "muted": "#A49A86",
-    "card": "#17171B",
-    "line": "#3A3426",
-    "display": "reemKufi",
-    "body": "decoSans",
+    "bg": "#F2EEE4",
+    "text": "#182336",
+    "muted": "#6F747C",
+    "card": "#FBFAF7",
+    "line": "#D3D2CC",
+    "deep": "#0B1324",
+    "leaf": "#2E6B5E",
+    "display": "elMessiri",
+    "body": "plexArabic",
     "latin": "poiret",
-    "radius": 0,
-    "nameSize": 56,
+    "radius": 14,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
     "patternTile": "deco-tile",
+    "monogramArt": "deco-fan",
+    "travellerArt": "deco-fan",
+    "footerArt": "champagne",
+    "frameArt": "gold-flourish",
+    "dividerArt": "gold-flourish",
+    "fireworksArt": "fireworks",
+    "skylineArt": "deco-skyline",
     "fanArt": "deco-fan",
+    "champagneArt": "champagne",
     "cornerArt": "deco-corner",
-    "dateStyle": "badge",
-    "photoFrame": "chamfer",
-    "galleryStyle": "deck",
+    "coverLayout": "scene",
     "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "veiled",
+    "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -468,20 +556,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "curtain",
+    "intro": "fan",
     "ambient": "none",
-    "duration": 1000,
-    "stagger": 140,
+    "duration": 1100,
+    "stagger": 160,
     "parallax": true,
     "sections": {
       "cover": {
         "effect": "fade"
       },
       "countdown": {
-        "effect": "fan"
+        "effect": "fade-up"
       },
       "story": {
-        "effect": "fan"
+        "effect": "fade-up"
       },
       "gallery": {
         "effect": "fade"
@@ -490,46 +578,45 @@
         "effect": "fade-up"
       },
       "wishes": {
-        "effect": "fan"
+        "effect": "fade-up"
       },
       "footer": {
         "effect": "fade"
       }
     }
   },
-  "effects": [
-    {
-      "key": "fan",
-      "kind": "reveal",
-      "name": {
-        "ar": "انفتاح المروحة",
-        "en": "Fan open"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "fan"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
-      "ar": "ديكو",
+      "ar": "غاتسبي ديكو",
       "en": "Gatsby Deco"
     },
-    "defaultPalette": "onyx",
+    "defaultPalette": "navyGold",
     "palettes": [
       {
-        "key": "onyx",
+        "key": "navyGold",
         "name": {
-          "ar": "أسود وذهبي",
-          "en": "Onyx & gold"
+          "ar": "كحلي وذهبي",
+          "en": "Navy & gold"
         },
         "values": {
-          "hero": "#0B0B0D",
-          "onHero": "#F1E6CC",
+          "hero": "#142238",
+          "onHero": "#F4EBD6",
           "accent": "#CDAA62",
-          "bg": "#121215",
-          "text": "#EDE3CC",
-          "muted": "#A49A86",
-          "card": "#17171B",
-          "line": "#3A3426"
+          "bg": "#F2EEE4",
+          "text": "#182336",
+          "muted": "#6F747C",
+          "card": "#FBFAF7",
+          "line": "#D3D2CC",
+          "deep": "#0B1324",
+          "leaf": "#2E6B5E"
         }
       },
       {
@@ -539,89 +626,105 @@
           "en": "Emerald deco"
         },
         "values": {
-          "hero": "#05201B",
-          "onHero": "#F1E6CC",
-          "accent": "#D2B06A",
-          "bg": "#082A24",
-          "text": "#EFE5CE",
-          "muted": "#9FB0A6",
-          "card": "#0B3029",
-          "line": "#2E4A3C"
-        }
-      },
-      {
-        "key": "champagne",
-        "name": {
-          "ar": "شمبانيا وأسود",
-          "en": "Champagne & black"
-        },
-        "values": {
-          "hero": "#141210",
-          "onHero": "#F4EBD8",
-          "accent": "#B8934E",
-          "bg": "#EFE6D4",
-          "text": "#1C1814",
-          "muted": "#6E6355",
-          "card": "#1A1714",
-          "line": "#CDBE9F"
-        }
-      },
-      {
-        "key": "sapphireDeco",
-        "name": {
-          "ar": "ياقوتي ديكو",
-          "en": "Sapphire deco"
-        },
-        "values": {
-          "hero": "#0A1430",
-          "onHero": "#EEE6D2",
+          "hero": "#0F3A30",
+          "onHero": "#F2F8F4",
           "accent": "#CDAA62",
-          "bg": "#0E1A3D",
-          "text": "#EAE3D0",
-          "muted": "#9AA0B4",
-          "card": "#111E45",
-          "line": "#2C3456"
+          "bg": "#EFEFE6",
+          "text": "#14302A",
+          "muted": "#6C7C75",
+          "card": "#FAFAF8",
+          "line": "#D0D4CC",
+          "deep": "#08201B",
+          "leaf": "#2E5A6B"
         }
       },
       {
         "key": "rubyDeco",
         "name": {
-          "ar": "ياقوت أحمر",
+          "ar": "ياقوت ديكو",
           "en": "Ruby deco"
         },
         "values": {
-          "hero": "#2A0A10",
-          "onHero": "#F3E6D2",
+          "hero": "#5A1420",
+          "onHero": "#FBF2EA",
           "accent": "#CFA862",
-          "bg": "#3A0E17",
-          "text": "#F0E2CF",
-          "muted": "#B49A8F",
-          "card": "#44111C",
-          "line": "#5A2A30"
+          "bg": "#F5EDE6",
+          "text": "#2E1418",
+          "muted": "#7E6B6A",
+          "card": "#FCFAF8",
+          "line": "#D9CFC9",
+          "deep": "#1E0B10",
+          "leaf": "#2E4A5E"
+        }
+      },
+      {
+        "key": "champagneDeco",
+        "name": {
+          "ar": "شمبانيا",
+          "en": "Champagne"
+        },
+        "values": {
+          "hero": "#3A3226",
+          "onHero": "#FBF7EE",
+          "accent": "#C8AB72",
+          "bg": "#F5F1E8",
+          "text": "#2A241C",
+          "muted": "#7B766E",
+          "card": "#FCFBF8",
+          "line": "#D9D4CB",
+          "deep": "#1A1712",
+          "leaf": "#5E6B5E"
+        }
+      },
+      {
+        "key": "onyxDeco",
+        "name": {
+          "ar": "أسود ديكو",
+          "en": "Onyx deco"
+        },
+        "values": {
+          "hero": "#EADCB8",
+          "onHero": "#0E0E10",
+          "accent": "#CDAA62",
+          "bg": "#0E0E10",
+          "text": "#EFE6D2",
+          "muted": "#959084",
+          "card": "#1E1D1E",
+          "line": "#2E2C2B",
+          "deep": "#060608",
+          "leaf": "#2E5A4E"
         }
       }
     ],
     "intros": [
-      "none",
+      "fan",
+      "doors",
       "curtain",
-      "doors"
+      "none"
     ],
     "ambients": [
-      "none"
+      "none",
+      "sparkles"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
-        "stagger": 140,
+        "duration": 1100,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },
     "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
       {
         "key": "dateStyle"
       },
@@ -630,9 +733,6 @@
       },
       {
         "key": "galleryStyle"
-      },
-      {
-        "key": "ornament"
       },
       {
         "key": "fontPair"

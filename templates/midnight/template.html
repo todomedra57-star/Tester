@@ -1,62 +1,64 @@
-<main class="mn" data-date-style="{{variant "dateStyle"}}" data-countdown-style="{{variant "countdownStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-ornament="{{variant "ornament"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}">
+<main class="mn" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
-  <section class="mn-section mn-cover" data-animate="cover">
-    <span class="mn-cover__thread" aria-hidden="true"></span>
-    <span class="mn-moon" aria-hidden="true" data-parallax></span>
-
-    {{#if verse}}<p class="mn-verse">{{verse}}</p>{{/if}}
-    <p class="mn-lead">{{text "lead"}}</p>
-
-    <h1 class="mn-names">
-      <span class="mn-name">{{couple.groom.name}}</span>
-      {{#if couple.bride.name}}
-        <span class="mn-and">{{text "and"}}</span>
-        <span class="mn-name">{{couple.bride.name}}</span>
-      {{/if}}
-    </h1>
-
-    <div class="mn-families">
-      <div class="mn-family">
-        {{#if couple.groom.father}}
-          <p class="mn-family__label">{{text "sonOf"}}</p>
-          <p class="mn-family__name">{{couple.groom.father}}</p>
-        {{/if}}
-        {{#each couple.groom.family}}
-          <p class="mn-family__label">{{label}}</p>
-          <p class="mn-family__name">{{name}}</p>
-        {{/each}}
-      </div>
-      <div class="mn-family">
-        {{#if couple.bride.father}}
-          <p class="mn-family__label">{{text "daughterOf"}}</p>
-          <p class="mn-family__name">{{couple.bride.father}}</p>
-        {{/if}}
-        {{#each couple.bride.family}}
-          <p class="mn-family__label">{{label}}</p>
-          <p class="mn-family__name">{{name}}</p>
-        {{/each}}
+  <section class="mn-cover" data-animate="cover">
+    <!-- the night sky: sky, Milky Way, stars, constellation, comet, moon, hills, observatory and trees drift at their own speeds -->
+    <div class="mn-diorama">
+      <div class="mn-stage">
+        <span class="mn-layer mn-sky" aria-hidden="true"></span>
+        <span class="mn-layer mn-milkyway" aria-hidden="true"></span>
+        <span class="mn-layer mn-stars" aria-hidden="true"></span>
+        <span class="mn-layer mn-constellation" aria-hidden="true"></span>
+        <span class="mn-layer mn-comet" aria-hidden="true"></span>
+        <span class="mn-layer mn-moon" aria-hidden="true"></span>
+        <span class="mn-layer mn-hills-far" aria-hidden="true"></span>
+        <span class="mn-layer mn-hills-far-2" aria-hidden="true"></span>
+        <span class="mn-layer mn-observatory" aria-hidden="true"></span>
+        <span class="mn-layer mn-hills-near" aria-hidden="true"></span>
+        <span class="mn-layer mn-trees" aria-hidden="true"></span>
+        <div class="mn-layer mn-cartouche mn-cartouche--night">
+          <span class="mn-monogram" aria-hidden="true"></span>
+          <p class="mn-lead">{{text "lead"}}</p>
+          <h1 class="mn-names">
+            <span class="mn-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="mn-and">{{text "and"}}</span><span class="mn-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="mn-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+        <p class="mn-cue">{{text "scrollHint"}}</p>
       </div>
     </div>
 
-    {{#unless (variant "dateStyle" "calendar")}}
-      <p class="mn-date"><span>{{formatDate mainDate}}</span></p>
-    {{/unless}}
+    <div class="mn-sheet">
+      {{#if verse}}<p class="mn-verse">{{verse}}</p>{{/if}}
+      <div class="mn-families">
+        <div class="mn-family">
+          {{#if couple.groom.father}}<p class="mn-family__label">{{text "sonOf"}}</p><p class="mn-family__name">{{couple.groom.father}}</p>{{/if}}
+          {{#each couple.groom.family}}<p class="mn-family__label">{{label}}</p><p class="mn-family__name">{{name}}</p>{{/each}}
+        </div>
+        <div class="mn-family">
+          {{#if couple.bride.father}}<p class="mn-family__label">{{text "daughterOf"}}</p><p class="mn-family__name">{{couple.bride.father}}</p>{{/if}}
+          {{#each couple.bride.family}}<p class="mn-family__label">{{label}}</p><p class="mn-family__name">{{name}}</p>{{/each}}
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- countdown: five phases of the moon that rise one after another -->
   <section class="mn-section mn-countdown" data-animate="countdown">
-    <h2 class="mn-kicker">{{text "countdownTitle"}}</h2>
-    <div class="mn-count">
-      <span class="mn-count__num">{{daysUntil mainDate}}</span>
-      <span class="mn-count__unit">{{text "countdownUnit"}}</span>
+    <h2 class="mn-title">{{text "countdownTitle"}}</h2>
+    <div class="mn-emblem">
+      <span class="mn-emblem__a" aria-hidden="true"></span>
+      <span class="mn-emblem__b" aria-hidden="true"></span>
+      <span class="mn-emblem__c" aria-hidden="true"></span>
+      <p class="mn-count"><span class="mn-count__num">{{daysUntil mainDate}}</span><span class="mn-count__unit">{{text "countdownUnit"}}</span></p>
     </div>
-
     {{#if (variant "dateStyle" "calendar")}}
       {{#with (calendarMonth mainDate)}}
-        <div class="mn-cal">
+        <div class="mn-card mn-cal">
           <p class="mn-cal__title">{{title}}</p>
           <div class="mn-cal__grid">
             {{#each weekdays}}<span class="mn-cal__wd">{{this}}</span>{{/each}}
-            {{#each cells}}<span class="mn-cal__cell{{#if wedding}} is-wedding{{/if}}{{#if empty}} is-empty{{/if}}">{{label}}</span>{{/each}}
+            {{#each cells}}<span class="mn-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
           </div>
         </div>
       {{/with}}
@@ -65,86 +67,77 @@
 
   {{#if story.text}}
     <div class="mn-divider" aria-hidden="true"></div>
+    <!-- story: each photo waits behind night clouds that part once -->
     <section class="mn-section mn-story" data-animate="story">
       <h2 class="mn-title">{{text "storyTitle"}}</h2>
       {{#if story.photos.length}}
         <div class="mn-photos">
           {{#each story.photos}}
-            <figure class="mn-frame" data-item>
+            <figure class="mn-photo" data-item>
               <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="mn-veil mn-veil--a" aria-hidden="true"></span>
+              <span class="mn-veil mn-veil--b" aria-hidden="true"></span>
             </figure>
           {{/each}}
         </div>
       {{/if}}
       <p class="mn-story__text">{{story.text}}</p>
-      {{#if story.engagementDate}}
-        <p class="mn-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>
-      {{/if}}
+      {{#if story.engagementDate}}<p class="mn-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
     </section>
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="mn-section mn-gallery" data-animate="gallery">
-      <h2 class="mn-title">{{text "galleryTitle"}}</h2>
-      <div class="mn-strip">
-        {{#each gallery}}
-          <figure class="mn-strip__item" data-item>
-            <img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy">
-          </figure>
-        {{/each}}
+    <section class="mn-section mn-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
+      <div class="mn-gallery__stage">
+        <h2 class="mn-title">{{text "galleryTitle"}}</h2>
+        <div class="mn-flow">
+          {{#each gallery}}<figure class="mn-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="mn-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="mn-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
   <div class="mn-divider" aria-hidden="true"></div>
 
+  <!-- events: a star map; the comet travels along with you -->
   <section class="mn-section mn-events" data-animate="events">
     <h2 class="mn-title">{{text "eventsTitle"}}</h2>
-    <div class="mn-events__list">
+    <div class="mn-journey">
+      <span class="mn-path" aria-hidden="true"><span class="mn-traveller"></span></span>
       {{#each events}}
-        <article class="mn-event" data-item>
-          <p class="mn-event__type">{{eventLabel type}}</p>
+        <article class="mn-card mn-event" data-item>
+          <h3 class="mn-event__type">{{eventLabel type}}</h3>
           <p class="mn-event__date">{{formatDate date}}</p>
           <p class="mn-event__time">{{eventTime this}}</p>
           <p class="mn-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-
           {{#if program.length}}
             <div class="mn-program">
               <p class="mn-program__title">{{text "programTitle"}}</p>
               <ol class="mn-program__list">
-                {{#each program}}
-                  <li class="mn-program__item">
-                    <span class="mn-program__time">{{formatTime time}}</span>
-                    <span class="mn-program__what">{{title}}</span>
-                  </li>
-                {{/each}}
+                {{#each program}}<li class="mn-program__item"><span class="mn-program__time">{{formatTime time}}</span><span class="mn-program__what">{{title}}</span></li>{{/each}}
               </ol>
             </div>
           {{/if}}
-
-          {{#if mapUrl}}
-            <a class="mn-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>
-          {{/if}}
+          {{#if mapUrl}}<a class="mn-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
         </article>
       {{/each}}
     </div>
   </section>
 
-  <div class="mn-divider" aria-hidden="true"></div>
-
   <section class="mn-section mn-wishes" data-animate="wishes">
-    <h2 class="mn-title">{{text "wishesTitle"}}</h2>
-    <wishes-box></wishes-box>
+    <div class="mn-panel">
+      <span class="mn-panel__decor" aria-hidden="true"></span>
+      <h2 class="mn-title mn-title--panel">{{text "wishesTitle"}}</h2>
+      <wishes-box></wishes-box>
+    </div>
   </section>
 
   <footer class="mn-section mn-footer" data-animate="footer">
-    <span class="mn-moon mn-moon--small" aria-hidden="true"></span>
+    <span class="mn-footer__art" aria-hidden="true"></span>
+    <span class="mn-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="mn-closing">{{closingLine}}</p>{{/if}}
-    {{#if wishes.closeDate}}
-      <p class="mn-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>
-    {{/if}}
+    {{#if wishes.closeDate}}<p class="mn-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="mn-brand">{{text "madeWith"}}</p>{{/if}}
   </footer>
-
 </main>

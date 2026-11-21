@@ -111,9 +111,23 @@
     document.body.classList.add('is-locked');
     const intro = document.createElement('div');
     intro.className = `intro intro-${cfg.intro}`;
-    const doors = cfg.intro === 'palace'
-      ? '<div class="intro__doors"><div class="intro__door intro__door--l"><span class="intro__lattice"></span></div><div class="intro__door intro__door--r"><span class="intro__lattice"></span></div></div>'
-      : '<div class="intro__half intro__half--l"></div><div class="intro__half intro__half--r"></div>';
+    // each opening is a few panels that move with transforms only
+    const P = (cls, inner = '') => `<div class="intro__p ${cls}">${inner}</div>`;
+    const lattice = '<span class="intro__lattice"></span>';
+    const MARKUP = {
+      palace: '<div class="intro__doors"><div class="intro__door intro__door--l">' + lattice + '</div><div class="intro__door intro__door--r">' + lattice + '</div></div>',
+      glass: '<div class="intro__doors">' + P('intro__glass intro__glass--l') + P('intro__glass intro__glass--r') + '</div>',
+      velvet: P('intro__velvet intro__velvet--l') + P('intro__velvet intro__velvet--r') + P('intro__valance'),
+      tent: P('intro__flap intro__flap--l') + P('intro__flap intro__flap--r'),
+      screen: P('intro__screen intro__screen--l', lattice) + P('intro__screen intro__screen--r', lattice),
+      envelope: P('intro__env-back') + P('intro__env-flap') + P('intro__env-front'),
+      veil: P('intro__veil', lattice),
+      fan: P('intro__fan-bg intro__fan-bg--l') + P('intro__fan-bg intro__fan-bg--r') + P('intro__fan'),
+      starfall: P('intro__night') + P('intro__stars'),
+      page: '<div class="intro__book">' + P('intro__page', '<span class="intro__masthead"></span>') + '</div>',
+      fold: P('intro__fold intro__fold--1') + P('intro__fold intro__fold--2') + P('intro__fold intro__fold--3') + P('intro__fold intro__fold--4'),
+    };
+    const doors = MARKUP[cfg.intro] || '<div class="intro__half intro__half--l"></div><div class="intro__half intro__half--r"></div>';
     intro.innerHTML = doors +
       '<div class="intro__content"><h2 class="intro__names"></h2><button class="intro-seal" type="button"></button><p class="intro__hint"></p></div>';
     intro.querySelector('.intro__names').textContent = cfg.names;
@@ -127,12 +141,12 @@
       scene.askTilt();
       intro.classList.add('is-open');
       document.body.classList.remove('is-locked');
-      if (cfg.intro === 'palace' && !reduce) {
+      if (cfg.intro !== 'curtain' && cfg.intro !== 'doors' && !reduce) {
         // the page behind the doors settles from a slight zoom while the doors swing open
         document.body.classList.add('intro-settle');
         setTimeout(() => document.body.classList.remove('intro-settle'), 2200);
       }
-      setTimeout(() => { intro.classList.add('is-gone'); startReveal(); }, reduce ? 0 : (cfg.intro === 'palace' ? 1700 : 900));
+      setTimeout(() => { intro.classList.add('is-gone'); startReveal(); }, reduce ? 0 : (['curtain', 'doors'].includes(cfg.intro) ? 900 : 1700));
     }, { once: true });
   } else {
     startReveal();

@@ -5,8 +5,8 @@
     "en": "Lace"
   },
   "description": {
-    "ar": "دانتيل العروس واللؤلؤ على الحرير: عقد لؤلؤ، مفرش دانتيل حول صورتكم، كروت حرير بحافة دانتيل، وخط يدوي ناعم.",
-    "en": "Bridal lace and pearls on silk: a pearl garland, a lace doily around your portrait, silk cards with lace trims, and a flowing script."
+    "ar": "بوتيك عرائس بعمق: ستائر دانتيل وعقود لؤلؤ ومرآة مذهبة وطاولة بمفرش دانتيل وباقة ورد، يُفتح برفع الطرحة، مع علبة خاتم للعد وشريط ساتان بين المناسبات.",
+    "en": "A bridal boutique in depth: lace curtains, pearl strands, a gilded mirror, a lace-covered table and a bouquet. Opens as the veil lifts, counts down in a ring box, and a satin ribbon leads through the events."
   },
   "languages": [
     "ar",
@@ -14,32 +14,8 @@
   ],
   "texts": {
     "lead": {
-      "ar": "بكل الحب ندعوكم لمشاركتنا فرحة زفاف",
-      "en": "With love, we invite you to celebrate the marriage of"
-    },
-    "countdownTitle": {
-      "ar": "باقي على الفرح",
-      "en": "Until we say yes"
-    },
-    "storyTitle": {
-      "ar": "حكايتنا",
-      "en": "Our love story"
-    },
-    "galleryTitle": {
-      "ar": "من صورنا",
-      "en": "Sweet moments"
-    },
-    "galleryHint": {
-      "ar": "اسحبوا لمشاهدة كل الصور",
-      "en": "Swipe through our moments"
-    },
-    "eventsTitle": {
-      "ar": "المواعيد",
-      "en": "The celebrations"
-    },
-    "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
-      "en": "Write us a little note"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
       "ar": "و",
@@ -53,9 +29,21 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
+    "countdownTitle": {
+      "ar": "الخاتم بانتظار يومنا",
+      "en": "The ring awaits our day"
+    },
     "countdownUnit": {
       "ar": "يوم",
       "en": "days"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
     },
     "storyPhoto": {
       "ar": "صورة من حكايتنا",
@@ -65,9 +53,21 @@
       "ar": "الخطوبة:",
       "en": "Engaged on"
     },
+    "galleryTitle": {
+      "ar": "لحظات بيضاء",
+      "en": "White moments"
+    },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "على شريط الساتان",
+      "en": "Along the satin ribbon"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -80,6 +80,10 @@
     "listSeparator": {
       "ar": "، ",
       "en": ", "
+    },
+    "wishesTitle": {
+      "ar": "اكتبوا أمنية للعروسين",
+      "en": "Write a wish for the couple"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -124,7 +128,11 @@
       "type": "color"
     },
     {
-      "key": "lace",
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
       "type": "color"
     },
     {
@@ -143,22 +151,58 @@
       "key": "radius",
       "type": "length",
       "min": 0,
-      "max": 28,
+      "max": 24,
       "unit": "px"
     },
     {
       "key": "nameSize",
       "type": "length",
       "min": 34,
-      "max": 68,
+      "max": 64,
       "unit": "px"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
     },
     {
       "key": "patternTile",
       "type": "image"
     },
     {
-      "key": "edgeArt",
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
+      "type": "image"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "dividerArt",
+      "type": "image"
+    },
+    {
+      "key": "cornerArt",
+      "type": "image"
+    },
+    {
+      "key": "laceArt",
+      "type": "image"
+    },
+    {
+      "key": "pearlsArt",
       "type": "image"
     },
     {
@@ -166,11 +210,11 @@
       "type": "image"
     },
     {
-      "key": "pearlArt",
+      "key": "bouquetArt",
       "type": "image"
     },
     {
-      "key": "sparkleArt",
+      "key": "edgeArt",
       "type": "image"
     },
     {
@@ -326,22 +370,22 @@
       "key": "coverLayout",
       "type": "variant",
       "options": [
-        "veil",
-        "card",
-        "portrait"
+        "scene",
+        "still",
+        "names"
       ],
       "choices": {
-        "veil": {
-          "ar": "مفرش دانتيل حول الصورة",
-          "en": "Lace doily portrait"
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
         },
-        "card": {
-          "ar": "كارت دانتيل فقط",
-          "en": "Lace card only"
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
         },
-        "portrait": {
-          "ar": "صورة كبيرة بإطار لؤلؤ",
-          "en": "Large pearl portrait"
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
         }
       }
     },
@@ -405,25 +449,25 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
-        "pearl",
+        "veiled",
         "arch",
-        "scalloped",
+        "oval",
         "heart",
         "hexagon",
         "polaroid"
       ],
       "choices": {
-        "pearl": {
-          "ar": "إطار لؤلؤ بيضاوي",
-          "en": "Pearl oval"
+        "veiled": {
+          "ar": "طرحة ترتفع",
+          "en": "Lifting veil"
         },
         "arch": {
           "ar": "قوس",
           "en": "Arch"
         },
-        "scalloped": {
-          "ar": "حافة مموجة",
-          "en": "Scalloped"
+        "oval": {
+          "ar": "بيضاوي",
+          "en": "Oval"
         },
         "heart": {
           "ar": "قلب",
@@ -444,7 +488,7 @@
       "type": "variant",
       "options": [
         "coverflow",
-        "stack",
+        "carousel",
         "strip",
         "grid",
         "scatter"
@@ -454,9 +498,9 @@
           "ar": "عرض ثلاثي الأبعاد",
           "en": "3D coverflow"
         },
-        "stack": {
-          "ar": "كأوراق متراصة",
-          "en": "Fanned stack"
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -474,29 +518,39 @@
     }
   ],
   "defaultTheme": {
-    "hero": "#8A6D4B",
-    "onHero": "#FFFDF8",
-    "accent": "#C8A97A",
-    "bg": "#F4EBE0",
-    "text": "#3B2E24",
-    "muted": "#7A6A5C",
-    "card": "#FFFCF7",
-    "line": "#E8DCCB",
-    "lace": "#FFFFFF",
+    "hero": "#6E4B5A",
+    "onHero": "#FFF9FA",
+    "accent": "#C7A27C",
+    "bg": "#F7F0EE",
+    "text": "#3A2A30",
+    "muted": "#86797C",
+    "card": "#FDFAFA",
+    "line": "#DDD4D3",
+    "deep": "#5A4450",
+    "leaf": "#B9A3A8",
     "display": "arefRuqaa",
-    "body": "serifPair",
+    "body": "plexArabic",
     "latin": "pinyon",
-    "radius": 10,
-    "nameSize": 48,
+    "radius": 14,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
     "patternTile": "lace-tile",
-    "edgeArt": "lace-edge",
-    "doilyArt": "lace-doily",
-    "pearlArt": "pearls",
+    "monogramArt": "rosette",
     "sparkleArt": "sparkle",
-    "coverLayout": "veil",
+    "travellerArt": "bouquet",
+    "footerArt": "pearls",
+    "frameArt": "lace-edge",
+    "dividerArt": "pearls",
+    "cornerArt": "filigree-corner",
+    "laceArt": "lace-tile",
+    "pearlsArt": "pearls",
+    "doilyArt": "lace-doily",
+    "bouquetArt": "bouquet",
+    "edgeArt": "lace-edge",
+    "coverLayout": "scene",
     "ornament": "rich",
     "dateStyle": "badge",
-    "photoFrame": "pearl",
+    "photoFrame": "veiled",
     "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
@@ -512,23 +566,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "curtain",
+    "intro": "veil",
     "ambient": "none",
-    "duration": 1000,
-    "stagger": 150,
+    "duration": 1100,
+    "stagger": 160,
     "parallax": true,
     "sections": {
-      "countdown": {
-        "effect": "unfurl"
-      },
-      "story": {
-        "effect": "unfurl"
-      },
-      "wishes": {
-        "effect": "unfurl"
-      },
       "cover": {
         "effect": "fade"
+      },
+      "countdown": {
+        "effect": "fade-up"
+      },
+      "story": {
+        "effect": "fade-up"
       },
       "gallery": {
         "effect": "fade"
@@ -536,29 +587,48 @@
       "events": {
         "effect": "fade-up"
       },
+      "wishes": {
+        "effect": "fade-up"
+      },
       "footer": {
         "effect": "fade"
       }
     }
   },
-  "effects": [
-    {
-      "key": "unfurl",
-      "kind": "reveal",
-      "name": {
-        "ar": "انسدال الطرحة",
-        "en": "Veil unfurl"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "veil"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
       "ar": "دانتيل",
       "en": "Lace"
     },
-    "defaultPalette": "ivoryChampagne",
+    "defaultPalette": "blushPearl",
     "palettes": [
+      {
+        "key": "blushPearl",
+        "name": {
+          "ar": "وردي لؤلؤي",
+          "en": "Blush pearl"
+        },
+        "values": {
+          "hero": "#6E4B5A",
+          "onHero": "#FFF9FA",
+          "accent": "#C7A27C",
+          "bg": "#F7F0EE",
+          "text": "#3A2A30",
+          "muted": "#86797C",
+          "card": "#FDFAFA",
+          "line": "#DDD4D3",
+          "deep": "#5A4450",
+          "leaf": "#B9A3A8"
+        }
+      },
       {
         "key": "ivoryChampagne",
         "name": {
@@ -566,87 +636,16 @@
           "en": "Ivory & champagne"
         },
         "values": {
-          "hero": "#8A6D4B",
-          "onHero": "#FFFDF8",
-          "accent": "#C8A97A",
-          "bg": "#F4EBE0",
-          "text": "#3B2E24",
-          "muted": "#7A6A5C",
-          "card": "#FFFCF7",
-          "line": "#E8DCCB",
-          "lace": "#FFFFFF"
-        }
-      },
-      {
-        "key": "blushRose",
-        "name": {
-          "ar": "وردي وذهب وردي",
-          "en": "Blush & rose gold"
-        },
-        "values": {
-          "hero": "#A35D6A",
-          "onHero": "#FFF8F6",
-          "accent": "#C99A84",
-          "bg": "#F1DEDA",
-          "text": "#40262C",
-          "muted": "#7F6168",
-          "card": "#FFF8F6",
-          "line": "#E9D0CB",
-          "lace": "#FFFFFF"
-        }
-      },
-      {
-        "key": "doveSilver",
-        "name": {
-          "ar": "رمادي وفضي",
-          "en": "Dove & silver"
-        },
-        "values": {
-          "hero": "#5E6470",
-          "onHero": "#FAFAFB",
-          "accent": "#AEB4BF",
-          "bg": "#E9E9EC",
-          "text": "#2A2D33",
-          "muted": "#6B6F78",
-          "card": "#FAFAFB",
-          "line": "#DADBE0",
-          "lace": "#FFFFFF"
-        }
-      },
-      {
-        "key": "sageLace",
-        "name": {
-          "ar": "دانتيل مريمية",
-          "en": "Sage lace"
-        },
-        "values": {
-          "hero": "#5E7360",
-          "onHero": "#FBFCFA",
-          "accent": "#B9A16E",
-          "bg": "#E5EBE3",
-          "text": "#263027",
-          "muted": "#66705F",
-          "card": "#FBFCFA",
-          "line": "#D6DED4",
-          "lace": "#FFFFFF"
-        }
-      },
-      {
-        "key": "midnightLace",
-        "name": {
-          "ar": "دانتيل على كحلي",
-          "en": "Midnight lace"
-        },
-        "values": {
-          "hero": "#F1EAE0",
-          "onHero": "#141B2E",
-          "accent": "#D3B47A",
-          "bg": "#141B2E",
-          "text": "#F2ECE2",
-          "muted": "#A7AEC0",
-          "card": "#1D2640",
-          "line": "#313B58",
-          "lace": "#E9E4DA"
+          "hero": "#6A5434",
+          "onHero": "#FFFBF2",
+          "accent": "#C9AA74",
+          "bg": "#F7F2E8",
+          "text": "#3A2E1E",
+          "muted": "#867C6F",
+          "card": "#FDFBF8",
+          "line": "#DDD7CC",
+          "deep": "#5C4B33",
+          "leaf": "#C4B49A"
         }
       },
       {
@@ -656,53 +655,76 @@
           "en": "Lilac lace"
         },
         "values": {
-          "hero": "#7A6596",
+          "hero": "#5E4C7E",
           "onHero": "#FBF9FD",
           "accent": "#BFA6C8",
-          "bg": "#ECE6F2",
+          "bg": "#F1ECF4",
           "text": "#2E2540",
-          "muted": "#6E6684",
-          "card": "#FDFBFF",
-          "line": "#DDD5E7",
-          "lace": "#FFFFFF"
+          "muted": "#7C7588",
+          "card": "#FBF9FC",
+          "line": "#D6D0DB",
+          "deep": "#4A3D63",
+          "leaf": "#B5A6C8"
         }
       },
       {
-        "key": "blackGoldLace",
+        "key": "sageLace",
         "name": {
-          "ar": "دانتيل أسود وذهبي",
-          "en": "Black & gold lace"
+          "ar": "دانتيل مريمي",
+          "en": "Sage lace"
         },
         "values": {
-          "hero": "#F0E6D2",
-          "onHero": "#111111",
+          "hero": "#4A5E50",
+          "onHero": "#F7FAF7",
+          "accent": "#BFA67C",
+          "bg": "#EFF1EC",
+          "text": "#263329",
+          "muted": "#767F77",
+          "card": "#FAFBF9",
+          "line": "#D3D6D1",
+          "deep": "#3E4E42",
+          "leaf": "#A9B8A8"
+        }
+      },
+      {
+        "key": "blackLace",
+        "name": {
+          "ar": "دانتيل أسود",
+          "en": "Black lace"
+        },
+        "values": {
+          "hero": "#EADFC8",
+          "onHero": "#121212",
           "accent": "#D4B26B",
-          "bg": "#121212",
+          "bg": "#141414",
           "text": "#F2EBDD",
-          "muted": "#A49C8E",
-          "card": "#1C1B19",
-          "line": "#33302A",
-          "lace": "#D9CDB4"
+          "muted": "#99958D",
+          "card": "#242322",
+          "line": "#333230",
+          "deep": "#0A0A0A",
+          "leaf": "#5E554A"
         }
       }
     ],
     "intros": [
-      "none",
+      "veil",
       "doors",
-      "curtain"
+      "curtain",
+      "none"
     ],
     "ambients": [
-      "none"
+      "none",
+      "sparkles"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
-        "stagger": 150,
+        "duration": 1100,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },

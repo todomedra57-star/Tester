@@ -5,8 +5,8 @@
     "en": "Midnight"
   },
   "description": {
-    "ar": "تصميم هادئ بسيط بالكحلي، خطوط رفيعة وهلال صغير.",
-    "en": "A calm, minimal navy design: hairlines, lots of space, a small crescent."
+    "ar": "ليلة فلكية بعمق: درب التبانة ونجوم وأبراج ومذنب يعبر السماء وقمر ومرصد على التلال، تُفتح بحلول الليل، مع أطوار القمر للعد ومذنب يرافقكم على خريطة النجوم.",
+    "en": "An astronomer's night with depth: the Milky Way, stars, a constellation, a comet crossing the sky, the moon and an observatory on the hills. Opens as night falls, counts down in moon phases, and a comet rides the star map through the events."
   },
   "languages": [
     "ar",
@@ -14,12 +14,12 @@
   ],
   "texts": {
     "lead": {
-      "ar": "يتشرفون بدعوتكم لحضور حفل زفاف",
-      "en": "request the pleasure of your company at the wedding of"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
-      "ar": "&",
-      "en": "and"
+      "ar": "و",
+      "en": "&"
     },
     "sonOf": {
       "ar": "نجل",
@@ -29,9 +29,13 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
     "countdownTitle": {
-      "ar": "باقي على الفرح",
-      "en": "The celebration begins in"
+      "ar": "القمر يعدّ الليالي",
+      "en": "The moon counts the nights"
     },
     "countdownUnit": {
       "ar": "يوم",
@@ -50,20 +54,20 @@
       "en": "Engaged on"
     },
     "galleryTitle": {
-      "ar": "من صورنا",
-      "en": "Moments"
+      "ar": "من ليالينا",
+      "en": "From our nights"
     },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
     },
     "galleryHint": {
-      "ar": "اسحبوا عشان تشوفوا كل الصور",
-      "en": "Swipe to see every photo"
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
     },
     "eventsTitle": {
-      "ar": "المواعيد",
-      "en": "When & where"
+      "ar": "على خريطة النجوم",
+      "en": "On the star map"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -78,8 +82,8 @@
       "en": ", "
     },
     "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
-      "en": "Write a wish for the couple"
+      "ar": "اكتبوا أمنية للنجوم",
+      "en": "Wish upon a star"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -124,6 +128,14 @@
       "type": "color"
     },
     {
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
+      "type": "color"
+    },
+    {
       "key": "display",
       "type": "font"
     },
@@ -148,6 +160,46 @@
       "min": 34,
       "max": 64,
       "unit": "px"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
+    },
+    {
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
+      "type": "image"
+    },
+    {
+      "key": "dividerArt",
+      "type": "image"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "constellationArt",
+      "type": "image"
+    },
+    {
+      "key": "cometArt",
+      "type": "image"
+    },
+    {
+      "key": "observatoryArt",
+      "type": "image"
+    },
+    {
+      "key": "treesArt",
+      "type": "image"
     },
     {
       "key": "classic",
@@ -215,6 +267,39 @@
       }
     },
     {
+      "key": "metal",
+      "type": "variant",
+      "options": [
+        "palette",
+        "champagne",
+        "roseGold",
+        "silver",
+        "iridescent"
+      ],
+      "choices": {
+        "palette": {
+          "ar": "معدن الألوان",
+          "en": "Palette metal"
+        },
+        "champagne": {
+          "ar": "شمبانيا",
+          "en": "Champagne"
+        },
+        "roseGold": {
+          "ar": "ذهب وردي",
+          "en": "Rose gold"
+        },
+        "silver": {
+          "ar": "فضي",
+          "en": "Silver"
+        },
+        "iridescent": {
+          "ar": "لؤلؤي قزحي",
+          "en": "Iridescent pearl"
+        }
+      }
+    },
+    {
       "key": "entrance",
       "type": "variant",
       "options": [
@@ -266,6 +351,29 @@
       }
     },
     {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "scene",
+        "still",
+        "names"
+      ],
+      "choices": {
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
+        },
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
+        },
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
+        }
+      }
+    },
+    {
       "key": "ornament",
       "type": "variant",
       "options": [
@@ -289,46 +397,19 @@
       }
     },
     {
-      "key": "galleryStyle",
-      "type": "variant",
-      "options": [
-        "strip",
-        "grid",
-        "scatter"
-      ],
-      "choices": {
-        "strip": {
-          "ar": "شريط بسيط",
-          "en": "Simple strip"
-        },
-        "grid": {
-          "ar": "شبكة فسيفساء",
-          "en": "Mosaic grid"
-        },
-        "scatter": {
-          "ar": "صور فورية متناثرة",
-          "en": "Scattered polaroids"
-        }
-      }
-    },
-    {
       "key": "dateStyle",
       "type": "variant",
       "options": [
-        "line",
         "badge",
         "calendar",
         "ribbon",
-        "frame"
+        "frame",
+        "line"
       ],
       "choices": {
-        "line": {
-          "ar": "سطر رفيع تحت الأسماء",
-          "en": "Hairline under the names"
-        },
         "badge": {
-          "ar": "شارة على الغلاف",
-          "en": "Badge on the cover"
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
         },
         "calendar": {
           "ar": "تقويم الشهر",
@@ -341,29 +422,10 @@
         "frame": {
           "ar": "إطار مزدوج",
           "en": "Double frame"
-        }
-      }
-    },
-    {
-      "key": "countdownStyle",
-      "type": "variant",
-      "options": [
-        "ring",
-        "plain",
-        "diamond"
-      ],
-      "choices": {
-        "ring": {
-          "ar": "داخل دائرة",
-          "en": "In a ring"
         },
-        "plain": {
-          "ar": "رقم فقط",
-          "en": "Number only"
-        },
-        "diamond": {
-          "ar": "داخل معين",
-          "en": "In a diamond"
+        "line": {
+          "ar": "بين خطين",
+          "en": "Between hairlines"
         }
       }
     },
@@ -371,25 +433,25 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
-        "offset",
+        "veiled",
         "arch",
-        "circle",
+        "oval",
         "heart",
         "hexagon",
         "polaroid"
       ],
       "choices": {
-        "offset": {
-          "ar": "إطار مزاح",
-          "en": "Offset hairline"
+        "veiled": {
+          "ar": "غيوم تنقشع",
+          "en": "Parting clouds"
         },
         "arch": {
           "ar": "قوس",
           "en": "Arch"
         },
-        "circle": {
-          "ar": "دائرة",
-          "en": "Circle"
+        "oval": {
+          "ar": "بيضاوي",
+          "en": "Oval"
         },
         "heart": {
           "ar": "قلب",
@@ -404,27 +466,72 @@
           "en": "Polaroid"
         }
       }
+    },
+    {
+      "key": "galleryStyle",
+      "type": "variant",
+      "options": [
+        "coverflow",
+        "carousel",
+        "strip",
+        "grid",
+        "scatter"
+      ],
+      "choices": {
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
+        },
+        "strip": {
+          "ar": "شريط بسيط",
+          "en": "Simple strip"
+        },
+        "grid": {
+          "ar": "شبكة فسيفساء",
+          "en": "Mosaic grid"
+        },
+        "scatter": {
+          "ar": "صور فورية متناثرة",
+          "en": "Scattered polaroids"
+        }
+      }
     }
   ],
   "defaultTheme": {
-    "hero": "#0B1626",
-    "onHero": "#EAF0F8",
-    "accent": "#A9C1E0",
-    "bg": "#0F1D32",
-    "text": "#D9E2EF",
-    "muted": "#8597B4",
-    "card": "#14253D",
-    "line": "#26395A",
-    "display": "amiri",
+    "hero": "#E9DFC8",
+    "onHero": "#0D1222",
+    "accent": "#CDB27A",
+    "bg": "#0D1222",
+    "text": "#ECE6D8",
+    "muted": "#93918F",
+    "card": "#1D212F",
+    "line": "#2C303B",
+    "deep": "#070B18",
+    "leaf": "#2C3A5E",
+    "display": "elMessiri",
     "body": "plexArabic",
-    "latin": "cormorant",
-    "radius": 2,
-    "nameSize": 52,
-    "dateStyle": "line",
-    "countdownStyle": "ring",
-    "photoFrame": "offset",
-    "galleryStyle": "strip",
+    "latin": "marcellus",
+    "radius": 14,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
+    "monogramArt": "rosette",
+    "travellerArt": "comet",
+    "footerArt": "observatory",
+    "dividerArt": "star-divider",
+    "frameArt": "star-divider",
+    "constellationArt": "constellation",
+    "cometArt": "comet",
+    "observatoryArt": "observatory",
+    "treesArt": "tree-line",
+    "coverLayout": "scene",
     "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "veiled",
+    "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -435,12 +542,13 @@
     "geometricLatin": "cinzel",
     "photoTone": "natural",
     "entrance": "gentle",
+    "metal": "palette",
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "doors",
+    "intro": "starfall",
     "ambient": "none",
-    "duration": 1000,
+    "duration": 1100,
     "stagger": 160,
     "parallax": true,
     "sections": {
@@ -467,73 +575,57 @@
       }
     }
   },
-  "effects": [
-    {
-      "key": "stars",
-      "kind": "ambient",
-      "name": {
-        "ar": "نجوم هادئة",
-        "en": "Quiet stars"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "starfall"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
       "ar": "منتصف الليل",
       "en": "Midnight"
     },
-    "defaultPalette": "midnight",
+    "defaultPalette": "deepNight",
     "palettes": [
       {
-        "key": "midnight",
+        "key": "deepNight",
         "name": {
-          "ar": "كحلي وأزرق ثلجي",
-          "en": "Navy & ice"
+          "ar": "ليل عميق",
+          "en": "Deep night"
         },
         "values": {
-          "hero": "#0B1626",
-          "onHero": "#EAF0F8",
-          "accent": "#A9C1E0",
-          "bg": "#0F1D32",
-          "text": "#D9E2EF",
-          "muted": "#8597B4",
-          "card": "#14253D",
-          "line": "#26395A"
+          "hero": "#E9DFC8",
+          "onHero": "#0D1222",
+          "accent": "#CDB27A",
+          "bg": "#0D1222",
+          "text": "#ECE6D8",
+          "muted": "#93918F",
+          "card": "#1D212F",
+          "line": "#2C303B",
+          "deep": "#070B18",
+          "leaf": "#2C3A5E"
         }
       },
       {
-        "key": "navyGold",
+        "key": "ivoryNight",
         "name": {
-          "ar": "كحلي وذهبي",
-          "en": "Navy & gold"
+          "ar": "ليل عاجي",
+          "en": "Ivory night"
         },
         "values": {
-          "hero": "#0A1424",
-          "onHero": "#F3EEE4",
-          "accent": "#C9A96A",
-          "bg": "#0E1B2E",
-          "text": "#E4DFD4",
-          "muted": "#9298A6",
-          "card": "#13223A",
-          "line": "#2B3A52"
-        }
-      },
-      {
-        "key": "indigoPearl",
-        "name": {
-          "ar": "نيلي ولؤلؤي",
-          "en": "Indigo & pearl"
-        },
-        "values": {
-          "hero": "#121433",
-          "onHero": "#F1F0FA",
-          "accent": "#C8C4F0",
-          "bg": "#171A3D",
-          "text": "#DEDCF2",
-          "muted": "#9593BF",
-          "card": "#1E2250",
-          "line": "#30356A"
+          "hero": "#1A2340",
+          "onHero": "#F7F4EC",
+          "accent": "#C6A86C",
+          "bg": "#F1EEE6",
+          "text": "#1A2340",
+          "muted": "#707482",
+          "card": "#FBFAF8",
+          "line": "#D3D2CF",
+          "deep": "#0B1226",
+          "leaf": "#2C3A5E"
         }
       },
       {
@@ -543,14 +635,16 @@
           "en": "Onyx & gold"
         },
         "values": {
-          "hero": "#0A0A0B",
-          "onHero": "#F3EEE4",
+          "hero": "#EEE6D4",
+          "onHero": "#0A0A0B",
           "accent": "#CFAE6A",
           "bg": "#111112",
           "text": "#E9E4DA",
-          "muted": "#9A958B",
-          "card": "#18181A",
-          "line": "#2E2C28"
+          "muted": "#93908A",
+          "card": "#202020",
+          "line": "#2F2F2E",
+          "deep": "#060607",
+          "leaf": "#2A2A36"
         }
       },
       {
@@ -560,56 +654,81 @@
           "en": "Emerald night"
         },
         "values": {
-          "hero": "#06201A",
-          "onHero": "#EAF4EF",
+          "hero": "#E2EEE6",
+          "onHero": "#06201A",
           "accent": "#C9B37E",
           "bg": "#0A2A22",
           "text": "#DCE9E2",
-          "muted": "#86A396",
-          "card": "#10342A",
-          "line": "#24493D"
+          "muted": "#889D95",
+          "card": "#19372F",
+          "line": "#27453D",
+          "deep": "#041612",
+          "leaf": "#1E4A3A"
+        }
+      },
+      {
+        "key": "violetSky",
+        "name": {
+          "ar": "سماء بنفسجية",
+          "en": "Violet sky"
+        },
+        "values": {
+          "hero": "#ECE4F2",
+          "onHero": "#150F24",
+          "accent": "#C9AE7A",
+          "bg": "#150F24",
+          "text": "#ECE6F2",
+          "muted": "#9690A0",
+          "card": "#241E32",
+          "line": "#332D41",
+          "deep": "#0C0818",
+          "leaf": "#3E2E5E"
         }
       }
     ],
     "intros": [
-      "none",
+      "starfall",
       "doors",
-      "curtain"
+      "curtain",
+      "none"
     ],
     "ambients": [
       "none",
-      "stars"
+      "sparkles"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
+        "duration": 1100,
         "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },
     "variants": [
       {
-        "key": "dateStyle"
-      },
-      {
-        "key": "countdownStyle"
-      },
-      {
-        "key": "photoFrame"
+        "key": "coverLayout"
       },
       {
         "key": "ornament"
+      },
+      {
+        "key": "dateStyle"
+      },
+      {
+        "key": "photoFrame"
       },
       {
         "key": "galleryStyle"
       },
       {
         "key": "fontPair"
+      },
+      {
+        "key": "metal"
       },
       {
         "key": "entrance"

@@ -1,12 +1,12 @@
 {
   "key": "andalus",
   "name": {
-    "ar": "أندلس",
+    "ar": "الأندلس",
     "en": "Andalus"
   },
   "description": {
-    "ar": "فناء أندلسي في ليلة مقمرة: بوابة على شكل قوس، أرضية زليج بعمق ثلاثي الأبعاد، فوانيس معلقة، وكروت عاجية بأقواس. بلمسة ذهبية فاخرة.",
-    "en": "A moonlit Andalusian courtyard: a horseshoe-arch gateway, a zellige floor in 3D perspective, hanging lanterns and ivory arch-topped cards. Finished in gold foil."
+    "ar": "فناء أندلسي ليلي بعمق: سرو وأروقة مقوسة مضيئة وبركة تعكسها ونافورة وفوانيس، يُفتح بمشربيتين تنزلقان، مع نجمة زليج للعد وقناة ماء بين المناسبات.",
+    "en": "An Andalusian courtyard at night with depth: cypresses, lit arcades, a reflecting pool, a fountain and lanterns. Opens as two mashrabiya screens slide apart, counts down in a zellige star, and a water channel leads through the events."
   },
   "languages": [
     "ar",
@@ -14,8 +14,8 @@
   ],
   "texts": {
     "lead": {
-      "ar": "بكل الحب يتشرفون بدعوتكم لحضور حفل زفاف",
-      "en": "With joy, our families invite you to the wedding of"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
       "ar": "و",
@@ -29,9 +29,13 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
     "countdownTitle": {
-      "ar": "باقي على ليلتنا",
-      "en": "Until our night"
+      "ar": "تقترب ليلة الفناء",
+      "en": "Our night in the courtyard draws near"
     },
     "countdownUnit": {
       "ar": "يوم",
@@ -50,20 +54,20 @@
       "en": "Engaged on"
     },
     "galleryTitle": {
-      "ar": "من صورنا",
-      "en": "Our moments"
+      "ar": "من الأروقة",
+      "en": "From the arcades"
     },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
     },
     "galleryHint": {
-      "ar": "اسحبوا عشان تشوفوا كل الصور",
-      "en": "Swipe through the arches"
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
     },
     "eventsTitle": {
-      "ar": "المواعيد",
-      "en": "The celebrations"
+      "ar": "على قناة الماء",
+      "en": "Along the water channel"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -78,8 +82,8 @@
       "en": ", "
     },
     "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
-      "en": "Leave a wish for the couple"
+      "ar": "اكتبوا دعوة طيبة",
+      "en": "Leave a kind wish"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -124,6 +128,14 @@
       "type": "color"
     },
     {
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
+      "type": "color"
+    },
+    {
       "key": "display",
       "type": "font"
     },
@@ -145,8 +157,8 @@
     {
       "key": "nameSize",
       "type": "length",
-      "min": 36,
-      "max": 68,
+      "min": 34,
+      "max": 64,
       "unit": "px"
     },
     {
@@ -162,7 +174,23 @@
       "type": "image"
     },
     {
-      "key": "lanternArt",
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
+      "type": "image"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "dividerArt",
       "type": "image"
     },
     {
@@ -170,11 +198,23 @@
       "type": "image"
     },
     {
-      "key": "medallionArt",
+      "key": "cypressArt",
       "type": "image"
     },
     {
-      "key": "dividerArt",
+      "key": "arcadeArt",
+      "type": "image"
+    },
+    {
+      "key": "fountainArt",
+      "type": "image"
+    },
+    {
+      "key": "lanternArt",
+      "type": "image"
+    },
+    {
+      "key": "geoArt",
       "type": "image"
     },
     {
@@ -327,6 +367,29 @@
       }
     },
     {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "scene",
+        "still",
+        "names"
+      ],
+      "choices": {
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
+        },
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
+        },
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
+        }
+      }
+    },
+    {
       "key": "ornament",
       "type": "variant",
       "options": [
@@ -361,8 +424,8 @@
       ],
       "choices": {
         "badge": {
-          "ar": "التاريخ تحت الأسماء",
-          "en": "Date under the names"
+          "ar": "التاريخ على الغلاف",
+          "en": "Date on the cover"
         },
         "calendar": {
           "ar": "تقويم الشهر",
@@ -386,25 +449,25 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
+        "veiled",
         "arch",
-        "octagon",
-        "circle",
+        "oval",
         "heart",
         "hexagon",
         "polaroid"
       ],
       "choices": {
+        "veiled": {
+          "ar": "مشربية تنزلق",
+          "en": "Sliding mashrabiya"
+        },
         "arch": {
-          "ar": "قوس مدبب",
-          "en": "Pointed arch"
+          "ar": "قوس",
+          "en": "Arch"
         },
-        "octagon": {
-          "ar": "نجمة ثمانية",
-          "en": "Eight-point star"
-        },
-        "circle": {
-          "ar": "دائرة",
-          "en": "Circle"
+        "oval": {
+          "ar": "بيضاوي",
+          "en": "Oval"
         },
         "heart": {
           "ar": "قلب",
@@ -424,15 +487,20 @@
       "key": "galleryStyle",
       "type": "variant",
       "options": [
-        "arcade",
+        "coverflow",
+        "carousel",
         "strip",
         "grid",
         "scatter"
       ],
       "choices": {
-        "arcade": {
-          "ar": "أقواس ثلاثية الأبعاد",
-          "en": "3D arcade"
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -450,30 +518,40 @@
     }
   ],
   "defaultTheme": {
-    "hero": "#0A2E28",
-    "onHero": "#F6EEDC",
+    "hero": "#1E4B5F",
+    "onHero": "#F5FAFA",
     "accent": "#C9A55C",
-    "bg": "#0F3B33",
-    "text": "#123A32",
-    "muted": "#5E6E66",
-    "card": "#F7F0E1",
-    "line": "#E2D5B8",
-    "display": "arefRuqaa",
-    "body": "serifPair",
+    "bg": "#F3EEE3",
+    "text": "#1F2F38",
+    "muted": "#747B7C",
+    "card": "#FBFAF7",
+    "line": "#D5D3CB",
+    "deep": "#172437",
+    "leaf": "#4F6B4E",
+    "display": "reemKufi",
+    "body": "plexArabic",
     "latin": "marcellus",
-    "radius": 10,
-    "nameSize": 54,
+    "radius": 14,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
     "patternTile": "zellige-tile",
     "screenArt": "mashrabiya",
-    "lanternArt": "lantern",
-    "cornerArt": "geo-corner",
-    "medallionArt": "rosette",
+    "monogramArt": "rosette",
+    "travellerArt": "lantern",
+    "footerArt": "fountain",
+    "frameArt": "star-divider",
     "dividerArt": "star-divider",
-    "dateStyle": "badge",
-    "photoFrame": "arch",
-    "galleryStyle": "arcade",
-    "paperTexture": "paper-grain",
+    "cornerArt": "geo-corner",
+    "cypressArt": "cypress",
+    "arcadeArt": "arcade",
+    "fountainArt": "fountain",
+    "lanternArt": "lantern",
+    "geoArt": "geo-corner",
+    "coverLayout": "scene",
     "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "veiled",
+    "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -488,20 +566,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "doors",
+    "intro": "screen",
     "ambient": "none",
     "duration": 1100,
-    "stagger": 170,
+    "stagger": 160,
     "parallax": true,
     "sections": {
       "cover": {
         "effect": "fade"
       },
       "countdown": {
-        "effect": "unveil"
+        "effect": "fade-up"
       },
       "story": {
-        "effect": "unveil"
+        "effect": "fade-up"
       },
       "gallery": {
         "effect": "fade"
@@ -510,105 +588,45 @@
         "effect": "fade-up"
       },
       "wishes": {
-        "effect": "unveil"
+        "effect": "fade-up"
       },
       "footer": {
         "effect": "fade"
       }
     }
   },
-  "effects": [
-    {
-      "key": "unveil",
-      "kind": "reveal",
-      "name": {
-        "ar": "انكشاف من القوس",
-        "en": "Arch unveil"
-      }
-    },
-    {
-      "key": "gold-dust",
-      "kind": "ambient",
-      "name": {
-        "ar": "غبار ذهبي",
-        "en": "Rising gold dust"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "screen"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
-      "ar": "أندلس",
+      "ar": "الأندلس",
       "en": "Andalus"
     },
-    "defaultPalette": "emerald",
+    "defaultPalette": "tealGold",
     "palettes": [
       {
-        "key": "emerald",
+        "key": "tealGold",
         "name": {
-          "ar": "زمردي وذهبي",
-          "en": "Emerald & gold"
+          "ar": "فيروزي وذهبي",
+          "en": "Teal & gold"
         },
         "values": {
-          "hero": "#0A2E28",
-          "onHero": "#F6EEDC",
+          "hero": "#1E4B5F",
+          "onHero": "#F5FAFA",
           "accent": "#C9A55C",
-          "bg": "#0F3B33",
-          "text": "#123A32",
-          "muted": "#5E6E66",
-          "card": "#F7F0E1",
-          "line": "#E2D5B8"
-        }
-      },
-      {
-        "key": "onyx",
-        "name": {
-          "ar": "أسود وذهبي",
-          "en": "Onyx & gold"
-        },
-        "values": {
-          "hero": "#0C0C0E",
-          "onHero": "#F5EEDC",
-          "accent": "#CFAB63",
-          "bg": "#151518",
-          "text": "#1D1A15",
-          "muted": "#6B655B",
-          "card": "#F8F2E6",
-          "line": "#E4D8BF"
-        }
-      },
-      {
-        "key": "sapphire",
-        "name": {
-          "ar": "ياقوتي وذهبي",
-          "en": "Sapphire & gold"
-        },
-        "values": {
-          "hero": "#0B1E3F",
-          "onHero": "#F4EEDF",
-          "accent": "#C9A55C",
-          "bg": "#112A52",
-          "text": "#14284A",
-          "muted": "#5D6678",
-          "card": "#F6F1E6",
-          "line": "#DED4BE"
-        }
-      },
-      {
-        "key": "desertRose",
-        "name": {
-          "ar": "وردي صحراوي",
-          "en": "Desert rose"
-        },
-        "values": {
-          "hero": "#4A1F1A",
-          "onHero": "#F8EDE3",
-          "accent": "#D2A867",
-          "bg": "#5E2A22",
-          "text": "#4A231D",
-          "muted": "#7A625B",
-          "card": "#FAF1E7",
-          "line": "#E7D5C3"
+          "bg": "#F3EEE3",
+          "text": "#1F2F38",
+          "muted": "#747B7C",
+          "card": "#FBFAF7",
+          "line": "#D5D3CB",
+          "deep": "#172437",
+          "leaf": "#4F6B4E"
         }
       },
       {
@@ -618,47 +636,90 @@
           "en": "Amethyst & gold"
         },
         "values": {
-          "hero": "#2A1638",
-          "onHero": "#F4EDF6",
+          "hero": "#4A2A5E",
+          "onHero": "#F8F3FA",
           "accent": "#C9A55C",
-          "bg": "#3A1F4D",
+          "bg": "#F4EFF2",
           "text": "#2E1A3B",
-          "muted": "#6E5F78",
-          "card": "#F7F1F6",
-          "line": "#E1D3E2"
+          "muted": "#7D6F84",
+          "card": "#FCFAFB",
+          "line": "#D8D1D8",
+          "deep": "#21142E",
+          "leaf": "#5E6B4E"
         }
       },
       {
-        "key": "turquoise",
+        "key": "terracottaCourt",
         "name": {
-          "ar": "فيروزي وذهبي",
-          "en": "Turquoise & gold"
+          "ar": "فناء تيراكوتا",
+          "en": "Terracotta court"
         },
         "values": {
-          "hero": "#0B3440",
-          "onHero": "#EEF6F5",
+          "hero": "#8A4632",
+          "onHero": "#FFF7F2",
+          "accent": "#CDA864",
+          "bg": "#F5ECE2",
+          "text": "#3A2117",
+          "muted": "#857268",
+          "card": "#FCF9F6",
+          "line": "#DBD0C6",
+          "deep": "#2A1C22",
+          "leaf": "#6B7A4E"
+        }
+      },
+      {
+        "key": "emeraldCourt",
+        "name": {
+          "ar": "فناء زمردي",
+          "en": "Emerald court"
+        },
+        "values": {
+          "hero": "#1F5A44",
+          "onHero": "#F4FAF6",
           "accent": "#C9A55C",
-          "bg": "#0F4553",
-          "text": "#123A44",
-          "muted": "#5B7178",
-          "card": "#F4F1E6",
-          "line": "#DDD6C0"
+          "bg": "#EFF0E6",
+          "text": "#1A3328",
+          "muted": "#6F7F74",
+          "card": "#FAFAF8",
+          "line": "#D1D6CB",
+          "deep": "#122A26",
+          "leaf": "#4E7A52"
+        }
+      },
+      {
+        "key": "nightCourt",
+        "name": {
+          "ar": "فناء الليل",
+          "en": "Night courtyard"
+        },
+        "values": {
+          "hero": "#EDE0C2",
+          "onHero": "#101826",
+          "accent": "#C9A55C",
+          "bg": "#101826",
+          "text": "#EFE7D6",
+          "muted": "#969490",
+          "card": "#202632",
+          "line": "#2F353F",
+          "deep": "#0A101C",
+          "leaf": "#3E5A44"
         }
       }
     ],
     "intros": [
-      "none",
+      "screen",
       "doors",
-      "curtain"
+      "curtain",
+      "none"
     ],
     "ambients": [
       "none",
-      "gold-dust"
+      "sparkles"
     ],
     "motions": {
       "calm": {
         "duration": 1100,
-        "stagger": 170,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
@@ -669,6 +730,12 @@
     },
     "variants": [
       {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
+      {
         "key": "dateStyle"
       },
       {
@@ -676,9 +743,6 @@
       },
       {
         "key": "galleryStyle"
-      },
-      {
-        "key": "ornament"
       },
       {
         "key": "fontPair"

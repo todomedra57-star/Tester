@@ -1,0 +1,117 @@
+{
+  "desert-bloom": {
+    "P": "db",
+    "stages": [
+      ".db-sky, .db-stars, .db-moon",
+      ".db-dune-far, .db-caravan, .db-glow",
+      ".db-dune-mid, .db-tent, .db-tent-door",
+      ".db-dune-near, .db-palm",
+      ".db-cartouche",
+      ".db-bloom-start, .db-bloom-end",
+      ".db-sheet"
+    ]
+  },
+  "royal": {
+    "P": "ry",
+    "stages": [
+      ".ry-wall, .ry-windows, .ry-beams",
+      ".ry-chandelier-s, .ry-chandelier-e, .ry-floor",
+      ".ry-column-s, .ry-column-e, .ry-chandelier",
+      ".ry-cartouche",
+      ".ry-drape-s, .ry-drape-e, .ry-valance",
+      ".ry-sheet"
+    ]
+  },
+  "glass-garden": {
+    "P": "gg",
+    "stages": [
+      ".gg-sky, .gg-trees, .gg-panes",
+      ".gg-house, .gg-floor, .gg-ivy-s",
+      ".gg-ivy-e, .gg-fern-s, .gg-fern-e",
+      ".gg-urn-s, .gg-urn-e",
+      ".gg-cartouche",
+      ".gg-fly-1, .gg-fly-2, .gg-fly-3, .gg-fern-near",
+      ".gg-sheet"
+    ]
+  },
+  "lace": {
+    "P": "lc",
+    "stages": [
+      ".lc-wall, .lc-mirror, .lc-curtain-s",
+      ".lc-curtain-e, .lc-pearls, .lc-pearls-2",
+      ".lc-table, .lc-doily, .lc-bouquet",
+      ".lc-cartouche",
+      ".lc-edge",
+      ".lc-sheet"
+    ]
+  },
+  "porcelain": {
+    "P": "pc",
+    "stages": [
+      ".pc-sky, .pc-sun, .pc-mountains",
+      ".pc-birds, .pc-mist, .pc-mountains-near",
+      ".pc-cliff, .pc-pavilion, .pc-water",
+      ".pc-bridge, .pc-willow",
+      ".pc-cartouche",
+      ".pc-corner-s, .pc-corner-e",
+      ".pc-sheet"
+    ]
+  },
+  "andalus": {
+    "P": "an",
+    "stages": [
+      ".an-sky, .an-stars, .an-moon",
+      ".an-cypress, .an-arch-glow, .an-arcade",
+      ".an-pool, .an-reflection, .an-fountain",
+      ".an-lantern-s, .an-lantern-e",
+      ".an-cartouche",
+      ".an-tiles, .an-geo-s, .an-geo-e",
+      ".an-sheet"
+    ]
+  },
+  "deco": {
+    "P": "dc",
+    "stages": [
+      ".dc-sky, .dc-beams, .dc-stars",
+      ".dc-fireworks, .dc-skyline, .dc-skyline-near",
+      ".dc-terrace, .dc-rail, .dc-fan",
+      ".dc-champagne",
+      ".dc-cartouche",
+      ".dc-corner-s, .dc-corner-e",
+      ".dc-sheet"
+    ]
+  },
+  "atelier": {
+    "P": "at",
+    "stages": [
+      ".at-wall, .at-spots",
+      ".at-rack, .at-sweep",
+      ".at-form, .at-fabric",
+      ".at-cartouche",
+      ".at-tape",
+      ".at-sheet"
+    ]
+  },
+  "navy-bloom": {
+    "P": "nb",
+    "stages": [
+      ".nb-sky, .nb-stars, .nb-moon, .nb-trees",
+      ".nb-fireflies, .nb-hedge, .nb-path, .nb-arch",
+      ".nb-bloom-s, .nb-bloom-e, .nb-hydrangea-s, .nb-hydrangea-e",
+      ".nb-cartouche",
+      ".nb-fireflies-near",
+      ".nb-sheet"
+    ]
+  },
+  "midnight": {
+    "P": "mn",
+    "stages": [
+      ".mn-sky, .mn-milkyway, .mn-stars",
+      ".mn-constellation, .mn-comet, .mn-moon",
+      ".mn-hills-far, .mn-hills-far-2, .mn-observatory",
+      ".mn-hills-near, .mn-trees",
+      ".mn-cartouche",
+      ".mn-sheet"
+    ]
+  }
+}

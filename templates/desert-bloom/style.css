@@ -1,16 +1,18 @@
-/* Desert Bloom: an Arabian desert at sunset.
-   Layers: fixed sunset sky → stars and a glowing sun → four dunes that move at
-   different speeds as you scroll (real multi-layer parallax, CSS only) → date
-   palms and desert roses (masks in palette colours) standing on the dunes →
-   sand cards with gold double frames, a gold star crossing the top edge and a
-   desert rose on a corner. Ambient: sand glints drifting on the wind. */
+/* Desert Bloom: a desert night with a caravan, a glowing tent and an hourglass.
+   Built by tools/build-scenes.py with the scene kit (tools/scenekit.py): calm GPU
+   drift on the cover, one-time reveals, no loops. Tokens only; logical properties. */
+
 
 /* ---------- base ---------- */
 .db {
-  --db-gold-deep: color-mix(in srgb, var(--c-accent) 58%, var(--c-hero));
-  --db-gold-light: color-mix(in srgb, var(--c-accent) 45%, var(--c-card));
-  --db-foil: linear-gradient(115deg, var(--db-gold-deep) 0%, var(--c-accent) 20%, var(--db-gold-light) 34%,
-    var(--c-accent) 46%, var(--db-gold-deep) 60%, var(--c-accent) 76%, var(--db-gold-light) 90%, var(--c-accent) 100%);
+  --db-gd: color-mix(in srgb, var(--c-accent) 58%, var(--c-hero));
+  --db-gl: color-mix(in srgb, var(--c-accent) 45%, var(--c-card));
+  --db-foil: linear-gradient(115deg, var(--db-gd) 0%, var(--c-accent) 20%, var(--db-gl) 34%, var(--c-accent) 46%,
+    var(--db-gd) 60%, var(--c-accent) 76%, var(--db-gl) 90%, var(--c-accent) 100%);
+  --db-ink: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 38%, var(--db-gd) 48%, var(--c-accent) 52%, var(--c-hero) 62%, var(--c-hero) 100%);
+  --db-glow: var(--c-card);
+  --db-shade: var(--c-deep);
+  --db-photo-r: var(--radius);
   position: relative;
   isolation: isolate;
   max-inline-size: 520px;
@@ -22,244 +24,295 @@
   text-align: center;
   overflow-x: clip;
 }
-.db :where(p, h1, h2, h3, ol, figure) { margin: 0; }
-.db-section { position: relative; padding-block: 60px; padding-inline: 20px; }
-
-/* foil text */
-.db :is(.db-names, .db-title, .db-count__num, .db-closing, .db-event__type) {
-  background: var(--db-foil-text, var(--db-foil)) 0 0 / 220% 100%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+@supports (color: oklch(from red l c h)) {
+  .db { --db-glow: oklch(from var(--c-accent) 0.96 0.035 h); --db-shade: oklch(from var(--c-deep) calc(l * 0.62) c h); }
 }
+.db :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+.db::before { content: ""; position: fixed; inset: 0; z-index: -2;
+  background: radial-gradient(140% 100% at 50% 40%, transparent 55%, color-mix(in srgb, var(--c-text) 10%, transparent)), var(--c-bg); }
+.has-paper-texture .db::before { background: radial-gradient(140% 100% at 50% 40%, transparent 55%, color-mix(in srgb, var(--c-text) 10%, transparent)), var(--img-paper-texture), var(--c-bg); }
+.has-pattern-tile .db::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05;
+  background: var(--c-accent); -webkit-mask: var(--img-pattern-tile) 0 0 / 120px; mask: var(--img-pattern-tile) 0 0 / 120px; }
+.db-section { position: relative; padding-block: 64px; padding-inline: 20px; }
+.db-wishes, .db-footer { content-visibility: auto; contain-intrinsic-size: auto 700px; }
+
+/* type */
+.db :is(.db-names, .db-title, .db-count__num, .db-event__type) {
+  background: var(--db-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.db :is(.db-title--panel, .db-closing) {
+  background: var(--db-foil) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
 .db-title { margin-block-end: 26px; font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.3; }
 .db:lang(en) .db-title { font-family: var(--font-latin); }
-.db-names { display: flex; flex-direction: column; align-items: center; font-family: var(--font-display); font-weight: 400; font-size: var(--name-size); line-height: 1.25; }
-.db:lang(en) .db-names { font-family: var(--font-latin); }
+.db-names { display: flex; flex-direction: column; align-items: center; font-family: var(--font-display); font-weight: 400; font-size: min(var(--name-size), 12vw); line-height: 1.25; }
+.db:lang(en) .db-names { font-family: var(--font-latin); line-height: 1.12; }
 .db-name { max-inline-size: 100%; overflow-wrap: anywhere; text-wrap: balance; }
-.db-and { font-size: 0.6em; }
+.db-and { font-size: 0.55em; line-height: 1.6; }
+.db-lead { max-inline-size: 26ch; margin-inline: auto; font-size: 14px; color: var(--c-muted); }
+.db:lang(en) .db-lead { font-family: var(--font-latin); font-style: italic; font-size: 16px; }
+.db-monogram { display: none; inline-size: 40px; block-size: 40px; margin-inline: auto; background: var(--db-foil); }
+.has-monogram-art .db-monogram { display: block; -webkit-mask: var(--img-monogram-art) center / contain no-repeat; mask: var(--img-monogram-art) center / contain no-repeat; }
 
-/* sparkles: four-point glints in foil, twinkling as they scroll by */
-.db-spark { position: absolute; z-index: 4; inline-size: 18px; block-size: 18px; display: none; pointer-events: none; background: var(--db-foil); }
+/* ---------- 1 · the diorama ---------- */
+.db-cover, .db-diorama { position: relative; }
+.db-stage { position: relative; block-size: max(100svh, 680px); overflow: hidden; isolation: isolate; }
+/* every plane drifts at its own speed as the cover scrolls away: far planes lag
+   behind, near planes move ahead. One transform per plane, run by the browser on
+   the GPU from the scroll position: no script, no repaint. */
+.db-layer { position: absolute; will-change: transform; }
+@supports (animation-timeline: view()) {
+  .db-stage { view-timeline: --db-cover block; }
+  .db-layer { animation: desert-bloom-drift linear both; animation-timeline: --db-cover; animation-range: exit 0% exit 100%; }
+  .db[data-cover-layout="still"] .db-layer { animation: none; }
+}
+@keyframes desert-bloom-drift { to { transform: translate(var(--dx, 0px), var(--dy, 0px)); } }
+
+.db-cartouche {
+  inset-block-start: var(--db-cart-top, 17%); inset-inline: 0; margin-inline: auto; z-index: 5;
+  inline-size: min(300px, 80%); --dy: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding-block: 26px 30px; padding-inline: 20px;
+}
+.db-cartouche .db-monogram { inline-size: 30px; block-size: 30px; }
+.db-date { padding-block: 7px; padding-inline: 20px; border: 1px solid var(--c-accent); border-radius: 999px; color: var(--c-hero); font-size: 14px; }
+.db-spark { position: absolute; z-index: 4; inline-size: 16px; block-size: 16px; display: none; background: var(--db-foil); pointer-events: none; }
 .has-sparkle-art .db-spark { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; }
-.db-spark--1 { inset-block-start: 14px; inset-inline-start: 18%; }
-.db-spark--2 { inset-block-start: 34px; inset-inline-end: 14%; inline-size: 12px; block-size: 12px; }
-.db-spark--3 { inset-block-end: 22%; inset-inline-end: 8%; inline-size: 22px; block-size: 22px; }
-
-/* "refined" hides the extra ornament for a quieter look */
+.db-cue { position: absolute; inset-block-end: 3%; inset-inline: 0; z-index: 7; font-size: 12px; color: var(--db-cue, var(--c-muted)); }
+.db-cue::after { content: ""; display: block; inline-size: 1px; block-size: 26px; margin: 6px auto 0; background: linear-gradient(var(--c-accent), transparent); }
+.db[data-cover-layout="still"] .db-cue { display: none; }
 .db[data-ornament="refined"] .db-decor { display: none !important; }
 
-/* dividers */
-.db-divider { block-size: 22px; inline-size: 200px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; position: relative; }
-.db-divider::after { content: ""; position: absolute; inset: 0; margin: auto; inline-size: 9px; block-size: 9px; background: var(--db-foil); rotate: 45deg; }
+/* night scenes: names in foil over a soft dark halo */
+.db-cartouche--night { color: var(--db-glow); background: radial-gradient(closest-side, color-mix(in srgb, var(--c-deep) 62%, transparent), color-mix(in srgb, var(--c-deep) 30%, transparent) 70%, transparent); }
+.db-cartouche--night .db-names { background: var(--db-foil) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--c-deep) 90%, transparent)); font-size: min(calc(var(--name-size) * 0.9), 11vw); }
+.db-cartouche--night .db-lead { color: color-mix(in srgb, var(--db-glow) 85%, transparent); font-size: 13.5px; }
+.db-cartouche--night .db-date { color: var(--db-glow); background: color-mix(in srgb, var(--c-deep) 78%, transparent); border-color: var(--c-accent); }
+/* day scenes: ink names over a soft light halo */
+.db-cartouche--day { background: radial-gradient(closest-side, color-mix(in srgb, var(--c-card) 88%, transparent), color-mix(in srgb, var(--c-card) 55%, transparent) 70%, transparent); }
+.db-cartouche--day .db-names { font-size: min(calc(var(--name-size) * 0.9), 11vw); }
+.db-cartouche--day .db-date { background: color-mix(in srgb, var(--c-card) 80%, transparent); }
 
-/* the invitation card under the cover disappears when the couple filled nothing for it */
-.db-invite:not(:has(p, figure)) { display: none; }
-
-/* families */
-.db-families { display: grid; grid-template-columns: 1fr 1fr; margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
+/* ---------- the invitation sheet ---------- */
+.db-sheet { position: relative; margin-block: 30px 10px; margin-inline: 22px; padding-block: 56px; padding-inline: 30px;
+  border-radius: var(--radius); background: var(--c-card); outline: 1px solid var(--c-accent); outline-offset: -10px;
+  box-shadow: 0 0 0 1px var(--c-line), 0 30px 50px -30px color-mix(in srgb, var(--c-deep) 55%, transparent); }
+.db-sheet:not(:has(p)) { display: none; }
+.has-frame-art .db-sheet::before, .has-frame-art .db-sheet::after {
+  content: ""; position: absolute; inset-inline: 22px; block-size: 20px; background: var(--c-accent);
+  -webkit-mask: var(--img-frame-art) center / auto 100% repeat-x; mask: var(--img-frame-art) center / auto 100% repeat-x; }
+.db-sheet::before { inset-block-start: 20px; }
+.db-sheet::after { inset-block-end: 20px; rotate: x 180deg; }
+.db-verse { margin-block-end: 18px; font-family: var(--font-display); font-size: 19px; line-height: 1.9; }
+.db-families { display: grid; grid-template-columns: 1fr 1fr; }
 .db-families:not(:has(p)) { display: none; }
+.db-verse + .db-families { padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .db-family { display: flex; flex-direction: column; gap: 2px; padding-inline: 8px; min-inline-size: 0; }
 .db-family + .db-family { border-inline-start: 1px solid var(--c-line); }
 .db-family__label { font-size: 12px; color: var(--c-muted); }
 .db-family__label:not(:first-child) { margin-block-start: 8px; }
 .db-family__name { font-size: 14px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
-.db-verse { font-family: var(--font-display); font-size: 18px; line-height: 1.9; }
-.db-lead { max-inline-size: 28ch; margin-inline: auto; font-size: 16px; color: var(--c-muted); }
 
-/* countdown + calendar */
-.db-count { display: flex; flex-direction: column; align-items: center; line-height: 1.1; }
-.db-count__num { font-family: var(--font-display); font-size: 76px; }
+/* ---------- cards ---------- */
+.db-card { position: relative; z-index: 1; padding-block: 48px; padding-inline: 26px; border-radius: var(--radius); background: var(--c-card);
+  outline: 1px solid var(--c-accent); outline-offset: -10px;
+  box-shadow: inset 0 0 0 14px var(--c-card), inset 0 0 0 15px color-mix(in srgb, var(--c-accent) 45%, transparent), 0 0 0 1px var(--c-line),
+    0 30px 50px -28px color-mix(in srgb, var(--c-deep) 55%, transparent); }
+.has-corner-art .db-card::after { content: ""; position: absolute; inset-block-end: -18px; inset-inline-end: -14px; inline-size: 84px; aspect-ratio: 1; pointer-events: none;
+  background: var(--db-corner, var(--c-accent)); -webkit-mask: var(--img-corner-art) center / contain no-repeat; mask: var(--img-corner-art) center / contain no-repeat; }
+.db-card:dir(rtl)::after { rotate: y 180deg; }
+.db[data-ornament="refined"] .db-card::after { display: none; }
+.db-divider { inline-size: 240px; block-size: 30px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; }
+.has-divider-art .db-divider { background: var(--db-foil); -webkit-mask: var(--img-divider-art) center / contain no-repeat; mask: var(--img-divider-art) center / contain no-repeat; }
+
+/* ---------- 2 · countdown emblem ---------- */
+.db-countdown { display: flex; flex-direction: column; align-items: center; }
+.db-emblem { position: relative; display: grid; place-items: center; }
+.db-emblem > span { position: absolute; display: block; pointer-events: none; }
+.db-count { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; line-height: 1.05; }
+.db-count__num { font-family: var(--font-display); font-size: 46px; }
 .db:lang(en) .db-count__num { font-family: var(--font-latin); }
-.db-count__unit { margin-block-start: 4px; font-size: 14px; color: var(--c-muted); }
-.db-cal { margin-block-start: 26px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
-.db-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 22px; }
+.db-count__unit { font-size: 12px; color: var(--c-hero); }
+/* emblem pieces settle once when the section arrives */
+.db-emblem > span { transition: transform 1.6s cubic-bezier(.3, .7, .2, 1) .3s, opacity 1.2s ease .3s; }
+.db-cal { inline-size: 100%; max-inline-size: 360px; margin-block-start: 30px; padding-block: 36px; }
+.db-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 22px; color: var(--c-hero); }
 .db:lang(en) .db-cal__title { font-family: var(--font-latin); }
 .db-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; font-size: 13px; }
 .db-cal__wd { font-size: 11px; color: var(--c-muted); }
 .db-cal__cell { display: grid; place-items: center; block-size: 34px; }
-.db-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; background: var(--db-foil); color: var(--c-hero); font-weight: 700; box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px var(--c-accent); }
+.db-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; background: var(--db-foil); color: var(--c-hero); font-weight: 700; }
 
-/* story photos */
-.db-photos { display: flex; justify-content: center; gap: 18px; margin-block-end: 26px; }
-.db-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; }
-.db-photo:nth-child(2) { margin-block-start: 30px; }
+/* ---------- 3 · story: photos behind veils that open once ---------- */
+.db-photos { display: flex; justify-content: center; gap: 18px; margin-block-end: 28px; --open: 1; }
+.db-story.fx:not(.is-in) .db-photos { --open: 0; }
+.db-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; perspective: 700px; padding: 5px; border-radius: var(--db-photo-r); background: var(--db-foil);
+  box-shadow: inset 0 0 0 1px var(--db-gd), 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 70%, transparent), 0 20px 30px -16px color-mix(in srgb, var(--c-deep) 60%, transparent); }
+.db-photo:nth-child(2) { margin-block-start: 34px; }
 .db-photo:nth-child(n+3) { display: none; }
+.db-photo { overflow: hidden; }
 .db-photo img { position: relative; display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.db-veil { position: absolute; inset-block: 5px; inline-size: calc(50% - 5px); z-index: 2; overflow: hidden; will-change: transform;
+  transition: transform 1.6s cubic-bezier(.65, 0, .25, 1) .5s, opacity 1.2s ease .7s; }
+.db-veil--a { inset-inline-start: 5px; }
+.db-veil--b { inset-inline-end: 5px; }
+.db:not([data-photo-frame="veiled"]) .db-veil { display: none; }
+.db[data-photo-frame="oval"] .db-photo { border-radius: 50%; padding: 4px; outline: 2px dotted var(--c-accent); outline-offset: 5px; }
+.db[data-photo-frame="arch"] .db-photo { border-radius: 999px 999px 6px 6px; }
 .db-story__text { max-inline-size: 30ch; margin-inline: auto; font-size: 17px; }
 .db-story__date { margin-block-start: 12px; font-size: 13px; color: var(--c-muted); }
 
-/* gallery: coverflow · stack · strip */
+/* ---------- 4 · gallery ---------- */
 .db-gallery { padding-inline: 0; }
-.db-flow { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 18px 40px; padding-inline: 22%; perspective: 900px; scrollbar-width: none; }
+.db-gallery__stage { display: flex; flex-direction: column; align-items: center; }
+.db-flow { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 16px 34px; padding-inline: 22%; scrollbar-width: none; }
 .db-flow::-webkit-scrollbar { display: none; }
 .db-flow__item { flex: 0 0 56%; aspect-ratio: 3 / 4; scroll-snap-align: center; padding-inline: 8px; }
-.db-flow__item img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.db-flow__item img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: var(--db-photo-r); border: 3px solid transparent;
+  background: var(--db-foil) border-box; box-shadow: 0 24px 36px -20px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+/* the ring needs the scene engine and at least three photos */
+.scene-on .db[data-gallery-style="carousel"] .db-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) { block-size: 280svh; padding-block: 0; }
+.scene-on .db[data-gallery-style="carousel"] .db-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .db-gallery__stage {
+  position: sticky; inset-block-start: 0; block-size: 100svh; justify-content: center; overflow: hidden; perspective: 1100px; }
+.scene-on .db[data-gallery-style="carousel"] .db-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .db-flow {
+  position: relative; display: block; overflow: visible; block-size: 360px; padding: 0; transform-style: preserve-3d; rotate: x -6deg;
+  --w: 168px; --r: calc(var(--w) / 2 / tan(0.5turn / var(--n)) + 46px); }
+.scene-on .db[data-gallery-style="carousel"] .db-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .db-flow__item {
+  position: absolute; inset-block-start: 40px; inset-inline-start: calc(50% - var(--w) / 2); inline-size: var(--w); padding: 0;
+  transform: rotateY(calc((var(--i) / var(--n) - var(--p, 0) * (var(--n) - 1) / var(--n)) * 1turn)) translateZ(var(--r)); }
+.scene-on .db[data-gallery-style="carousel"] .db-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .db-hint { display: none; }
 @supports (animation-timeline: view(inline)) {
-  .db:not([data-gallery-style="strip"]) .db-flow__item { padding-inline: 0; animation: desert-bloom-flow linear both; animation-timeline: view(inline); }
-  .db:not([data-gallery-style="strip"]) .db-flow:dir(rtl) .db-flow__item { animation-name: desert-bloom-flow-rtl; }
-  .db[data-gallery-style="stack"] .db-flow__item { animation-name: desert-bloom-stack; }
-  .db[data-gallery-style="stack"] .db-flow:dir(rtl) .db-flow__item { animation-name: desert-bloom-stack-rtl; }
+  .db[data-gallery-style="coverflow"] .db-flow { perspective: 900px; }
+  .db[data-gallery-style="coverflow"] .db-flow__item { padding-inline: 0; animation: desert-bloom-flow linear both; animation-timeline: view(inline); }
+  .db[data-gallery-style="coverflow"] .db-flow:dir(rtl) .db-flow__item { animation-name: desert-bloom-flow-rtl; }
 }
-@keyframes desert-bloom-flow { 0% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } }
-@keyframes desert-bloom-flow-rtl { 0% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } }
-@keyframes desert-bloom-stack { 0% { transform: translateY(24px) rotate(12deg) scale(0.84); } 50% { transform: none; } 100% { transform: translateY(24px) rotate(-12deg) scale(0.84); } }
-@keyframes desert-bloom-stack-rtl { 0% { transform: translateY(24px) rotate(-12deg) scale(0.84); } 50% { transform: none; } 100% { transform: translateY(24px) rotate(12deg) scale(0.84); } }
 .db-hint { font-size: 13px; color: var(--c-muted); }
+@keyframes desert-bloom-flow { 0% { transform: translateZ(-160px) rotateY(-46deg); opacity: 0.75; } 50% { transform: none; opacity: 1; } 100% { transform: translateZ(-160px) rotateY(46deg); opacity: 0.75; } }
+@keyframes desert-bloom-flow-rtl { 0% { transform: translateZ(-160px) rotateY(46deg); opacity: 0.75; } 50% { transform: none; opacity: 1; } 100% { transform: translateZ(-160px) rotateY(-46deg); opacity: 0.75; } }
 
-/* events */
-.db-events { display: flex; flex-direction: column; gap: 56px; }
-.db-events .db-title { margin-block-end: 0; }
-.db-event__type { margin-block-end: 6px; font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.3; }
+/* ---------- 5 · events along a path, a traveller rides with the reader ---------- */
+.db-journey { position: relative; display: flex; flex-direction: column; gap: 46px; padding-inline-start: 58px; text-align: start; }
+.db-path { position: absolute; inset-block: -20px; inset-inline-start: 10px; inline-size: 30px; border-radius: 15px; }
+.db-traveller { position: sticky; inset-block-start: 46vh; z-index: 3; display: none; margin-inline-start: -16px; inline-size: 62px; aspect-ratio: var(--db-trav, 1); background: var(--db-foil); }
+.has-traveller-art .db-traveller { display: block; -webkit-mask: var(--img-traveller-art) center / contain no-repeat; mask: var(--img-traveller-art) center / contain no-repeat; }
+.db-traveller:dir(rtl) { rotate: y 180deg; }
+.db-event { padding-block: 36px 40px; padding-inline: 26px; }
+.db-event::before { content: ""; position: absolute; inset-block-start: 40px; inset-inline-start: -52px; inline-size: 18px; block-size: 18px; border-radius: 50%;
+  background: radial-gradient(circle, var(--db-glow) 30%, var(--c-accent) 60%); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-accent) 25%, transparent); }
+.db-event__type { margin-block-end: 4px; font-family: var(--font-display); font-weight: 400; font-size: 26px; }
 .db:lang(en) .db-event__type { font-family: var(--font-latin); }
-.db-event__date { font-size: 16px; }
-.db-event__time { margin-block-start: 2px; font-size: 16px; font-weight: 600; }
+.db-event__date, .db-event__time { font-size: 15px; }
+.db-event__time { font-weight: 600; }
 .db-event__place { font-size: 14px; color: var(--c-muted); overflow-wrap: anywhere; }
-.db-program { margin-block-start: 22px; padding-block-start: 18px; border-block-start: 1px solid var(--c-line); }
-.db-program__title { margin-block-end: 12px; font-size: 13px; color: var(--c-muted); }
-.db-program__list { list-style: none; padding: 0; display: grid; gap: 10px; max-inline-size: 280px; margin-inline: auto; }
-.db-program__item { display: flex; align-items: center; gap: 12px; font-size: 14px; text-align: start; }
-.db-program__item::before { content: ""; flex: none; inline-size: 7px; block-size: 7px; rotate: 45deg; background: var(--db-foil); }
-.db-program__time { flex: none; min-inline-size: 66px; font-weight: 600; }
-.db-map {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-block-size: 46px; margin-block-start: 24px; padding-inline: 28px;
-  border-radius: 999px; background: var(--db-foil) 0 0 / 220% 100%; color: var(--c-hero);
-  box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px color-mix(in srgb, var(--c-accent) 60%, transparent), 0 12px 22px -12px color-mix(in srgb, var(--c-accent) 90%, transparent);
-  font-size: 14px; font-weight: 600; text-decoration: none; transition: background-position .8s ease;
-}
-.db-map:hover, .db-map:focus-visible { background-position: 100% 0; }
+.db-program { margin-block-start: 18px; padding-block-start: 16px; border-block-start: 1px solid var(--c-line); }
+.db-program__title { margin-block-end: 10px; font-size: 13px; color: var(--c-muted); }
+.db-program__list { list-style: none; padding: 0; display: grid; gap: 8px; }
+.db-program__item { display: flex; gap: 12px; font-size: 14px; }
+.db-program__item::before { content: ""; flex: none; inline-size: 7px; block-size: 7px; margin-block-start: 0.7em; rotate: 45deg; background: var(--db-foil); }
+.db-program__time { flex: none; min-inline-size: 64px; font-weight: 600; color: var(--c-hero); }
+.db-map { display: inline-flex; align-items: center; justify-content: center; min-block-size: 46px; margin-block-start: 20px; padding-inline: 26px;
+  border-radius: 999px; background: var(--db-foil); color: var(--c-hero); font-size: 14px; font-weight: 600; text-decoration: none;
+  box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px color-mix(in srgb, var(--c-accent) 60%, transparent); }
 .db-map:focus-visible { outline: 2px solid var(--c-hero); outline-offset: 6px; }
 
-/* wishes box */
+/* ---------- 6 · wishes panel ---------- */
+.db-panel { position: relative; overflow: hidden; padding-block: 52px 40px; padding-inline: 24px; border-radius: var(--radius);
+  background: radial-gradient(80% 40% at 50% 100%, color-mix(in srgb, var(--c-accent) 22%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, var(--c-deep) 90%, var(--c-card)), var(--c-deep));
+  color: var(--db-glow); box-shadow: 0 30px 50px -28px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+.db-panel__decor { position: absolute; inset: 0; pointer-events: none; }
+.db-panel > :not(.db-panel__decor) { position: relative; }
 .db .wb { text-align: start; }
-.db .wb-chip { border-color: var(--c-accent); color: var(--c-text); }
-.db .wb-label { color: var(--c-muted); }
-.db .wb-input, .db .wb-textarea { background: color-mix(in srgb, var(--c-card) 70%, var(--c-bg)); border-color: var(--c-line); color: var(--c-text); }
-.db .wb-input::placeholder, .db .wb-textarea::placeholder { color: var(--c-muted); }
+.db .wb-chip { border-color: color-mix(in srgb, var(--c-accent) 70%, transparent); color: var(--db-glow); }
+.db .wb-label { color: color-mix(in srgb, var(--db-glow) 75%, transparent); }
+.db .wb-input, .db .wb-textarea { background: color-mix(in srgb, var(--c-deep) 80%, var(--db-glow)); border-color: color-mix(in srgb, var(--c-accent) 45%, transparent); color: var(--db-glow); }
+.db .wb-input::placeholder, .db .wb-textarea::placeholder { color: color-mix(in srgb, var(--db-glow) 55%, transparent); }
 .db .wb-input:focus, .db .wb-textarea:focus { outline: 2px solid var(--c-accent); outline-offset: 0; }
-.db .wb-send { border-radius: 999px; background: var(--db-foil) 0 0 / 220% 100%; color: var(--c-hero); transition: background-position .8s ease; }
-.db .wb-send:hover { background-position: 100% 0; }
-.db .wb-status { color: var(--c-muted); }
+.db .wb-send { border-radius: 999px; background: var(--db-foil); color: var(--c-deep); }
+.db .wb-status { color: var(--c-accent); }
 .db .wb-item { background: transparent; border: 0; border-inline-start: 2px solid var(--c-accent); border-radius: 0; }
-.db .wb-item__name, .db .wb-item__text { color: var(--c-text); }
+.db .wb-item__name { color: var(--c-accent); }
+.db .wb-item__text { color: var(--db-glow); }
+/* light panels */
+.db-panel--light { background: var(--c-card); color: var(--c-text); box-shadow: 0 0 0 1px var(--c-line), 0 30px 50px -28px color-mix(in srgb, var(--c-deep) 45%, transparent); }
+.db-panel--light .db-title--panel { background: var(--db-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; }
+.db-panel--light .wb-chip { color: var(--c-text); }
+.db-panel--light .wb-label { color: var(--c-muted); }
+.db-panel--light :is(.wb-input, .wb-textarea) { background: var(--c-bg); color: var(--c-text); }
+.db-panel--light :is(.wb-input, .wb-textarea)::placeholder { color: var(--c-muted); }
+.db-panel--light .wb-send { color: var(--c-hero); }
+.db-panel--light .wb-item__text { color: var(--c-text); }
 
-/* footer */
-.db-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 40px 64px; }
-.db-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 32px; line-height: 1.5; }
+/* ---------- 7 · footer ---------- */
+.db-footer { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 70px 64px; overflow: hidden; }
+.db-footer__art { display: none; inline-size: 150px; aspect-ratio: var(--db-fa, 1); background: var(--db-foil); }
+.has-footer-art .db-footer__art { display: block; -webkit-mask: var(--img-footer-art) center bottom / contain no-repeat; mask: var(--img-footer-art) center bottom / contain no-repeat; }
+.db-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 30px; line-height: 1.5; }
 .db:lang(en) .db-closing { font-family: var(--font-latin); }
 .db-until, .db-brand { font-size: 13px; color: var(--c-muted); }
 
-/* scroll-driven life shared by all */
-@supports (animation-timeline: view()) {
-  .db :is(.db-names, .db-title, .db-count__num, .db-closing, .db-event__type, .db-map) { animation: desert-bloom-foil linear both; animation-timeline: view(); }
-  .db-spark { animation: desert-bloom-twinkle linear both; animation-timeline: view(); }
-}
-@keyframes desert-bloom-foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
-@keyframes desert-bloom-twinkle { 0%, 100% { scale: 0.3; opacity: 0.2; rotate: 0deg; } 30% { scale: 1.15; opacity: 1; } 55% { scale: 0.6; opacity: 0.6; rotate: 45deg; } 75% { scale: 1; opacity: 1; } }
+/* ---------- cover layout "names": only the names, no scene ---------- */
+.db[data-cover-layout="names"] .db-stage { block-size: auto; padding-block: 90px 40px; overflow: visible; }
+.db[data-cover-layout="names"] .db-layer:not(.db-cartouche), .db[data-cover-layout="names"] .db-cue { display: none; }
+.db[data-cover-layout="names"] .db-cartouche { position: relative; inset: auto; margin-inline: auto; background: none; animation: none; }
+.db[data-cover-layout="names"] .db-cartouche::before, .db[data-cover-layout="names"] .db-cartouche::after { display: none; }
+.db[data-cover-layout="names"] .db-names { background: var(--db-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; filter: none; font-size: calc(var(--name-size) * 1.1); }
+.db[data-cover-layout="names"] .db-lead { color: var(--c-muted); }
+.db[data-cover-layout="names"] .db-date { color: var(--c-hero); background: none; }
 
-/* ---------- page layers ---------- */
-.db::before { content: ""; position: fixed; inset: 0; z-index: -2;
-  background: linear-gradient(var(--c-bg) 0%, color-mix(in srgb, var(--c-bg) 55%, var(--c-glow)) 40%, var(--c-glow) 70%, color-mix(in srgb, var(--c-glow) 60%, var(--c-dune)) 100%); }
-.has-sand-texture .db::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--img-sand-texture) 0 0 / 300px; opacity: 0.6; }
-.db-title { color: var(--c-hero); }
-.db { --db-foil-text: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 36%, var(--db-gold-deep) 48%, var(--c-accent) 52%, var(--c-hero) 64%, var(--c-hero) 100%); }
-.db:lang(en) .db-title { text-transform: uppercase; letter-spacing: 0.16em; font-size: 24px; }
-
-/* ---------- 1 · cover: dunes at sunset ---------- */
-.db-cover { padding-block: 0 30px; padding-inline: 0; }
-.db-scene { position: relative; isolation: isolate; min-block-size: 720px; overflow: hidden; }
-/* the sky grows with long names; the dunes stay pinned to the bottom below the text */
-.db-stars { position: absolute; inset: 0 0 50%; z-index: -1; opacity: 0.7;
-  background-image: radial-gradient(1.2px 1.2px at 10% 12%, var(--c-card), transparent), radial-gradient(1px 1px at 30% 26%, var(--c-card), transparent), radial-gradient(1.4px 1.4px at 52% 8%, var(--c-accent), transparent),
-    radial-gradient(1px 1px at 72% 20%, var(--c-card), transparent), radial-gradient(1.2px 1.2px at 88% 10%, var(--c-card), transparent), radial-gradient(1px 1px at 64% 34%, var(--c-card), transparent);
-  -webkit-mask-image: linear-gradient(var(--c-text), transparent); mask-image: linear-gradient(var(--c-text), transparent); }
-.db-sun { position: absolute; inset-block-end: 210px; inset-inline-start: calc(50% - 90px); inline-size: 180px; block-size: 180px; border-radius: 50%; z-index: -1;
-  background: radial-gradient(circle, var(--c-card) 0%, color-mix(in srgb, var(--c-accent) 70%, var(--c-card)) 38%, var(--c-accent) 60%, transparent 62%);
-  box-shadow: 0 0 80px 30px color-mix(in srgb, var(--c-accent) 45%, transparent), 0 0 200px 80px color-mix(in srgb, var(--c-glow) 60%, transparent); }
-.db-sky { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 76px 390px; padding-inline: 26px; }
-.db-lead { color: var(--c-text); }
-.db:lang(en) .db-lead { text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; line-height: 2; }
-.db-names { filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--c-glow) 80%, transparent)); }
-.db:lang(en) .db-names { text-transform: uppercase; letter-spacing: 0.06em; font-size: calc(var(--name-size) * 0.8); }
-.db-date { padding-block: 8px; padding-inline: 24px; border-block: 1px solid var(--c-accent); color: var(--c-hero); font-size: 15px; }
-/* dunes: four layers of soft curves, darker as they come closer */
-.db-dune { position: absolute; inset-inline: -20%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; will-change: transform; }
-.db-sun, .db-palm { will-change: transform; }
-.db-dune--1 { inset-block-end: 150px; block-size: 160px; inset-inline: -40% 10%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 70%, var(--c-glow)), var(--c-dune)); z-index: 0; }
-.db-dune--2 { inset-block-end: 100px; block-size: 170px; inset-inline: 20% -50%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 85%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 75%, var(--c-hero))); z-index: 1; }
-.db-dune--3 { inset-block-end: 40px; block-size: 160px; inset-inline: -50% 25%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 65%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 55%, var(--c-hero))); z-index: 3; }
-.db-dune--4 { inset-block-end: -40px; block-size: 150px; inset-inline: -10% -30%; background: linear-gradient(color-mix(in srgb, var(--c-dune) 45%, var(--c-hero)), color-mix(in srgb, var(--c-dune) 35%, var(--c-hero))); z-index: 5;
-  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--c-accent) 50%, transparent); }
-.db-palm { position: absolute; display: none; background: var(--c-silhouette); pointer-events: none; aspect-ratio: 240 / 400; }
+/* ---------- the scene: planes from far to near ---------- */
+.db-sky { --dy: 260px; inset: -40% 0 0; background: radial-gradient(80% 30% at 50% 60%, color-mix(in srgb, var(--c-accent) 26%, transparent), transparent 70%), linear-gradient(color-mix(in srgb, var(--c-deep) 92%, var(--c-card)) 0%, var(--c-deep) 42%, color-mix(in srgb, var(--c-deep) 72%, var(--c-accent)) 59%, var(--c-deep) 61%) }
+.db-stars { --dy: 240px; inset: 0 0 48%; background-image: radial-gradient(1.4px 1.4px at 73% 61%, var(--c-accent), transparent), radial-gradient(1.4px 1.4px at 67% 77%, var(--db-glow), transparent), radial-gradient(1px 1px at 25% 67%, var(--db-glow), transparent), radial-gradient(1.4px 1.4px at 82% 80%, var(--db-glow), transparent), radial-gradient(1px 1px at 14% 59%, var(--c-accent), transparent), radial-gradient(1.2px 1.2px at 20% 13%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 90% 83%, var(--db-glow), transparent), radial-gradient(1px 1px at 78% 52%, var(--db-glow), transparent), radial-gradient(1.4px 1.4px at 85% 96%, var(--c-accent), transparent), radial-gradient(1.7px 1.7px at 85% 22%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 3% 69%, var(--db-glow), transparent), radial-gradient(1px 1px at 9% 6%, var(--db-glow), transparent), radial-gradient(1px 1px at 32% 78%, var(--c-accent), transparent), radial-gradient(1px 1px at 61% 43%, var(--db-glow), transparent), radial-gradient(1.4px 1.4px at 77% 27%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 31% 83%, var(--db-glow), transparent), radial-gradient(1.2px 1.2px at 65% 2%, var(--c-accent), transparent), radial-gradient(1px 1px at 60% 85%, var(--db-glow), transparent), radial-gradient(1.2px 1.2px at 54% 72%, var(--db-glow), transparent), radial-gradient(1px 1px at 92% 34%, var(--db-glow), transparent), radial-gradient(1.2px 1.2px at 31% 67%, var(--c-accent), transparent), radial-gradient(1.2px 1.2px at 5% 10%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 15% 53%, var(--db-glow), transparent), radial-gradient(1px 1px at 39% 51%, var(--db-glow), transparent), radial-gradient(1px 1px at 4% 89%, var(--c-accent), transparent), radial-gradient(1px 1px at 29% 28%, var(--db-glow), transparent) }
+.db-moon { --dy: 220px; inset-block-start: 9%; inset-inline-end: 16%; inline-size: 58px; block-size: 58px; border-radius: 50%; rotate: -24deg; box-shadow: inset 12px -5px 0 0 var(--db-glow), 0 0 60px 6px color-mix(in srgb, var(--db-glow) 14%, transparent) }
+.db-dune-far { --dy: 170px; inset-block: 56% -10%; inset-inline: -30% -10%; border-radius: 60% 40% 0 0 / 20% 14% 0 0; background: linear-gradient(color-mix(in srgb, var(--c-accent) 34%, var(--c-deep)), var(--c-deep) 40%) }
+.db-caravan { --dy: 170px; --dx: 46px; inset-block-start: 50.4%; inset-inline-end: 2%; inline-size: 46%; aspect-ratio: 520 / 120; display: none; background: var(--db-shade);  }
+.db-caravan:dir(rtl) { --dx: -46px; }
+.has-caravan-art .db-caravan { display: block; -webkit-mask: var(--img-caravan-art) center bottom / contain no-repeat; mask: var(--img-caravan-art) center bottom / contain no-repeat; }
+.db-glow { --dy: 120px; inset-block-start: 46%; inset-inline-start: -6%; inline-size: 74%; aspect-ratio: 1.5; background: radial-gradient(closest-side, color-mix(in srgb, var(--c-accent) 38%, transparent), transparent) }
+.db-dune-mid { --dy: 120px; inset-block: 61% -10%; inset-inline: -10% -40%; border-radius: 45% 55% 0 0 / 18% 26% 0 0; background: linear-gradient(color-mix(in srgb, var(--c-accent) 50%, var(--c-deep)), color-mix(in srgb, var(--c-deep) 84%, var(--c-accent)) 50%) }
+.db-tent { --dy: 120px; inset-block-start: 47.5%; inset-inline-start: 3%; inline-size: 52%; aspect-ratio: 300 / 180; display: none; background: linear-gradient(color-mix(in srgb, var(--c-accent) 62%, var(--c-deep)), color-mix(in srgb, var(--c-accent) 36%, var(--c-deep)));  }
+.has-tent-art .db-tent { display: block; -webkit-mask: var(--img-tent-art) center bottom / contain no-repeat; mask: var(--img-tent-art) center bottom / contain no-repeat; }
+.db-tent-door { --dy: 120px; inset-block-start: 47.5%; inset-inline-start: 3%; inline-size: 52%; aspect-ratio: 300 / 180; display: none; background: radial-gradient(closest-side at 50% 85%, var(--db-glow), var(--c-accent));  }
+.has-tent-door-art .db-tent-door { display: block; -webkit-mask: var(--img-tent-door-art) center bottom / contain no-repeat; mask: var(--img-tent-door-art) center bottom / contain no-repeat; }
+.db-dune-near { --dy: 70px; inset-block: 71% -12%; inset-inline: -40% -20%; border-radius: 55% 45% 0 0 / 22% 14% 0 0; background: linear-gradient(color-mix(in srgb, var(--c-accent) 66%, var(--c-deep)), color-mix(in srgb, var(--c-accent) 32%, var(--c-deep)) 60%) }
+.db-palm { --dy: 50px; inset-block-end: 17%; inset-inline-end: -9%; inline-size: 36%; aspect-ratio: 240 / 400; display: none; background: var(--db-shade);  }
 .has-palm-art .db-palm { display: block; -webkit-mask: var(--img-palm-art) center bottom / contain no-repeat; mask: var(--img-palm-art) center bottom / contain no-repeat; }
-.db-palm--start { inset-block-end: 190px; inset-inline-start: 4%; inline-size: 120px; z-index: 2; }
-.db-palm--end { inset-block-end: 120px; inset-inline-end: -2%; inline-size: 170px; z-index: 4; }
-.db-bloom { position: absolute; inset-block-end: 40px; inset-inline-start: 10%; inline-size: 110px; aspect-ratio: 1; display: none; z-index: 6; background: color-mix(in srgb, var(--c-accent) 55%, var(--c-hero)); pointer-events: none; }
-.has-flower-art .db-bloom { display: block; -webkit-mask: var(--img-flower-art) center / contain no-repeat; mask: var(--img-flower-art) center / contain no-repeat; }
-/* layout "arch": the same scene seen through a gilded arch window */
-.db[data-cover-layout="arch"] .db-scene { inline-size: min(360px, 88%); margin-block-start: 30px; margin-inline: auto; min-block-size: 620px; border: 5px solid transparent;
-  border-radius: 50% 50% 4px 4px / 32% 32% 4px 4px; background: linear-gradient(var(--c-bg), var(--c-glow)) padding-box, var(--db-foil) border-box;
-  outline: 1px solid var(--c-accent); outline-offset: 8px; box-shadow: 0 40px 60px -30px color-mix(in srgb, var(--c-hero) 70%, transparent); }
-.db[data-cover-layout="arch"] .db-scene { min-block-size: 700px; }
-.db[data-cover-layout="arch"] .db-sun { inset-block-end: 140px; inline-size: 140px; block-size: 140px; inset-inline-start: calc(50% - 70px); }
-.db[data-cover-layout="arch"] .db-sky { padding-block-start: 96px; padding-inline: 30px; }
-.db[data-cover-layout="arch"] .db-palm--start { inset-block-end: 170px; inline-size: 90px; }
-.db[data-cover-layout="arch"] .db-palm--end { inset-block-end: 110px; inline-size: 120px; }
-.db[data-cover-layout="arch"] .db-names { font-size: calc(var(--name-size) * 0.82); }
+.db-bloom-start { --dy: -60px; inset-block-end: -5%; inset-inline-start: -12%; inline-size: 42%; aspect-ratio: 160 / 160; display: none; background: color-mix(in srgb, var(--c-accent) 72%, var(--c-hero));  }
+.has-bloom-art .db-bloom-start { display: block; -webkit-mask: var(--img-bloom-art) center bottom / contain no-repeat; mask: var(--img-bloom-art) center bottom / contain no-repeat; }
+.db-bloom-end { --dy: -40px; inset-block-end: -9%; inset-inline-end: -12%; inline-size: 30%; aspect-ratio: 160 / 160; display: none; background: color-mix(in srgb, var(--c-accent) 60%, var(--c-card));  }
+.has-bloom-art .db-bloom-end { display: block; -webkit-mask: var(--img-bloom-art) center bottom / contain no-repeat; mask: var(--img-bloom-art) center bottom / contain no-repeat; }
+.db-spark--1 { inset-block-start: 20%; inset-inline-start: 16%; }
+.db-spark--2 { inset-block-start: 13%; inset-inline-start: 62%; inline-size: 11px; block-size: 11px; }
+.db-spark--3 { inset-block-start: 38%; inset-inline-end: 9%; inline-size: 19px; block-size: 19px; }
+.db { --db-cart-top: 9%; --db-photo-r: 50% 50% 8px 8px / 26% 26% 8px 8px; --db-trav: 520 / 120; --db-fa: 300 / 180; --db-corner: color-mix(in srgb, var(--c-accent) 70%, var(--c-hero)); }
+.db-cartouche { border-radius: 50% 50% 22px 22px / 34% 34% 22px 22px; outline: 1px solid color-mix(in srgb, var(--c-accent) 80%, transparent); outline-offset: -3px;
+  box-shadow: inset 0 0 0 7px transparent, inset 0 0 0 8px color-mix(in srgb, var(--c-accent) 35%, transparent); }
+/* hourglass */
+.db-emblem { inline-size: 150px; block-size: 230px; margin-block-end: 76px; }
+.db-emblem__a { inset: 0; border-radius: 4px;
+  background: linear-gradient(90deg, var(--db-gd), var(--db-gl), var(--db-gd)) 0 0 / 100% 14px no-repeat, linear-gradient(90deg, var(--db-gd), var(--db-gl), var(--db-gd)) 0 100% / 100% 14px no-repeat,
+    linear-gradient(var(--c-accent), var(--c-accent)) 8px 0 / 5px 100% no-repeat, linear-gradient(var(--c-accent), var(--c-accent)) calc(100% - 8px) 0 / 5px 100% no-repeat; }
+.db-emblem__b { inset-block: 14px; inset-inline: 22px; clip-path: polygon(0 0, 100% 0, 100% 6%, 57% 47%, 57% 53%, 100% 94%, 100% 100%, 0 100%, 0 94%, 43% 53%, 43% 47%, 0 6%);
+  background: linear-gradient(transparent 0 24%, color-mix(in srgb, var(--c-accent) 78%, var(--c-hero)) 24% 46%, transparent 46% 72%, color-mix(in srgb, var(--c-accent) 78%, var(--c-hero)) 72%), linear-gradient(90deg, color-mix(in srgb, var(--c-card) 45%, transparent), color-mix(in srgb, var(--c-card) 15%, transparent) 40%, color-mix(in srgb, var(--c-card) 40%, transparent)); }
+.db-emblem__c { inset-block: 48% 12%; inset-inline: calc(50% - 1px); inline-size: 2px; background: color-mix(in srgb, var(--c-accent) 78%, var(--c-hero)); transform-origin: 50% 0; }
+.db-countdown.fx:not(.is-in) .db-emblem__c { transform: scaleY(0); }
+.db-count { position: absolute; inset-block-start: calc(100% + 14px); padding-block: 6px; padding-inline: 24px; border-block: 1px solid var(--c-accent); }
+/* tent flaps over the photos */
+.db-veil { background: repeating-linear-gradient(100deg, var(--c-hero) 0 14px, color-mix(in srgb, var(--c-hero) 80%, var(--c-accent)) 14px 28px); box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c-accent) 70%, transparent); }
+/* footprints in the sand */
+.db-path { background: radial-gradient(circle, color-mix(in srgb, var(--c-accent) 75%, transparent) 2.5px, transparent 3.5px) 8px 0 / 14px 24px repeat-y,
+  radial-gradient(circle, color-mix(in srgb, var(--c-accent) 75%, transparent) 2.5px, transparent 3.5px) 16px 12px / 14px 24px repeat-y, linear-gradient(90deg, transparent, color-mix(in srgb, var(--c-accent) 14%, transparent), transparent); }
+.db-traveller, .db-traveller:dir(rtl) { inline-size: 120px; margin-inline-start: -45px; rotate: 90deg; }
+.db-panel__decor { background-image: radial-gradient(1.7px 1.7px at 34% 96%, var(--c-accent), transparent), radial-gradient(1.2px 1.2px at 90% 96%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 5% 61%, var(--db-glow), transparent), radial-gradient(1px 1px at 85% 8%, var(--db-glow), transparent), radial-gradient(1px 1px at 16% 49%, var(--c-accent), transparent), radial-gradient(1.4px 1.4px at 33% 50%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 15% 75%, var(--db-glow), transparent), radial-gradient(1px 1px at 3% 95%, var(--db-glow), transparent), radial-gradient(1px 1px at 54% 37%, var(--c-accent), transparent), radial-gradient(1px 1px at 51% 22%, var(--db-glow), transparent), radial-gradient(1px 1px at 19% 81%, var(--db-glow), transparent), radial-gradient(1.7px 1.7px at 58% 18%, var(--db-glow), transparent), radial-gradient(1px 1px at 2% 2%, var(--c-accent), transparent), radial-gradient(1px 1px at 29% 23%, var(--db-glow), transparent), radial-gradient(1px 1px at 39% 42%, var(--db-glow), transparent), radial-gradient(1px 1px at 71% 88%, var(--db-glow), transparent), radial-gradient(60% 30% at 50% 108%, color-mix(in srgb, var(--c-accent) 45%, transparent), transparent); }
 
-/* ---------- sand cards with gold frames ---------- */
-.db-card {
-  position: relative; z-index: 6; padding-block: 52px; padding-inline: 28px; border-radius: var(--radius);
-  background: linear-gradient(115deg, transparent 36%, color-mix(in srgb, var(--c-card) 75%, var(--c-glow)) 50%, transparent 64%) 160% 0 / 250% 100% no-repeat, var(--c-card);
-  outline: 1px solid var(--c-accent); outline-offset: -10px;
-  box-shadow: inset 0 0 0 14px var(--c-card), inset 0 0 0 15px color-mix(in srgb, var(--c-accent) 55%, transparent), 0 0 0 1px var(--c-line),
-    0 32px 50px -28px color-mix(in srgb, var(--c-hero) 60%, transparent), 0 0 70px -26px color-mix(in srgb, var(--c-accent) 60%, transparent);
-}
-.has-sand-texture .db-card { background: linear-gradient(115deg, transparent 36%, color-mix(in srgb, var(--c-card) 75%, var(--c-glow)) 50%, transparent 64%) 160% 0 / 250% 100% no-repeat, var(--img-sand-texture) 0 0 / 300px, var(--c-card); }
-.db-card::before { content: ""; position: absolute; inset-block-start: -15px; inset-inline-start: calc(50% - 15px); inline-size: 30px; block-size: 30px; display: none; background: var(--db-foil); }
-.has-sparkle-art .db-card::before { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; }
-.db-card::after { content: ""; position: absolute; inset-block-end: -24px; inset-inline-end: -16px; inline-size: 84px; aspect-ratio: 1; display: none; pointer-events: none; background: color-mix(in srgb, var(--c-accent) 50%, var(--c-hero)); }
-.has-flower-art .db-card::after { display: block; -webkit-mask: var(--img-flower-art) center / contain no-repeat; mask: var(--img-flower-art) center / contain no-repeat; }
-.db[data-ornament="refined"] .db-card::after { display: none; }
-.db-invite { margin-block-start: -60px; margin-inline: 18px; }
-.db-portrait { inline-size: 120px; aspect-ratio: 3 / 4; margin-inline: auto; margin-block-end: 18px; padding: 4px; border-radius: 999px 999px 8px 8px; background: var(--db-foil); }
-.db-portrait img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.db-veil--a { transform-origin: 0 50%; transform: rotateY(calc(var(--open) * -112deg)); }
+.db-veil--b { transform-origin: 100% 50%; transform: rotateY(calc(var(--open) * 112deg)); }
+.db-veil--a:dir(rtl) { transform-origin: 100% 50%; transform: rotateY(calc(var(--open) * 112deg)); }
+.db-veil--b:dir(rtl) { transform-origin: 0 50%; transform: rotateY(calc(var(--open) * -112deg)); }
 
-/* photo frames: arch · circle · dome */
-.db-photo { padding: 4px; border-radius: 999px 999px 6px 6px; background: var(--db-foil); box-shadow: 0 18px 28px -16px color-mix(in srgb, var(--c-hero) 60%, transparent); }
-.db[data-photo-frame="circle"] .db-photo { aspect-ratio: 1; border-radius: 50%; }
-.db[data-photo-frame="dome"] .db-photo { border-radius: 50% 50% 6px 6px / 70% 70% 6px 6px; }
-.db-flow__item img { border-radius: 999px 999px 6px 6px; border: 3px solid transparent; background: var(--db-foil) border-box; box-shadow: 0 24px 36px -20px color-mix(in srgb, var(--c-hero) 70%, transparent); }
-
-/* ---------- motion: dunes move at different speeds ---------- */
-@supports (animation-timeline: view()) {
-  .db-dune--1 { animation: desert-bloom-far linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--2 { animation: desert-bloom-mid linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-dune--3, .db-palm--start { animation: desert-bloom-near linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-  .db-sun { animation: desert-bloom-set linear both; animation-timeline: view(); animation-range: exit 0% exit 100%; }
-}
-@keyframes desert-bloom-far { to { translate: 0 -40px; } }
-@keyframes desert-bloom-mid { to { translate: 0 -90px; } }
-@keyframes desert-bloom-near { to { translate: 0 -150px; } }
-@keyframes desert-bloom-set { to { translate: 0 120px; scale: 1.15; } }
-
-/* own reveal: a mirage settling */
-.fx-mirage { opacity: 0; transform: translateY(40px) scaleY(1.04); filter: blur(5px);
-  transition: opacity var(--fx-dur, 1s) ease, transform var(--fx-dur, 1s) cubic-bezier(.2, .7, .2, 1), filter var(--fx-dur, 1s) ease; }
-.fx-mirage.is-in { filter: none; }
-
-/* own ambient: sand glints drifting on the wind */
-.ambient-sand-glints { background-image:
-    radial-gradient(1.6px 1.6px at 10% 40%, var(--c-accent), transparent), radial-gradient(1.2px 1.2px at 46% 70%, var(--c-card), transparent),
-    radial-gradient(2px 2px at 72% 30%, var(--c-accent), transparent), radial-gradient(1.2px 1.2px at 90% 84%, var(--c-card), transparent);
-  background-size: 320px 380px; opacity: 0.75; animation: sand-glints-drift 26s linear infinite; }
-@keyframes sand-glints-drift { to { background-position: -320px 60px; } }
-@media (prefers-reduced-motion: reduce) { .ambient-sand-glints { animation-duration: 120s; } }
-
+/* ---------- reduced motion: a still, complete scene ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .db *, .db *::before, .db *::after { animation: none !important; }
-  .db-map, .db .wb-send { transition: none; }
+  .db *, .db *::before, .db *::after { animation: none !important; transition: none !important; }
+  .db-photos, .db-story.fx:not(.is-in) .db-photos { --open: 1; }
 }
 
 /* ==== options pack: generated by tools/add-options.py, do not edit by hand ==== */
@@ -304,35 +357,34 @@
 /* ---- living + premium set ---- */
 @property --db-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .db { --db-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --db-mm: var(--c-accent); --db-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait):has(img) { isolation: isolate; background: var(--db-foil); }
-.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--db-foil); }
-.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item, .db-portrait) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item):has(img) { isolation: isolate; background: var(--db-foil); }
+.db[data-photo-tone="golden"] :is(.db-photo, .db-flow__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--db-foil); }
+.db[data-photo-tone="palette"] :is(.db-photo, .db-flow__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .db[data-photo-tone="palette"][data-photo-frame="polaroid"] .db-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
-.db[data-photo-tone="noir"] :is(.db-photo, .db-flow__item, .db-portrait) img { filter: grayscale(1) contrast(1.15); }
+.db[data-photo-tone="noir"] :is(.db-photo, .db-flow__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .db[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait):has(img) {
+  .db[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo):has(img) {
     background: conic-gradient(from var(--db-shine), var(--db-md), var(--db-mm) 15%, var(--db-ml) 25%, var(--db-mm) 35%, var(--db-md) 50%, var(--db-mm) 65%, var(--db-ml) 75%, var(--db-mm) 85%, var(--db-md));
     animation: desert-bloom-frameshine linear both; animation-timeline: view();
   }
 }
 @keyframes desert-bloom-frameshine { from { --db-shine: 0deg; } to { --db-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
-  .db [data-animate="cover"] .db-stars { --db-stage: 0; }
-  .db [data-animate="cover"] .db-sun { --db-stage: 1; }
-  .db [data-animate="cover"] .db-dune--1 { --db-stage: 2; }
-  .db [data-animate="cover"] .db-dune--2, .db [data-animate="cover"] .db-palm--start { --db-stage: 3; }
-  .db [data-animate="cover"] .db-dune--3, .db [data-animate="cover"] .db-palm--end { --db-stage: 4; }
-  .db [data-animate="cover"] .db-dune--4, .db [data-animate="cover"] .db-bloom { --db-stage: 5; }
-  .db [data-animate="cover"] .db-sky { --db-stage: 6; }
-  .db [data-animate="cover"] .db-invite { --db-stage: 7; }
-  .db:not([data-entrance="none"]) [data-animate="cover"] :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) {
+  .db [data-animate="cover"] .db-sky, .db [data-animate="cover"] .db-stars, .db [data-animate="cover"] .db-moon { --db-stage: 0; }
+  .db [data-animate="cover"] .db-dune-far, .db [data-animate="cover"] .db-caravan, .db [data-animate="cover"] .db-glow { --db-stage: 1; }
+  .db [data-animate="cover"] .db-dune-mid, .db [data-animate="cover"] .db-tent, .db [data-animate="cover"] .db-tent-door { --db-stage: 2; }
+  .db [data-animate="cover"] .db-dune-near, .db [data-animate="cover"] .db-palm { --db-stage: 3; }
+  .db [data-animate="cover"] .db-cartouche { --db-stage: 4; }
+  .db [data-animate="cover"] .db-bloom-start, .db [data-animate="cover"] .db-bloom-end { --db-stage: 5; }
+  .db [data-animate="cover"] .db-sheet { --db-stage: 6; }
+  .db:not([data-entrance="none"]) [data-animate="cover"] :is(.db-sky, .db-stars, .db-moon, .db-dune-far, .db-caravan, .db-glow, .db-dune-mid, .db-tent, .db-tent-door, .db-dune-near, .db-palm, .db-cartouche, .db-bloom-start, .db-bloom-end, .db-sheet) {
     transition: opacity 1.1s ease, scale 1.5s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
     transition-delay: calc(var(--db-stage, 0) * 0.34s + 0.15s);
   }
-  .db[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { opacity: 0; scale: 0.92; filter: blur(10px); }
-  .db[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { opacity: 0; }
-  .db[data-entrance="gentle"] [data-animate="cover"] :is(.db-stars, .db-sun, .db-dune--1, .db-dune--2, .db-palm--start, .db-dune--3, .db-palm--end, .db-dune--4, .db-bloom, .db-sky, .db-invite) { transition-delay: calc(var(--db-stage, 0) * 0.12s); }
+  .db[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.db-sky, .db-stars, .db-moon, .db-dune-far, .db-caravan, .db-glow, .db-dune-mid, .db-tent, .db-tent-door, .db-dune-near, .db-palm, .db-cartouche, .db-bloom-start, .db-bloom-end, .db-sheet) { opacity: 0; scale: 0.92; filter: blur(10px); }
+  .db[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.db-sky, .db-stars, .db-moon, .db-dune-far, .db-caravan, .db-glow, .db-dune-mid, .db-tent, .db-tent-door, .db-dune-near, .db-palm, .db-cartouche, .db-bloom-start, .db-bloom-end, .db-sheet) { opacity: 0; }
+  .db[data-entrance="gentle"] [data-animate="cover"] :is(.db-sky, .db-stars, .db-moon, .db-dune-far, .db-caravan, .db-glow, .db-dune-mid, .db-tent, .db-tent-door, .db-dune-near, .db-palm, .db-cartouche, .db-bloom-start, .db-bloom-end, .db-sheet) { transition-delay: calc(var(--db-stage, 0) * 0.12s); }
 
   .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.db-title) { transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); }
   .db:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(.db-title) { opacity: 0; translate: 0 14px; }
@@ -355,10 +407,4 @@
 .db[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .db[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
 /* ---- calm & smooth ---- */
-.db :is(.db-names, .db-title, .db-count__num, .db-closing, .db-event__type, .db-map, .db-spark, .db-card) { animation: none !important; }
-.db[data-cover-layout="horizon"] .db-scene { min-block-size: 560px; }
-.db[data-cover-layout="horizon"] .db-sky { padding-block-end: 280px; }
-.db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }
-.db[data-cover-layout="horizon"] .db-sun { inset-block-end: 0; inline-size: 240px; block-size: 240px; inset-inline-start: calc(50% - 120px); }
-.db[data-cover-layout="horizon"] .db-dune--4 { block-size: 120px; }
 /* ==== end of options pack ==== */

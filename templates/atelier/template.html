@@ -1,25 +1,33 @@
-<main class="at" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-ornament="{{variant "ornament"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
+<main class="at" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="at-cover" data-animate="cover">
-    <header class="at-masthead">
-      <span class="at-masthead__rule" aria-hidden="true"></span>
-      {{#unless (variant "dateStyle" "calendar")}}<p class="at-masthead__date">{{formatDate mainDate}}</p>{{/unless}}
-    </header>
-    <div class="at-hero">
-      <p class="at-ghost" aria-hidden="true"><span>{{couple.groom.name}}</span> <span>{{couple.bride.name}}</span></p>
-      {{#if story.photos.length}}
-        {{#with story.photos.[0]}}<figure class="at-hero__photo"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
-      {{else}}
-        <div class="at-hero__photo at-hero__photo--blank" aria-hidden="true"><span class="at-hero__amp">{{text "and"}}</span></div>
-      {{/if}}
+    <!-- the studio: wall, spotlights, garment rack, paper sweep, dress form, fabric and tape measure drift at their own speeds -->
+    <div class="at-diorama">
+      <div class="at-stage">
+        <span class="at-layer at-wall" aria-hidden="true"></span>
+        <span class="at-layer at-spots" aria-hidden="true"></span>
+        <span class="at-layer at-rack" aria-hidden="true"></span>
+        <span class="at-layer at-sweep" aria-hidden="true"></span>
+        <span class="at-layer at-form" aria-hidden="true"></span>
+        <span class="at-layer at-fabric" aria-hidden="true"></span>
+        <div class="at-layer at-cartouche at-cartouche--day">
+          <span class="at-monogram" aria-hidden="true"></span>
+          <p class="at-lead">{{text "lead"}}</p>
+          <h1 class="at-names">
+            <span class="at-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="at-and">{{text "and"}}</span><span class="at-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="at-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+        <span class="at-layer at-tape at-decor" aria-hidden="true"></span>
+        <span class="at-spark at-spark--1 at-decor" aria-hidden="true"></span>
+        <span class="at-spark at-spark--2 at-decor" aria-hidden="true"></span>
+        <span class="at-spark at-spark--3 at-decor" aria-hidden="true"></span>
+        <p class="at-cue">{{text "scrollHint"}}</p>
+      </div>
     </div>
 
-    <div class="at-card at-invite">
-      <p class="at-kicker">{{text "lead"}}</p>
-      <h1 class="at-names">
-        <span class="at-name">{{couple.groom.name}}</span>
-        {{#if couple.bride.name}}<span class="at-and">{{text "and"}}</span><span class="at-name">{{couple.bride.name}}</span>{{/if}}
-      </h1>
+    <div class="at-sheet">
       {{#if verse}}<p class="at-verse">{{verse}}</p>{{/if}}
       <div class="at-families">
         <div class="at-family">
@@ -34,12 +42,18 @@
     </div>
   </section>
 
+  <!-- countdown: a clothing tag that swings once when it arrives -->
   <section class="at-section at-countdown" data-animate="countdown">
-    <h2 class="at-kicker">{{text "countdownTitle"}}</h2>
-    <p class="at-count"><span class="at-count__num">{{daysUntil mainDate}}</span><span class="at-count__unit">{{text "countdownUnit"}}</span></p>
+    <h2 class="at-title">{{text "countdownTitle"}}</h2>
+    <div class="at-emblem">
+      <span class="at-emblem__a" aria-hidden="true"></span>
+      <span class="at-emblem__b" aria-hidden="true"></span>
+      <span class="at-emblem__c" aria-hidden="true"></span>
+      <p class="at-count"><span class="at-count__num">{{daysUntil mainDate}}</span><span class="at-count__unit">{{text "countdownUnit"}}</span></p>
+    </div>
     {{#if (variant "dateStyle" "calendar")}}
       {{#with (calendarMonth mainDate)}}
-        <div class="at-cal">
+        <div class="at-card at-cal">
           <p class="at-cal__title">{{title}}</p>
           <div class="at-cal__grid">
             {{#each weekdays}}<span class="at-cal__wd">{{this}}</span>{{/each}}
@@ -52,11 +66,18 @@
 
   {{#if story.text}}
     <div class="at-divider" aria-hidden="true"></div>
+    <!-- story: each photo waits under a page of tissue paper that turns once -->
     <section class="at-section at-story" data-animate="story">
       <h2 class="at-title">{{text "storyTitle"}}</h2>
       {{#if story.photos.length}}
         <div class="at-photos">
-          {{#each story.photos}}<figure class="at-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
+          {{#each story.photos}}
+            <figure class="at-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="at-veil at-veil--a" aria-hidden="true"></span>
+              <span class="at-veil at-veil--b" aria-hidden="true"></span>
+            </figure>
+          {{/each}}
         </div>
       {{/if}}
       <p class="at-story__text">{{story.text}}</p>
@@ -65,51 +86,55 @@
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="at-section at-gallery" data-animate="gallery">
-      <h2 class="at-title">{{text "galleryTitle"}}</h2>
-      <div class="at-strip">
-        {{#each gallery}}<figure class="at-strip__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+    <section class="at-section at-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
+      <div class="at-gallery__stage">
+        <h2 class="at-title">{{text "galleryTitle"}}</h2>
+        <div class="at-flow">
+          {{#each gallery}}<figure class="at-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="at-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="at-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
   <div class="at-divider" aria-hidden="true"></div>
 
+  <!-- events: a tape measure; the dress form travels along with you -->
   <section class="at-section at-events" data-animate="events">
     <h2 class="at-title">{{text "eventsTitle"}}</h2>
-    {{#each events}}
-      <article class="at-card at-event" data-item>
-        <div class="at-event__head">
+    <div class="at-journey">
+      <span class="at-path" aria-hidden="true"><span class="at-traveller"></span></span>
+      {{#each events}}
+        <article class="at-card at-event" data-item>
+          <h3 class="at-event__type">{{eventLabel type}}</h3>
+          <p class="at-event__date">{{formatDate date}}</p>
           <p class="at-event__time">{{eventTime this}}</p>
-          <div>
-            <h3 class="at-event__type">{{eventLabel type}}</h3>
-            <p class="at-event__date">{{formatDate date}}</p>
-          </div>
-        </div>
-        <p class="at-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-        {{#if program.length}}
-          <div class="at-program">
-            <p class="at-program__title">{{text "programTitle"}}</p>
-            <ol class="at-program__list">
-              {{#each program}}<li class="at-program__item"><span class="at-program__time">{{formatTime time}}</span><span class="at-program__what">{{title}}</span></li>{{/each}}
-            </ol>
-          </div>
-        {{/if}}
-        {{#if mapUrl}}<a class="at-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
-      </article>
-    {{/each}}
+          <p class="at-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+          {{#if program.length}}
+            <div class="at-program">
+              <p class="at-program__title">{{text "programTitle"}}</p>
+              <ol class="at-program__list">
+                {{#each program}}<li class="at-program__item"><span class="at-program__time">{{formatTime time}}</span><span class="at-program__what">{{title}}</span></li>{{/each}}
+              </ol>
+            </div>
+          {{/if}}
+          {{#if mapUrl}}<a class="at-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+        </article>
+      {{/each}}
+    </div>
   </section>
 
   <section class="at-section at-wishes" data-animate="wishes">
-    <div class="at-card">
-      <h2 class="at-title">{{text "wishesTitle"}}</h2>
+    <div class="at-panel">
+      <span class="at-panel__decor" aria-hidden="true"></span>
+      <h2 class="at-title at-title--panel">{{text "wishesTitle"}}</h2>
       <wishes-box></wishes-box>
     </div>
   </section>
 
   <footer class="at-section at-footer" data-animate="footer">
-    <div class="at-divider" aria-hidden="true"></div>
+    <span class="at-footer__art" aria-hidden="true"></span>
+    <span class="at-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="at-closing">{{closingLine}}</p>{{/if}}
     {{#if wishes.closeDate}}<p class="at-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="at-brand">{{text "madeWith"}}</p>{{/if}}

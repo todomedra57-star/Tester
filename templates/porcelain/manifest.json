@@ -5,8 +5,8 @@
     "en": "Porcelain"
   },
   "description": {
-    "ar": "خزف أزرق وأبيض بحواف ذهبية: طبق مذهب يدور بعمق ثلاثي الأبعاد، نقش أغصان ناعم، وكروت مزججة.",
-    "en": "Fine blue-and-white china with gold rims: a gilded plate turning in 3D, a soft vine pattern and glazed cards."
+    "ar": "منظر بالحبر الأزرق كأنه مرسوم على البورسلين: جبال وضباب وطيور وجناح على الجرف وجسر وصفصاف، يُفتح بستارة قابلة للطي، مع فنجان شاي للعد وحجارة عبور فوق الماء.",
+    "en": "A blue-ink landscape as if painted on porcelain: mountains, mist, birds, a pavilion on a cliff, a bridge and a willow. Opens with a folding screen, counts down in a teacup, and stepping stones cross the water."
   },
   "languages": [
     "ar",
@@ -14,32 +14,8 @@
   ],
   "texts": {
     "lead": {
-      "ar": "يسعدنا دعوتكم لحضور حفل زفاف",
-      "en": "Together with their families invite you to the wedding of"
-    },
-    "countdownTitle": {
-      "ar": "باقي على الفرح",
-      "en": "Counting the days"
-    },
-    "storyTitle": {
-      "ar": "حكايتنا",
-      "en": "Our story"
-    },
-    "galleryTitle": {
-      "ar": "من صورنا",
-      "en": "Moments"
-    },
-    "galleryHint": {
-      "ar": "اسحبوا لمشاهدة كل الصور",
-      "en": "Swipe through the moments"
-    },
-    "eventsTitle": {
-      "ar": "المواعيد",
-      "en": "The celebrations"
-    },
-    "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
-      "en": "Leave a wish"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
       "ar": "و",
@@ -53,9 +29,21 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
+    "countdownTitle": {
+      "ar": "فنجان ينتظر يومنا",
+      "en": "A cup poured for our day"
+    },
     "countdownUnit": {
       "ar": "يوم",
       "en": "days"
+    },
+    "storyTitle": {
+      "ar": "حكايتنا",
+      "en": "Our story"
     },
     "storyPhoto": {
       "ar": "صورة من حكايتنا",
@@ -65,9 +53,21 @@
       "ar": "الخطوبة:",
       "en": "Engaged on"
     },
+    "galleryTitle": {
+      "ar": "لوحات من أيامنا",
+      "en": "Painted moments"
+    },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
       "en": "Gallery photo"
+    },
+    "galleryHint": {
+      "ar": "اسحبوا لمشاهدة كل الصور",
+      "en": "Swipe through the moments"
+    },
+    "eventsTitle": {
+      "ar": "على حجارة العبور",
+      "en": "Across the stepping stones"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -80,6 +80,10 @@
     "listSeparator": {
       "ar": "، ",
       "en": ", "
+    },
+    "wishesTitle": {
+      "ar": "اكتبوا دعوة",
+      "en": "Leave a wish"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -124,6 +128,14 @@
       "type": "color"
     },
     {
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
+      "type": "color"
+    },
+    {
       "key": "display",
       "type": "font"
     },
@@ -139,30 +151,70 @@
       "key": "radius",
       "type": "length",
       "min": 0,
-      "max": 28,
+      "max": 24,
       "unit": "px"
     },
     {
       "key": "nameSize",
       "type": "length",
       "min": 34,
-      "max": 68,
+      "max": 64,
       "unit": "px"
+    },
+    {
+      "key": "paperTexture",
+      "type": "image"
     },
     {
       "key": "patternTile",
       "type": "image"
     },
     {
-      "key": "plateArt",
-      "type": "image"
-    },
-    {
-      "key": "cornerArt",
+      "key": "monogramArt",
       "type": "image"
     },
     {
       "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
+      "type": "image"
+    },
+    {
+      "key": "frameArt",
+      "type": "image"
+    },
+    {
+      "key": "dividerArt",
+      "type": "image"
+    },
+    {
+      "key": "mountainsArt",
+      "type": "image"
+    },
+    {
+      "key": "birdsArt",
+      "type": "image"
+    },
+    {
+      "key": "pavilionArt",
+      "type": "image"
+    },
+    {
+      "key": "bridgeArt",
+      "type": "image"
+    },
+    {
+      "key": "willowArt",
+      "type": "image"
+    },
+    {
+      "key": "cornerArt",
       "type": "image"
     },
     {
@@ -318,22 +370,22 @@
       "key": "coverLayout",
       "type": "variant",
       "options": [
-        "plate",
-        "frame",
-        "minimal"
+        "scene",
+        "still",
+        "names"
       ],
       "choices": {
-        "plate": {
-          "ar": "طبق مذهب ثلاثي الأبعاد",
-          "en": "Gilded 3D plate"
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
         },
-        "frame": {
-          "ar": "لوحة خزف بإطار منقوش",
-          "en": "Patterned tile frame"
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
         },
-        "minimal": {
-          "ar": "أسماء فقط بإطار ذهبي",
-          "en": "Names only, gold frame"
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
         }
       }
     },
@@ -397,25 +449,25 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
-        "plate",
+        "veiled",
         "arch",
-        "scalloped",
+        "oval",
         "heart",
         "hexagon",
         "polaroid"
       ],
       "choices": {
-        "plate": {
-          "ar": "إطار طبق دائري",
-          "en": "Round plate"
+        "veiled": {
+          "ar": "ستارة قابلة للطي",
+          "en": "Folding screen"
         },
         "arch": {
           "ar": "قوس",
           "en": "Arch"
         },
-        "scalloped": {
-          "ar": "حافة مموجة",
-          "en": "Scalloped"
+        "oval": {
+          "ar": "بيضاوي",
+          "en": "Oval"
         },
         "heart": {
           "ar": "قلب",
@@ -436,7 +488,7 @@
       "type": "variant",
       "options": [
         "coverflow",
-        "stack",
+        "carousel",
         "strip",
         "grid",
         "scatter"
@@ -446,9 +498,9 @@
           "ar": "عرض ثلاثي الأبعاد",
           "en": "3D coverflow"
         },
-        "stack": {
-          "ar": "كأوراق متراصة",
-          "en": "Fanned stack"
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -466,27 +518,39 @@
     }
   ],
   "defaultTheme": {
-    "hero": "#1E3F8C",
-    "onHero": "#F7F8FB",
-    "accent": "#C6A15B",
-    "bg": "#F4F6FA",
-    "text": "#1C2A4A",
-    "muted": "#5F6B85",
-    "card": "#FFFFFF",
-    "line": "#D9DFEC",
+    "hero": "#1F3F7A",
+    "onHero": "#F7F9FC",
+    "accent": "#C9A55C",
+    "bg": "#F6F3EC",
+    "text": "#1C2A44",
+    "muted": "#737A87",
+    "card": "#FCFBF9",
+    "line": "#D7D7D4",
+    "deep": "#23407A",
+    "leaf": "#7F95BF",
     "display": "amiri",
-    "body": "serifPair",
-    "latin": "cormorant",
+    "body": "plexArabic",
+    "latin": "playfair",
     "radius": 14,
-    "nameSize": 52,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
     "patternTile": "porcelain-tile",
-    "plateArt": "porcelain-plate",
-    "cornerArt": "porcelain-corner",
+    "monogramArt": "porcelain-plate",
     "sparkleArt": "sparkle",
-    "coverLayout": "plate",
+    "travellerArt": "birds",
+    "footerArt": "pavilion",
+    "frameArt": "ornament",
+    "dividerArt": "ornament",
+    "mountainsArt": "ink-mountains",
+    "birdsArt": "birds",
+    "pavilionArt": "pavilion",
+    "bridgeArt": "ink-bridge",
+    "willowArt": "willow",
+    "cornerArt": "porcelain-corner",
+    "coverLayout": "scene",
     "ornament": "rich",
     "dateStyle": "badge",
-    "photoFrame": "plate",
+    "photoFrame": "veiled",
     "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
@@ -502,23 +566,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "doors",
+    "intro": "fold",
     "ambient": "none",
-    "duration": 1000,
-    "stagger": 150,
+    "duration": 1100,
+    "stagger": 160,
     "parallax": true,
     "sections": {
-      "countdown": {
-        "effect": "glaze"
-      },
-      "story": {
-        "effect": "glaze"
-      },
-      "wishes": {
-        "effect": "glaze"
-      },
       "cover": {
         "effect": "fade"
+      },
+      "countdown": {
+        "effect": "fade-up"
+      },
+      "story": {
+        "effect": "fade-up"
       },
       "gallery": {
         "effect": "fade"
@@ -526,21 +587,21 @@
       "events": {
         "effect": "fade-up"
       },
+      "wishes": {
+        "effect": "fade-up"
+      },
       "footer": {
         "effect": "fade"
       }
     }
   },
-  "effects": [
-    {
-      "key": "glaze",
-      "kind": "reveal",
-      "name": {
-        "ar": "تزجيج",
-        "en": "Glaze settle"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "fold"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
@@ -552,18 +613,20 @@
       {
         "key": "cobalt",
         "name": {
-          "ar": "كوبالت وذهبي",
-          "en": "Cobalt & gold"
+          "ar": "أزرق كوبالت",
+          "en": "Cobalt"
         },
         "values": {
-          "hero": "#1E3F8C",
-          "onHero": "#F7F8FB",
-          "accent": "#C6A15B",
-          "bg": "#F4F6FA",
-          "text": "#1C2A4A",
-          "muted": "#5F6B85",
-          "card": "#FFFFFF",
-          "line": "#D9DFEC"
+          "hero": "#1F3F7A",
+          "onHero": "#F7F9FC",
+          "accent": "#C9A55C",
+          "bg": "#F6F3EC",
+          "text": "#1C2A44",
+          "muted": "#737A87",
+          "card": "#FCFBF9",
+          "line": "#D7D7D4",
+          "deep": "#23407A",
+          "leaf": "#7F95BF"
         }
       },
       {
@@ -573,119 +636,95 @@
           "en": "Celadon"
         },
         "values": {
-          "hero": "#2C6A58",
-          "onHero": "#F5FAF7",
-          "accent": "#C6A15B",
-          "bg": "#F2F7F4",
-          "text": "#1E3A31",
-          "muted": "#5C7268",
-          "card": "#FFFFFF",
-          "line": "#D5E3DB"
+          "hero": "#2F5E57",
+          "onHero": "#F5FBF9",
+          "accent": "#C2A469",
+          "bg": "#F1F3EC",
+          "text": "#1F3532",
+          "muted": "#73817C",
+          "card": "#FBFBF9",
+          "line": "#D4D8D2",
+          "deep": "#2C5550",
+          "leaf": "#8DB0A6"
         }
       },
       {
-        "key": "rouge",
+        "key": "roseFamille",
         "name": {
-          "ar": "أحمر صيني",
-          "en": "Rouge"
+          "ar": "وردي عائلي",
+          "en": "Famille rose"
         },
         "values": {
-          "hero": "#9B2B2B",
-          "onHero": "#FFF8F5",
-          "accent": "#C6A15B",
-          "bg": "#FBF4F1",
-          "text": "#3B1A1A",
-          "muted": "#7D5F5B",
-          "card": "#FFFFFF",
-          "line": "#EBD9D3"
-        }
-      },
-      {
-        "key": "rosePorcelain",
-        "name": {
-          "ar": "وردي وذهب وردي",
-          "en": "Rose & rose gold"
-        },
-        "values": {
-          "hero": "#B0607A",
-          "onHero": "#FFF7F9",
-          "accent": "#C99A84",
-          "bg": "#FBF3F5",
-          "text": "#3F2430",
-          "muted": "#7F6470",
-          "card": "#FFFFFF",
-          "line": "#EDD8DE"
-        }
-      },
-      {
-        "key": "midnightChina",
-        "name": {
-          "ar": "خزف ليلي",
-          "en": "Midnight china"
-        },
-        "values": {
-          "hero": "#E3E9F7",
-          "onHero": "#10182E",
-          "accent": "#D4B26B",
-          "bg": "#10182E",
-          "text": "#EEF1F8",
-          "muted": "#9AA6C2",
-          "card": "#1A2440",
-          "line": "#2C3858"
-        }
-      },
-      {
-        "key": "goldLeaf",
-        "name": {
-          "ar": "ورق ذهب",
-          "en": "Gold leaf"
-        },
-        "values": {
-          "hero": "#6B4E1F",
-          "onHero": "#FFF9EE",
+          "hero": "#8A3D55",
+          "onHero": "#FFF8FA",
           "accent": "#C9A55C",
-          "bg": "#FBF6EC",
-          "text": "#3A2C17",
-          "muted": "#7A6A52",
-          "card": "#FFFFFF",
-          "line": "#EADFCB"
+          "bg": "#F8F1EF",
+          "text": "#3C2029",
+          "muted": "#877478",
+          "card": "#FDFBFA",
+          "line": "#DED4D3",
+          "deep": "#7A3550",
+          "leaf": "#C99AA8"
         }
       },
       {
-        "key": "lavender",
+        "key": "indigoGold",
         "name": {
-          "ar": "لافندر",
-          "en": "Lavender"
+          "ar": "نيلي وذهبي",
+          "en": "Indigo & gold"
         },
         "values": {
-          "hero": "#6A5A9E",
-          "onHero": "#FAF8FF",
-          "accent": "#C8A96A",
-          "bg": "#F6F4FB",
-          "text": "#2D2547",
-          "muted": "#6E6888",
-          "card": "#FFFFFF",
-          "line": "#E1DCEE"
+          "hero": "#2B2F6B",
+          "onHero": "#F7F7FC",
+          "accent": "#CBA85E",
+          "bg": "#F3F2F6",
+          "text": "#1E2148",
+          "muted": "#73758E",
+          "card": "#FBFBFC",
+          "line": "#D5D5DE",
+          "deep": "#262B63",
+          "leaf": "#8C90C4"
+        }
+      },
+      {
+        "key": "inkNight",
+        "name": {
+          "ar": "حبر الليل",
+          "en": "Ink night"
+        },
+        "values": {
+          "hero": "#DCE4F2",
+          "onHero": "#121A2E",
+          "accent": "#C9A55C",
+          "bg": "#121A2E",
+          "text": "#E6EBF4",
+          "muted": "#9197A5",
+          "card": "#21293C",
+          "line": "#30374A",
+          "deep": "#0A1020",
+          "leaf": "#3E5280"
         }
       }
     ],
     "intros": [
-      "none",
+      "fold",
       "doors",
-      "curtain"
+      "curtain",
+      "none"
     ],
     "ambients": [
-      "none"
+      "none",
+      "sparkles"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
-        "stagger": 150,
+        "duration": 1100,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },

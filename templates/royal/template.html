@@ -1,25 +1,39 @@
-<main class="ry" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-ornament="{{variant "ornament"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
+<main class="ry" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="ry-cover" data-animate="cover">
-    <div class="ry-drapes" aria-hidden="true">
-      <span class="ry-drape ry-drape--start"></span>
-      <span class="ry-drape ry-drape--end"></span>
-      <span class="ry-valance"></span>
+    <!-- the ballroom: damask wall, moonlit windows, light beams, chandeliers, marble floor, columns and velvet drapes drift at their own speeds -->
+    <div class="ry-diorama">
+      <div class="ry-stage">
+        <span class="ry-layer ry-wall" aria-hidden="true"></span>
+        <span class="ry-layer ry-windows" aria-hidden="true"></span>
+        <span class="ry-layer ry-beams" aria-hidden="true"></span>
+        <span class="ry-layer ry-chandelier-s ry-decor" aria-hidden="true"></span>
+        <span class="ry-layer ry-chandelier-e ry-decor" aria-hidden="true"></span>
+        <span class="ry-layer ry-floor" aria-hidden="true"><span class="ry-floor__tiles"></span></span>
+        <span class="ry-layer ry-column-s" aria-hidden="true"></span>
+        <span class="ry-layer ry-column-e" aria-hidden="true"></span>
+        <span class="ry-layer ry-chandelier" aria-hidden="true"></span>
+        <div class="ry-layer ry-cartouche ry-cartouche--night">
+          <span class="ry-monogram" aria-hidden="true"></span>
+          <p class="ry-lead">{{text "lead"}}</p>
+          <h1 class="ry-names">
+            <span class="ry-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="ry-and">{{text "and"}}</span><span class="ry-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="ry-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+        <span class="ry-layer ry-drape-s" aria-hidden="true"></span>
+        <span class="ry-layer ry-drape-e" aria-hidden="true"></span>
+        <span class="ry-layer ry-valance" aria-hidden="true"></span>
+        <span class="ry-spark ry-spark--1 ry-decor" aria-hidden="true"></span>
+        <span class="ry-spark ry-spark--2 ry-decor" aria-hidden="true"></span>
+        <span class="ry-spark ry-spark--3 ry-decor" aria-hidden="true"></span>
+        <p class="ry-cue">{{text "scrollHint"}}</p>
+      </div>
     </div>
-    <span class="ry-crest" aria-hidden="true" data-parallax></span>
 
-    <div class="ry-card ry-panel">
-      <span class="ry-fil ry-fil--1" aria-hidden="true"></span>
-      <span class="ry-fil ry-fil--2" aria-hidden="true"></span>
-      <span class="ry-fil ry-fil--3" aria-hidden="true"></span>
-      <span class="ry-fil ry-fil--4" aria-hidden="true"></span>
+    <div class="ry-sheet">
       {{#if verse}}<p class="ry-verse">{{verse}}</p>{{/if}}
-      <p class="ry-lead">{{text "lead"}}</p>
-      <h1 class="ry-names">
-        <span class="ry-name">{{couple.groom.name}}</span>
-        {{#if couple.bride.name}}<span class="ry-and">{{text "and"}}</span><span class="ry-name">{{couple.bride.name}}</span>{{/if}}
-      </h1>
-      {{#unless (variant "dateStyle" "calendar")}}<p class="ry-ribbon"><span>{{formatDate mainDate}}</span></p>{{/unless}}
       <div class="ry-families">
         <div class="ry-family">
           {{#if couple.groom.father}}<p class="ry-family__label">{{text "sonOf"}}</p><p class="ry-family__name">{{couple.groom.father}}</p>{{/if}}
@@ -33,11 +47,14 @@
     </div>
   </section>
 
+  <!-- countdown: a gilded clock whose hand settles when it arrives -->
   <section class="ry-section ry-countdown" data-animate="countdown">
-    <h2 class="ry-title ry-title--light">{{text "countdownTitle"}}</h2>
-    <div class="ry-medal">
-      <p class="ry-medal__num">{{daysUntil mainDate}}</p>
-      <p class="ry-medal__unit">{{text "countdownUnit"}}</p>
+    <h2 class="ry-title">{{text "countdownTitle"}}</h2>
+    <div class="ry-emblem">
+      <span class="ry-emblem__a" aria-hidden="true"></span>
+      <span class="ry-emblem__b" aria-hidden="true"></span>
+      <span class="ry-emblem__c" aria-hidden="true"></span>
+      <p class="ry-count"><span class="ry-count__num">{{daysUntil mainDate}}</span><span class="ry-count__unit">{{text "countdownUnit"}}</span></p>
     </div>
     {{#if (variant "dateStyle" "calendar")}}
       {{#with (calendarMonth mainDate)}}
@@ -53,61 +70,76 @@
   </section>
 
   {{#if story.text}}
+    <div class="ry-divider" aria-hidden="true"></div>
+    <!-- story: each photo waits behind velvet curtains that part once -->
     <section class="ry-section ry-story" data-animate="story">
-      <div class="ry-card">
-        <h2 class="ry-title">{{text "storyTitle"}}</h2>
-        {{#if story.photos.length}}
-          <div class="ry-photos">
-            {{#each story.photos}}<figure class="ry-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
-          </div>
-        {{/if}}
-        <p class="ry-story__text">{{story.text}}</p>
-        {{#if story.engagementDate}}<p class="ry-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
-      </div>
+      <h2 class="ry-title">{{text "storyTitle"}}</h2>
+      {{#if story.photos.length}}
+        <div class="ry-photos">
+          {{#each story.photos}}
+            <figure class="ry-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="ry-veil ry-veil--a" aria-hidden="true"></span>
+              <span class="ry-veil ry-veil--b" aria-hidden="true"></span>
+            </figure>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="ry-story__text">{{story.text}}</p>
+      {{#if story.engagementDate}}<p class="ry-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
     </section>
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="ry-section ry-gallery" data-animate="gallery">
-      <h2 class="ry-title ry-title--light">{{text "galleryTitle"}}</h2>
-      <div class="ry-wall">
-        {{#each gallery}}<figure class="ry-wall__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+    <section class="ry-section ry-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
+      <div class="ry-gallery__stage">
+        <h2 class="ry-title">{{text "galleryTitle"}}</h2>
+        <div class="ry-flow">
+          {{#each gallery}}<figure class="ry-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="ry-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="ry-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
+  <div class="ry-divider" aria-hidden="true"></div>
+
+  <!-- events: a red carpet with gold edges; the royal crest walks along with you -->
   <section class="ry-section ry-events" data-animate="events">
-    <h2 class="ry-title ry-title--light">{{text "eventsTitle"}}</h2>
-    {{#each events}}
-      <article class="ry-card ry-event" data-item>
-        <span class="ry-seal" aria-hidden="true"></span>
-        <h3 class="ry-event__type">{{eventLabel type}}</h3>
-        <p class="ry-event__date">{{formatDate date}}</p>
-        <p class="ry-event__time">{{eventTime this}}</p>
-        <p class="ry-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-        {{#if program.length}}
-          <div class="ry-program">
-            <p class="ry-program__title">{{text "programTitle"}}</p>
-            <ol class="ry-program__list">
-              {{#each program}}<li class="ry-program__item"><span class="ry-program__time">{{formatTime time}}</span><span class="ry-program__what">{{title}}</span></li>{{/each}}
-            </ol>
-          </div>
-        {{/if}}
-        {{#if mapUrl}}<a class="ry-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
-      </article>
-    {{/each}}
+    <h2 class="ry-title">{{text "eventsTitle"}}</h2>
+    <div class="ry-journey">
+      <span class="ry-path" aria-hidden="true"><span class="ry-traveller"></span></span>
+      {{#each events}}
+        <article class="ry-card ry-event" data-item>
+          <h3 class="ry-event__type">{{eventLabel type}}</h3>
+          <p class="ry-event__date">{{formatDate date}}</p>
+          <p class="ry-event__time">{{eventTime this}}</p>
+          <p class="ry-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+          {{#if program.length}}
+            <div class="ry-program">
+              <p class="ry-program__title">{{text "programTitle"}}</p>
+              <ol class="ry-program__list">
+                {{#each program}}<li class="ry-program__item"><span class="ry-program__time">{{formatTime time}}</span><span class="ry-program__what">{{title}}</span></li>{{/each}}
+              </ol>
+            </div>
+          {{/if}}
+          {{#if mapUrl}}<a class="ry-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+        </article>
+      {{/each}}
+    </div>
   </section>
 
   <section class="ry-section ry-wishes" data-animate="wishes">
-    <div class="ry-card">
-      <h2 class="ry-title">{{text "wishesTitle"}}</h2>
+    <div class="ry-panel">
+      <span class="ry-panel__decor" aria-hidden="true"></span>
+      <h2 class="ry-title ry-title--panel">{{text "wishesTitle"}}</h2>
       <wishes-box></wishes-box>
     </div>
   </section>
 
   <footer class="ry-section ry-footer" data-animate="footer">
-    <span class="ry-crest ry-crest--small" aria-hidden="true"></span>
+    <span class="ry-footer__art" aria-hidden="true"></span>
+    <span class="ry-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="ry-closing">{{closingLine}}</p>{{/if}}
     {{#if wishes.closeDate}}<p class="ry-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="ry-brand">{{text "madeWith"}}</p>{{/if}}

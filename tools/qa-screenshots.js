@@ -48,7 +48,7 @@ async function main() {
       // capture the final, revealed state: skip transition timing for the screenshot
       const st = document.createElement('style');
       // fixed page layers only cover one screen in a full-page capture: stretch them over the page instead
-      st.textContent = '*, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; } main::before, main::after { position: absolute !important; }';
+      st.textContent = '*, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; } main::before, main::after { position: absolute !important; } * { content-visibility: visible !important; }';
       document.head.append(st);
       document.querySelectorAll('img').forEach((i) => { i.loading = 'eager'; });
       document.querySelectorAll('[data-animate]').forEach((s) => s.classList.add('is-in'));

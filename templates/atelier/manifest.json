@@ -5,8 +5,8 @@
     "en": "Atelier"
   },
   "description": {
-    "ar": "غلاف مجلة أزياء: رخام وعاجي، أسماء ضخمة مفرغة، صورة غلاف ثابتة تنزلق فوقها الدعوة، ومعرض صور يتحول من الأبيض والأسود للألوان.",
-    "en": "A fashion-magazine cover: marble and ivory, huge outlined names, a fixed cover photo the invitation slides over, and a gallery that blooms from black-and-white into colour."
+    "ar": "استوديو أزياء راقٍ بعمق: أضواء كاشفة وراف ملابس ومانيكان وقماش منسدل وشريط قياس، يُفتح كغلاف مجلة يُقلب، مع بطاقة أزياء للعد وشريط فيلم للصور.",
+    "en": "A couture studio with depth: spotlights, a garment rack, a dress form, draped fabric and a tape measure. Opens as a magazine cover turns, counts down on a clothing tag, and the gallery runs like a film strip."
   },
   "languages": [
     "ar",
@@ -14,8 +14,8 @@
   ],
   "texts": {
     "lead": {
-      "ar": "بكل سرور ندعوكم لحضور حفل زفاف",
-      "en": "The pleasure of your company is requested at the wedding of"
+      "ar": "بكل الحب والسرور، يتشرفون بدعوتكم لحضور حفل زفاف",
+      "en": "With joy and love, request the honour of your presence at the wedding of"
     },
     "and": {
       "ar": "و",
@@ -29,9 +29,13 @@
       "ar": "كريمة",
       "en": "Daughter of"
     },
+    "scrollHint": {
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
+    },
     "countdownTitle": {
-      "ar": "باقي على الموعد",
-      "en": "Counting down"
+      "ar": "العدّ قبل العرض",
+      "en": "Countdown to the show"
     },
     "countdownUnit": {
       "ar": "يوم",
@@ -51,7 +55,7 @@
     },
     "galleryTitle": {
       "ar": "لقطات",
-      "en": "Portraits"
+      "en": "Frames"
     },
     "galleryPhoto": {
       "ar": "صورة من معرض الصور",
@@ -59,11 +63,11 @@
     },
     "galleryHint": {
       "ar": "اسحبوا لمشاهدة كل الصور",
-      "en": "Swipe through the portraits"
+      "en": "Swipe through the moments"
     },
     "eventsTitle": {
-      "ar": "البرنامج",
-      "en": "Itinerary"
+      "ar": "جدول العرض",
+      "en": "The running order"
     },
     "programTitle": {
       "ar": "فقرات الحفل",
@@ -78,8 +82,8 @@
       "en": ", "
     },
     "wishesTitle": {
-      "ar": "اكتب دعوة للعروسين",
-      "en": "Notes for the couple"
+      "ar": "اكتبوا كلمة للعروسين",
+      "en": "Write a note for the couple"
     },
     "openUntil": {
       "ar": "الصفحة مفتوحة حتى",
@@ -124,6 +128,14 @@
       "type": "color"
     },
     {
+      "key": "deep",
+      "type": "color"
+    },
+    {
+      "key": "leaf",
+      "type": "color"
+    },
+    {
       "key": "display",
       "type": "font"
     },
@@ -139,22 +151,46 @@
       "key": "radius",
       "type": "length",
       "min": 0,
-      "max": 12,
+      "max": 24,
       "unit": "px"
     },
     {
       "key": "nameSize",
       "type": "length",
-      "min": 40,
-      "max": 76,
+      "min": 34,
+      "max": 64,
       "unit": "px"
     },
     {
-      "key": "marbleTexture",
+      "key": "paperTexture",
+      "type": "image"
+    },
+    {
+      "key": "monogramArt",
+      "type": "image"
+    },
+    {
+      "key": "sparkleArt",
+      "type": "image"
+    },
+    {
+      "key": "travellerArt",
+      "type": "image"
+    },
+    {
+      "key": "footerArt",
       "type": "image"
     },
     {
       "key": "dividerArt",
+      "type": "image"
+    },
+    {
+      "key": "rackArt",
+      "type": "image"
+    },
+    {
+      "key": "formArt",
       "type": "image"
     },
     {
@@ -307,6 +343,29 @@
       }
     },
     {
+      "key": "coverLayout",
+      "type": "variant",
+      "options": [
+        "scene",
+        "still",
+        "names"
+      ],
+      "choices": {
+        "scene": {
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
+        },
+        "still": {
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
+        },
+        "names": {
+          "ar": "الأسماء فقط",
+          "en": "Names only"
+        }
+      }
+    },
+    {
       "key": "ornament",
       "type": "variant",
       "options": [
@@ -341,7 +400,7 @@
       ],
       "choices": {
         "badge": {
-          "ar": "التاريخ في الغلاف",
+          "ar": "التاريخ على الغلاف",
           "en": "Date on the cover"
         },
         "calendar": {
@@ -366,7 +425,7 @@
       "key": "photoFrame",
       "type": "variant",
       "options": [
-        "offset",
+        "veiled",
         "arch",
         "oval",
         "heart",
@@ -374,9 +433,9 @@
         "polaroid"
       ],
       "choices": {
-        "offset": {
-          "ar": "خط مزاح",
-          "en": "Offset line"
+        "veiled": {
+          "ar": "ورق حرير يُقلب",
+          "en": "Turning tissue page"
         },
         "arch": {
           "ar": "قوس",
@@ -404,15 +463,20 @@
       "key": "galleryStyle",
       "type": "variant",
       "options": [
-        "bloom",
+        "coverflow",
+        "carousel",
         "strip",
         "grid",
         "scatter"
       ],
       "choices": {
-        "bloom": {
-          "ar": "من الأبيض والأسود للألوان",
-          "en": "Black-and-white to colour"
+        "coverflow": {
+          "ar": "عرض ثلاثي الأبعاد",
+          "en": "3D coverflow"
+        },
+        "carousel": {
+          "ar": "حلقة ثلاثية الأبعاد",
+          "en": "3D carousel ring"
         },
         "strip": {
           "ar": "شريط بسيط",
@@ -430,25 +494,34 @@
     }
   ],
   "defaultTheme": {
-    "hero": "#141414",
-    "onHero": "#F6F2EA",
-    "accent": "#B89B5E",
-    "bg": "#F3EEE6",
-    "text": "#161513",
-    "muted": "#6F6A61",
-    "card": "#FFFFFF",
-    "line": "#DDD5C8",
-    "display": "elMessiri",
+    "hero": "#1E1E22",
+    "onHero": "#F8F5F0",
+    "accent": "#B8946A",
+    "bg": "#F3EFEA",
+    "text": "#1E1E22",
+    "muted": "#737272",
+    "card": "#FBFAF9",
+    "line": "#D5D2CE",
+    "deep": "#3A3436",
+    "leaf": "#C9B8A8",
+    "display": "reemKufi",
     "body": "plexArabic",
-    "latin": "playfair",
-    "radius": 0,
-    "nameSize": 60,
-    "marbleTexture": "marble",
-    "dividerArt": "gold-flourish",
-    "dateStyle": "badge",
-    "photoFrame": "offset",
-    "galleryStyle": "bloom",
+    "latin": "bodoni",
+    "radius": 14,
+    "nameSize": 50,
+    "paperTexture": "paper-grain",
+    "monogramArt": "rosette",
+    "sparkleArt": "sparkle",
+    "travellerArt": "dress-form",
+    "footerArt": "garment-rack",
+    "dividerArt": "ornament",
+    "rackArt": "garment-rack",
+    "formArt": "dress-form",
+    "coverLayout": "scene",
     "ornament": "rich",
+    "dateStyle": "badge",
+    "photoFrame": "veiled",
+    "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -463,20 +536,20 @@
     "fontPair": "template"
   },
   "defaultAnimation": {
-    "intro": "curtain",
+    "intro": "page",
     "ambient": "none",
-    "duration": 1000,
-    "stagger": 140,
+    "duration": 1100,
+    "stagger": 160,
     "parallax": true,
     "sections": {
       "cover": {
         "effect": "fade"
       },
       "countdown": {
-        "effect": "wipe"
+        "effect": "fade-up"
       },
       "story": {
-        "effect": "wipe"
+        "effect": "fade-up"
       },
       "gallery": {
         "effect": "fade"
@@ -485,80 +558,45 @@
         "effect": "fade-up"
       },
       "wishes": {
-        "effect": "wipe"
+        "effect": "fade-up"
       },
       "footer": {
         "effect": "fade"
       }
     }
   },
-  "effects": [
-    {
-      "key": "wipe",
-      "kind": "reveal",
-      "name": {
-        "ar": "مسح جانبي",
-        "en": "Editorial wipe"
-      }
-    }
-  ],
+  "runtime": {
+    "scene": true,
+    "intros": [
+      "page"
+    ]
+  },
+  "effects": [],
   "fields": [],
   "couplePresets": {
     "label": {
       "ar": "أتيليه",
       "en": "Atelier"
     },
-    "defaultPalette": "champagne",
+    "defaultPalette": "inkNude",
     "palettes": [
       {
-        "key": "champagne",
+        "key": "inkNude",
         "name": {
-          "ar": "شمبانيا",
-          "en": "Champagne"
+          "ar": "حبر ونود",
+          "en": "Ink & nude"
         },
         "values": {
-          "hero": "#141414",
-          "onHero": "#F6F2EA",
-          "accent": "#B89B5E",
-          "bg": "#F3EEE6",
-          "text": "#161513",
-          "muted": "#6F6A61",
-          "card": "#FFFFFF",
-          "line": "#DDD5C8"
-        }
-      },
-      {
-        "key": "noir",
-        "name": {
-          "ar": "نوار",
-          "en": "Noir"
-        },
-        "values": {
-          "hero": "#EDE6D8",
-          "onHero": "#121212",
-          "accent": "#C7A76A",
-          "bg": "#121212",
-          "text": "#EFE9DE",
-          "muted": "#A39C90",
-          "card": "#1B1B1B",
-          "line": "#34312C"
-        }
-      },
-      {
-        "key": "sage",
-        "name": {
-          "ar": "أخضر مريمية",
-          "en": "Sage"
-        },
-        "values": {
-          "hero": "#2F3B32",
-          "onHero": "#F4F3EE",
-          "accent": "#A88B57",
-          "bg": "#EDEFE8",
-          "text": "#1E2620",
-          "muted": "#66705F",
-          "card": "#FBFBF8",
-          "line": "#D4D9CC"
+          "hero": "#1E1E22",
+          "onHero": "#F8F5F0",
+          "accent": "#B8946A",
+          "bg": "#F3EFEA",
+          "text": "#1E1E22",
+          "muted": "#737272",
+          "card": "#FBFAF9",
+          "line": "#D5D2CE",
+          "deep": "#3A3436",
+          "leaf": "#C9B8A8"
         }
       },
       {
@@ -573,9 +611,11 @@
           "accent": "#C29A84",
           "bg": "#F5ECE8",
           "text": "#2E2124",
-          "muted": "#7C6A6C",
-          "card": "#FFFFFF",
-          "line": "#E6D7D2"
+          "muted": "#7E7272",
+          "card": "#FCF9F8",
+          "line": "#D9D0CD",
+          "deep": "#4A383C",
+          "leaf": "#D9B8B0"
         }
       },
       {
@@ -590,33 +630,81 @@
           "accent": "#B89B5E",
           "bg": "#EEF0F4",
           "text": "#121B30",
-          "muted": "#626B7E",
-          "card": "#FFFFFF",
-          "line": "#D6DBE4"
+          "muted": "#6A707E",
+          "card": "#FAFAFC",
+          "line": "#CFD2D9",
+          "deep": "#2A3450",
+          "leaf": "#B8C0CF"
+        }
+      },
+      {
+        "key": "oliveAtelier",
+        "name": {
+          "ar": "زيتوني",
+          "en": "Olive"
+        },
+        "values": {
+          "hero": "#2F3426",
+          "onHero": "#F6F6EF",
+          "accent": "#B59A62",
+          "bg": "#F0EFE6",
+          "text": "#262A1F",
+          "muted": "#77796F",
+          "card": "#FAFAF8",
+          "line": "#D4D3CA",
+          "deep": "#3E4432",
+          "leaf": "#BDB79A"
+        }
+      },
+      {
+        "key": "noirAtelier",
+        "name": {
+          "ar": "نوار",
+          "en": "Noir"
+        },
+        "values": {
+          "hero": "#EDE6DA",
+          "onHero": "#141414",
+          "accent": "#C2A274",
+          "bg": "#141414",
+          "text": "#EFE9DE",
+          "muted": "#97948D",
+          "card": "#232322",
+          "line": "#333230",
+          "deep": "#0C0C0C",
+          "leaf": "#5A524C"
         }
       }
     ],
     "intros": [
-      "none",
+      "page",
+      "doors",
       "curtain",
-      "doors"
+      "none"
     ],
     "ambients": [
-      "none"
+      "none",
+      "sparkles"
     ],
     "motions": {
       "calm": {
-        "duration": 1000,
-        "stagger": 140,
+        "duration": 1100,
+        "stagger": 160,
         "parallax": true
       },
       "lively": {
-        "duration": 650,
-        "stagger": 90,
+        "duration": 700,
+        "stagger": 100,
         "parallax": true
       }
     },
     "variants": [
+      {
+        "key": "coverLayout"
+      },
+      {
+        "key": "ornament"
+      },
       {
         "key": "dateStyle"
       },
@@ -625,9 +713,6 @@
       },
       {
         "key": "galleryStyle"
-      },
-      {
-        "key": "ornament"
       },
       {
         "key": "fontPair"

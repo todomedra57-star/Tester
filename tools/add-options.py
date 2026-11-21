@@ -56,6 +56,13 @@ for P, key in LUXE.items():
     T[key] = dict(root=f".{P}", photo=f".{P}-photo", flow=f".{P}-flow", item=f".{P}-flow__item", hint=f".{P}-hint", date=f".{P}-date",
                   cards=f".{P}-card", names=f".{P}-names", foil=f"var(--{P}-foil)", light="var(--c-card)", decor=[], filter="")
 
+# templates built by the scene kit (tools/build-scenes.py) share one class scheme
+KIT = json.loads((ROOT.parent / "tools" / "kit-templates.json").read_text()) if (ROOT.parent / "tools" / "kit-templates.json").exists() else {}
+for _key, _k in KIT.items():
+    _P = _k["P"]
+    T[_key] = dict(root=f".{_P}", photo=f".{_P}-photo", flow=f".{_P}-flow", item=f".{_P}-flow__item", hint=f".{_P}-hint", date=f".{_P}-date",
+                   cards=f".{_P}-card", names=f".{_P}-names", foil=f"var(--{_P}-foil)", light="var(--c-card)", decor=[], filter="")
+
 # ----------------------------------------------------------------- new options
 NEW_FRAMES = [("heart", "قلب", "Heart"), ("hexagon", "سداسي", "Hexagon"), ("polaroid", "صورة فورية", "Polaroid")]
 NEW_GALLERY = [("grid", "شبكة فسيفساء", "Mosaic grid"), ("scatter", "صور فورية متناثرة", "Scattered polaroids")]
@@ -95,6 +102,11 @@ PALETTES = {
     "desert-bloom": [("saffron", "زعفران", "Saffron", dict(hero="#5A3410", onHero="#FFF6E6", accent="#D9A440", bg="#EDB85A", text="#3D2410", muted="#7D5A35", card="#FFF6E4", line="#EED8B0", glow="#FBE3A8", dune="#DDA052", silhouette="#4A2A0E")),
                      ("lavenderDusk", "غروب لافندر", "Lavender dusk", dict(hero="#3D2850", onHero="#FAF4FF", accent="#D3AE6E", bg="#9C86B8", text="#2B1D3A", muted="#4E3F5E", card="#FBF6FC", line="#E5D9EA", glow="#F2CFC4", dune="#B98AA0", silhouette="#2E1C3B"))],
 }
+
+for _key in KIT:
+    COVER_NEW.pop(_key, None)
+    PALETTES.pop(_key, None)
+
 
 def extend_variant(tokens, key, new_opts, fallback=None):
     tok = next((t for t in tokens if t["key"] == key), None)
@@ -140,6 +152,9 @@ LIVE = {
     "desert-bloom": dict(key="desert-bloom", portraits=[".db-portrait"], titles=".db-title", foil="--db-foil",
                          stages=[".db-stars", ".db-sun", ".db-dune--1", ".db-dune--2, .db-palm--start", ".db-dune--3, .db-palm--end", ".db-dune--4, .db-bloom", ".db-sky", ".db-invite"]),
 }
+
+for _key, _k in KIT.items():
+    LIVE[_key] = dict(key=_key, portraits=[], titles=f".{_k['P']}-title", foil=f"--{_k['P']}-foil", stages=_k["stages"])
 
 PHOTO_TONE = [("natural", "ألوان طبيعية", "Natural colour"), ("golden", "تدرج ذهبي", "Golden tone"),
               ("palette", "بألوان التصميم", "Palette tone"), ("noir", "أبيض وأسود", "Black and white")]
@@ -246,11 +261,14 @@ for _P, _key in LUXE.items():
 CALM["porcelain"].append(".pc-plate__glaze")
 CALM["glass-garden"].append(".gg-house__glare")
 
+for _key in KIT:
+    CALM[_key] = []
+
 def calm_css(name, R):
     out = ["/* ---- calm & smooth ---- */"]
     if CALM.get(name):
         out.append(f"{R} :is({', '.join(CALM[name])}) {{ animation: none !important; }}")
-    if name == "glass-garden":
+    if name == "glass-garden" and name not in KIT:
         out.append(""".gg :is(.gg-card, .gg-house__glass, .gg-date) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 .gg .gg-card { background: color-mix(in srgb, var(--c-card) 90%, transparent) !important; }
 .gg .gg-date { background: color-mix(in srgb, var(--c-card) 85%, transparent) !important; }""")
@@ -312,6 +330,8 @@ def css_pack(name, c):
 
 def extra_css(name, R):
     """Template-specific new options (countdown, third cover layouts)."""
+    if name in KIT:
+        return []
     if name == "midnight":
         return [""".mn[data-countdown-style="diamond"] .mn-count { inline-size: 150px; block-size: 150px; margin-block: 24px; border: 1px solid var(--c-accent); outline: 1px solid var(--c-line); outline-offset: 10px; rotate: 45deg; }
 .mn[data-countdown-style="diamond"] .mn-count > * { rotate: -45deg; }"""]
@@ -353,7 +373,7 @@ for name, c in T.items():
     extend_variant(toks, "galleryStyle", NEW_GALLERY, fallback=variant_tok("galleryStyle", [("strip", "شريط بسيط", "Simple strip")]))
     extend_variant(toks, "dateStyle", [o for o in NEW_DATES])
     extend_variant(toks, "ornament", ORNAMENT, fallback=variant_tok("ornament", ORNAMENT[:1]))
-    if name == "midnight":
+    if name == "midnight" and name not in KIT:
         extend_variant(toks, "countdownStyle", COUNTDOWN_NEW)
     if name in COVER_NEW:
         extend_variant(toks, "coverLayout", [COVER_NEW[name]])
@@ -382,7 +402,7 @@ for name, c in T.items():
         if t["type"] == "variant" and t["key"] not in vkeys:
             man["couplePresets"]["variants"].append({"key": t["key"]})
     have = {p["key"] for p in man["couplePresets"]["palettes"]}
-    for key, ar, en, vals in PALETTES[name]:
+    for key, ar, en, vals in PALETTES.get(name, []):
         if key not in have:
             man["couplePresets"]["palettes"].append({"key": key, "name": {"ar": ar, "en": en}, "values": vals})
     (d / "manifest.json").write_text(json.dumps(man, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

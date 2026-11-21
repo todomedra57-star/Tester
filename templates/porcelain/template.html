@@ -1,120 +1,143 @@
 <main class="pc" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="pc-cover" data-animate="cover">
-    <div class="pc-panel">
-      <span class="pc-panel__pattern pc-decor" aria-hidden="true"></span>
-      <div class="pc-plate">
-        <span class="pc-plate__band" aria-hidden="true"></span>
-        <span class="pc-plate__glaze" aria-hidden="true"></span>
-        {{#if story.photos.length}}
-          {{#with story.photos.[0]}}<figure class="pc-plate__photo"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
-        {{else}}
-          <span class="pc-plate__amp" aria-hidden="true">{{text "and"}}</span>
-        {{/if}}
-        <span class="pc-spark pc-spark--1 pc-decor" aria-hidden="true"></span><span class="pc-spark pc-spark--2 pc-decor" aria-hidden="true"></span><span class="pc-spark pc-spark--3 pc-decor" aria-hidden="true"></span>
+    <!-- the ink landscape: paper sky, sun, two mountain ranges, birds, mist, cliff with a pavilion, water, bridge and willow drift at their own speeds -->
+    <div class="pc-diorama">
+      <div class="pc-stage">
+        <span class="pc-layer pc-sky" aria-hidden="true"></span>
+        <span class="pc-layer pc-sun" aria-hidden="true"></span>
+        <span class="pc-layer pc-mountains" aria-hidden="true"></span>
+        <span class="pc-layer pc-birds" aria-hidden="true"></span>
+        <span class="pc-layer pc-mist" aria-hidden="true"></span>
+        <span class="pc-layer pc-mountains-near" aria-hidden="true"></span>
+        <span class="pc-layer pc-cliff" aria-hidden="true"></span>
+        <span class="pc-layer pc-pavilion" aria-hidden="true"></span>
+        <span class="pc-layer pc-water" aria-hidden="true"></span>
+        <span class="pc-layer pc-bridge" aria-hidden="true"></span>
+        <span class="pc-layer pc-willow" aria-hidden="true"></span>
+        <div class="pc-layer pc-cartouche pc-cartouche--day">
+          <span class="pc-monogram" aria-hidden="true"></span>
+          <p class="pc-lead">{{text "lead"}}</p>
+          <h1 class="pc-names">
+            <span class="pc-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="pc-and">{{text "and"}}</span><span class="pc-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="pc-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+        <span class="pc-layer pc-corner-s pc-decor" aria-hidden="true"></span>
+        <span class="pc-layer pc-corner-e pc-decor" aria-hidden="true"></span>
+        <p class="pc-cue">{{text "scrollHint"}}</p>
       </div>
-      <p class="pc-lead">{{text "lead"}}</p>
-      <h1 class="pc-names">
-        <span class="pc-name">{{couple.groom.name}}</span>
-        {{#if couple.bride.name}}<span class="pc-and">{{text "and"}}</span><span class="pc-name">{{couple.bride.name}}</span>{{/if}}
-      </h1>
-      {{#unless (variant "dateStyle" "calendar")}}<p class="pc-date">{{formatDate mainDate}}</p>{{/unless}}
     </div>
-    <div class="pc-card pc-invite">
+
+    <div class="pc-sheet">
       {{#if verse}}<p class="pc-verse">{{verse}}</p>{{/if}}
-    <div class="pc-families">
-      <div class="pc-family">
-        {{#if couple.groom.father}}<p class="pc-family__label">{{text "sonOf"}}</p><p class="pc-family__name">{{couple.groom.father}}</p>{{/if}}
-        {{#each couple.groom.family}}<p class="pc-family__label">{{label}}</p><p class="pc-family__name">{{name}}</p>{{/each}}
+      <div class="pc-families">
+        <div class="pc-family">
+          {{#if couple.groom.father}}<p class="pc-family__label">{{text "sonOf"}}</p><p class="pc-family__name">{{couple.groom.father}}</p>{{/if}}
+          {{#each couple.groom.family}}<p class="pc-family__label">{{label}}</p><p class="pc-family__name">{{name}}</p>{{/each}}
+        </div>
+        <div class="pc-family">
+          {{#if couple.bride.father}}<p class="pc-family__label">{{text "daughterOf"}}</p><p class="pc-family__name">{{couple.bride.father}}</p>{{/if}}
+          {{#each couple.bride.family}}<p class="pc-family__label">{{label}}</p><p class="pc-family__name">{{name}}</p>{{/each}}
+        </div>
       </div>
-      <div class="pc-family">
-        {{#if couple.bride.father}}<p class="pc-family__label">{{text "daughterOf"}}</p><p class="pc-family__name">{{couple.bride.father}}</p>{{/if}}
-        {{#each couple.bride.family}}<p class="pc-family__label">{{label}}</p><p class="pc-family__name">{{name}}</p>{{/each}}
-      </div>
-    </div>
     </div>
   </section>
 
+  <!-- countdown: a porcelain teacup on its saucer -->
   <section class="pc-section pc-countdown" data-animate="countdown">
-    <div class="pc-card">
-      <span class="pc-spark pc-spark--1 pc-decor" aria-hidden="true"></span><span class="pc-spark pc-spark--2 pc-decor" aria-hidden="true"></span>
-      <h2 class="pc-title">{{text "countdownTitle"}}</h2>
+    <h2 class="pc-title">{{text "countdownTitle"}}</h2>
+    <div class="pc-emblem">
+      <span class="pc-emblem__a" aria-hidden="true"></span>
+      <span class="pc-emblem__b" aria-hidden="true"></span>
+      <span class="pc-emblem__c" aria-hidden="true"></span>
       <p class="pc-count"><span class="pc-count__num">{{daysUntil mainDate}}</span><span class="pc-count__unit">{{text "countdownUnit"}}</span></p>
-      {{#if (variant "dateStyle" "calendar")}}
-        {{#with (calendarMonth mainDate)}}
-          <div class="pc-cal">
-            <p class="pc-cal__title">{{title}}</p>
-            <div class="pc-cal__grid">
-              {{#each weekdays}}<span class="pc-cal__wd">{{this}}</span>{{/each}}
-              {{#each cells}}<span class="pc-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
-            </div>
-          </div>
-        {{/with}}
-      {{/if}}
     </div>
+    {{#if (variant "dateStyle" "calendar")}}
+      {{#with (calendarMonth mainDate)}}
+        <div class="pc-card pc-cal">
+          <p class="pc-cal__title">{{title}}</p>
+          <div class="pc-cal__grid">
+            {{#each weekdays}}<span class="pc-cal__wd">{{this}}</span>{{/each}}
+            {{#each cells}}<span class="pc-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+          </div>
+        </div>
+      {{/with}}
+    {{/if}}
   </section>
 
   {{#if story.text}}
     <div class="pc-divider" aria-hidden="true"></div>
+    <!-- story: each photo waits behind painted screen panels that fold open once -->
     <section class="pc-section pc-story" data-animate="story">
-      <div class="pc-card">
-        
-        <h2 class="pc-title">{{text "storyTitle"}}</h2>
-        {{#if story.photos.length}}
-          <div class="pc-photos">
-            {{#each story.photos}}<figure class="pc-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
-          </div>
-        {{/if}}
-        <p class="pc-story__text">{{story.text}}</p>
-        {{#if story.engagementDate}}<p class="pc-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
-      </div>
+      <h2 class="pc-title">{{text "storyTitle"}}</h2>
+      {{#if story.photos.length}}
+        <div class="pc-photos">
+          {{#each story.photos}}
+            <figure class="pc-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="pc-veil pc-veil--a" aria-hidden="true"></span>
+              <span class="pc-veil pc-veil--b" aria-hidden="true"></span>
+            </figure>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="pc-story__text">{{story.text}}</p>
+      {{#if story.engagementDate}}<p class="pc-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
     </section>
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="pc-section pc-gallery" data-animate="gallery">
-      <h2 class="pc-title">{{text "galleryTitle"}}</h2>
-      <div class="pc-flow">
-        {{#each gallery}}<figure class="pc-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+    <section class="pc-section pc-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
+      <div class="pc-gallery__stage">
+        <h2 class="pc-title">{{text "galleryTitle"}}</h2>
+        <div class="pc-flow">
+          {{#each gallery}}<figure class="pc-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="pc-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="pc-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
   <div class="pc-divider" aria-hidden="true"></div>
 
+  <!-- events: stepping stones across the water; birds fly along with you -->
   <section class="pc-section pc-events" data-animate="events">
     <h2 class="pc-title">{{text "eventsTitle"}}</h2>
-    {{#each events}}
-      <article class="pc-card pc-event" data-item>
-        
-        <h3 class="pc-event__type">{{eventLabel type}}</h3>
-        <p class="pc-event__date">{{formatDate date}}</p>
-        <p class="pc-event__time">{{eventTime this}}</p>
-        <p class="pc-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-        {{#if program.length}}
-          <div class="pc-program">
-            <p class="pc-program__title">{{text "programTitle"}}</p>
-            <ol class="pc-program__list">
-              {{#each program}}<li class="pc-program__item"><span class="pc-program__time">{{formatTime time}}</span><span class="pc-program__what">{{title}}</span></li>{{/each}}
-            </ol>
-          </div>
-        {{/if}}
-        {{#if mapUrl}}<a class="pc-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
-      </article>
-    {{/each}}
+    <div class="pc-journey">
+      <span class="pc-path" aria-hidden="true"><span class="pc-traveller"></span></span>
+      {{#each events}}
+        <article class="pc-card pc-event" data-item>
+          <h3 class="pc-event__type">{{eventLabel type}}</h3>
+          <p class="pc-event__date">{{formatDate date}}</p>
+          <p class="pc-event__time">{{eventTime this}}</p>
+          <p class="pc-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+          {{#if program.length}}
+            <div class="pc-program">
+              <p class="pc-program__title">{{text "programTitle"}}</p>
+              <ol class="pc-program__list">
+                {{#each program}}<li class="pc-program__item"><span class="pc-program__time">{{formatTime time}}</span><span class="pc-program__what">{{title}}</span></li>{{/each}}
+              </ol>
+            </div>
+          {{/if}}
+          {{#if mapUrl}}<a class="pc-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+        </article>
+      {{/each}}
+    </div>
   </section>
 
   <section class="pc-section pc-wishes" data-animate="wishes">
-    <div class="pc-card">
-      
-      <h2 class="pc-title">{{text "wishesTitle"}}</h2>
+    <div class="pc-panel pc-panel--light">
+      <span class="pc-panel__decor" aria-hidden="true"></span>
+      <h2 class="pc-title pc-title--panel">{{text "wishesTitle"}}</h2>
       <wishes-box></wishes-box>
     </div>
   </section>
 
   <footer class="pc-section pc-footer" data-animate="footer">
-    <span class="pc-divider" aria-hidden="true"></span>
+    <span class="pc-footer__art" aria-hidden="true"></span>
+    <span class="pc-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="pc-closing">{{closingLine}}</p>{{/if}}
     {{#if wishes.closeDate}}<p class="pc-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="pc-brand">{{text "madeWith"}}</p>{{/if}}

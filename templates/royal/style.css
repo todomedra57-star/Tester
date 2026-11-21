@@ -1,387 +1,323 @@
-/* Royal Crest: a palace ball.
-   Layers: fixed velvet page + damask → velvet drapes and a scalloped valance
-   framing the top (they part as you scroll) → the gold crest crossing above the
-   invitation panel → ivory letterpress cards with gold filigree corners and wax
-   seals crossing their top edge. Card text uses text; page text uses onHero.
-   Tokens only; logical properties. */
+/* Royal Crest: a moonlit ballroom with chandeliers, velvet drapes and a gilded clock.
+   Built by tools/build-scenes.py with the scene kit (tools/scenekit.py): calm GPU
+   drift on the cover, one-time reveals, no loops. Tokens only; logical properties. */
 
+
+/* ---------- base ---------- */
 .ry {
-  --ry-gold-deep: color-mix(in srgb, var(--c-accent) 62%, var(--c-hero));
-  --ry-gold-light: color-mix(in srgb, var(--c-accent) 50%, var(--c-on-hero));
-  --ry-foil: linear-gradient(115deg, var(--ry-gold-deep) 0%, var(--c-accent) 20%, var(--ry-gold-light) 34%,
-    var(--c-accent) 46%, var(--ry-gold-deep) 60%, var(--c-accent) 76%, var(--ry-gold-light) 90%, var(--c-accent) 100%);
-  --ry-ink: linear-gradient(115deg, var(--c-text) 0%, var(--ry-gold-deep) 35%, var(--c-text) 60%, var(--ry-gold-deep) 85%, var(--c-text) 100%);
+  --ry-gd: color-mix(in srgb, var(--c-accent) 58%, var(--c-hero));
+  --ry-gl: color-mix(in srgb, var(--c-accent) 45%, var(--c-card));
+  --ry-foil: linear-gradient(115deg, var(--ry-gd) 0%, var(--c-accent) 20%, var(--ry-gl) 34%, var(--c-accent) 46%,
+    var(--ry-gd) 60%, var(--c-accent) 76%, var(--ry-gl) 90%, var(--c-accent) 100%);
+  --ry-ink: linear-gradient(115deg, var(--c-hero) 0%, var(--c-hero) 38%, var(--ry-gd) 48%, var(--c-accent) 52%, var(--c-hero) 62%, var(--c-hero) 100%);
+  --ry-glow: var(--c-card);
+  --ry-shade: var(--c-deep);
+  --ry-photo-r: var(--radius);
   position: relative;
   isolation: isolate;
   max-inline-size: 520px;
   margin-inline: auto;
-  color: var(--c-on-hero);
+  color: var(--c-text);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.75;
   text-align: center;
   overflow-x: clip;
 }
+@supports (color: oklch(from red l c h)) {
+  .ry { --ry-glow: oklch(from var(--c-accent) 0.96 0.035 h); --ry-shade: oklch(from var(--c-deep) calc(l * 0.62) c h); }
+}
 .ry :where(p, h1, h2, h3, ol, figure) { margin: 0; }
+.ry::before { content: ""; position: fixed; inset: 0; z-index: -2;
+  background: radial-gradient(140% 100% at 50% 40%, transparent 55%, color-mix(in srgb, var(--c-text) 10%, transparent)), var(--c-bg); }
+.has-paper-texture .ry::before { background: radial-gradient(140% 100% at 50% 40%, transparent 55%, color-mix(in srgb, var(--c-text) 10%, transparent)), var(--img-paper-texture), var(--c-bg); }
+.has-pattern-tile .ry::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05;
+  background: var(--c-accent); -webkit-mask: var(--img-pattern-tile) 0 0 / 120px; mask: var(--img-pattern-tile) 0 0 / 120px; }
+.ry-section { position: relative; padding-block: 64px; padding-inline: 20px; }
+.ry-wishes, .ry-footer { content-visibility: auto; contain-intrinsic-size: auto 700px; }
 
-/* velvet: deep folds of light over the base color */
-.ry::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(60% 40% at 30% 20%, color-mix(in srgb, var(--c-on-hero) 7%, transparent), transparent 70%),
-    radial-gradient(70% 50% at 80% 70%, color-mix(in srgb, var(--c-hero) 70%, transparent), transparent 70%),
-    var(--c-bg);
-}
-.has-pattern-tile .ry::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: var(--img-pattern-tile) 0 0 / 120px;
-  opacity: 0.08;
-  pointer-events: none;
-}
-.ry-section { position: relative; padding-block: 60px; padding-inline: 20px; }
-
-/* foil and ink text */
-.ry :is(.ry-title--light, .ry-medal__num, .ry-closing) {
-  background: var(--ry-foil) 0 0 / 220% 100%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-}
-.ry :is(.ry-title:not(.ry-title--light), .ry-names, .ry-event__type) {
-  background: var(--ry-ink) 0 0 / 220% 100%;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-}
+/* type */
+.ry :is(.ry-names, .ry-title, .ry-count__num, .ry-event__type) {
+  background: var(--ry-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ry :is(.ry-title--panel, .ry-closing) {
+  background: var(--ry-foil) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
 .ry-title { margin-block-end: 26px; font-family: var(--font-display); font-weight: 400; font-size: 34px; line-height: 1.3; }
-.ry:lang(en) .ry-title { font-family: var(--font-latin); font-size: 21px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
-
-/* ---------- 1 · cover: drapes, crest, panel ---------- */
-.ry-cover { position: relative; padding-block: 120px 40px; padding-inline: 22px; }
-.ry-drapes { position: absolute; inset-block-start: 0; inset-inline: 0; block-size: 560px; z-index: 4; pointer-events: none; }
-.ry-drape {
-  position: absolute;
-  inset-block-start: 0;
-  inline-size: 30%;
-  block-size: 100%;
-  background:
-    linear-gradient(color-mix(in srgb, var(--c-hero) 30%, transparent), transparent 30%),
-    repeating-linear-gradient(90deg,
-      var(--c-hero) 0 4px,
-      color-mix(in srgb, var(--c-bg) 85%, var(--c-on-hero)) 12px,
-      var(--c-bg) 18px,
-      var(--c-hero) 26px);
-  box-shadow: 0 20px 30px -10px color-mix(in srgb, var(--c-hero) 90%, transparent);
-}
-.ry-drape--start { inset-inline-start: 0; border-end-end-radius: 100% 92%; }
-.ry-drape--end { inset-inline-end: 0; border-end-start-radius: 100% 92%; }
-/* gold tie-backs */
-.ry-drape::after {
-  content: "";
-  position: absolute;
-  inset-block-start: 58%;
-  inset-inline: -10% 10%;
-  block-size: 12px;
-  border-radius: 6px;
-  background: var(--ry-foil);
-  rotate: -14deg;
-  box-shadow: 0 4px 8px color-mix(in srgb, var(--c-hero) 80%, transparent);
-}
-.ry-drape--end::after { inset-inline: 10% -10%; rotate: 14deg; }
-.ry-drape--start:dir(rtl)::after { rotate: 14deg; }
-.ry-drape--end:dir(rtl)::after { rotate: -14deg; }
-/* scalloped valance with a gold fringe */
-.ry-valance {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 0;
-  block-size: 64px;
-  background:
-    radial-gradient(circle at 50% 0, var(--c-hero) 62%, transparent 63%) 0 14px / 64px 50px repeat-x,
-    radial-gradient(circle at 50% 0, var(--c-accent) 66%, transparent 67%) 0 16px / 64px 50px repeat-x,
-    linear-gradient(var(--c-hero), var(--c-hero)) 0 0 / 100% 22px no-repeat;
-  filter: drop-shadow(0 6px 6px color-mix(in srgb, var(--c-hero) 80%, transparent));
-}
-
-.ry-crest {
-  position: relative;
-  z-index: 3;
-  display: none;
-  inline-size: 170px;
-  aspect-ratio: 240 / 260;
-  margin-inline: auto;
-  margin-block-end: -70px;
-  filter: drop-shadow(0 12px 18px color-mix(in srgb, var(--c-hero) 90%, transparent));
-}
-.has-crest-art .ry-crest { display: block; background: var(--img-crest-art) center / contain no-repeat; }
-.ry-crest--small { inline-size: 100px; margin-block-end: 0; }
-
-/* ---------- ivory letterpress cards ---------- */
-.ry-card {
-  position: relative;
-  z-index: 2;
-  padding-block: 50px;
-  padding-inline: 28px;
-  border-radius: var(--radius);
-  background:
-    linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--c-on-hero) 70%, transparent) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
-    radial-gradient(130% 90% at 50% 0%, transparent 55%, color-mix(in srgb, var(--c-line) 60%, transparent)),
-    var(--c-card);
-  color: var(--c-text);
-  outline: 1px solid var(--c-accent);
-  outline-offset: -12px;
-  box-shadow:
-    inset 0 0 0 16px var(--c-card),
-    inset 0 0 0 17px color-mix(in srgb, var(--c-accent) 55%, transparent),
-    0 0 0 3px var(--c-accent),
-    0 0 0 4px color-mix(in srgb, var(--c-hero) 60%, transparent),
-    0 34px 54px -26px color-mix(in srgb, var(--c-hero) 95%, transparent),
-    0 0 70px -24px color-mix(in srgb, var(--c-accent) 50%, transparent);
-}
-.has-paper-texture .ry-card {
-  background:
-    linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--c-on-hero) 70%, transparent) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
-    radial-gradient(130% 90% at 50% 0%, transparent 55%, color-mix(in srgb, var(--c-line) 60%, transparent)),
-    var(--img-paper-texture),
-    var(--c-card);
-}
-.ry-fil { position: absolute; inline-size: 70px; block-size: 70px; display: none; z-index: 1; }
-.has-corner-art .ry-fil { display: block; background: var(--img-corner-art) center / contain no-repeat; }
-.ry-fil--1 { inset-block-start: 6px; inset-inline-start: 6px; }
-.ry-fil--2 { inset-block-start: 6px; inset-inline-end: 6px; }
-.ry-fil--3 { inset-block-end: 6px; inset-inline-start: 6px; }
-.ry-fil--4 { inset-block-end: 6px; inset-inline-end: 6px; }
-.ry-fil--1:dir(rtl), .ry-fil--2:dir(ltr) { transform: scaleX(-1); }
-.ry-fil--3:dir(ltr), .ry-fil--4:dir(rtl) { transform: scaleY(-1); }
-.ry-fil--3:dir(rtl), .ry-fil--4:dir(ltr) { transform: scale(-1, -1); }
-
-.ry-panel { padding-block: 100px 56px; }
-.ry-verse { margin-block-end: 16px; font-family: var(--font-display); font-size: 19px; line-height: 1.9; }
-.ry-lead { max-inline-size: 26ch; margin-inline: auto; font-size: 16px; color: var(--c-muted); }
-.ry:lang(en) .ry-lead { font-style: italic; }
-.ry-names {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-block: 22px 18px;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--name-size);
-  line-height: 1.3;
-}
-.ry:lang(en) .ry-names { font-family: var(--font-latin); font-size: calc(var(--name-size) * 0.7); letter-spacing: 0.06em; line-height: 1.35; }
+.ry:lang(en) .ry-title { font-family: var(--font-latin); }
+.ry-names { display: flex; flex-direction: column; align-items: center; font-family: var(--font-display); font-weight: 400; font-size: min(var(--name-size), 12vw); line-height: 1.25; }
+.ry:lang(en) .ry-names { font-family: var(--font-latin); line-height: 1.12; }
 .ry-name { max-inline-size: 100%; overflow-wrap: anywhere; text-wrap: balance; }
-.ry-and { font-size: 0.6em; }
+.ry-and { font-size: 0.55em; line-height: 1.6; }
+.ry-lead { max-inline-size: 26ch; margin-inline: auto; font-size: 14px; color: var(--c-muted); }
+.ry:lang(en) .ry-lead { font-family: var(--font-latin); font-style: italic; font-size: 16px; }
+.ry-monogram { display: none; inline-size: 40px; block-size: 40px; margin-inline: auto; background: var(--ry-foil); }
+.has-monogram-art .ry-monogram { display: block; -webkit-mask: var(--img-monogram-art) center / contain no-repeat; mask: var(--img-monogram-art) center / contain no-repeat; }
 
-/* gold ribbon banner with notched ends */
-.ry-ribbon {
-  position: relative;
-  display: inline-block;
-  margin-block: 8px 4px;
-  margin-inline: -44px;
-  padding-block: 10px;
-  padding-inline: 46px;
-  background: var(--ry-foil);
-  color: var(--c-hero);
-  font-size: 15px;
-  font-weight: 600;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 50%, 100% 100%, 0 100%, 16px 50%);
-  filter: drop-shadow(0 6px 6px color-mix(in srgb, var(--c-hero) 40%, transparent));
+/* ---------- 1 · the diorama ---------- */
+.ry-cover, .ry-diorama { position: relative; }
+.ry-stage { position: relative; block-size: max(100svh, 680px); overflow: hidden; isolation: isolate; }
+/* every plane drifts at its own speed as the cover scrolls away: far planes lag
+   behind, near planes move ahead. One transform per plane, run by the browser on
+   the GPU from the scroll position: no script, no repaint. */
+.ry-layer { position: absolute; will-change: transform; }
+@supports (animation-timeline: view()) {
+  .ry-stage { view-timeline: --ry-cover block; }
+  .ry-layer { animation: royal-drift linear both; animation-timeline: --ry-cover; animation-range: exit 0% exit 100%; }
+  .ry[data-cover-layout="still"] .ry-layer { animation: none; }
 }
-.ry:lang(en) .ry-ribbon { font-family: var(--font-latin); letter-spacing: 0.08em; }
+@keyframes royal-drift { to { transform: translate(var(--dx, 0px), var(--dy, 0px)); } }
 
-.ry-families {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-block-start: 26px;
-  padding-block-start: 22px;
-  border-block-start: 1px solid var(--c-line);
+.ry-cartouche {
+  inset-block-start: var(--ry-cart-top, 17%); inset-inline: 0; margin-inline: auto; z-index: 5;
+  inline-size: min(300px, 80%); --dy: 60px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding-block: 26px 30px; padding-inline: 20px;
 }
+.ry-cartouche .ry-monogram { inline-size: 30px; block-size: 30px; }
+.ry-date { padding-block: 7px; padding-inline: 20px; border: 1px solid var(--c-accent); border-radius: 999px; color: var(--c-hero); font-size: 14px; }
+.ry-spark { position: absolute; z-index: 4; inline-size: 16px; block-size: 16px; display: none; background: var(--ry-foil); pointer-events: none; }
+.has-sparkle-art .ry-spark { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; }
+.ry-cue { position: absolute; inset-block-end: 3%; inset-inline: 0; z-index: 7; font-size: 12px; color: var(--ry-cue, var(--c-muted)); }
+.ry-cue::after { content: ""; display: block; inline-size: 1px; block-size: 26px; margin: 6px auto 0; background: linear-gradient(var(--c-accent), transparent); }
+.ry[data-cover-layout="still"] .ry-cue { display: none; }
+.ry[data-ornament="refined"] .ry-decor { display: none !important; }
+
+/* night scenes: names in foil over a soft dark halo */
+.ry-cartouche--night { color: var(--ry-glow); background: radial-gradient(closest-side, color-mix(in srgb, var(--c-deep) 62%, transparent), color-mix(in srgb, var(--c-deep) 30%, transparent) 70%, transparent); }
+.ry-cartouche--night .ry-names { background: var(--ry-foil) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--c-deep) 90%, transparent)); font-size: min(calc(var(--name-size) * 0.9), 11vw); }
+.ry-cartouche--night .ry-lead { color: color-mix(in srgb, var(--ry-glow) 85%, transparent); font-size: 13.5px; }
+.ry-cartouche--night .ry-date { color: var(--ry-glow); background: color-mix(in srgb, var(--c-deep) 78%, transparent); border-color: var(--c-accent); }
+/* day scenes: ink names over a soft light halo */
+.ry-cartouche--day { background: radial-gradient(closest-side, color-mix(in srgb, var(--c-card) 88%, transparent), color-mix(in srgb, var(--c-card) 55%, transparent) 70%, transparent); }
+.ry-cartouche--day .ry-names { font-size: min(calc(var(--name-size) * 0.9), 11vw); }
+.ry-cartouche--day .ry-date { background: color-mix(in srgb, var(--c-card) 80%, transparent); }
+
+/* ---------- the invitation sheet ---------- */
+.ry-sheet { position: relative; margin-block: 30px 10px; margin-inline: 22px; padding-block: 56px; padding-inline: 30px;
+  border-radius: var(--radius); background: var(--c-card); outline: 1px solid var(--c-accent); outline-offset: -10px;
+  box-shadow: 0 0 0 1px var(--c-line), 0 30px 50px -30px color-mix(in srgb, var(--c-deep) 55%, transparent); }
+.ry-sheet:not(:has(p)) { display: none; }
+.has-frame-art .ry-sheet::before, .has-frame-art .ry-sheet::after {
+  content: ""; position: absolute; inset-inline: 22px; block-size: 20px; background: var(--c-accent);
+  -webkit-mask: var(--img-frame-art) center / auto 100% repeat-x; mask: var(--img-frame-art) center / auto 100% repeat-x; }
+.ry-sheet::before { inset-block-start: 20px; }
+.ry-sheet::after { inset-block-end: 20px; rotate: x 180deg; }
+.ry-verse { margin-block-end: 18px; font-family: var(--font-display); font-size: 19px; line-height: 1.9; }
+.ry-families { display: grid; grid-template-columns: 1fr 1fr; }
 .ry-families:not(:has(p)) { display: none; }
+.ry-verse + .ry-families { padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
 .ry-family { display: flex; flex-direction: column; gap: 2px; padding-inline: 8px; min-inline-size: 0; }
 .ry-family + .ry-family { border-inline-start: 1px solid var(--c-line); }
 .ry-family__label { font-size: 12px; color: var(--c-muted); }
-.ry:lang(en) .ry-family__label { font-family: var(--font-latin); letter-spacing: 0.1em; }
 .ry-family__label:not(:first-child) { margin-block-start: 8px; }
-.ry-family__name { font-size: 14px; font-weight: 600; overflow-wrap: anywhere; }
+.ry-family__name { font-size: 14px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
 
-/* ---------- 2 · countdown in a gilded oval medal ---------- */
-.ry-medal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  inline-size: 210px;
-  block-size: 250px;
-  margin-inline: auto;
-  border: 5px solid transparent;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--c-on-hero) 10%, var(--c-hero)), var(--c-hero) 70%) padding-box,
-    var(--ry-foil) border-box;
-  outline: 1px solid var(--c-accent);
-  outline-offset: 8px;
-  box-shadow: 0 30px 50px -20px color-mix(in srgb, var(--c-hero) 95%, transparent), 0 0 60px -20px color-mix(in srgb, var(--c-accent) 60%, transparent);
-}
-.ry-medal__num { font-family: var(--font-display); font-size: 78px; line-height: 1.1; }
-.ry:lang(en) .ry-medal__num { font-family: var(--font-latin); font-size: 64px; }
-.ry-medal__unit { font-size: 14px; color: color-mix(in srgb, var(--c-on-hero) 75%, transparent); }
-.ry:lang(en) .ry-medal__unit { font-family: var(--font-latin); letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; }
-.ry-cal { margin-block-start: 40px; padding-block: 40px; }
-.ry-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 24px; }
-.ry:lang(en) .ry-cal__title { font-family: var(--font-latin); letter-spacing: 0.1em; font-size: 18px; }
+/* ---------- cards ---------- */
+.ry-card { position: relative; z-index: 1; padding-block: 48px; padding-inline: 26px; border-radius: var(--radius); background: var(--c-card);
+  outline: 1px solid var(--c-accent); outline-offset: -10px;
+  box-shadow: inset 0 0 0 14px var(--c-card), inset 0 0 0 15px color-mix(in srgb, var(--c-accent) 45%, transparent), 0 0 0 1px var(--c-line),
+    0 30px 50px -28px color-mix(in srgb, var(--c-deep) 55%, transparent); }
+.has-corner-art .ry-card::after { content: ""; position: absolute; inset-block-end: -18px; inset-inline-end: -14px; inline-size: 84px; aspect-ratio: 1; pointer-events: none;
+  background: var(--ry-corner, var(--c-accent)); -webkit-mask: var(--img-corner-art) center / contain no-repeat; mask: var(--img-corner-art) center / contain no-repeat; }
+.ry-card:dir(rtl)::after { rotate: y 180deg; }
+.ry[data-ornament="refined"] .ry-card::after { display: none; }
+.ry-divider { inline-size: 240px; block-size: 30px; margin-inline: auto; background: linear-gradient(var(--c-accent), var(--c-accent)) center / 100% 1px no-repeat; }
+.has-divider-art .ry-divider { background: var(--ry-foil); -webkit-mask: var(--img-divider-art) center / contain no-repeat; mask: var(--img-divider-art) center / contain no-repeat; }
+
+/* ---------- 2 · countdown emblem ---------- */
+.ry-countdown { display: flex; flex-direction: column; align-items: center; }
+.ry-emblem { position: relative; display: grid; place-items: center; }
+.ry-emblem > span { position: absolute; display: block; pointer-events: none; }
+.ry-count { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; line-height: 1.05; }
+.ry-count__num { font-family: var(--font-display); font-size: 46px; }
+.ry:lang(en) .ry-count__num { font-family: var(--font-latin); }
+.ry-count__unit { font-size: 12px; color: var(--c-hero); }
+/* emblem pieces settle once when the section arrives */
+.ry-emblem > span { transition: transform 1.6s cubic-bezier(.3, .7, .2, 1) .3s, opacity 1.2s ease .3s; }
+.ry-cal { inline-size: 100%; max-inline-size: 360px; margin-block-start: 30px; padding-block: 36px; }
+.ry-cal__title { margin-block-end: 12px; font-family: var(--font-display); font-size: 22px; color: var(--c-hero); }
+.ry:lang(en) .ry-cal__title { font-family: var(--font-latin); }
 .ry-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; font-size: 13px; }
 .ry-cal__wd { font-size: 11px; color: var(--c-muted); }
 .ry-cal__cell { display: grid; place-items: center; block-size: 34px; }
-.ry-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; background: var(--c-bg); color: var(--c-on-hero); box-shadow: 0 0 0 2px var(--c-accent); font-weight: 700; }
+.ry-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50%; background: var(--ry-foil); color: var(--c-hero); font-weight: 700; }
 
-/* ---------- 3 · story: gilded portrait frames ---------- */
-.ry-photos { display: flex; justify-content: center; gap: 18px; margin-block-end: 28px; }
-.ry-photo {
-  flex: 0 1 44%;
-  aspect-ratio: 3 / 4;
-  padding: 6px;
-  border-radius: 50%;
-  background: var(--ry-foil);
-  box-shadow: inset 0 0 0 1px var(--ry-gold-deep), 0 18px 28px -16px color-mix(in srgb, var(--c-hero) 85%, transparent);
-}
-.ry-photo:nth-child(2) { margin-block-start: 30px; }
+/* ---------- 3 · story: photos behind veils that open once ---------- */
+.ry-photos { display: flex; justify-content: center; gap: 18px; margin-block-end: 28px; --open: 1; }
+.ry-story.fx:not(.is-in) .ry-photos { --open: 0; }
+.ry-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; perspective: 700px; padding: 5px; border-radius: var(--ry-photo-r); background: var(--ry-foil);
+  box-shadow: inset 0 0 0 1px var(--ry-gd), 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 70%, transparent), 0 20px 30px -16px color-mix(in srgb, var(--c-deep) 60%, transparent); }
+.ry-photo:nth-child(2) { margin-block-start: 34px; }
 .ry-photo:nth-child(n+3) { display: none; }
-.ry-photo img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; box-shadow: 0 0 0 2px var(--c-card); }
-.ry[data-photo-frame="arch"] .ry-photo { border-radius: 999px 999px 4px 4px; }
-.ry[data-photo-frame="square"] .ry-photo { border-radius: 2px; padding: 9px; }
+.ry-photo { overflow: hidden; }
+.ry-photo img { position: relative; display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
+.ry-veil { position: absolute; inset-block: 5px; inline-size: calc(50% - 5px); z-index: 2; overflow: hidden; will-change: transform;
+  transition: transform 1.6s cubic-bezier(.65, 0, .25, 1) .5s, opacity 1.2s ease .7s; }
+.ry-veil--a { inset-inline-start: 5px; }
+.ry-veil--b { inset-inline-end: 5px; }
+.ry:not([data-photo-frame="veiled"]) .ry-veil { display: none; }
+.ry[data-photo-frame="oval"] .ry-photo { border-radius: 50%; padding: 4px; outline: 2px dotted var(--c-accent); outline-offset: 5px; }
+.ry[data-photo-frame="arch"] .ry-photo { border-radius: 999px 999px 6px 6px; }
 .ry-story__text { max-inline-size: 30ch; margin-inline: auto; font-size: 17px; }
 .ry-story__date { margin-block-start: 12px; font-size: 13px; color: var(--c-muted); }
 
-/* ---------- 4 · gallery: gilded frames on a 3D wall ---------- */
+/* ---------- 4 · gallery ---------- */
 .ry-gallery { padding-inline: 0; }
-.ry-wall { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 16px 34px; padding-inline: 22%; perspective: 900px; scrollbar-width: none; }
-.ry-wall::-webkit-scrollbar { display: none; }
-.ry-wall__item { flex: 0 0 56%; aspect-ratio: 3 / 4; scroll-snap-align: center; padding-inline: 8px; }
-.ry-wall__item img {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  border: 10px solid transparent;
-  background: var(--ry-foil) border-box;
-  box-shadow: inset 0 0 0 2px var(--ry-gold-deep), 0 0 0 2px var(--ry-gold-deep), 0 26px 40px -18px color-mix(in srgb, var(--c-hero) 95%, transparent);
-}
+.ry-gallery__stage { display: flex; flex-direction: column; align-items: center; }
+.ry-flow { display: flex; inline-size: 100%; overflow-x: auto; scroll-snap-type: x mandatory; padding-block: 16px 34px; padding-inline: 22%; scrollbar-width: none; }
+.ry-flow::-webkit-scrollbar { display: none; }
+.ry-flow__item { flex: 0 0 56%; aspect-ratio: 3 / 4; scroll-snap-align: center; padding-inline: 8px; }
+.ry-flow__item img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: var(--ry-photo-r); border: 3px solid transparent;
+  background: var(--ry-foil) border-box; box-shadow: 0 24px 36px -20px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+/* the ring needs the scene engine and at least three photos */
+.scene-on .ry[data-gallery-style="carousel"] .ry-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) { block-size: 280svh; padding-block: 0; }
+.scene-on .ry[data-gallery-style="carousel"] .ry-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .ry-gallery__stage {
+  position: sticky; inset-block-start: 0; block-size: 100svh; justify-content: center; overflow: hidden; perspective: 1100px; }
+.scene-on .ry[data-gallery-style="carousel"] .ry-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .ry-flow {
+  position: relative; display: block; overflow: visible; block-size: 360px; padding: 0; transform-style: preserve-3d; rotate: x -6deg;
+  --w: 168px; --r: calc(var(--w) / 2 / tan(0.5turn / var(--n)) + 46px); }
+.scene-on .ry[data-gallery-style="carousel"] .ry-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .ry-flow__item {
+  position: absolute; inset-block-start: 40px; inset-inline-start: calc(50% - var(--w) / 2); inline-size: var(--w); padding: 0;
+  transform: rotateY(calc((var(--i) / var(--n) - var(--p, 0) * (var(--n) - 1) / var(--n)) * 1turn)) translateZ(var(--r)); }
+.scene-on .ry[data-gallery-style="carousel"] .ry-gallery[data-n]:not([data-n="1"]):not([data-n="2"]) .ry-hint { display: none; }
 @supports (animation-timeline: view(inline)) {
-  .ry[data-gallery-style="gallery"] .ry-wall__item { padding-inline: 0; animation: royal-wall linear both; animation-timeline: view(inline); }
-  .ry[data-gallery-style="gallery"] .ry-wall:dir(rtl) .ry-wall__item { animation-name: royal-wall-rtl; }
+  .ry[data-gallery-style="coverflow"] .ry-flow { perspective: 900px; }
+  .ry[data-gallery-style="coverflow"] .ry-flow__item { padding-inline: 0; animation: royal-flow linear both; animation-timeline: view(inline); }
+  .ry[data-gallery-style="coverflow"] .ry-flow:dir(rtl) .ry-flow__item { animation-name: royal-flow-rtl; }
 }
-@keyframes royal-wall {
-  0%   { transform: translateZ(-150px) rotateY(-42deg); filter: brightness(0.7); }
-  50%  { transform: none; filter: none; }
-  100% { transform: translateZ(-150px) rotateY(42deg); filter: brightness(0.7); }
-}
-@keyframes royal-wall-rtl {
-  0%   { transform: translateZ(-150px) rotateY(42deg); filter: brightness(0.7); }
-  50%  { transform: none; filter: none; }
-  100% { transform: translateZ(-150px) rotateY(-42deg); filter: brightness(0.7); }
-}
-.ry-hint { font-size: 13px; color: color-mix(in srgb, var(--c-on-hero) 70%, transparent); }
+.ry-hint { font-size: 13px; color: var(--c-muted); }
+@keyframes royal-flow { 0% { transform: translateZ(-160px) rotateY(-46deg); opacity: 0.75; } 50% { transform: none; opacity: 1; } 100% { transform: translateZ(-160px) rotateY(46deg); opacity: 0.75; } }
+@keyframes royal-flow-rtl { 0% { transform: translateZ(-160px) rotateY(46deg); opacity: 0.75; } 50% { transform: none; opacity: 1; } 100% { transform: translateZ(-160px) rotateY(-46deg); opacity: 0.75; } }
 
-/* ---------- 5 · events: sealed cards ---------- */
-.ry-events { display: flex; flex-direction: column; gap: 70px; }
-.ry-events .ry-title { margin-block-end: 0; }
-.ry-seal {
-  position: absolute;
-  inset-block-start: -32px;
-  inset-inline-start: calc(50% - 32px);
-  z-index: 3;
-  inline-size: 64px;
-  block-size: 64px;
-  border-radius: 50%;
-  background: var(--ry-foil);
-}
-.has-seal-art .ry-seal { border-radius: 0; background: var(--img-seal-art) center / contain no-repeat; }
-.ry-event { padding-block-start: 60px; }
-.ry-event__type { margin-block-end: 6px; font-family: var(--font-display); font-weight: 400; font-size: 28px; }
-.ry:lang(en) .ry-event__type { font-family: var(--font-latin); font-size: 19px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
-.ry-event__date { font-size: 16px; }
-.ry-event__time { margin-block-start: 2px; font-size: 16px; font-weight: 600; }
+/* ---------- 5 · events along a path, a traveller rides with the reader ---------- */
+.ry-journey { position: relative; display: flex; flex-direction: column; gap: 46px; padding-inline-start: 58px; text-align: start; }
+.ry-path { position: absolute; inset-block: -20px; inset-inline-start: 10px; inline-size: 30px; border-radius: 15px; }
+.ry-traveller { position: sticky; inset-block-start: 46vh; z-index: 3; display: none; margin-inline-start: -16px; inline-size: 62px; aspect-ratio: var(--ry-trav, 1); background: var(--ry-foil); }
+.has-traveller-art .ry-traveller { display: block; -webkit-mask: var(--img-traveller-art) center / contain no-repeat; mask: var(--img-traveller-art) center / contain no-repeat; }
+.ry-traveller:dir(rtl) { rotate: y 180deg; }
+.ry-event { padding-block: 36px 40px; padding-inline: 26px; }
+.ry-event::before { content: ""; position: absolute; inset-block-start: 40px; inset-inline-start: -52px; inline-size: 18px; block-size: 18px; border-radius: 50%;
+  background: radial-gradient(circle, var(--ry-glow) 30%, var(--c-accent) 60%); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-accent) 25%, transparent); }
+.ry-event__type { margin-block-end: 4px; font-family: var(--font-display); font-weight: 400; font-size: 26px; }
+.ry:lang(en) .ry-event__type { font-family: var(--font-latin); }
+.ry-event__date, .ry-event__time { font-size: 15px; }
+.ry-event__time { font-weight: 600; }
 .ry-event__place { font-size: 14px; color: var(--c-muted); overflow-wrap: anywhere; }
-.ry-program { margin-block-start: 24px; padding-block-start: 20px; border-block-start: 1px solid var(--c-line); }
-.ry-program__title { margin-block-end: 12px; font-size: 14px; color: var(--c-muted); }
-.ry:lang(en) .ry-program__title { font-family: var(--font-latin); letter-spacing: 0.1em; }
-.ry-program__list { list-style: none; padding: 0; display: grid; gap: 10px; max-inline-size: 280px; margin-inline: auto; }
-.ry-program__item { display: flex; justify-content: space-between; gap: 14px; padding-block-end: 8px; border-block-end: 1px dotted var(--c-accent); font-size: 14px; }
-.ry-program__time { font-weight: 600; }
-.ry-map {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-block-size: 46px;
-  margin-block-start: 26px;
-  padding-inline: 28px;
-  border-radius: 999px;
-  background: var(--c-bg);
-  color: var(--c-on-hero);
-  box-shadow: 0 0 0 2px var(--c-accent), 0 0 0 5px var(--c-card), 0 0 0 6px color-mix(in srgb, var(--c-accent) 60%, transparent);
-  font-size: 14px;
-  text-decoration: none;
-  transition: background-color .3s, color .3s;
-}
-.ry-map:hover, .ry-map:focus-visible { background: var(--c-accent); color: var(--c-hero); }
-.ry-map:focus-visible { outline: 2px solid var(--c-bg); outline-offset: 8px; }
+.ry-program { margin-block-start: 18px; padding-block-start: 16px; border-block-start: 1px solid var(--c-line); }
+.ry-program__title { margin-block-end: 10px; font-size: 13px; color: var(--c-muted); }
+.ry-program__list { list-style: none; padding: 0; display: grid; gap: 8px; }
+.ry-program__item { display: flex; gap: 12px; font-size: 14px; }
+.ry-program__item::before { content: ""; flex: none; inline-size: 7px; block-size: 7px; margin-block-start: 0.7em; rotate: 45deg; background: var(--ry-foil); }
+.ry-program__time { flex: none; min-inline-size: 64px; font-weight: 600; color: var(--c-hero); }
+.ry-map { display: inline-flex; align-items: center; justify-content: center; min-block-size: 46px; margin-block-start: 20px; padding-inline: 26px;
+  border-radius: 999px; background: var(--ry-foil); color: var(--c-hero); font-size: 14px; font-weight: 600; text-decoration: none;
+  box-shadow: 0 0 0 3px var(--c-card), 0 0 0 4px color-mix(in srgb, var(--c-accent) 60%, transparent); }
+.ry-map:focus-visible { outline: 2px solid var(--c-hero); outline-offset: 6px; }
 
-/* ---------- 6 · wishes ---------- */
+/* ---------- 6 · wishes panel ---------- */
+.ry-panel { position: relative; overflow: hidden; padding-block: 52px 40px; padding-inline: 24px; border-radius: var(--radius);
+  background: radial-gradient(80% 40% at 50% 100%, color-mix(in srgb, var(--c-accent) 22%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, var(--c-deep) 90%, var(--c-card)), var(--c-deep));
+  color: var(--ry-glow); box-shadow: 0 30px 50px -28px color-mix(in srgb, var(--c-deep) 70%, transparent); }
+.ry-panel__decor { position: absolute; inset: 0; pointer-events: none; }
+.ry-panel > :not(.ry-panel__decor) { position: relative; }
 .ry .wb { text-align: start; }
-.ry .wb-chip { border-color: var(--c-accent); color: var(--c-text); }
-.ry .wb-label { color: var(--c-muted); }
-.ry .wb-input, .ry .wb-textarea { background: color-mix(in srgb, var(--c-card) 50%, var(--c-on-hero)); border-color: var(--c-line); color: var(--c-text); }
-.ry .wb-input::placeholder, .ry .wb-textarea::placeholder { color: var(--c-muted); }
-.ry .wb-send { border-radius: 999px; background: var(--ry-foil); color: var(--c-hero); }
-.ry .wb-status { color: var(--c-muted); }
+.ry .wb-chip { border-color: color-mix(in srgb, var(--c-accent) 70%, transparent); color: var(--ry-glow); }
+.ry .wb-label { color: color-mix(in srgb, var(--ry-glow) 75%, transparent); }
+.ry .wb-input, .ry .wb-textarea { background: color-mix(in srgb, var(--c-deep) 80%, var(--ry-glow)); border-color: color-mix(in srgb, var(--c-accent) 45%, transparent); color: var(--ry-glow); }
+.ry .wb-input::placeholder, .ry .wb-textarea::placeholder { color: color-mix(in srgb, var(--ry-glow) 55%, transparent); }
+.ry .wb-input:focus, .ry .wb-textarea:focus { outline: 2px solid var(--c-accent); outline-offset: 0; }
+.ry .wb-send { border-radius: 999px; background: var(--ry-foil); color: var(--c-deep); }
+.ry .wb-status { color: var(--c-accent); }
 .ry .wb-item { background: transparent; border: 0; border-inline-start: 2px solid var(--c-accent); border-radius: 0; }
-.ry .wb-item__name { color: var(--c-text); }
-.ry .wb-item__text { color: var(--c-text); }
+.ry .wb-item__name { color: var(--c-accent); }
+.ry .wb-item__text { color: var(--ry-glow); }
+/* light panels */
+.ry-panel--light { background: var(--c-card); color: var(--c-text); box-shadow: 0 0 0 1px var(--c-line), 0 30px 50px -28px color-mix(in srgb, var(--c-deep) 45%, transparent); }
+.ry-panel--light .ry-title--panel { background: var(--ry-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; }
+.ry-panel--light .wb-chip { color: var(--c-text); }
+.ry-panel--light .wb-label { color: var(--c-muted); }
+.ry-panel--light :is(.wb-input, .wb-textarea) { background: var(--c-bg); color: var(--c-text); }
+.ry-panel--light :is(.wb-input, .wb-textarea)::placeholder { color: var(--c-muted); }
+.ry-panel--light .wb-send { color: var(--c-hero); }
+.ry-panel--light .wb-item__text { color: var(--c-text); }
 
 /* ---------- 7 · footer ---------- */
-.ry-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 40px 64px; }
-.ry-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 32px; line-height: 1.5; }
-.ry:lang(en) .ry-closing { font-family: var(--font-latin); font-size: 22px; letter-spacing: 0.06em; }
-.ry-until { font-size: 13px; color: color-mix(in srgb, var(--c-on-hero) 72%, transparent); }
-.ry-brand { font-size: 12px; color: color-mix(in srgb, var(--c-on-hero) 55%, transparent); }
+.ry-footer { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-block: 70px 64px; overflow: hidden; }
+.ry-footer__art { display: none; inline-size: 150px; aspect-ratio: var(--ry-fa, 1); background: var(--ry-foil); }
+.has-footer-art .ry-footer__art { display: block; -webkit-mask: var(--img-footer-art) center bottom / contain no-repeat; mask: var(--img-footer-art) center bottom / contain no-repeat; }
+.ry-closing { max-inline-size: 20ch; font-family: var(--font-display); font-size: 30px; line-height: 1.5; }
+.ry:lang(en) .ry-closing { font-family: var(--font-latin); }
+.ry-until, .ry-brand { font-size: 13px; color: var(--c-muted); }
 
-/* ---------- scroll-driven life ---------- */
-@supports (animation-timeline: view()) {
-  /* the curtains part as the cover scrolls away */
-  .ry-drape--start { animation: royal-part-start linear both; animation-timeline: view(); animation-range: exit 0% exit 70%; }
-  .ry-drape--end { animation: royal-part-end linear both; animation-timeline: view(); animation-range: exit 0% exit 70%; }
-  .ry-drape--start:dir(rtl) { animation-name: royal-part-end; }
-  .ry-drape--end:dir(rtl) { animation-name: royal-part-start; }
-  .ry :is(.ry-title, .ry-names, .ry-medal__num, .ry-closing, .ry-event__type) { animation: royal-foil linear both; animation-timeline: view(); }
-  .ry-card { animation: royal-shine linear both; animation-timeline: view(); animation-range: entry 20% cover 60%; }
-}
-@keyframes royal-part-start { to { translate: -70% 0; } }
-@keyframes royal-part-end { to { translate: 70% 0; } }
-@keyframes royal-foil { from { background-position: 0% 0; } to { background-position: 100% 0; } }
-@keyframes royal-shine {
-  from { background-position: 160% 0, 0 0, 0 0, 0 0; }
-  to   { background-position: -60% 0, 0 0, 0 0, 0 0; }
-}
+/* ---------- cover layout "names": only the names, no scene ---------- */
+.ry[data-cover-layout="names"] .ry-stage { block-size: auto; padding-block: 90px 40px; overflow: visible; }
+.ry[data-cover-layout="names"] .ry-layer:not(.ry-cartouche), .ry[data-cover-layout="names"] .ry-cue { display: none; }
+.ry[data-cover-layout="names"] .ry-cartouche { position: relative; inset: auto; margin-inline: auto; background: none; animation: none; }
+.ry[data-cover-layout="names"] .ry-cartouche::before, .ry[data-cover-layout="names"] .ry-cartouche::after { display: none; }
+.ry[data-cover-layout="names"] .ry-names { background: var(--ry-ink) 0 0 / 220% 100%; -webkit-background-clip: text; background-clip: text; filter: none; font-size: calc(var(--name-size) * 1.1); }
+.ry[data-cover-layout="names"] .ry-lead { color: var(--c-muted); }
+.ry[data-cover-layout="names"] .ry-date { color: var(--c-hero); background: none; }
 
-/* own reveal: a royal entrance */
-.fx-crown {
-  opacity: 0;
-  transform: scale(0.94) translateY(20px);
-  filter: blur(6px);
-  transition: opacity var(--fx-dur, 1s) ease, transform var(--fx-dur, 1s) cubic-bezier(.2, .7, .2, 1), filter var(--fx-dur, 1s) ease;
-}
-.fx-crown.is-in { filter: none; }
+/* ---------- the scene: planes from far to near ---------- */
+.ry-wall { --dy: 250px; inset: -40% 0 0; background: linear-gradient(color-mix(in srgb, var(--c-deep) 84%, var(--c-accent)), var(--c-deep) 60%) }
+.ry-windows { --dy: 210px; inset-block-start: 11%; inset-inline: 3%; block-size: 46%; display: none; background: linear-gradient(var(--ry-glow), color-mix(in srgb, var(--ry-glow) 55%, var(--c-accent)));  }
+.has-window-art .ry-windows { display: block; -webkit-mask: var(--img-window-art) center top / auto 100% space no-repeat; mask: var(--img-window-art) center top / auto 100% space no-repeat; }
+.ry-beams { --dy: 180px; inset-block: 30% 0; inset-inline: 0; background: linear-gradient(160deg, transparent 22%, color-mix(in srgb, var(--ry-glow) 13%, transparent) 32%, transparent 46%), linear-gradient(200deg, transparent 22%, color-mix(in srgb, var(--ry-glow) 13%, transparent) 32%, transparent 46%) }
+.ry-chandelier-s { --dy: 200px; inset-block-start: -1%; inset-inline-start: 4%; inline-size: 22%; aspect-ratio: 200 / 190; display: none; background: var(--ry-foil);  }
+.has-chandelier-art .ry-chandelier-s { display: block; -webkit-mask: var(--img-chandelier-art) center bottom / contain no-repeat; mask: var(--img-chandelier-art) center bottom / contain no-repeat; }
+.ry-chandelier-e { --dy: 200px; inset-block-start: -1%; inset-inline-end: 4%; inline-size: 22%; aspect-ratio: 200 / 190; display: none; background: var(--ry-foil);  }
+.has-chandelier-art .ry-chandelier-e { display: block; -webkit-mask: var(--img-chandelier-art) center bottom / contain no-repeat; mask: var(--img-chandelier-art) center bottom / contain no-repeat; }
+.ry-floor { --dy: 110px; inset-block: 66% -20%; inset-inline: -30%; perspective: 320px }
+.ry-column-s { --dy: 100px; inset-block-end: 24%; inset-inline-start: 2%; block-size: 60%; aspect-ratio: 80 / 414; display: none; background: linear-gradient(90deg, color-mix(in srgb, var(--c-deep) 70%, var(--c-accent)), color-mix(in srgb, var(--ry-glow) 70%, var(--c-accent)) 45%, color-mix(in srgb, var(--c-deep) 60%, var(--c-accent)));  }
+.has-column-art .ry-column-s { display: block; -webkit-mask: var(--img-column-art) center bottom / contain no-repeat; mask: var(--img-column-art) center bottom / contain no-repeat; }
+.ry-column-e { --dy: 100px; inset-block-end: 24%; inset-inline-end: 2%; block-size: 60%; aspect-ratio: 80 / 414; display: none; background: linear-gradient(90deg, color-mix(in srgb, var(--c-deep) 60%, var(--c-accent)), color-mix(in srgb, var(--ry-glow) 70%, var(--c-accent)) 55%, color-mix(in srgb, var(--c-deep) 70%, var(--c-accent)));  }
+.has-column-art .ry-column-e { display: block; -webkit-mask: var(--img-column-art) center bottom / contain no-repeat; mask: var(--img-column-art) center bottom / contain no-repeat; }
+.ry-chandelier { --dy: 130px; inset-block-start: -7%; inset-inline: 0; margin-inline: auto; inline-size: 50%; aspect-ratio: 200 / 190; display: none; background: var(--ry-foil);  }
+.has-chandelier-art .ry-chandelier { display: block; -webkit-mask: var(--img-chandelier-art) center bottom / contain no-repeat; mask: var(--img-chandelier-art) center bottom / contain no-repeat; }
+.ry-drape-s { --dy: 30px; inset-block: -2% 0; inset-inline-start: -5%; inline-size: 26%; background: repeating-linear-gradient(90deg, var(--c-leaf) 0 8px, color-mix(in srgb, var(--c-leaf) 66%, var(--c-deep)) 16px, var(--c-leaf) 26px); clip-path: polygon(0 0, 100% 0, 62% 38%, 34% 58%, 46% 100%, 0 100%) }
+.ry-drape-e { --dy: 30px; inset-block: -2% 0; inset-inline-end: -5%; inline-size: 26%; rotate: y 180deg; background: repeating-linear-gradient(90deg, var(--c-leaf) 0 8px, color-mix(in srgb, var(--c-leaf) 66%, var(--c-deep)) 16px, var(--c-leaf) 26px); clip-path: polygon(0 0, 100% 0, 62% 38%, 34% 58%, 46% 100%, 0 100%) }
+.ry-valance { --dy: 20px; inset-block-start: -2%; inset-inline: -4%; block-size: 10%; background: radial-gradient(circle at 50% 0, var(--c-leaf) 63%, transparent 64%) 0 100% / 56px 38px repeat-x, linear-gradient(var(--c-accent), var(--c-accent)) 0 calc(100% - 38px) / 100% 3px no-repeat, linear-gradient(var(--c-leaf), var(--c-leaf)) 0 0 / 100% calc(100% - 38px) no-repeat }
+.ry-spark--1 { inset-block-start: 30%; inset-inline-start: 22%; }
+.ry-spark--2 { inset-block-start: 24%; inset-inline-end: 20%; inline-size: 12px; block-size: 12px; }
+.ry-spark--3 { inset-block-start: 52%; inset-inline-end: 14%; inline-size: 18px; block-size: 18px; }
+.ry { --ry-cart-top: 26%; --ry-photo-r: 999px 999px 6px 6px; --ry-trav: 240 / 260; --ry-fa: 200 / 190; }
+.has-pattern-tile .ry-wall::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--c-accent) 16%, transparent); -webkit-mask: var(--img-pattern-tile) 0 0 / 84px; mask: var(--img-pattern-tile) 0 0 / 84px; }
+.ry-floor__tiles { position: absolute; inset: 0; transform: rotateX(58deg); transform-origin: 50% 0;
+  background: linear-gradient(color-mix(in srgb, var(--c-deep) 10%, transparent), color-mix(in srgb, var(--ry-glow) 20%, transparent) 40%, transparent), conic-gradient(color-mix(in srgb, var(--c-card) 26%, var(--c-deep)) 25%, color-mix(in srgb, var(--c-accent) 32%, var(--c-deep)) 0 50%, color-mix(in srgb, var(--c-card) 26%, var(--c-deep)) 0 75%, color-mix(in srgb, var(--c-accent) 32%, var(--c-deep)) 0) 0 0 / 70px 70px; }
+.ry-cartouche { border-radius: 46% 46% 18px 18px / 30% 30% 18px 18px; outline: 1px solid color-mix(in srgb, var(--c-accent) 70%, transparent); outline-offset: -3px; }
+.ry-cartouche .ry-monogram { inline-size: 50px; block-size: 54px; }
+/* gilded clock */
+.ry-emblem { inline-size: 220px; aspect-ratio: 1; margin-block: 6px 20px; }
+.ry-emblem__a { inset: 0; border-radius: 50%; background: radial-gradient(closest-side, var(--c-card) 82%, transparent 83%), var(--ry-foil);
+  box-shadow: 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 60%, transparent), 0 24px 40px -20px color-mix(in srgb, var(--c-deep) 50%, transparent); }
+.ry-emblem__b { inset: 22px; border-radius: 50%; background: repeating-conic-gradient(var(--c-accent) 0 1.4deg, transparent 1.4deg 30deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 84%, var(--c-text) 85%); mask: radial-gradient(closest-side, transparent 84%, var(--c-text) 85%); }
+.ry-emblem__c { inset-block: 16% 50%; inset-inline: calc(50% - 1.5px); inline-size: 3px; border-radius: 2px; background: var(--c-hero); transform-origin: 50% 100%; transform: rotate(-60deg); }
+.ry-countdown.fx:not(.is-in) .ry-emblem__c { transform: rotate(0deg); }
+.ry-emblem::before { content: ""; position: absolute; inset-block: 28% 50%; inset-inline: calc(50% - 2.5px); inline-size: 5px; border-radius: 3px; background: var(--c-hero); transform-origin: 50% 100%; rotate: 60deg; }
+.ry-emblem::after { content: ""; position: absolute; inset-block-start: calc(50% - 7px); inset-inline-start: calc(50% - 7px); inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--ry-foil); }
+.ry-count { position: absolute; inset-block-start: 55%; }
+.ry-count__num { font-size: 34px; }
+/* velvet curtains over the photos */
+.ry-veil { background: repeating-linear-gradient(90deg, var(--c-leaf) 0 6px, color-mix(in srgb, var(--c-leaf) 66%, var(--c-deep)) 12px, var(--c-leaf) 20px); box-shadow: inset 0 -30px 30px color-mix(in srgb, var(--c-deep) 40%, transparent); }
+/* the red carpet */
+.ry-path { inline-size: 26px; border-radius: 2px; background: linear-gradient(90deg, var(--c-accent) 0 3px, var(--c-leaf) 3px calc(100% - 3px), var(--c-accent) calc(100% - 3px)); }
+.ry-traveller { inline-size: 52px; margin-inline-start: -13px; }
+.ry-event::before { background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--c-leaf) 60%, var(--c-card)), var(--c-leaf) 60%); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-leaf) 40%, transparent); }
+.ry-panel { background: radial-gradient(80% 40% at 50% 0, color-mix(in srgb, var(--c-accent) 22%, transparent), transparent 70%), linear-gradient(color-mix(in srgb, var(--c-leaf) 80%, var(--c-deep)), color-mix(in srgb, var(--c-leaf) 50%, var(--c-deep))); }
+.has-pattern-tile .ry-panel__decor { background: var(--c-accent); opacity: 0.1; -webkit-mask: var(--img-pattern-tile) 0 0 / 70px; mask: var(--img-pattern-tile) 0 0 / 70px; }
 
+.ry-veil--a { transform: translateX(calc(var(--open) * -104%)); }
+.ry-veil--b { transform: translateX(calc(var(--open) * 104%)); }
+.ry-veil--a:dir(rtl) { transform: translateX(calc(var(--open) * 104%)); }
+.ry-veil--b:dir(rtl) { transform: translateX(calc(var(--open) * -104%)); }
+
+
+/* ---------- reduced motion: a still, complete scene ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .ry-drape, .ry-wall__item, .ry-card, .ry :is(.ry-title, .ry-names, .ry-medal__num, .ry-closing, .ry-event__type) { animation: none !important; }
-  .fx-crown { filter: none; transition-duration: .01s; }
+  .ry *, .ry *::before, .ry *::after { animation: none !important; transition: none !important; }
+  .ry-photos, .ry-story.fx:not(.is-in) .ry-photos { --open: 1; }
 }
 
 /* ==== options pack: generated by tools/add-options.py, do not edit by hand ==== */
@@ -397,42 +333,41 @@
 .ry[data-photo-frame="polaroid"] .ry-photo:nth-child(2) { rotate: 5deg; }
 .ry[data-photo-frame="polaroid"] .ry-photo img { border: 0; border-radius: 0; box-shadow: none; clip-path: none; }
 .ry[data-photo-frame="polaroid"] .ry-photo::before, .ry[data-photo-frame="polaroid"] .ry-photo::after { display: none; }
-.ry[data-gallery-style="grid"] .ry-wall, .ry[data-gallery-style="scatter"] .ry-wall { display: grid; overflow: visible; scroll-snap-type: none; perspective: none; padding-block: 10px 30px; padding-inline: 20px; }
-.ry[data-gallery-style="grid"] .ry-wall { grid-template-columns: 1fr 1fr; gap: 12px; }
-.ry[data-gallery-style="grid"] .ry-wall__item, .ry[data-gallery-style="scatter"] .ry-wall__item { inline-size: auto; padding: 0; animation: none !important; transform: none; aspect-ratio: 3 / 4; }
-.ry[data-gallery-style="grid"] .ry-wall__item:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
-.ry[data-gallery-style="grid"] .ry-wall__item img { border-radius: var(--radius); -webkit-box-reflect: none; }
-.ry[data-gallery-style="scatter"] .ry-wall { grid-template-columns: 1fr 1fr; gap: 0; padding-inline: 34px; }
-.ry[data-gallery-style="scatter"] .ry-wall__item { margin-block-end: -18%; }
-.ry[data-gallery-style="scatter"] .ry-wall__item:nth-child(odd) { rotate: -6deg; }
-.ry[data-gallery-style="scatter"] .ry-wall__item:nth-child(even) { rotate: 5deg; margin-block-start: 18%; }
-.ry[data-gallery-style="scatter"] .ry-wall__item:nth-child(3n) { rotate: 2deg; }
-.ry[data-gallery-style="scatter"] .ry-wall__item img { border: 0; border-radius: 2px; padding: 7px 7px 26px; background: var(--c-card); -webkit-box-reflect: none;
+.ry[data-gallery-style="grid"] .ry-flow, .ry[data-gallery-style="scatter"] .ry-flow { display: grid; overflow: visible; scroll-snap-type: none; perspective: none; padding-block: 10px 30px; padding-inline: 20px; }
+.ry[data-gallery-style="grid"] .ry-flow { grid-template-columns: 1fr 1fr; gap: 12px; }
+.ry[data-gallery-style="grid"] .ry-flow__item, .ry[data-gallery-style="scatter"] .ry-flow__item { inline-size: auto; padding: 0; animation: none !important; transform: none; aspect-ratio: 3 / 4; }
+.ry[data-gallery-style="grid"] .ry-flow__item:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+.ry[data-gallery-style="grid"] .ry-flow__item img { border-radius: var(--radius); -webkit-box-reflect: none; }
+.ry[data-gallery-style="scatter"] .ry-flow { grid-template-columns: 1fr 1fr; gap: 0; padding-inline: 34px; }
+.ry[data-gallery-style="scatter"] .ry-flow__item { margin-block-end: -18%; }
+.ry[data-gallery-style="scatter"] .ry-flow__item:nth-child(odd) { rotate: -6deg; }
+.ry[data-gallery-style="scatter"] .ry-flow__item:nth-child(even) { rotate: 5deg; margin-block-start: 18%; }
+.ry[data-gallery-style="scatter"] .ry-flow__item:nth-child(3n) { rotate: 2deg; }
+.ry[data-gallery-style="scatter"] .ry-flow__item img { border: 0; border-radius: 2px; padding: 7px 7px 26px; background: var(--c-card); -webkit-box-reflect: none;
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--c-text) 10%, transparent), 0 22px 30px -16px color-mix(in srgb, var(--c-text) 60%, transparent); }
-.ry[data-gallery-style="scatter"] .ry-wall { padding-block-end: 22%; }
+.ry[data-gallery-style="scatter"] .ry-flow { padding-block-end: 22%; }
 .ry[data-gallery-style="grid"] .ry-hint, .ry[data-gallery-style="scatter"] .ry-hint { display: none; }
-.ry[data-date-style="ribbon"] .ry-ribbon { display: inline-block; inline-size: auto; max-inline-size: 100%; margin-inline: auto; padding-block: 10px; padding-inline: 40px; border: 0; border-radius: 0; outline: 0; box-shadow: none;
+.ry[data-date-style="ribbon"] .ry-date { display: inline-block; inline-size: auto; max-inline-size: 100%; margin-inline: auto; padding-block: 10px; padding-inline: 40px; border: 0; border-radius: 0; outline: 0; box-shadow: none;
   filter: drop-shadow(1.5px 0 0 var(--c-accent)) drop-shadow(-1.5px 0 0 var(--c-accent)) drop-shadow(0 1.5px 0 var(--c-accent)) drop-shadow(0 -1.5px 0 var(--c-accent)) drop-shadow(0 8px 10px color-mix(in srgb, var(--c-hero) 45%, transparent));
   background: linear-gradient(90deg, var(--c-accent), var(--c-accent)) top / 100% 2px no-repeat, linear-gradient(90deg, var(--c-accent), var(--c-accent)) bottom / 100% 2px no-repeat, color-mix(in srgb, var(--c-hero) 78%, var(--c-accent));
   color: var(--c-on-hero); clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 50%, 100% 100%, 0 100%, 14px 50%); }
-.ry[data-date-style="frame"] .ry-ribbon { display: inline-block; inline-size: auto; margin-inline: auto; padding-block: 12px; padding-inline: 26px; border: 1px solid var(--c-accent); border-radius: 0; outline: 1px solid var(--c-accent); outline-offset: 4px; box-shadow: none; background: none; clip-path: none; filter: none; color: inherit; }
-.ry[data-date-style="line"] .ry-ribbon { display: flex; align-items: center; gap: 14px; inline-size: 100%; max-inline-size: 340px; margin-inline: auto; padding: 0; border: 0; border-radius: 0; outline: 0; box-shadow: none; background: none; clip-path: none; filter: none; color: inherit; }
-.ry[data-date-style="line"] .ry-ribbon::before, .ry[data-date-style="line"] .ry-ribbon::after { content: ""; display: block; flex: 1; block-size: 1px; background: var(--c-accent); }
-.ry[data-date-style="badge"] .ry-ribbon { display: inline-block; inline-size: auto; margin-inline: auto; padding-block: 9px; padding-inline: 26px; border: 1px solid var(--c-accent); border-radius: 999px; outline: 0; background: none; clip-path: none; filter: none; color: inherit; }
-.ry[data-date-style="ribbon"] .ry-ribbon::before, .ry[data-date-style="ribbon"] .ry-ribbon::after, .ry[data-date-style="frame"] .ry-ribbon::before, .ry[data-date-style="frame"] .ry-ribbon::after, .ry[data-date-style="badge"] .ry-ribbon::before, .ry[data-date-style="badge"] .ry-ribbon::after { display: none; }
-.ry[data-ornament="refined"] .ry-drapes, .ry[data-ornament="refined"] .ry-fil, .ry[data-ornament="refined"] .ry-seal { display: none !important; }
+.ry[data-date-style="frame"] .ry-date { display: inline-block; inline-size: auto; margin-inline: auto; padding-block: 12px; padding-inline: 26px; border: 1px solid var(--c-accent); border-radius: 0; outline: 1px solid var(--c-accent); outline-offset: 4px; box-shadow: none; background: none; clip-path: none; filter: none; color: inherit; }
+.ry[data-date-style="line"] .ry-date { display: flex; align-items: center; gap: 14px; inline-size: 100%; max-inline-size: 340px; margin-inline: auto; padding: 0; border: 0; border-radius: 0; outline: 0; box-shadow: none; background: none; clip-path: none; filter: none; color: inherit; }
+.ry[data-date-style="line"] .ry-date::before, .ry[data-date-style="line"] .ry-date::after { content: ""; display: block; flex: 1; block-size: 1px; background: var(--c-accent); }
+.ry[data-date-style="badge"] .ry-date { display: inline-block; inline-size: auto; margin-inline: auto; padding-block: 9px; padding-inline: 26px; border: 1px solid var(--c-accent); border-radius: 999px; outline: 0; background: none; clip-path: none; filter: none; color: inherit; }
+.ry[data-date-style="ribbon"] .ry-date::before, .ry[data-date-style="ribbon"] .ry-date::after, .ry[data-date-style="frame"] .ry-date::before, .ry[data-date-style="frame"] .ry-date::after, .ry[data-date-style="badge"] .ry-date::before, .ry[data-date-style="badge"] .ry-date::after { display: none; }
 .ry[data-ornament="opulent"] .ry-card { filter: drop-shadow(0 0 20px color-mix(in srgb, var(--c-accent) 45%, transparent)) drop-shadow(0 0 2px color-mix(in srgb, var(--c-accent) 70%, transparent)); }
 .ry[data-ornament="opulent"] .ry-names { filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
 .ry[data-ornament="opulent"] .ry-photo { filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
 /* ---- living + premium set ---- */
 @property --ry-shine { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .ry { --ry-md: color-mix(in srgb, var(--c-accent) 60%, var(--c-hero)); --ry-mm: var(--c-accent); --ry-ml: color-mix(in srgb, var(--c-accent) 45%, var(--c-card)); }
-.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-wall__item):has(img) { isolation: isolate; background: var(--ry-foil); }
-.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-wall__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
-.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-wall__item):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--ry-foil); }
-.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-wall__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-flow__item):has(img) { isolation: isolate; background: var(--ry-foil); }
+.ry[data-photo-tone="golden"] :is(.ry-photo, .ry-flow__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
+.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-flow__item):has(img) { isolation: isolate; background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--ry-foil); }
+.ry[data-photo-tone="palette"] :is(.ry-photo, .ry-flow__item) img { mix-blend-mode: luminosity; filter: contrast(1.08) brightness(1.04); }
 .ry[data-photo-tone="palette"][data-photo-frame="polaroid"] .ry-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
-.ry[data-photo-tone="noir"] :is(.ry-photo, .ry-wall__item) img { filter: grayscale(1) contrast(1.15); }
+.ry[data-photo-tone="noir"] :is(.ry-photo, .ry-flow__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
   .ry[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo):has(img) {
     background: conic-gradient(from var(--ry-shine), var(--ry-md), var(--ry-mm) 15%, var(--ry-ml) 25%, var(--ry-mm) 35%, var(--ry-md) 50%, var(--ry-mm) 65%, var(--ry-ml) 75%, var(--ry-mm) 85%, var(--ry-md));
@@ -441,18 +376,19 @@
 }
 @keyframes royal-frameshine { from { --ry-shine: 0deg; } to { --ry-shine: 300deg; } }
 @media (prefers-reduced-motion: no-preference) {
-  .ry [data-animate="cover"] .ry-drapes { --ry-stage: 0; }
-  .ry [data-animate="cover"] .ry-crest { --ry-stage: 1; }
-  .ry [data-animate="cover"] .ry-panel { --ry-stage: 2; }
-  .ry [data-animate="cover"] .ry-names { --ry-stage: 3; }
-  .ry [data-animate="cover"] .ry-ribbon { --ry-stage: 4; }
-  .ry:not([data-entrance="none"]) [data-animate="cover"] :is(.ry-drapes, .ry-crest, .ry-panel, .ry-names, .ry-ribbon) {
+  .ry [data-animate="cover"] .ry-wall, .ry [data-animate="cover"] .ry-windows, .ry [data-animate="cover"] .ry-beams { --ry-stage: 0; }
+  .ry [data-animate="cover"] .ry-chandelier-s, .ry [data-animate="cover"] .ry-chandelier-e, .ry [data-animate="cover"] .ry-floor { --ry-stage: 1; }
+  .ry [data-animate="cover"] .ry-column-s, .ry [data-animate="cover"] .ry-column-e, .ry [data-animate="cover"] .ry-chandelier { --ry-stage: 2; }
+  .ry [data-animate="cover"] .ry-cartouche { --ry-stage: 3; }
+  .ry [data-animate="cover"] .ry-drape-s, .ry [data-animate="cover"] .ry-drape-e, .ry [data-animate="cover"] .ry-valance { --ry-stage: 4; }
+  .ry [data-animate="cover"] .ry-sheet { --ry-stage: 5; }
+  .ry:not([data-entrance="none"]) [data-animate="cover"] :is(.ry-wall, .ry-windows, .ry-beams, .ry-chandelier-s, .ry-chandelier-e, .ry-floor, .ry-column-s, .ry-column-e, .ry-chandelier, .ry-cartouche, .ry-drape-s, .ry-drape-e, .ry-valance, .ry-sheet) {
     transition: opacity 1.1s ease, scale 1.5s cubic-bezier(.2, .7, .2, 1), filter 1.2s ease;
     transition-delay: calc(var(--ry-stage, 0) * 0.34s + 0.15s);
   }
-  .ry[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.ry-drapes, .ry-crest, .ry-panel, .ry-names, .ry-ribbon) { opacity: 0; scale: 0.92; filter: blur(10px); }
-  .ry[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.ry-drapes, .ry-crest, .ry-panel, .ry-names, .ry-ribbon) { opacity: 0; }
-  .ry[data-entrance="gentle"] [data-animate="cover"] :is(.ry-drapes, .ry-crest, .ry-panel, .ry-names, .ry-ribbon) { transition-delay: calc(var(--ry-stage, 0) * 0.12s); }
+  .ry[data-entrance="cinematic"] [data-animate="cover"]:not(.is-in) :is(.ry-wall, .ry-windows, .ry-beams, .ry-chandelier-s, .ry-chandelier-e, .ry-floor, .ry-column-s, .ry-column-e, .ry-chandelier, .ry-cartouche, .ry-drape-s, .ry-drape-e, .ry-valance, .ry-sheet) { opacity: 0; scale: 0.92; filter: blur(10px); }
+  .ry[data-entrance="gentle"] [data-animate="cover"]:not(.is-in) :is(.ry-wall, .ry-windows, .ry-beams, .ry-chandelier-s, .ry-chandelier-e, .ry-floor, .ry-column-s, .ry-column-e, .ry-chandelier, .ry-cartouche, .ry-drape-s, .ry-drape-e, .ry-valance, .ry-sheet) { opacity: 0; }
+  .ry[data-entrance="gentle"] [data-animate="cover"] :is(.ry-wall, .ry-windows, .ry-beams, .ry-chandelier-s, .ry-chandelier-e, .ry-floor, .ry-column-s, .ry-column-e, .ry-chandelier, .ry-cartouche, .ry-drape-s, .ry-drape-e, .ry-valance, .ry-sheet) { transition-delay: calc(var(--ry-stage, 0) * 0.12s); }
 
   .ry:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]) :is(.ry-title) { transition: opacity .8s ease, translate .8s cubic-bezier(.2, .7, .2, 1); }
   .ry:not([data-entrance="none"]) [data-animate]:not([data-animate="cover"]):not(.is-in) :is(.ry-title) { opacity: 0; translate: 0 14px; }
@@ -475,5 +411,4 @@
 .ry[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .ry[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
 /* ---- calm & smooth ---- */
-.ry :is(.ry-title, .ry-names, .ry-medal__num, .ry-closing, .ry-event__type, .ry-card) { animation: none !important; }
 /* ==== end of options pack ==== */

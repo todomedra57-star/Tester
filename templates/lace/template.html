@@ -1,120 +1,143 @@
 <main class="lc" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="lc-cover" data-animate="cover">
-    <span class="lc-pearls lc-decor" aria-hidden="true"></span>
-    <div class="lc-veil">
-      <span class="lc-doily" aria-hidden="true"></span>
-      <div class="lc-veil__center">
-        {{#if story.photos.length}}
-          {{#with story.photos.[0]}}<figure class="lc-portrait"><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/with}}
-        {{else}}
-          <span class="lc-veil__amp" aria-hidden="true">{{text "and"}}</span>
-        {{/if}}
+    <!-- the bridal boutique: wall, gilded mirror, lace curtains, pearl strands, table, doily, bouquet and lace edge drift at their own speeds -->
+    <div class="lc-diorama">
+      <div class="lc-stage">
+        <span class="lc-layer lc-wall" aria-hidden="true"></span>
+        <span class="lc-layer lc-mirror" aria-hidden="true"></span>
+        <span class="lc-layer lc-curtain-s" aria-hidden="true"></span>
+        <span class="lc-layer lc-curtain-e" aria-hidden="true"></span>
+        <span class="lc-layer lc-pearls" aria-hidden="true"></span>
+        <span class="lc-layer lc-pearls-2 lc-decor" aria-hidden="true"></span>
+        <span class="lc-layer lc-table" aria-hidden="true"></span>
+        <span class="lc-layer lc-doily" aria-hidden="true"></span>
+        <span class="lc-layer lc-bouquet" aria-hidden="true"></span>
+        <div class="lc-layer lc-cartouche lc-cartouche--day">
+          <span class="lc-monogram" aria-hidden="true"></span>
+          <p class="lc-lead">{{text "lead"}}</p>
+          <h1 class="lc-names">
+            <span class="lc-name">{{couple.groom.name}}</span>
+            {{#if couple.bride.name}}<span class="lc-and">{{text "and"}}</span><span class="lc-name">{{couple.bride.name}}</span>{{/if}}
+          </h1>
+          {{#unless (variant "dateStyle" "calendar")}}<p class="lc-date">{{formatDate mainDate}}</p>{{/unless}}
+        </div>
+        <span class="lc-layer lc-edge" aria-hidden="true"></span>
+        <span class="lc-spark lc-spark--1 lc-decor" aria-hidden="true"></span>
+        <span class="lc-spark lc-spark--2 lc-decor" aria-hidden="true"></span>
+        <span class="lc-spark lc-spark--3 lc-decor" aria-hidden="true"></span>
+        <p class="lc-cue">{{text "scrollHint"}}</p>
       </div>
-      <span class="lc-spark lc-spark--1 lc-decor" aria-hidden="true"></span><span class="lc-spark lc-spark--2 lc-decor" aria-hidden="true"></span><span class="lc-spark lc-spark--3 lc-decor" aria-hidden="true"></span>
     </div>
-    <div class="lc-card lc-invite">
-      <span class="lc-ribbon lc-decor" aria-hidden="true"></span>
-      <p class="lc-lead">{{text "lead"}}</p>
-      <h1 class="lc-names">
-        <span class="lc-name">{{couple.groom.name}}</span>
-        {{#if couple.bride.name}}<span class="lc-and">{{text "and"}}</span><span class="lc-name">{{couple.bride.name}}</span>{{/if}}
-      </h1>
-      {{#unless (variant "dateStyle" "calendar")}}<p class="lc-date">{{formatDate mainDate}}</p>{{/unless}}
+
+    <div class="lc-sheet">
       {{#if verse}}<p class="lc-verse">{{verse}}</p>{{/if}}
-    <div class="lc-families">
-      <div class="lc-family">
-        {{#if couple.groom.father}}<p class="lc-family__label">{{text "sonOf"}}</p><p class="lc-family__name">{{couple.groom.father}}</p>{{/if}}
-        {{#each couple.groom.family}}<p class="lc-family__label">{{label}}</p><p class="lc-family__name">{{name}}</p>{{/each}}
+      <div class="lc-families">
+        <div class="lc-family">
+          {{#if couple.groom.father}}<p class="lc-family__label">{{text "sonOf"}}</p><p class="lc-family__name">{{couple.groom.father}}</p>{{/if}}
+          {{#each couple.groom.family}}<p class="lc-family__label">{{label}}</p><p class="lc-family__name">{{name}}</p>{{/each}}
+        </div>
+        <div class="lc-family">
+          {{#if couple.bride.father}}<p class="lc-family__label">{{text "daughterOf"}}</p><p class="lc-family__name">{{couple.bride.father}}</p>{{/if}}
+          {{#each couple.bride.family}}<p class="lc-family__label">{{label}}</p><p class="lc-family__name">{{name}}</p>{{/each}}
+        </div>
       </div>
-      <div class="lc-family">
-        {{#if couple.bride.father}}<p class="lc-family__label">{{text "daughterOf"}}</p><p class="lc-family__name">{{couple.bride.father}}</p>{{/if}}
-        {{#each couple.bride.family}}<p class="lc-family__label">{{label}}</p><p class="lc-family__name">{{name}}</p>{{/each}}
-      </div>
-    </div>
     </div>
   </section>
 
+  <!-- countdown: a ring box whose lid opens when it arrives -->
   <section class="lc-section lc-countdown" data-animate="countdown">
-    <div class="lc-card">
-      <span class="lc-spark lc-spark--1 lc-decor" aria-hidden="true"></span><span class="lc-spark lc-spark--2 lc-decor" aria-hidden="true"></span>
-      <h2 class="lc-title">{{text "countdownTitle"}}</h2>
+    <h2 class="lc-title">{{text "countdownTitle"}}</h2>
+    <div class="lc-emblem">
+      <span class="lc-emblem__a" aria-hidden="true"></span>
+      <span class="lc-emblem__b" aria-hidden="true"></span>
+      <span class="lc-emblem__c" aria-hidden="true"></span>
       <p class="lc-count"><span class="lc-count__num">{{daysUntil mainDate}}</span><span class="lc-count__unit">{{text "countdownUnit"}}</span></p>
-      {{#if (variant "dateStyle" "calendar")}}
-        {{#with (calendarMonth mainDate)}}
-          <div class="lc-cal">
-            <p class="lc-cal__title">{{title}}</p>
-            <div class="lc-cal__grid">
-              {{#each weekdays}}<span class="lc-cal__wd">{{this}}</span>{{/each}}
-              {{#each cells}}<span class="lc-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
-            </div>
-          </div>
-        {{/with}}
-      {{/if}}
     </div>
+    {{#if (variant "dateStyle" "calendar")}}
+      {{#with (calendarMonth mainDate)}}
+        <div class="lc-card lc-cal">
+          <p class="lc-cal__title">{{title}}</p>
+          <div class="lc-cal__grid">
+            {{#each weekdays}}<span class="lc-cal__wd">{{this}}</span>{{/each}}
+            {{#each cells}}<span class="lc-cal__cell{{#if wedding}} is-wedding{{/if}}">{{label}}</span>{{/each}}
+          </div>
+        </div>
+      {{/with}}
+    {{/if}}
   </section>
 
   {{#if story.text}}
     <div class="lc-divider" aria-hidden="true"></div>
+    <!-- story: each photo waits under a tulle veil that lifts once -->
     <section class="lc-section lc-story" data-animate="story">
-      <div class="lc-card">
-        
-        <h2 class="lc-title">{{text "storyTitle"}}</h2>
-        {{#if story.photos.length}}
-          <div class="lc-photos">
-            {{#each story.photos}}<figure class="lc-photo" data-item><img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy"></figure>{{/each}}
-          </div>
-        {{/if}}
-        <p class="lc-story__text">{{story.text}}</p>
-        {{#if story.engagementDate}}<p class="lc-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
-      </div>
+      <h2 class="lc-title">{{text "storyTitle"}}</h2>
+      {{#if story.photos.length}}
+        <div class="lc-photos">
+          {{#each story.photos}}
+            <figure class="lc-photo" data-item>
+              <img src="{{url}}" alt="{{text "storyPhoto"}}" loading="lazy">
+              <span class="lc-veil lc-veil--a" aria-hidden="true"></span>
+              <span class="lc-veil lc-veil--b" aria-hidden="true"></span>
+            </figure>
+          {{/each}}
+        </div>
+      {{/if}}
+      <p class="lc-story__text">{{story.text}}</p>
+      {{#if story.engagementDate}}<p class="lc-story__date">{{text "engagement"}} {{formatDate story.engagementDate}}</p>{{/if}}
     </section>
   {{/if}}
 
   {{#if gallery.length}}
-    <section class="lc-section lc-gallery" data-animate="gallery">
-      <h2 class="lc-title">{{text "galleryTitle"}}</h2>
-      <div class="lc-flow">
-        {{#each gallery}}<figure class="lc-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+    <section class="lc-section lc-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
+      <div class="lc-gallery__stage">
+        <h2 class="lc-title">{{text "galleryTitle"}}</h2>
+        <div class="lc-flow">
+          {{#each gallery}}<figure class="lc-flow__item" data-item><img src="{{url}}" width="{{width}}" height="{{height}}" alt="{{text "galleryPhoto"}}" loading="lazy"></figure>{{/each}}
+        </div>
+        {{#if gallery.[1]}}<p class="lc-hint">{{text "galleryHint"}}</p>{{/if}}
       </div>
-      {{#if gallery.[1]}}<p class="lc-hint">{{text "galleryHint"}}</p>{{/if}}
     </section>
   {{/if}}
 
   <div class="lc-divider" aria-hidden="true"></div>
 
+  <!-- events: a satin ribbon; a bouquet travels along with you -->
   <section class="lc-section lc-events" data-animate="events">
     <h2 class="lc-title">{{text "eventsTitle"}}</h2>
-    {{#each events}}
-      <article class="lc-card lc-event" data-item>
-        
-        <h3 class="lc-event__type">{{eventLabel type}}</h3>
-        <p class="lc-event__date">{{formatDate date}}</p>
-        <p class="lc-event__time">{{eventTime this}}</p>
-        <p class="lc-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
-        {{#if program.length}}
-          <div class="lc-program">
-            <p class="lc-program__title">{{text "programTitle"}}</p>
-            <ol class="lc-program__list">
-              {{#each program}}<li class="lc-program__item"><span class="lc-program__time">{{formatTime time}}</span><span class="lc-program__what">{{title}}</span></li>{{/each}}
-            </ol>
-          </div>
-        {{/if}}
-        {{#if mapUrl}}<a class="lc-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
-      </article>
-    {{/each}}
+    <div class="lc-journey">
+      <span class="lc-path" aria-hidden="true"><span class="lc-traveller"></span></span>
+      {{#each events}}
+        <article class="lc-card lc-event" data-item>
+          <h3 class="lc-event__type">{{eventLabel type}}</h3>
+          <p class="lc-event__date">{{formatDate date}}</p>
+          <p class="lc-event__time">{{eventTime this}}</p>
+          <p class="lc-event__place">{{venue}}{{#if area}}{{text "listSeparator"}}{{area}}{{/if}}</p>
+          {{#if program.length}}
+            <div class="lc-program">
+              <p class="lc-program__title">{{text "programTitle"}}</p>
+              <ol class="lc-program__list">
+                {{#each program}}<li class="lc-program__item"><span class="lc-program__time">{{formatTime time}}</span><span class="lc-program__what">{{title}}</span></li>{{/each}}
+              </ol>
+            </div>
+          {{/if}}
+          {{#if mapUrl}}<a class="lc-map" href="{{mapUrl}}" target="_blank" rel="noopener">{{text "openMap"}}</a>{{/if}}
+        </article>
+      {{/each}}
+    </div>
   </section>
 
   <section class="lc-section lc-wishes" data-animate="wishes">
-    <div class="lc-card">
-      
-      <h2 class="lc-title">{{text "wishesTitle"}}</h2>
+    <div class="lc-panel lc-panel--light">
+      <span class="lc-panel__decor" aria-hidden="true"></span>
+      <h2 class="lc-title lc-title--panel">{{text "wishesTitle"}}</h2>
       <wishes-box></wishes-box>
     </div>
   </section>
 
   <footer class="lc-section lc-footer" data-animate="footer">
-    <span class="lc-divider" aria-hidden="true"></span>
+    <span class="lc-footer__art" aria-hidden="true"></span>
+    <span class="lc-monogram" aria-hidden="true"></span>
     {{#if closingLine}}<p class="lc-closing">{{closingLine}}</p>{{/if}}
     {{#if wishes.closeDate}}<p class="lc-until">{{text "openUntil"}} {{formatDate wishes.closeDate}}</p>{{/if}}
     {{#if showBranding}}<p class="lc-brand">{{text "madeWith"}}</p>{{/if}}
