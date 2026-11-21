@@ -293,7 +293,7 @@
 .pc[data-photo-tone="palette"][data-photo-frame="polaroid"] .pc-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .pc[data-photo-tone="noir"] :is(.pc-photo, .pc-flow__item, .pc-plate__photo) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .pc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.pc-photo, .pc-plate__photo):has(img) {
+  .pc[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.pc-photo, .pc-plate__photo):has(img) {
     background: conic-gradient(from var(--pc-shine), var(--pc-md), var(--pc-mm) 15%, var(--pc-ml) 25%, var(--pc-mm) 35%, var(--pc-md) 50%, var(--pc-mm) 65%, var(--pc-ml) 75%, var(--pc-mm) 85%, var(--pc-md));
     animation: porcelain-frameshine linear both; animation-timeline: view();
   }
@@ -333,6 +333,8 @@
 .pc[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .pc[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .pc[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.pc :is(.pc-names, .pc-title, .pc-count__num, .pc-closing, .pc-event__type, .pc-map, .pc-spark, .pc-card, .pc-plate__glaze) { animation: none !important; }
 .pc[data-cover-layout="minimal"] .pc-plate { display: none; }
 .pc[data-cover-layout="minimal"] .pc-panel { padding-block: 90px; margin-block-start: 20px; border: 1px solid var(--c-accent); outline: 1px solid var(--c-accent); outline-offset: 8px; border-radius: 50% 50% var(--radius) var(--radius) / 120px 120px var(--radius) var(--radius); background: var(--c-card); }
 .pc[data-cover-layout="minimal"] .pc-names { font-size: calc(var(--name-size) * 1.15); }

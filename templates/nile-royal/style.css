@@ -66,43 +66,42 @@
 
 /* ---------- 1 · the diorama ---------- */
 .nr-cover { position: relative; }
-.nr-diorama { position: relative; block-size: 250svh; }
-.nr[data-cover-layout="window"] .nr-diorama { block-size: max(100svh, 680px); }
-.nr-stage { position: sticky; inset-block-start: 0; block-size: max(100svh, 680px); overflow: hidden; isolation: isolate; }
+.nr-diorama { position: relative; }
+.nr-stage { position: relative; block-size: max(100svh, 680px); overflow: hidden; isolation: isolate; }
 
-/* every plane: tilt by depth, camera dolly by depth, plus its own extras */
-.nr-layer {
-  position: absolute;
-  --d: 0;
-  --out: 0px;
-  transform:
-    translate3d(calc(var(--tx, 0) * var(--d) * -3.2px + var(--out)), calc(var(--ty, 0) * var(--d) * -2.4px + var(--p, 0) * var(--rise, 0px)), 0)
-    scale(calc(1 + var(--p, 0) * var(--d) * var(--dolly, 0.045)));
-  will-change: transform;
+/* every plane drifts at its own speed as the cover scrolls away: far planes lag
+   behind, near planes move ahead. One transform per plane, run by the browser on
+   the GPU from the scroll position: no script, no repaint. */
+.nr-layer { position: absolute; will-change: transform; }
+@supports (animation-timeline: view()) {
+  .nr-stage { view-timeline: --nr-cover block; }
+  .nr-layer { animation: nile-royal-drift linear both; animation-timeline: --nr-cover; animation-range: exit 0% exit 100%; }
+  .nr[data-cover-layout="window"] .nr-layer { animation: none; }
 }
+@keyframes nile-royal-drift { to { transform: translate(var(--dx, 0px), var(--dy, 0px)); } }
 
-.nr-sky { inset: 0; --d: 0;
+.nr-sky { inset: -40% 0 0; --dy: 260px;
   background:
     radial-gradient(80% 30% at 50% 62%, color-mix(in srgb, var(--c-accent) 26%, transparent), transparent 70%),
     linear-gradient(color-mix(in srgb, var(--c-night) 92%, var(--c-card)) 0%, var(--c-night) 42%, color-mix(in srgb, var(--c-night) 70%, var(--c-accent)) 61%, var(--c-night) 63%); }
-.nr-stars { inset: 0 0 46%; --d: 0.6;
+.nr-stars { inset: 0 0 46%; --dy: 240px;
   background-image:
     radial-gradient(1.3px 1.3px at 12% 18%, var(--nr-moonlight), transparent), radial-gradient(1px 1px at 26% 8%, var(--nr-moonlight), transparent),
     radial-gradient(1.6px 1.6px at 66% 14%, var(--c-accent), transparent), radial-gradient(1px 1px at 82% 26%, var(--nr-moonlight), transparent),
     radial-gradient(1.2px 1.2px at 42% 30%, var(--nr-moonlight), transparent), radial-gradient(1px 1px at 92% 10%, var(--nr-moonlight), transparent),
     radial-gradient(1.4px 1.4px at 8% 40%, var(--c-accent), transparent), radial-gradient(1px 1px at 56% 40%, var(--nr-moonlight), transparent);
-  animation: nile-royal-twinkle 5s ease-in-out infinite alternate; }
-.nr-moon { inset-block-start: 8.5%; inset-inline: 0; margin-inline: auto; inline-size: 74px; block-size: 74px; border-radius: 50%; --d: 1; --rise: -26px;
+}
+.nr-moon { inset-block-start: 8.5%; inset-inline: 0; margin-inline: auto; inline-size: 74px; block-size: 74px; border-radius: 50%; --dy: 220px;
   background: radial-gradient(circle at 38% 36%, var(--nr-moonlight), color-mix(in srgb, var(--nr-moonlight) 84%, var(--c-accent)) 66%, color-mix(in srgb, var(--c-accent) 55%, var(--nr-moonlight)));
   box-shadow: 0 0 40px 12px color-mix(in srgb, var(--nr-moonlight) 30%, transparent), 0 0 140px 60px color-mix(in srgb, var(--c-accent) 16%, transparent); }
 .nr-mist { inset-inline: -20%; block-size: 16%; pointer-events: none;
   background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--nr-moonlight) 22%, transparent), color-mix(in srgb, var(--nr-moonlight) 8%, transparent) 45%, transparent 72%) 0 0 / 60% 100% repeat-x; }
-.nr-mist--far { inset-block-start: 46%; --d: 2; opacity: 0.7; }
-.nr-mist--near { inset-block-start: 55%; --d: 4; opacity: 0.55; background-position: 30% 0; }
-.nr-skyline { inset-block-start: 45%; inset-inline: -14%; block-size: 15%; --d: 3; display: none;
+.nr-mist--far { inset-block-start: 46%; --dy: 170px; opacity: 0.7; }
+.nr-mist--near { inset-block-start: 55%; --dy: 110px; opacity: 0.55; background-position: 30% 0; }
+.nr-skyline { inset-block-start: 45%; inset-inline: -14%; block-size: 15%; --dy: 150px; display: none;
   background: linear-gradient(color-mix(in srgb, var(--c-night) 55%, var(--c-accent)), color-mix(in srgb, var(--c-night) 90%, var(--c-hero)) 60%); }
 .has-skyline-art .nr-skyline { display: block; -webkit-mask: var(--img-skyline-art) center bottom / 100% 100% no-repeat; mask: var(--img-skyline-art) center bottom / 100% 100% no-repeat; }
-.nr-water { inset-block: 59.5% 0; inset-inline: -20%; --d: 5;
+.nr-water { inset-block: 59.5% -20%; inset-inline: -20%; --dy: 90px;
   background:
     repeating-linear-gradient(transparent 0 7px, color-mix(in srgb, var(--nr-moonlight) 14%, transparent) 7px 8px),
     linear-gradient(color-mix(in srgb, var(--c-night) 70%, var(--c-accent)), var(--c-night) 45%, color-mix(in srgb, var(--c-night) 90%, var(--c-hero))); }
@@ -112,40 +111,36 @@
     radial-gradient(50% 100% at 50% 0%, color-mix(in srgb, var(--nr-moonlight) 30%, transparent), transparent 80%);
   -webkit-mask-image: radial-gradient(50% 100% at 50% 0%, var(--c-text) 30%, transparent 75%); mask-image: radial-gradient(50% 100% at 50% 0%, var(--c-text) 30%, transparent 75%); }
 /* the felucca sails across the river as the camera moves */
-.nr-boat { inset-block-start: 64%; inset-inline-start: calc(-26% + var(--p, 0.3) * 120%); inline-size: 96px; aspect-ratio: 200 / 170; --d: 5.5; }
+.nr-boat { inset-block-start: 64%; inset-inline-start: 10%; inline-size: 96px; aspect-ratio: 200 / 170; --dx: 150px; --dy: 80px; }
+.nr-boat:dir(rtl) { --dx: -150px; }
 .has-boat-art .nr-boat::before { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--c-night) 75%, var(--c-hero));
-  -webkit-mask: var(--img-boat-art) center / contain no-repeat; mask: var(--img-boat-art) center / contain no-repeat; animation: nile-royal-bob 5s ease-in-out infinite; }
+  -webkit-mask: var(--img-boat-art) center / contain no-repeat; mask: var(--img-boat-art) center / contain no-repeat; }
 .nr-boat:dir(rtl)::before { scale: -1 1; }
-.nr-palms { inset-block-end: 26%; inline-size: 48%; aspect-ratio: 236 / 260; --d: 6.5; display: none;
+.nr-palms { inset-block-end: 26%; inline-size: 48%; aspect-ratio: 236 / 260; --dy: 50px; display: none;
   background: linear-gradient(color-mix(in srgb, var(--c-night) 80%, var(--c-accent)), color-mix(in srgb, var(--c-night) 95%, var(--c-hero))); }
 .has-palms-art .nr-palms { display: block; -webkit-mask: var(--img-palms-art) center bottom / contain no-repeat; mask: var(--img-palms-art) center bottom / contain no-repeat; }
-.nr-palms--start { inset-inline-start: -8%; --out: calc(var(--p, 0) * -60px); }
-.nr-palms--end { inset-inline-end: -10%; --out: calc(var(--p, 0) * 60px); scale: -1 1; }
-.nr-palms--start:dir(rtl) { --out: calc(var(--p, 0) * 60px); }
-.nr-palms--end:dir(rtl) { --out: calc(var(--p, 0) * -60px); }
+.nr-palms--start { inset-inline-start: -8%; }
+.nr-palms--end { inset-inline-end: -10%; scale: -1 1; }
 
 /* the palace window: a wall with an arched opening; the camera flies through it */
 .nr-arch {
-  inset: 6% 7% 13%; --d: 9; --dolly: 0.17;
+  inset: 6% 7% 13%;
   border: 3px solid var(--c-accent);
   border-radius: 50% 50% 4px 4px / 28% 28% 4px 4px;
   box-shadow: 0 0 0 1px var(--nr-gold-deep), 0 0 0 70vmax var(--nr-wall), inset 0 0 0 1px var(--nr-gold-light), inset 0 0 50px color-mix(in srgb, var(--c-night) 70%, transparent);
-  opacity: calc(1.25 - var(--p, 0) * 1.5);
 }
 .nr-arch::after { content: ""; position: absolute; inset: -14px; border: 1px solid color-mix(in srgb, var(--c-accent) 70%, transparent); border-radius: inherit; }
-.nr-screen { position: absolute; inset: 0 0 58%; border-radius: inherit; display: none; background: var(--c-accent); opacity: calc(0.32 - var(--p, 0) * 0.6); }
+.nr-screen { position: absolute; inset: 0 0 58%; border-radius: inherit; display: none; background: var(--c-accent); opacity: 0.3; }
 .has-screen-art .nr-screen { display: block; -webkit-mask: var(--img-screen-art) center top / 100% auto no-repeat; mask: var(--img-screen-art) center top / 100% auto no-repeat; }
-.nr-column { inset-block-end: 11%; inline-size: 34px; aspect-ratio: 60 / 416; --d: 10; display: none; background: var(--nr-foil); opacity: calc(1.2 - var(--p, 0) * 1.4); }
+.nr-column { inset-block-end: 11%; inline-size: 34px; aspect-ratio: 60 / 416; display: none; background: var(--nr-foil); }
 .has-column-art .nr-column { display: block; -webkit-mask: var(--img-column-art) center bottom / contain no-repeat; mask: var(--img-column-art) center bottom / contain no-repeat; }
-.nr-column--start { inset-inline-start: calc(7% - 20px); --out: calc(var(--p, 0) * -120px); }
-.nr-column--end { inset-inline-end: calc(7% - 20px); --out: calc(var(--p, 0) * 120px); }
-.nr-column--start:dir(rtl) { --out: calc(var(--p, 0) * 120px); }
-.nr-column--end:dir(rtl) { --out: calc(var(--p, 0) * -120px); }
+.nr-column--start { inset-inline-start: calc(7% - 20px); }
+.nr-column--end { inset-inline-end: calc(7% - 20px); }
 
 /* the names float in the night sky inside a fine gold cartouche line; the river stays visible below */
 .nr-cartouche {
   inset-block-start: 21%; inset-inline: 0; margin-inline: auto; z-index: 5;
-  inline-size: min(300px, 80%); --d: 6; --dolly: 0.006; --rise: -28px;
+  inline-size: min(300px, 80%); --dy: 60px;
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   padding-block: 26px 30px; padding-inline: 20px;
   border-radius: 150px 150px 30px 30px / 120px 120px 30px 30px;
@@ -162,27 +157,27 @@
 .nr-cartouche::after { content: ""; position: absolute; inset-block-end: -9px; inset-inline: 22%; block-size: 3px; border-radius: 2px; background: var(--nr-foil); }
 .nr-date { padding-block: 7px; padding-inline: 20px; border: 1px solid var(--c-accent); border-radius: 999px; color: var(--c-hero); font-size: 14px; }
 /* foreground jasmine, out of focus like a lens close-up */
-.nr-jasmine { inset-block-end: -4%; inline-size: 46%; aspect-ratio: 220 / 200; --d: 12; z-index: 6; display: none; pointer-events: none; opacity: 0.9; }
+.nr-jasmine { inset-block-end: -4%; inline-size: 46%; aspect-ratio: 220 / 200; --dy: -70px; z-index: 6; display: none; pointer-events: none; opacity: 0.9; }
 .has-sprig-art .nr-jasmine { display: block; background: var(--c-sage); -webkit-mask: var(--img-sprig-art) center / contain no-repeat; mask: var(--img-sprig-art) center / contain no-repeat; }
 .has-jasmine-art .nr-jasmine::after { content: ""; position: absolute; inset: 0; background: var(--nr-moonlight);
   -webkit-mask: var(--img-jasmine-art) center / contain no-repeat; mask: var(--img-jasmine-art) center / contain no-repeat; }
-.nr-jasmine--start { inset-inline-start: -18%; --out: calc(var(--p, 0) * -140px); }
-.nr-jasmine--end { inset-inline-end: -18%; scale: -1 1; --out: calc(var(--p, 0) * 140px); }
-.nr-jasmine--start:dir(rtl) { scale: -1 1; --out: calc(var(--p, 0) * 140px); }
-.nr-jasmine--end:dir(rtl) { scale: 1 1; --out: calc(var(--p, 0) * -140px); }
+.nr-jasmine--start { inset-inline-start: -18%; }
+.nr-jasmine--end { inset-inline-end: -18%; scale: -1 1; }
+.nr-jasmine--start:dir(rtl) { scale: -1 1; }
+.nr-jasmine--end:dir(rtl) { scale: 1 1; }
 .nr-spark { position: absolute; z-index: 4; inline-size: 16px; block-size: 16px; display: none; background: var(--nr-foil); pointer-events: none; }
-.has-sparkle-art .nr-spark { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; animation: nile-royal-twinkle 3.4s ease-in-out infinite alternate; }
+.has-sparkle-art .nr-spark { display: block; -webkit-mask: var(--img-sparkle-art) center / contain no-repeat; mask: var(--img-sparkle-art) center / contain no-repeat; }
 .nr-spark--1 { inset-block-start: 22%; inset-inline-start: 24%; }
 .nr-spark--2 { inset-block-start: 15%; inset-inline-end: 22%; inline-size: 11px; block-size: 11px; animation-delay: -1.2s; }
 .nr-spark--3 { inset-block-start: 34%; inset-inline-end: 14%; inline-size: 20px; block-size: 20px; animation-delay: -2.3s; }
-.nr-cue { position: absolute; inset-block-end: 3%; inset-inline: 0; z-index: 7; font-size: 12px; color: var(--c-muted); opacity: calc(1 - var(--p, 0) * 4); }
-.nr-cue::after { content: ""; display: block; inline-size: 1px; block-size: 26px; margin: 6px auto 0; background: linear-gradient(var(--c-accent), transparent); animation: nile-royal-cue 1.8s ease-in-out infinite; }
+.nr-cue { position: absolute; inset-block-end: 3%; inset-inline: 0; z-index: 7; font-size: 12px; color: var(--c-muted); }
+.nr-cue::after { content: ""; display: block; inline-size: 1px; block-size: 26px; margin: 6px auto 0; background: linear-gradient(var(--c-accent), transparent); }
 .nr[data-cover-layout="window"] .nr-cue { display: none; }
 .nr[data-ornament="refined"] .nr-decor { display: none !important; }
 
 /* ---------- the invitation papyrus unrolls ---------- */
 .nr-papyrus { position: relative; margin-block: 30px 10px; margin-inline: 22px;
-  --u: clamp(0, calc((var(--p, 1) - 0.1) * 3.2), 1); }
+  --u: 1; }
 .nr-papyrus:not(:has(p)) { display: none; }
 .nr-papyrus__sheet {
   position: relative; padding-block: 56px; padding-inline: 30px;
@@ -235,8 +230,8 @@
 
 /* ---------- 2 · countdown inside a hanging lantern ---------- */
 .nr-countdown { display: flex; flex-direction: column; align-items: center; }
-.nr-lantern { position: relative; inline-size: 190px; aspect-ratio: 100 / 270; margin-block-start: -40px; transform-origin: 50% 0; rotate: calc(var(--tx, 0) * 6deg); }
-.nr-lantern__swing { position: absolute; inset: 0; transform-origin: 50% 0; will-change: transform; animation: nile-royal-swing 6s ease-in-out infinite alternate; }
+.nr-lantern { position: relative; inline-size: 190px; aspect-ratio: 100 / 270; margin-block-start: -40px; }
+.nr-lantern__swing { position: absolute; inset: 0; }
 .nr-lantern__halo { position: absolute; inset-block-start: 40%; inset-inline: -60%; block-size: 50%; border-radius: 50%;
   background: radial-gradient(closest-side, color-mix(in srgb, var(--c-accent) 35%, transparent), transparent); filter: blur(10px); }
 .nr-lantern__body { position: absolute; inset: 0; display: none; }
@@ -255,7 +250,8 @@
 .nr-cal__cell.is-wedding { justify-self: center; inline-size: 34px; border-radius: 50% 50% 4px 4px; background: var(--nr-foil); color: var(--c-hero); font-weight: 700; }
 
 /* ---------- 3 · story: palace windows with opening shutters ---------- */
-.nr-windows { display: flex; justify-content: center; gap: 18px; margin-block-end: 28px; --open: clamp(0, calc((var(--p, 1) - 0.18) * 2.6), 1); }
+.nr-windows { display: flex; justify-content: center; gap: 18px; margin-block-end: 28px; --open: 1; }
+.nr-story.fx:not(.is-in) .nr-windows { --open: 0; }
 .nr-photo { position: relative; flex: 0 1 44%; aspect-ratio: 3 / 4; perspective: 700px; padding: 5px; border-radius: 999px 999px 6px 6px; background: var(--nr-foil);
   box-shadow: inset 0 0 0 1px var(--nr-gold-deep), 0 0 0 4px var(--c-card), 0 0 0 5px color-mix(in srgb, var(--c-accent) 70%, transparent), 0 20px 30px -16px color-mix(in srgb, var(--c-night) 60%, transparent); }
 .nr-photo:nth-child(2) { margin-block-start: 34px; }
@@ -263,7 +259,8 @@
 .nr-photo img { position: relative; display: block; inline-size: 100%; block-size: 100%; object-fit: cover; border-radius: inherit; }
 .nr-shutter { position: absolute; inset-block: 5px; inline-size: calc(50% - 5px); z-index: 2; transform-style: preserve-3d;
   background: linear-gradient(90deg, var(--c-hero), color-mix(in srgb, var(--c-hero) 80%, var(--c-night)));
-  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c-accent) 70%, transparent), inset 0 0 0 7px var(--c-hero), inset 0 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent); }
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c-accent) 70%, transparent), inset 0 0 0 7px var(--c-hero), inset 0 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent);
+  will-change: transform; transition: transform 1.6s cubic-bezier(.65, 0, .25, 1) .5s; }
 .has-pattern-tile .nr-shutter::before { content: ""; position: absolute; inset: 12px; background: var(--c-accent); opacity: 0.4;
   -webkit-mask: var(--img-pattern-tile) 0 0 / 46px; mask: var(--img-pattern-tile) 0 0 / 46px; }
 .nr-shutter--a { inset-inline-start: 5px; border-start-start-radius: 999px; transform-origin: 0 50%; transform: rotateY(calc(var(--open) * -112deg)); }
@@ -312,9 +309,7 @@
     repeating-linear-gradient(transparent 0 9px, color-mix(in srgb, var(--nr-moonlight) 30%, transparent) 9px 10px),
     linear-gradient(color-mix(in srgb, var(--c-night) 75%, var(--c-accent)), var(--c-night));
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-accent) 50%, transparent), 0 10px 20px -10px color-mix(in srgb, var(--c-night) 60%, transparent); }
-.nr-river__boat { position: absolute; inset-inline-start: -4px; inset-block-start: 0; z-index: 3; inline-size: 58px; aspect-ratio: 200 / 170; display: none;
-  background: var(--nr-foil); }
-.nr-river__boat { inset-block-start: calc(var(--p, 0.5) * (100% - 70px)); }
+.nr-river__boat { position: sticky; inset-block-start: 46vh; z-index: 3; margin-inline-start: -14px; inline-size: 58px; aspect-ratio: 200 / 170; display: none; background: var(--nr-foil); }
 .has-boat-art .nr-river__boat { display: block; -webkit-mask: var(--img-boat-art) center / contain no-repeat; mask: var(--img-boat-art) center / contain no-repeat; }
 .nr-river__boat:dir(rtl) { scale: -1 1; }
 .nr-event { padding-block: 36px 40px; padding-inline: 26px; }
@@ -349,7 +344,7 @@
     radial-gradient(5px 7px at 34% 90%, color-mix(in srgb, var(--c-accent) 80%, var(--nr-moonlight)), transparent),
     radial-gradient(7px 10px at 72% 80%, color-mix(in srgb, var(--c-accent) 90%, var(--nr-moonlight)), transparent),
     radial-gradient(4px 6px at 88% 60%, color-mix(in srgb, var(--c-accent) 80%, var(--nr-moonlight)), transparent);
-  background-size: 100% 50%; animation: nile-royal-lanterns 18s linear infinite; opacity: 0.8; }
+  background-size: 100% 50%; opacity: 0.8; }
 .nr-night > :not(.nr-night__lanterns) { position: relative; }
 .nr .wb { text-align: start; }
 .nr .wb-chip { border-color: color-mix(in srgb, var(--c-accent) 70%, transparent); color: var(--nr-moonlight); }
@@ -373,17 +368,9 @@
 .nr-until, .nr-brand { font-size: 13px; color: var(--c-muted); }
 
 /* ---------- layout "window": the palace window without the journey ---------- */
-.nr[data-cover-layout="window"] .nr-layer { --dolly: 0; --rise: 0px; --out: 0px; }
-.nr[data-cover-layout="window"] .nr-arch { opacity: 1; }
-.nr[data-cover-layout="window"] .nr-column { opacity: 1; }
 .nr[data-cover-layout="window"] .nr-boat { inset-inline-start: 58%; }
 
 /* ---------- keyframes ---------- */
-@keyframes nile-royal-twinkle { from { opacity: 0.45; } to { opacity: 1; } }
-@keyframes nile-royal-bob { 0%, 100% { translate: 0 0; rotate: -1.5deg; } 50% { translate: 0 3px; rotate: 1.5deg; } }
-@keyframes nile-royal-cue { 0%, 100% { transform: scaleY(0.4); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
-@keyframes nile-royal-swing { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
-@keyframes nile-royal-lanterns { to { transform: translateY(-50%); } }
 @keyframes nile-royal-flow { 0% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } }
 @keyframes nile-royal-flow-rtl { 0% { transform: translateZ(-160px) rotateY(46deg); filter: brightness(0.8); } 50% { transform: none; filter: none; } 100% { transform: translateZ(-160px) rotateY(-46deg); filter: brightness(0.8); } }
 
@@ -403,10 +390,8 @@
 /* ---------- reduced motion: a still, complete scene ---------- */
 @media (prefers-reduced-motion: reduce) {
   .nr *, .nr *::before, .nr *::after { animation: none !important; }
-  .nr-layer { transform: none; }
-  .nr-diorama { block-size: max(100svh, 680px); }
-  .nr-arch, .nr-column { opacity: 1; }
-  .nr-papyrus, .nr-windows { --u: 1; --open: 1; }
+  .nr-windows, .nr-story.fx:not(.is-in) .nr-windows { --open: 1; }
+  .nr-shutter { transition: none; }
   .nr-map, .nr .wb-send { transition: none; }
   .ambient-lantern-glints { animation: none; }
 }
@@ -460,7 +445,7 @@
 .nr[data-photo-tone="palette"][data-photo-frame="polaroid"] .nr-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .nr[data-photo-tone="noir"] :is(.nr-photo, .nr-flow__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .nr:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.nr-photo):has(img) {
+  .nr[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.nr-photo):has(img) {
     background: conic-gradient(from var(--nr-shine), var(--nr-md), var(--nr-mm) 15%, var(--nr-ml) 25%, var(--nr-mm) 35%, var(--nr-md) 50%, var(--nr-mm) 65%, var(--nr-ml) 75%, var(--nr-mm) 85%, var(--nr-md));
     animation: nile-royal-frameshine linear both; animation-timeline: view();
   }
@@ -505,6 +490,7 @@
 .nr[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .nr[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .nr[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
 .nr[data-cover-layout="names"] .nr-diorama { block-size: auto; }
 .nr[data-cover-layout="names"] .nr-stage { position: relative; block-size: auto; padding-block: 90px 40px; overflow: visible; }
 .nr[data-cover-layout="names"] .nr-layer:not(.nr-cartouche), .nr[data-cover-layout="names"] .nr-spark, .nr[data-cover-layout="names"] .nr-cue { display: none; }

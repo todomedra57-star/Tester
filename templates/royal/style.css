@@ -434,7 +434,7 @@
 .ry[data-photo-tone="palette"][data-photo-frame="polaroid"] .ry-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .ry[data-photo-tone="noir"] :is(.ry-photo, .ry-wall__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .ry:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo):has(img) {
+  .ry[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.ry-photo):has(img) {
     background: conic-gradient(from var(--ry-shine), var(--ry-md), var(--ry-mm) 15%, var(--ry-ml) 25%, var(--ry-mm) 35%, var(--ry-md) 50%, var(--ry-mm) 65%, var(--ry-ml) 75%, var(--ry-mm) 85%, var(--ry-md));
     animation: royal-frameshine linear both; animation-timeline: view();
   }
@@ -474,4 +474,6 @@
 .ry[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .ry[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .ry[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.ry :is(.ry-title, .ry-names, .ry-medal__num, .ry-closing, .ry-event__type, .ry-card) { animation: none !important; }
 /* ==== end of options pack ==== */

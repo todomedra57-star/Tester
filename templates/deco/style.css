@@ -429,7 +429,7 @@
 .dc[data-photo-tone="palette"][data-photo-frame="polaroid"] .dc-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-on-hero); }
 .dc[data-photo-tone="noir"] :is(.dc-photo, .dc-deck__item, .dc-portrait) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .dc:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.dc-photo, .dc-portrait):has(img) {
+  .dc[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.dc-photo, .dc-portrait):has(img) {
     background: conic-gradient(from var(--dc-shine), var(--dc-md), var(--dc-mm) 15%, var(--dc-ml) 25%, var(--dc-mm) 35%, var(--dc-md) 50%, var(--dc-mm) 65%, var(--dc-ml) 75%, var(--dc-mm) 85%, var(--dc-md));
     animation: deco-frameshine linear both; animation-timeline: view();
   }
@@ -470,4 +470,6 @@
 .dc[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .dc[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .dc[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.dc :is(.dc-names, .dc-title, .dc-count__num, .dc-event__type, .dc-closing, .dc-map, .dc-fan, .dc-card__fan) { animation: none !important; }
 /* ==== end of options pack ==== */

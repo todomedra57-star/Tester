@@ -1,8 +1,8 @@
 <main class="nr" data-cover-layout="{{variant "coverLayout"}}" data-ornament="{{variant "ornament"}}" data-date-style="{{variant "dateStyle"}}" data-photo-frame="{{variant "photoFrame"}}" data-gallery-style="{{variant "galleryStyle"}}" data-photo-tone="{{variant "photoTone"}}" data-entrance="{{variant "entrance"}}" data-font-pair="{{variant "fontPair"}}" data-metal="{{variant "metal"}}">
 
   <section class="nr-cover" data-animate="cover">
-    <!-- the diorama: a pinned stage; the camera flies through the palace window as you scroll -->
-    <div class="nr-diorama" data-scene="contain">
+    <!-- the diorama: 13 depth planes that drift at their own speeds as the cover scrolls away -->
+    <div class="nr-diorama">
       <div class="nr-stage">
         <span class="nr-layer nr-sky" aria-hidden="true"></span>
         <span class="nr-layer nr-stars" aria-hidden="true"></span>
@@ -36,7 +36,7 @@
     </div>
 
     <!-- the invitation unrolls like a papyrus scroll -->
-    <div class="nr-papyrus" data-scene="cover">
+    <div class="nr-papyrus">
       <span class="nr-papyrus__roll nr-papyrus__roll--top" aria-hidden="true"></span>
       <div class="nr-papyrus__sheet">
         {{#if verse}}<p class="nr-verse">{{verse}}</p>{{/if}}
@@ -56,7 +56,7 @@
   </section>
 
   <!-- countdown inside a hanging lantern -->
-  <section class="nr-section nr-countdown" data-animate="countdown" data-scene="cover">
+  <section class="nr-section nr-countdown" data-animate="countdown">
     <h2 class="nr-title">{{text "countdownTitle"}}</h2>
     <div class="nr-lantern">
       <div class="nr-lantern__swing">
@@ -81,7 +81,7 @@
   {{#if story.text}}
     <div class="nr-divider" aria-hidden="true"></div>
     <!-- story: palace windows whose shutters open as you scroll -->
-    <section class="nr-section nr-story" data-animate="story" data-scene="cover">
+    <section class="nr-section nr-story" data-animate="story">
       <h2 class="nr-title">{{text "storyTitle"}}</h2>
       {{#if story.photos.length}}
         <div class="nr-windows">
@@ -101,7 +101,7 @@
 
   {{#if gallery.length}}
     <!-- gallery: a 3D ring of photos turning as you scroll -->
-    <section class="nr-section nr-gallery" data-animate="gallery" data-scene="contain">
+    <section class="nr-section nr-gallery" data-animate="gallery"{{#if (variant "galleryStyle" "carousel")}} data-scene="contain"{{/if}}>
       <div class="nr-gallery__stage">
         <h2 class="nr-title">{{text "galleryTitle"}}</h2>
         <div class="nr-flow">
@@ -115,11 +115,10 @@
   <div class="nr-divider" aria-hidden="true"></div>
 
   <!-- events: a felucca sails down the Nile past each celebration -->
-  <section class="nr-section nr-events" data-animate="events" data-scene="cover">
+  <section class="nr-section nr-events" data-animate="events">
     <h2 class="nr-title">{{text "eventsTitle"}}</h2>
     <div class="nr-journey">
-      <span class="nr-river" aria-hidden="true"></span>
-      <span class="nr-river__boat" aria-hidden="true"></span>
+      <span class="nr-river" aria-hidden="true"><span class="nr-river__boat"></span></span>
       {{#each events}}
         <article class="nr-card nr-event" data-item>
           <h3 class="nr-event__type">{{eventLabel type}}</h3>

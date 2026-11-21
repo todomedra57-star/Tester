@@ -311,7 +311,7 @@
 .db[data-photo-tone="palette"][data-photo-frame="polaroid"] .db-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .db[data-photo-tone="noir"] :is(.db-photo, .db-flow__item, .db-portrait) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .db:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait):has(img) {
+  .db[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.db-photo, .db-portrait):has(img) {
     background: conic-gradient(from var(--db-shine), var(--db-md), var(--db-mm) 15%, var(--db-ml) 25%, var(--db-mm) 35%, var(--db-md) 50%, var(--db-mm) 65%, var(--db-ml) 75%, var(--db-mm) 85%, var(--db-md));
     animation: desert-bloom-frameshine linear both; animation-timeline: view();
   }
@@ -354,6 +354,8 @@
 .db[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .db[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .db[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.db :is(.db-names, .db-title, .db-count__num, .db-closing, .db-event__type, .db-map, .db-spark, .db-card) { animation: none !important; }
 .db[data-cover-layout="horizon"] .db-scene { min-block-size: 560px; }
 .db[data-cover-layout="horizon"] .db-sky { padding-block-end: 280px; }
 .db[data-cover-layout="horizon"] .db-palm, .db[data-cover-layout="horizon"] .db-bloom, .db[data-cover-layout="horizon"] .db-dune--2, .db[data-cover-layout="horizon"] .db-dune--3 { display: none; }

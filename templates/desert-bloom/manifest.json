@@ -512,13 +512,13 @@
     "geometric": "reemKufi",
     "geometricLatin": "cinzel",
     "photoTone": "natural",
-    "entrance": "cinematic",
+    "entrance": "gentle",
     "metal": "palette",
     "fontPair": "template"
   },
   "defaultAnimation": {
     "intro": "curtain",
-    "ambient": "sand-glints",
+    "ambient": "none",
     "duration": 1000,
     "stagger": 150,
     "parallax": true,

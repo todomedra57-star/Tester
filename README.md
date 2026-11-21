@@ -6,7 +6,7 @@ written against the view model, plus a preview harness to see them.
 | Template | Look |
 |---|---|
 | `navy-bloom` | Cream paper with a faint palace sketch, navy cards with watercolor blue flowers on the corners, wax-sealed envelope with the couple's photos, sticky names the card slides over, 3D coverflow gallery |
-| `nile-royal` | **Showcase built on the scene engine.** Palace doors open in 3D; a pinned 13-plane diorama (sky, stars, moon, mist, Cairo skyline, the Nile, a sailing felucca, palms, the palace window, lotus columns, the names cartouche, foreground jasmine) that the camera flies through as you scroll, with tilt parallax; an unrolling papyrus, a swinging lantern countdown, shutters opening in 3D, a 3D photo ring and a felucca sailing down the Nile past each event |
+| `nile-royal` | **Calm 3D showcase.** Palace doors open in 3D; a 13-plane moonlit diorama (sky, stars, moon, mist, Cairo skyline, the Nile, a felucca, palms, the palace window, lotus columns, the names cartouche, foreground jasmine) whose planes drift at their own speeds as you scroll (GPU scroll timeline, no script); a papyrus invitation, a lantern countdown, shutters that open once, a coverflow (or optional 3D ring) gallery, and a felucca riding the river beside each event |
 | `porcelain` | Blue-and-white china: a gilded plate turning in 3D, vine pattern, glazed cards with gold and cobalt rims. 5 palettes incl. Midnight china |
 | `glass-garden` | Victorian glasshouse at golden hour: frosted-glass cards (backdrop blur), brass frame, ferns and ivy over the edges, reflections under the gallery, floating pollen light |
 | `lace` | Bridal lace and pearls on silk: pearl garland, lace doily portrait, satin ribbon, pearl rows and lace trims on every card, script names |
@@ -149,6 +149,8 @@ tilt on the scenes rather than `:root` (so the whole page is not recalculated),
 and sleeps when nothing moves. Templates animate continuous effects with
 `transform`/`opacity` on their own layers (never `background-position` or live
 `filter: blur()` every frame), and avoid repainting textured cards on scroll.
+
+**Calm by default:** every template switches off scroll animations that repaint (foil sweeps, card shines, twinkles, glare), keeps the shimmering frames for "opulent" only, opens with the gentle entrance and no ambient effect. Measured with a 4x slower processor, all templates run at 57–60 fps with no long frames.
 
 Templates do all the choreography in CSS with these variables, for example a
 plane at depth `--d` uses

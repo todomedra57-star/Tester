@@ -6,7 +6,7 @@
   },
   "description": {
     "ar": "رحلة ثلاثية الأبعاد في ليلة مقمرة على النيل: تفتح أبواب القصر وتعبر الكاميرا النافذة نحو النهر، مع مركب شراعي ومآذن ونخيل وياسمين، وفانوس للعد التنازلي، ومصاريع تنفتح، وحلقة صور ثلاثية الأبعاد.",
-    "en": "A 3D journey on a moonlit Nile night: palace doors open and the camera flies through the arch toward the river, with a felucca, minarets, palms and jasmine, a lantern countdown, opening shutters and a 3D photo ring."
+    "en": "A 3D journey on a moonlit Nile night: palace doors open and a calm moonlit scene with real depth, with a felucca, minarets, palms and jasmine, a lantern countdown, opening shutters and a 3D photo ring."
   },
   "languages": [
     "ar",
@@ -30,8 +30,8 @@
       "en": "Daughter of"
     },
     "scrollHint": {
-      "ar": "مرّروا لتعبروا النافذة",
-      "en": "Scroll to step through the window"
+      "ar": "مرّروا للأسفل",
+      "en": "Scroll down"
     },
     "countdownTitle": {
       "ar": "باقي على ليلتنا",
@@ -376,12 +376,12 @@
       ],
       "choices": {
         "diorama": {
-          "ar": "رحلة ثلاثية الأبعاد عبر النافذة",
-          "en": "3D journey through the window"
+          "ar": "مشهد بعمق يتحرك بهدوء",
+          "en": "Scene with gentle depth"
         },
         "window": {
-          "ar": "نافذة القصر بدون رحلة",
-          "en": "Palace window, no journey"
+          "ar": "مشهد ثابت",
+          "en": "Still scene"
         },
         "names": {
           "ar": "الأسماء فقط",
@@ -487,8 +487,8 @@
       "key": "galleryStyle",
       "type": "variant",
       "options": [
-        "carousel",
         "coverflow",
+        "carousel",
         "strip",
         "grid",
         "scatter"
@@ -551,7 +551,7 @@
     "ornament": "rich",
     "dateStyle": "badge",
     "photoFrame": "archRoyal",
-    "galleryStyle": "carousel",
+    "galleryStyle": "coverflow",
     "classic": "amiri",
     "classicLatin": "cormorant",
     "modern": "elMessiri",
@@ -561,13 +561,13 @@
     "geometric": "reemKufi",
     "geometricLatin": "cinzel",
     "photoTone": "natural",
-    "entrance": "cinematic",
+    "entrance": "gentle",
     "metal": "palette",
     "fontPair": "template"
   },
   "defaultAnimation": {
     "intro": "palace",
-    "ambient": "lantern-glints",
+    "ambient": "none",
     "duration": 1100,
     "stagger": 160,
     "parallax": true,
@@ -749,8 +749,8 @@
       "none"
     ],
     "ambients": [
-      "lantern-glints",
-      "none"
+      "none",
+      "lantern-glints"
     ],
     "motions": {
       "calm": {

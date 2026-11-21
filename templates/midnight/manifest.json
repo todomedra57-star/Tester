@@ -434,12 +434,12 @@
     "geometric": "reemKufi",
     "geometricLatin": "cinzel",
     "photoTone": "natural",
-    "entrance": "cinematic",
+    "entrance": "gentle",
     "fontPair": "template"
   },
   "defaultAnimation": {
     "intro": "doors",
-    "ambient": "stars",
+    "ambient": "none",
     "duration": 1000,
     "stagger": 160,
     "parallax": true,

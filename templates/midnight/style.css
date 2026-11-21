@@ -535,7 +535,7 @@
 .mn[data-photo-tone="palette"][data-photo-frame="polaroid"] .mn-frame { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-on-hero); }
 .mn[data-photo-tone="noir"] :is(.mn-frame, .mn-strip__item) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .mn:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.mn-frame):has(img) {
+  .mn[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.mn-frame):has(img) {
     background: conic-gradient(from var(--mn-shine), var(--mn-md), var(--mn-mm) 15%, var(--mn-ml) 25%, var(--mn-mm) 35%, var(--mn-md) 50%, var(--mn-mm) 65%, var(--mn-ml) 75%, var(--mn-mm) 85%, var(--mn-md));
     animation: midnight-frameshine linear both; animation-timeline: view();
   }
@@ -570,6 +570,7 @@
 .mn[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .mn[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .mn[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
 .mn[data-countdown-style="diamond"] .mn-count { inline-size: 150px; block-size: 150px; margin-block: 24px; border: 1px solid var(--c-accent); outline: 1px solid var(--c-line); outline-offset: 10px; rotate: 45deg; }
 .mn[data-countdown-style="diamond"] .mn-count > * { rotate: -45deg; }
 /* ==== end of options pack ==== */

@@ -176,7 +176,7 @@ def live_css(name, R, c):
     out.append(f"{R}[data-photo-tone=\"palette\"][data-photo-frame=\"polaroid\"] {c['photo']} {{ background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, {c['light']}; }}")
     out.append(f"{R}[data-photo-tone=\"noir\"] :is({allp}) img {{ filter: grayscale(1) contrast(1.15); }}")
     # 2. shimmering foil frames (light travels around as you scroll)
-    shine_sel = f"{R}:not([data-ornament=\"refined\"]):not([data-photo-frame=\"polaroid\"]):not([data-photo-frame=\"pearl\"]):is([data-photo-tone=\"natural\"], :not([data-photo-tone])) :is({', '.join([c['photo']] + L['portraits'])}):has(img)"
+    shine_sel = f"{R}[data-ornament=\"opulent\"]:not([data-photo-frame=\"polaroid\"]):not([data-photo-frame=\"pearl\"]):is([data-photo-tone=\"natural\"], :not([data-photo-tone])) :is({', '.join([c['photo']] + L['portraits'])}):has(img)"
     out.append(f"""@supports (animation-timeline: view()) {{
   {shine_sel} {{
     background: conic-gradient(from var(--{P}-shine), var(--{P}-md), var(--{P}-mm) 15%, var(--{P}-ml) 25%, var(--{P}-mm) 35%, var(--{P}-md) 50%, var(--{P}-mm) 65%, var(--{P}-ml) 75%, var(--{P}-mm) 85%, var(--{P}-md));
@@ -228,6 +228,34 @@ def live_css(name, R, c):
         out.append(f"{R}[data-font-pair=\"{fp}\"] {{ --font-display: var(--font-{fp}); --font-latin: var(--font-{fp}-latin); }}")
     return out
 
+
+# ----------------------------------------------------------------- calm & smooth
+# Animations that repaint while scrolling (foil sweeps on text, shines across
+# textured cards, sparkle twinkles, glare, clip-path fans) are switched off so
+# every template stays smooth on a mid-range phone. Transform-only motion stays.
+CALM = {
+    "midnight": [], "navy-bloom": [], "nile-royal": [],
+    "andalus": [".an-names", ".an-title", ".an-count__num", ".an-kicker", ".an-closing", ".an-event__type", ".an-event__date", ".an-map"],
+    "deco": [".dc-names", ".dc-title", ".dc-count__num", ".dc-event__type", ".dc-closing", ".dc-map", ".dc-fan", ".dc-card__fan"],
+    "atelier": [".at-title", ".at-names", ".at-count__num", ".at-closing"],
+    "royal": [".ry-title", ".ry-names", ".ry-medal__num", ".ry-closing", ".ry-event__type", ".ry-card"],
+}
+for _P, _key in LUXE.items():
+    if _key != "nile-royal":
+        CALM[_key] = [f".{_P}-names", f".{_P}-title", f".{_P}-count__num", f".{_P}-closing", f".{_P}-event__type", f".{_P}-map", f".{_P}-spark", f".{_P}-card"]
+CALM["porcelain"].append(".pc-plate__glaze")
+CALM["glass-garden"].append(".gg-house__glare")
+
+def calm_css(name, R):
+    out = ["/* ---- calm & smooth ---- */"]
+    if CALM.get(name):
+        out.append(f"{R} :is({', '.join(CALM[name])}) {{ animation: none !important; }}")
+    if name == "glass-garden":
+        out.append(""".gg :is(.gg-card, .gg-house__glass, .gg-date) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+.gg .gg-card { background: color-mix(in srgb, var(--c-card) 90%, transparent) !important; }
+.gg .gg-date { background: color-mix(in srgb, var(--c-card) 85%, transparent) !important; }""")
+    return out
+
 # ----------------------------------------------------------------- CSS pack
 def css_pack(name, c):
     R, ph, fl, it = c["root"], c["photo"], c["flow"], c["item"]
@@ -277,6 +305,7 @@ def css_pack(name, c):
 {sel('ornament', 'opulent', c['names'])} {{ filter: drop-shadow(0 0 16px color-mix(in srgb, var(--c-accent) 55%, transparent)); }}
 {sel('ornament', 'opulent', ph)} {{ filter: drop-shadow(0 0 14px color-mix(in srgb, var(--c-accent) 55%, transparent)); }}""")
     out.extend(live_css(name, R, c))
+    out.extend(calm_css(name, R))
     out.extend(extra_css(name, R))
     out.append(END)
     return "\n".join(out) + "\n"
@@ -343,6 +372,11 @@ for name, c in T.items():
         if not any(t["key"] == k for t in toks):
             continue
         man["defaultTheme"].setdefault(k, next(t for t in toks if t["key"] == k)["options"][0])
+    # calm defaults: gentle entrance, no ambient effect (couples can still choose them)
+    man["defaultTheme"]["entrance"] = "gentle"
+    man["defaultAnimation"]["ambient"] = "none"
+    if "none" in man["couplePresets"].get("ambients", []):
+        man["couplePresets"]["ambients"] = ["none"] + [a for a in man["couplePresets"]["ambients"] if a != "none"]
     vkeys = [v["key"] for v in man["couplePresets"]["variants"]]
     for t in toks:
         if t["type"] == "variant" and t["key"] not in vkeys:

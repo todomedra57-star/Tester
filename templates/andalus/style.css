@@ -596,7 +596,7 @@
 .an[data-photo-tone="palette"][data-photo-frame="polaroid"] .an-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .an[data-photo-tone="noir"] :is(.an-photo, .an-arcade__item, .an-window) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .an:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.an-photo, .an-window):has(img) {
+  .an[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.an-photo, .an-window):has(img) {
     background: conic-gradient(from var(--an-shine), var(--an-md), var(--an-mm) 15%, var(--an-ml) 25%, var(--an-mm) 35%, var(--an-md) 50%, var(--an-mm) 65%, var(--an-ml) 75%, var(--an-mm) 85%, var(--an-md));
     animation: andalus-frameshine linear both; animation-timeline: view();
   }
@@ -637,4 +637,6 @@
 .an[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .an[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .an[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.an :is(.an-names, .an-title, .an-count__num, .an-kicker, .an-closing, .an-event__type, .an-event__date, .an-map) { animation: none !important; }
 /* ==== end of options pack ==== */

@@ -362,7 +362,7 @@
 .at[data-photo-tone="palette"][data-photo-frame="polaroid"] .at-photo { background: linear-gradient(160deg, var(--c-hero), var(--c-accent)) content-box, var(--c-card); }
 .at[data-photo-tone="noir"] :is(.at-photo, .at-strip__item, .at-hero__photo) img { filter: grayscale(1) contrast(1.15); }
 @supports (animation-timeline: view()) {
-  .at:not([data-ornament="refined"]):not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo):has(img) {
+  .at[data-ornament="opulent"]:not([data-photo-frame="polaroid"]):not([data-photo-frame="pearl"]):is([data-photo-tone="natural"], :not([data-photo-tone])) :is(.at-photo, .at-hero__photo):has(img) {
     background: conic-gradient(from var(--at-shine), var(--at-md), var(--at-mm) 15%, var(--at-ml) 25%, var(--at-mm) 35%, var(--at-md) 50%, var(--at-mm) 65%, var(--at-ml) 75%, var(--at-mm) 85%, var(--at-md));
     animation: atelier-frameshine linear both; animation-timeline: view();
   }
@@ -401,4 +401,6 @@
 .at[data-font-pair="modern"] { --font-display: var(--font-modern); --font-latin: var(--font-modern-latin); }
 .at[data-font-pair="script"] { --font-display: var(--font-script); --font-latin: var(--font-script-latin); }
 .at[data-font-pair="geometric"] { --font-display: var(--font-geometric); --font-latin: var(--font-geometric-latin); }
+/* ---- calm & smooth ---- */
+.at :is(.at-title, .at-names, .at-count__num, .at-closing) { animation: none !important; }
 /* ==== end of options pack ==== */
